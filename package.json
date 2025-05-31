@@ -1,22 +1,20 @@
 {
-  "name": "nuestra-carne-sistema",
+  "name": "nuestra-carne-backend",
   "version": "1.0.0",
-  "description": "Sistema Nuestra Carne - Carne Angus Panameña Premium",
+  "description": "Backend para Nuestra Carne - Sistema de pedidos",
   "main": "backend/src/server.js",
   "scripts": {
-    "start": "cd backend && yarn start",
-    "dev": "cd backend && yarn dev",
-    "install-backend": "cd backend && yarn install",
-    "install-frontend": "cd frontend && yarn install",
-    "install-all": "yarn install-backend && yarn install-frontend",
-    "build": "cd frontend && yarn build"
+    "start": "cd backend && npm start",
+    "dev": "cd backend && npm run dev",
+    "install-backend": "cd backend && npm install",
+    "build": "cd backend && npm install"
   },
-  "workspaces": [
-    "backend",
-    "frontend"
-  ],
   "dependencies": {},
   "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
   "keywords": [
     "nuestra-carne",
     "carniceria",
