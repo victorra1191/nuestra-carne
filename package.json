@@ -1,0 +1,34 @@
+{
+  "name": "nuestra-carne-sistema",
+  "version": "1.0.0",
+  "description": "Sistema Nuestra Carne - Carne Angus Panameña Premium",
+  "main": "backend/src/server.js",
+  "scripts": {
+    "start": "cd backend && yarn start",
+    "dev": "cd backend && yarn dev",
+    "install-backend": "cd backend && yarn install",
+    "install-frontend": "cd frontend && yarn install",
+    "install-all": "yarn install-backend && yarn install-frontend",
+    "build": "cd frontend && yarn build"
+  },
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "dependencies": {},
+  "devDependencies": {},
+  "keywords": [
+    "nuestra-carne",
+    "carniceria",
+    "panama",
+    "angus",
+    "pedidos",
+    "digitalocean"
+  ],
+  "author": "Nuestra Carne",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/victorra1191/nuestra-carne.git"
+  }
+}
