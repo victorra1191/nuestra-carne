@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const bodyParser = require('body-parser');
+const path = require('path');
 require('dotenv').config();
 
 const orderRoutes = require('./routes/orderRoutes');
@@ -15,61 +15,58 @@ app.use(helmet());
 
 // Rate limiting
 const limiter = rateLimit({
-  windowMs: 1 * 60 * 1000, // 1 minuto
-  max: 5, // máximo 5 requests por IP en 1 minuto
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-  message: { 
-    success: false, 
-    error: 'Demasiadas solicitudes, por favor intente de nuevo más tarde.' 
-  }
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 100 // máximo 100 requests por IP
 });
 app.use(limiter);
 
-// CORS configurado para el frontend
+// CORS
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  origin: process.env.FRONTEND_URL || 'https://ncappweb-vt888.ondigitalocean.app',
+  credentials: true
 }));
 
-// Body parser
-app.use(bodyParser.json({ limit: '10mb' }));
-app.use(bodyParser.urlencoded({ extended: true }));
+// Middleware para parsear JSON
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Rutas
-app.use('/api/orders', orderRoutes);
+// Servir archivos estáticos del frontend
+app.use(express.static(path.join(__dirname, '../../frontend/build')));
 
-// Ruta de health check
-app.get('/api/health', (req, res) => {
-  res.json({
-    status: 'OK',
-    timestamp: new Date().toISOString(),
-    service: 'Nuestra Carne Backend',
-    version: '1.0.0'
-  });
+// Rutas de API
+app.use('/api', orderRoutes);
+
+// Ruta principal del frontend
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../frontend/build', 'index.html'));
 });
 
-// Manejo de errores
+// Ruta catch-all para React Router
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../frontend/build', 'index.html'));
+});
+
+// Middleware de manejo de errores
 app.use((err, req, res, next) => {
-  console.error('Error:', err);
-  res.status(500).json({
-    success: false,
-    error: 'Error interno del servidor',
-    message: process.env.NODE_ENV === 'development' ? err.message : 'Algo salió mal'
+  console.error(err.stack);
+  res.status(500).json({ 
+    success: false, 
+    error: 'Error interno del servidor' 
   });
 });
 
-// Ruta 404
-app.use('*', (req, res) => {
-  res.status(404).json({
-    success: false,
-    error: 'Endpoint no encontrado'
+// Ruta 404 para APIs
+app.use('/api/*', (req, res) => {
+  res.status(404).json({ 
+    success: false, 
+    error: 'Endpoint no encontrado' 
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`🥩 Servidor Nuestra Carne ejecutándose en puerto ${PORT}`);
-  console.log(`🌐 Entorno: ${process.env.NODE_ENV}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
+  console.log(`🌐 URL: https://ncappweb-vt888.ondigitalocean.app`);
+  console.log(`📧 Email configurado: ${process.env.SMTP_USER}`);
+  console.log(`📱 WhatsApp: ${process.env.WHATSAPP_NUMBER}`);
   console.log(`📧 Email desde: ${process.env.FROM_EMAIL}`);
 });
