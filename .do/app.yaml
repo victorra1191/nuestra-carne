@@ -1,0 +1,56 @@
+name: nuestra-carne
+services:
+- name: backend
+  source_dir: /backend
+  github:
+    repo: victorra1191/nuestra-carne
+    branch: main
+  run_command: yarn start
+  build_command: yarn install
+  environment_slug: node-js
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  routes:
+  - path: /api
+  envs:
+  - key: NODE_ENV
+    value: production
+  - key: PORT
+    value: "8001"
+  - key: FRONTEND_URL
+    value: ${APP_URL}
+  - key: SMTP_HOST
+    value: smtp.zoho.com
+  - key: SMTP_PORT
+    value: "587"
+  - key: SMTP_USER
+    value: info@nuestracarnepa.com
+  - key: SMTP_PASS
+    value: # TU_CONTRASEÑA_ZOHO
+    type: SECRET
+  - key: FROM_EMAIL
+    value: info@nuestracarnepa.com
+  - key: TO_EMAIL
+    value: info@nuestracarnepa.com
+  - key: WHATSAPP_NUMBER
+    value: "+507 6917-2690"
+
+- name: frontend
+  source_dir: /frontend
+  github:
+    repo: victorra1191/nuestra-carne
+    branch: main
+  build_command: yarn install && yarn build
+  environment_slug: node-js
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  routes:
+  - path: /
+  static_sites:
+  - name: frontend-static
+    source_dir: /frontend/build
+    routes:
+    - path: /
+  envs:
+  - key: REACT_APP_BACKEND_URL
+    value: ${APP_URL}/api

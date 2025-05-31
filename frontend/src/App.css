@@ -1,0 +1,119 @@
+/* App.css - Estilos específicos para componentes */
+
+.hero-bg {
+  background: linear-gradient(135deg, rgba(237, 103, 55, 0.9) 0%, rgba(139, 69, 19, 0.8) 100%),
+              url('https://images.pexels.com/photos/12884545/pexels-photo-12884545.jpeg') center/cover;
+  min-height: 100vh;
+}
+
+.cuts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.cut-card {
+  transition: all 0.3s ease;
+}
+
+.cut-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(237, 103, 55, 0.3);
+}
+
+.price-badge {
+  background: linear-gradient(45deg, #ed6737, #a57c3c);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+.cooking-method {
+  background: rgba(237, 103, 55, 0.1);
+  border: 1px solid rgba(237, 103, 55, 0.3);
+  color: #ed6737;
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: #25d366;
+  color: white;
+  border-radius: 50px;
+  padding: 15px 20px;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.testimonial-card {
+  background: linear-gradient(135deg, #fff 0%, #f9f7f4 100%);
+  border-left: 4px solid #ed6737;
+}
+
+.blog-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(237, 103, 55, 0.2);
+}
+
+.cta-section {
+  background: linear-gradient(135deg, #ed6737 0%, #a57c3c 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('https://images.pexels.com/photos/1482803/pexels-photo-1482803.jpeg') center/cover;
+  opacity: 0.3;
+}
+
+.delivery-badge {
+  background: linear-gradient(45deg, #25d366, #20b358);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .hero-bg {
+    min-height: 80vh;
+  }
+  
+  .cuts-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .whatsapp-float {
+    bottom: 15px;
+    right: 15px;
+    padding: 12px 16px;
+  }
+}
