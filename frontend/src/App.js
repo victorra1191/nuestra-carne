@@ -1,22 +1,27 @@
 import React from 'react';
-import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import OrderForm from './pages/OrderForm';
 import Admin from './pages/Admin';
+import AdminTest from './pages/AdminTest';
+import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
+    <Router>
+      <div className="App">
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/pedido" element={<OrderForm />} />
           <Route path="/haz-tu-pedido" element={<OrderForm />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/*" element={<Admin />} />
+          <Route path="/admin" element={<AdminTest />} />
+          <Route path="/admin-full" element={<Admin />} />
+          <Route path="/admin/*" element={<AdminTest />} />
+          {/* Fallback para rutas no encontradas */}
+          <Route path="*" element={<LandingPage />} />
         </Routes>
-      </BrowserRouter>
-    </div>
+      </div>
+    </Router>
   );
 }
 
