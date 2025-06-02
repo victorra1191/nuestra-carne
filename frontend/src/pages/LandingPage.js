@@ -192,7 +192,7 @@ const LandingPage = () => {
             <div className="mb-8">
               <div className="w-32 h-32 mx-auto bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center border-2 border-white/30">
                 <img 
-                  src="/images/Logo NC Blanco.png" 
+                  src="/images/logo-nc-blanco.png" 
                   alt="Logo NC Blanco - Nuestra Carne"
                   className="w-full h-full object-contain p-2"
                 />
