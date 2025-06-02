@@ -20,84 +20,84 @@ const LandingPage = () => {
   const [selectedCut, setSelectedCut] = useState(null);
   const navigate = useNavigate();
 
-  // Datos de cortes panameños - SOLO 12 SELECCIONADOS PARA EL LANDING
+  // Datos de cortes panameños - SOLO 11 SELECCIONADOS PARA EL LANDING
   const cortes = [
     {
       nombre: "Arrachera",
       descripcion: "Corte premium para parrilla, lleno de sabor",
       precio: "Consultar precio", 
       cocina: ["Parrilla", "Marinado", "Plancha"],
-      imagen: "https://images.pexels.com/photos/8112382/pexels-photo-8112382.jpeg"
+      imagen: "/images/productos/arrachera.jpg"
     },
     {
       nombre: "Bistec Picado",
       descripcion: "Ideal para plancha y frituras rápidas",
       precio: "$3.18/lb",
       cocina: ["Plancha", "Frito", "Parrilla"],
-      imagen: "https://images.unsplash.com/photo-1501200291289-c5a76c232e5f"
+      imagen: "/images/productos/bistec-picado.jpg"
     },
     {
       nombre: "Bofe",
       descripcion: "Corte especial tradicional, muy nutritivo",
       precio: "$1.59/lb",
       cocina: ["Guisado", "Estofado", "Tradicional"],
-      imagen: "https://images.pexels.com/photos/1482803/pexels-photo-1482803.jpeg"
+      imagen: "/images/productos/bofe.jpg"
     },
     {
       nombre: "Carne de guisar",
       descripcion: "Perfecta para todos tus guisos favoritos",
       precio: "$3.79/lb",
       cocina: ["Guisado", "Estofado", "Sancocho"],
-      imagen: "https://images.pexels.com/photos/12884545/pexels-photo-12884545.jpeg"
+      imagen: "/images/productos/carne-guisar.jpg"
     },
     {
       nombre: "Carne de hamburguesa- 24 onzas",
       descripcion: "Mezcla especial para hamburguesas gourmet",
       precio: "$3.86/lb",
       cocina: ["Hamburguesas", "Parrilla", "Plancha"],
-      imagen: "https://images.pexels.com/photos/20036097/pexels-photo-20036097.jpeg"
+      imagen: "/images/productos/carne-hamburguesa.jpg"
     },
     {
       nombre: "Carne molida especial",
       descripcion: "Molida premium para múltiples preparaciones",
       precio: "$3.62/lb",
       cocina: ["Albóndigas", "Tacos", "Rellenos"],
-      imagen: "https://images.pexels.com/photos/947174/pexels-photo-947174.jpeg"
+      imagen: "/images/productos/carne-molida.jpg"
     },
     {
       nombre: "Costillón entero",
       descripcion: "Ideal para parrilladas familiares",
       precio: "$3.29/lb",
       cocina: ["Parrilla", "BBQ", "Asado lento"],
-      imagen: "https://images.pexels.com/photos/15188460/pexels-photo-15188460.jpeg"
+      imagen: "/images/productos/costilla-res.jpg"
     },
     {
       nombre: "Entraña",
       descripcion: "El rey de la parrilla, jugoso y sabroso",
       precio: "$4.26/lb",
       cocina: ["Parrilla", "Plancha", "Marinado"],
-      imagen: "https://images.pexels.com/photos/25537620/pexels-photo-25537620.jpeg"
+      imagen: "/images/productos/entraña.jpg"
     },
     {
       nombre: "Punta Palomilla entera (picanha)",
       descripcion: "Corte brasileño premium, muy jugoso",
       precio: "$4.79/lb",
       cocina: ["Parrilla", "Asado", "Rodizio"],
-      imagen: "https://images.pexels.com/photos/17677575/pexels-photo-17677575.jpeg"
+      imagen: "/images/productos/picanha.jpg"
     },
     {
       nombre: "Rib- eye entero",
       descripcion: "Corte premium americano, máximo sabor",
       precio: "$4.20/lb",
       cocina: ["Parrilla", "Plancha", "Horno"],
-      imagen: "https://images.pexels.com/photos/12884545/pexels-photo-12884545.jpeg"
+      imagen: "/images/productos/rib-eye.jpg"
     },
     {
       nombre: "Trip tip (punta Rincón)",
       descripcion: "Corte californiano, tierno y versátil",
       precio: "$4.35/lb",
       cocina: ["Parrilla", "Plancha", "Asado"],
-      imagen: "https://images.unsplash.com/photo-1501200291289-c5a76c232e5f"
+      imagen: "/images/productos/tip-trip.jpg"
     }
   ];
 
@@ -126,19 +126,19 @@ const LandingPage = () => {
     {
       titulo: "5 Secretos para la Parrilla Perfecta",
       resumen: "Aprende los trucos de los expertos para conseguir el punto exacto...",
-      imagen: "https://images.pexels.com/photos/1482803/pexels-photo-1482803.jpeg",
+      imagen: "/images/blog/secretos-parrilla.jpg",
       fecha: "15 Ene 2024"
     },
     {
       titulo: "Guía Completa: Cómo Elegir el Corte Perfecto", 
       resumen: "Todo lo que necesitas saber para seleccionar la carne ideal...",
-      imagen: "https://images.unsplash.com/photo-1529262365544-55d1707e64e6",
+      imagen: "/images/blog/guia-cortes.jpg",
       fecha: "12 Ene 2024"
     },
     {
       titulo: "Recetas Tradicionales Panameñas con Carne Angus",
       resumen: "Descubre cómo preparar tus platos favoritos con nuestros cortes...",
-      imagen: "https://images.pexels.com/photos/15188460/pexels-photo-15188460.jpeg",
+      imagen: "/images/blog/recetas-tradicionales.jpg",
       fecha: "10 Ene 2024"
     }
   ];
@@ -184,13 +184,14 @@ const LandingPage = () => {
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto"
           >
-            {/* Logo Placeholder */}
+            {/* Logo NC Blanco */}
             <div className="mb-8">
               <div className="w-32 h-32 mx-auto bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center border-2 border-white/30">
-                <div className="text-center">
-                  <p className="text-2xl font-bold mb-1">LOGO</p>
-                  <p className="text-xs opacity-75">Nuestra Carne</p>
-                </div>
+                <img 
+                  src="/images/Logo NC Blanco.png" 
+                  alt="Logo NC Blanco - Nuestra Carne"
+                  className="w-full h-full object-contain p-2"
+                />
               </div>
             </div>
             
@@ -437,7 +438,7 @@ const LandingPage = () => {
             >
               <div className="aspect-video bg-gray-200 rounded-lg mb-6 overflow-hidden">
                 <img 
-                  src="https://images.pexels.com/photos/1482803/pexels-photo-1482803.jpeg"
+                  src="/images/heroes/hero-parrilla.jpg"
                   alt="Parrilla"
                   className="w-full h-full object-cover"
                 />
@@ -469,7 +470,7 @@ const LandingPage = () => {
             >
               <div className="aspect-video bg-gray-200 rounded-lg mb-6 overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1529262365544-55d1707e64e6"
+                  src="/images/heroes/hero-plancha.jpg"
                   alt="Plancha"
                   className="w-full h-full object-cover"
                 />
@@ -501,7 +502,7 @@ const LandingPage = () => {
             >
               <div className="aspect-video bg-gray-200 rounded-lg mb-6 overflow-hidden">
                 <img 
-                  src="https://images.pexels.com/photos/15188460/pexels-photo-15188460.jpeg"
+                  src="/images/heroes/hero-guisados.jpg"
                   alt="Guisados"
                   className="w-full h-full object-cover"
                 />
