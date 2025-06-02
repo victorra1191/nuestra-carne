@@ -18,7 +18,26 @@ import {
 
 const LandingPage = () => {
   const [selectedCut, setSelectedCut] = useState(null);
-  const [blogPosts, setBlogPosts] = useState([]);
+  const [blogPosts, setBlogPosts] = useState([
+    {
+      titulo: "5 Secretos para la Parrilla Perfecta",
+      resumen: "Aprende los trucos de los expertos para conseguir el punto exacto...",
+      imagen: "/images/blog/secretos-parrilla.jpg",
+      fecha: "15 Ene 2024"
+    },
+    {
+      titulo: "Guía Completa: Cómo Elegir el Corte Perfecto", 
+      resumen: "Todo lo que necesitas saber para seleccionar la carne ideal...",
+      imagen: "/images/blog/guia-cortes.jpg",
+      fecha: "12 Ene 2024"
+    },
+    {
+      titulo: "Recetas Tradicionales Panameñas con Carne Angus",
+      resumen: "Descubre cómo preparar tus platos favoritos con nuestros cortes...",
+      imagen: "/images/blog/recetas-tradicionales.jpg",
+      fecha: "10 Ene 2024"
+    }
+  ]);
   const [loadingBlog, setLoadingBlog] = useState(true);
   const navigate = useNavigate();
   
@@ -123,27 +142,6 @@ const LandingPage = () => {
       texto: "Calidad premium a precio justo. Los recomiendo 100%.",
       rating: 5,
       ubicacion: "Costa del Este"
-    }
-  ];
-
-  const blogPosts = [
-    {
-      titulo: "5 Secretos para la Parrilla Perfecta",
-      resumen: "Aprende los trucos de los expertos para conseguir el punto exacto...",
-      imagen: "/images/blog/secretos-parrilla.jpg",
-      fecha: "15 Ene 2024"
-    },
-    {
-      titulo: "Guía Completa: Cómo Elegir el Corte Perfecto", 
-      resumen: "Todo lo que necesitas saber para seleccionar la carne ideal...",
-      imagen: "/images/blog/guia-cortes.jpg",
-      fecha: "12 Ene 2024"
-    },
-    {
-      titulo: "Recetas Tradicionales Panameñas con Carne Angus",
-      resumen: "Descubre cómo preparar tus platos favoritos con nuestros cortes...",
-      imagen: "/images/blog/recetas-tradicionales.jpg",
-      fecha: "10 Ene 2024"
     }
   ];
 
