@@ -1,0 +1,273 @@
+const express = require('express');
+const { v4: uuidv4 } = require('uuid');
+const fs = require('fs');
+const path = require('path');
+
+const router = express.Router();
+
+// Archivo JSON para almacenar artículos del blog
+const BLOG_DATA_FILE = path.join(__dirname, '../data/blog-articles.json');
+
+// Asegurar que el directorio data existe
+const dataDir = path.dirname(BLOG_DATA_FILE);
+if (!fs.existsSync(dataDir)) {
+  fs.mkdirSync(dataDir, { recursive: true });
+}
+
+// Inicializar archivo si no existe
+if (!fs.existsSync(BLOG_DATA_FILE)) {
+  const initialData = [
+    {
+      id: '1',
+      titulo: "5 Secretos para la Parrilla Perfecta",
+      resumen: "Aprende los trucos de los expertos para conseguir el punto exacto en cada corte de carne.",
+      contenido: "La parrilla perfecta requiere técnica, paciencia y conocimiento. Aquí te compartimos los secretos que hemos aprendido en años de experiencia...",
+      imagen: "/images/blog/secretos-parrilla.jpg",
+      fecha: new Date().toISOString(),
+      autor: "Nuestra Carne",
+      activo: true
+    },
+    {
+      id: '2',
+      titulo: "Guía Completa: Cómo Elegir el Corte Perfecto",
+      resumen: "Todo lo que necesitas saber para seleccionar la carne ideal para cada ocasión.",
+      contenido: "Elegir el corte perfecto puede ser intimidante. Esta guía te ayudará a tomar la mejor decisión según tu presupuesto y preferencias...",
+      imagen: "/images/blog/guia-cortes.jpg",
+      fecha: new Date().toISOString(),
+      autor: "Nuestra Carne",
+      activo: true
+    },
+    {
+      id: '3',
+      titulo: "Recetas Tradicionales Panameñas con Carne Angus",
+      resumen: "Descubre cómo preparar tus platos favoritos con nuestros cortes premium.",
+      contenido: "La carne Angus eleva cualquier receta tradicional panameña. Te enseñamos cómo preparar sancocho, carne guisada y más...",
+      imagen: "/images/blog/recetas-tradicionales.jpg",
+      fecha: new Date().toISOString(),
+      autor: "Nuestra Carne",
+      activo: true
+    }
+  ];
+  fs.writeFileSync(BLOG_DATA_FILE, JSON.stringify(initialData, null, 2));
+}
+
+// Middleware de autenticación simple
+const AUTH_USERNAME = process.env.ADMIN_USERNAME || 'admin';
+const AUTH_PASSWORD = process.env.ADMIN_PASSWORD || 'nuestra123';
+
+const authenticate = (req, res, next) => {
+  const auth = req.headers.authorization;
+  
+  if (!auth || !auth.startsWith('Basic ')) {
+    return res.status(401).json({ 
+      success: false, 
+      error: 'Autenticación requerida' 
+    });
+  }
+  
+  const credentials = Buffer.from(auth.slice(6), 'base64').toString();
+  const [username, password] = credentials.split(':');
+  
+  if (username === AUTH_USERNAME && password === AUTH_PASSWORD) {
+    next();
+  } else {
+    res.status(401).json({ 
+      success: false, 
+      error: 'Credenciales inválidas' 
+    });
+  }
+};
+
+// Funciones helper para manejo de datos
+const readBlogData = () => {
+  try {
+    const data = fs.readFileSync(BLOG_DATA_FILE, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    console.error('Error leyendo blog data:', error);
+    return [];
+  }
+};
+
+const writeBlogData = (data) => {
+  try {
+    fs.writeFileSync(BLOG_DATA_FILE, JSON.stringify(data, null, 2));
+    return true;
+  } catch (error) {
+    console.error('Error escribiendo blog data:', error);
+    return false;
+  }
+};
+
+// RUTAS PÚBLICAS (sin autenticación)
+
+// Obtener todos los artículos públicos
+router.get('/blog/articles', (req, res) => {
+  try {
+    const articles = readBlogData().filter(article => article.activo);
+    res.json({ 
+      success: true, 
+      articles: articles.sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
+    });
+  } catch (error) {
+    console.error('Error obteniendo artículos:', error);
+    res.status(500).json({ success: false, error: 'Error interno del servidor' });
+  }
+});
+
+// Obtener artículo específico por ID
+router.get('/blog/articles/:id', (req, res) => {
+  try {
+    const articles = readBlogData();
+    const article = articles.find(a => a.id === req.params.id && a.activo);
+    
+    if (!article) {
+      return res.status(404).json({ success: false, error: 'Artículo no encontrado' });
+    }
+    
+    res.json({ success: true, article });
+  } catch (error) {
+    console.error('Error obteniendo artículo:', error);
+    res.status(500).json({ success: false, error: 'Error interno del servidor' });
+  }
+});
+
+// RUTAS PROTEGIDAS (requieren autenticación)
+
+// Login para verificar credenciales
+router.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  
+  if (username === AUTH_USERNAME && password === AUTH_PASSWORD) {
+    res.json({ 
+      success: true, 
+      message: 'Login exitoso',
+      token: Buffer.from(`${username}:${password}`).toString('base64')
+    });
+  } else {
+    res.status(401).json({ 
+      success: false, 
+      error: 'Credenciales inválidas' 
+    });
+  }
+});
+
+// Obtener todos los artículos (incluyendo inactivos)
+router.get('/blog/all-articles', authenticate, (req, res) => {
+  try {
+    const articles = readBlogData();
+    res.json({ 
+      success: true, 
+      articles: articles.sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
+    });
+  } catch (error) {
+    console.error('Error obteniendo todos los artículos:', error);
+    res.status(500).json({ success: false, error: 'Error interno del servidor' });
+  }
+});
+
+// Crear nuevo artículo
+router.post('/blog/articles', authenticate, (req, res) => {
+  try {
+    const { titulo, resumen, contenido, imagen } = req.body;
+    
+    if (!titulo || !resumen || !contenido) {
+      return res.status(400).json({ 
+        success: false, 
+        error: 'Título, resumen y contenido son requeridos' 
+      });
+    }
+    
+    const articles = readBlogData();
+    const newArticle = {
+      id: uuidv4(),
+      titulo,
+      resumen,
+      contenido,
+      imagen: imagen || '/images/blog/default.jpg',
+      fecha: new Date().toISOString(),
+      autor: 'Nuestra Carne',
+      activo: true
+    };
+    
+    articles.push(newArticle);
+    
+    if (writeBlogData(articles)) {
+      res.json({ 
+        success: true, 
+        message: 'Artículo creado exitosamente',
+        article: newArticle
+      });
+    } else {
+      res.status(500).json({ success: false, error: 'Error guardando artículo' });
+    }
+  } catch (error) {
+    console.error('Error creando artículo:', error);
+    res.status(500).json({ success: false, error: 'Error interno del servidor' });
+  }
+});
+
+// Actualizar artículo
+router.put('/blog/articles/:id', authenticate, (req, res) => {
+  try {
+    const { titulo, resumen, contenido, imagen, activo } = req.body;
+    const articles = readBlogData();
+    const articleIndex = articles.findIndex(a => a.id === req.params.id);
+    
+    if (articleIndex === -1) {
+      return res.status(404).json({ success: false, error: 'Artículo no encontrado' });
+    }
+    
+    articles[articleIndex] = {
+      ...articles[articleIndex],
+      titulo: titulo || articles[articleIndex].titulo,
+      resumen: resumen || articles[articleIndex].resumen,
+      contenido: contenido || articles[articleIndex].contenido,
+      imagen: imagen || articles[articleIndex].imagen,
+      activo: activo !== undefined ? activo : articles[articleIndex].activo,
+      fechaActualizacion: new Date().toISOString()
+    };
+    
+    if (writeBlogData(articles)) {
+      res.json({ 
+        success: true, 
+        message: 'Artículo actualizado exitosamente',
+        article: articles[articleIndex]
+      });
+    } else {
+      res.status(500).json({ success: false, error: 'Error guardando cambios' });
+    }
+  } catch (error) {
+    console.error('Error actualizando artículo:', error);
+    res.status(500).json({ success: false, error: 'Error interno del servidor' });
+  }
+});
+
+// Eliminar artículo (soft delete)
+router.delete('/blog/articles/:id', authenticate, (req, res) => {
+  try {
+    const articles = readBlogData();
+    const articleIndex = articles.findIndex(a => a.id === req.params.id);
+    
+    if (articleIndex === -1) {
+      return res.status(404).json({ success: false, error: 'Artículo no encontrado' });
+    }
+    
+    articles[articleIndex].activo = false;
+    articles[articleIndex].fechaEliminacion = new Date().toISOString();
+    
+    if (writeBlogData(articles)) {
+      res.json({ 
+        success: true, 
+        message: 'Artículo eliminado exitosamente'
+      });
+    } else {
+      res.status(500).json({ success: false, error: 'Error eliminando artículo' });
+    }
+  } catch (error) {
+    console.error('Error eliminando artículo:', error);
+    res.status(500).json({ success: false, error: 'Error interno del servidor' });
+  }
+});
+
+module.exports = router;

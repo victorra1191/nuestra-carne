@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { 
@@ -18,7 +18,11 @@ import {
 
 const LandingPage = () => {
   const [selectedCut, setSelectedCut] = useState(null);
+  const [blogPosts, setBlogPosts] = useState([]);
+  const [loadingBlog, setLoadingBlog] = useState(true);
   const navigate = useNavigate();
+  
+  const API_BASE = process.env.REACT_APP_BACKEND_URL;
 
   // Datos de cortes panameños - SOLO 11 SELECCIONADOS PARA EL LANDING
   const cortes = [
