@@ -146,6 +146,54 @@ const LandingPage = () => {
     }
   };
 
+  // Cargar artículos del blog desde el backend
+  useEffect(() => {
+    const fetchBlogArticles = async () => {
+      try {
+        setLoadingBlog(true);
+        setBlogError(null);
+        
+        const response = await fetch(`${API_BASE}/admin/blog/articles`);
+        const data = await response.json();
+        
+        if (data.success && data.articles) {
+          // Limitamos a los primeros 3 artículos para el landing page
+          setBlogPosts(data.articles.slice(0, 3));
+        } else {
+          throw new Error('Error al cargar artículos');
+        }
+      } catch (error) {
+        console.error('Error fetching blog articles:', error);
+        setBlogError('Error al cargar los artículos del blog');
+        // Fallback a datos estáticos si falla la API
+        setBlogPosts([
+          {
+            titulo: "5 Secretos para la Parrilla Perfecta",
+            resumen: "Aprende los trucos de los expertos para conseguir el punto exacto...",
+            imagen: "/images/blog/secretos-parrilla.jpg",
+            fecha: "15 Ene 2024"
+          },
+          {
+            titulo: "Guía Completa: Cómo Elegir el Corte Perfecto", 
+            resumen: "Todo lo que necesitas saber para seleccionar la carne ideal...",
+            imagen: "/images/blog/guia-cortes.jpg",
+            fecha: "12 Ene 2024"
+          },
+          {
+            titulo: "Recetas Tradicionales Panameñas con Carne Angus",
+            resumen: "Descubre cómo preparar tus platos favoritos con nuestros cortes...",
+            imagen: "/images/blog/recetas-tradicionales.jpg",
+            fecha: "10 Ene 2024"
+          }
+        ]);
+      } finally {
+        setLoadingBlog(false);
+      }
+    };
+
+    fetchBlogArticles();
+  }, [API_BASE]);
+
   return (
     <div className="min-h-screen bg-white">
       {/* WhatsApp Float Button */}
