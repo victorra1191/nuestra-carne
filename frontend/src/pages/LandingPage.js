@@ -99,7 +99,7 @@ const LandingPage = () => {
       descripcion: "El rey de la parrilla, jugoso y sabroso",
       precio: "$4.26/lb",
       cocina: ["Parrilla", "Plancha", "Marinado"],
-      imagen: "/images/productos/entraña.jpg"
+      imagen: "/images/productos/entrana.jpg"
     },
     {
       nombre: "Punta Palomilla entera (picanha)",
