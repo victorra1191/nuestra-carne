@@ -714,9 +714,30 @@ const LandingPage = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {blogPosts.map((post, index) => (
+            {loadingBlog ? (
+              // Estado de carga
+              [1, 2, 3].map((index) => (
+                <div key={index} className="blog-card animate-pulse">
+                  <div className="aspect-video bg-gray-300"></div>
+                  <div className="p-6">
+                    <div className="h-4 bg-gray-300 rounded mb-2 w-20"></div>
+                    <div className="h-6 bg-gray-300 rounded mb-3"></div>
+                    <div className="h-4 bg-gray-300 rounded mb-2"></div>
+                    <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+                  </div>
+                </div>
+              ))
+            ) : blogError ? (
+              // Estado de error
+              <div className="col-span-full text-center py-8">
+                <p className="text-rustic-600 mb-4">⚠️ {blogError}</p>
+                <p className="text-sm text-rustic-500">Mostrando contenido de respaldo</p>
+              </div>
+            ) : null}
+            
+            {!loadingBlog && blogPosts.map((post, index) => (
               <motion.div
-                key={index}
+                key={post.id || index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -724,15 +745,26 @@ const LandingPage = () => {
               >
                 <div className="aspect-video bg-gray-200 overflow-hidden">
                   <img 
-                    src={post.imagen}
+                    src={post.imagen || post.image || "/images/blog/default.jpg"}
                     alt={post.titulo}
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.src = "/images/blog/default.jpg";
+                    }}
                   />
                 </div>
                 <div className="p-6">
-                  <p className="text-sm text-primary-500 font-semibold mb-2">{post.fecha}</p>
+                  <p className="text-sm text-primary-500 font-semibold mb-2">
+                    {new Date(post.fecha || post.published_at || Date.now()).toLocaleDateString('es-ES', {
+                      day: 'numeric',
+                      month: 'short',
+                      year: 'numeric'
+                    })}
+                  </p>
                   <h3 className="text-xl font-bold text-rustic-900 mb-3">{post.titulo}</h3>
-                  <p className="text-rustic-700 mb-4">{post.resumen}</p>
+                  <p className="text-rustic-700 mb-4">
+                    {post.resumen || post.contenido?.substring(0, 150) + '...' || 'Contenido disponible próximamente...'}
+                  </p>
                   <button className="text-primary-500 font-semibold hover:text-primary-600">
                     Leer más →
                   </button>
