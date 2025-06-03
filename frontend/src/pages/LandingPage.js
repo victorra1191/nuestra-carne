@@ -784,7 +784,23 @@ const LandingPage = () => {
                   <p className="text-rustic-700 mb-4">
                     {post.resumen || post.contenido?.substring(0, 150) + '...' || 'Contenido disponible próximamente...'}
                   </p>
-                  <button className="text-primary-500 font-semibold hover:text-primary-600">
+                  <button 
+                    onClick={() => {
+                      const slug = post.titulo
+                        .toLowerCase()
+                        .replace(/[áàäâ]/g, 'a')
+                        .replace(/[éèëê]/g, 'e')
+                        .replace(/[íìïî]/g, 'i')
+                        .replace(/[óòöô]/g, 'o')
+                        .replace(/[úùüû]/g, 'u')
+                        .replace(/ñ/g, 'n')
+                        .replace(/[^\w\s-]/g, '')
+                        .replace(/\s+/g, '-')
+                        .trim();
+                      navigate(`/blog/${slug}`);
+                    }}
+                    className="text-primary-500 font-semibold hover:text-primary-600 transition-colors"
+                  >
                     Leer más →
                   </button>
                 </div>
