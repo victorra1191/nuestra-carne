@@ -150,7 +150,7 @@ class NuestraCarneTester:
         success, response = self.run_test(
             "Submit Order",
             "POST",
-            "orders/submit",
+            "submit",
             200,
             data=test_order
         )
