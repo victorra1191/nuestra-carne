@@ -10,17 +10,8 @@ const BlogList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   
-  // Detectar automáticamente la URL del backend
-  const getBackendURL = () => {
-    // En desarrollo local
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-      return 'http://localhost:8080/api';
-    }
-    // En producción
-    return 'https://nuestracarnepa.com/api';
-  };
-  
-  const API_BASE = process.env.REACT_APP_BACKEND_URL || getBackendURL();
+  // Forzar URL del backend para producción
+  const API_BASE = 'https://nuestracarnepa.com/api';
 
   // Imágenes de fondo atractivas
   const backgroundImages = [
