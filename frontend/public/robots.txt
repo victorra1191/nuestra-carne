@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://nuestracarnepa.com/sitemap.xml
+
+# Disallow admin areas for general crawlers
+User-agent: *
+Disallow: /admin/
+
+# Allow specific search engines for admin
+User-agent: Googlebot
+Allow: /admin/
+
+# Cache for performance
+Cache-delay: 1
