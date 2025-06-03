@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Calendar, Clock, User, Share2, Facebook, Twitter, MessageCircle } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, User, Share2, Facebook, Twitter, MessageCircle, Eye, Heart, Bookmark, ChefHat, Award } from 'lucide-react';
 
 const BlogPost = () => {
   const { slug } = useParams();
@@ -10,6 +10,8 @@ const BlogPost = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [relatedArticles, setRelatedArticles] = useState([]);
+  const [liked, setLiked] = useState(false);
+  const [bookmarked, setBookmarked] = useState(false);
   
   // Detectar automáticamente la URL del backend
   const getBackendURL = () => {
@@ -22,6 +24,14 @@ const BlogPost = () => {
   };
   
   const API_BASE = process.env.REACT_APP_BACKEND_URL || getBackendURL();
+
+  // Imágenes de fondo premium
+  const backgroundImages = [
+    'https://images.pexels.com/photos/31313536/pexels-photo-31313536.jpeg',
+    'https://images.pexels.com/photos/1482803/pexels-photo-1482803.jpeg',
+    'https://images.unsplash.com/photo-1556269923-e4ef51d69638',
+    'https://images.unsplash.com/photo-1508615263227-c5d58c1e5821'
+  ];
 
   useEffect(() => {
     fetchArticle();
@@ -91,7 +101,7 @@ const BlogPost = () => {
 
   const shareOnWhatsApp = () => {
     const url = window.location.href;
-    const text = `¡Mira este artículo sobre carne premium! ${article?.titulo}`;
+    const text = `🥩 ¡Mira este artículo increíble sobre carne premium! ${article?.titulo}`;
     window.open(`https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`, '_blank');
   };
 
@@ -102,16 +112,29 @@ const BlogPost = () => {
 
   const shareOnTwitter = () => {
     const url = window.location.href;
-    const text = `${article?.titulo} | Nuestra Carne`;
+    const text = `🥩 ${article?.titulo} | Nuestra Carne - Los mejores consejos sobre carne premium`;
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-rustic-50 to-amber-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-500 mx-auto mb-4"></div>
-          <p className="text-rustic-600">Cargando artículo...</p>
+      <div className="min-h-screen bg-gradient-to-br from-rustic-900 via-rustic-800 to-primary-900 flex items-center justify-center relative">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
+        
+        <div className="text-center z-10">
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+            className="w-16 h-16 border-4 border-amber-500 border-t-transparent rounded-full mx-auto mb-6"
+          />
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="text-white text-lg font-semibold"
+          >
+            Preparando el artículo...
+          </motion.p>
         </div>
       </div>
     );
@@ -119,135 +142,257 @@ const BlogPost = () => {
 
   if (error || !article) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-rustic-50 to-amber-50 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-rustic-900 mb-4">Artículo no encontrado</h1>
-          <p className="text-rustic-600 mb-6">{error || 'El artículo que buscas no existe.'}</p>
-          <button
-            onClick={() => navigate('/blog')}
-            className="bg-primary-500 text-white px-6 py-3 rounded-lg hover:bg-primary-600 transition-colors"
+      <div className="min-h-screen bg-gradient-to-br from-rustic-900 via-rustic-800 to-primary-900 flex items-center justify-center relative">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
+        
+        <div className="text-center z-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-white/10 backdrop-blur-sm rounded-2xl p-12 border border-white/20"
           >
-            Ver todos los artículos
-          </button>
+            <div className="text-8xl mb-6">🔍</div>
+            <h1 className="text-4xl font-bold text-white mb-4">Artículo no encontrado</h1>
+            <p className="text-white/70 mb-8 text-lg">{error || 'El artículo que buscas no existe.'}</p>
+            <div className="space-x-4">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => navigate('/blog')}
+                className="bg-amber-500 text-white px-8 py-3 rounded-xl hover:bg-amber-600 transition-colors font-semibold"
+              >
+                Ver todos los artículos
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => navigate('/')}
+                className="bg-white/10 backdrop-blur-sm text-white px-8 py-3 rounded-xl hover:bg-white/20 transition-colors font-semibold border border-white/30"
+              >
+                Ir al inicio
+              </motion.button>
+            </div>
+          </motion.div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rustic-50 to-amber-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b border-rustic-200">
-        <div className="max-w-4xl mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <button
-              onClick={() => navigate('/blog')}
-              className="flex items-center text-rustic-600 hover:text-primary-600 transition-colors"
-            >
-              <ArrowLeft className="w-5 h-5 mr-2" />
-              Volver al blog
-            </button>
-            
-            <button
-              onClick={() => navigate('/')}
-              className="text-rustic-600 hover:text-primary-600 transition-colors font-semibold"
-            >
-              🥩 Nuestra Carne
-            </button>
+    <div className="min-h-screen bg-gradient-to-br from-rustic-900 via-rustic-800 to-primary-900 relative">
+      {/* Fondo con patrón */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
+      
+      {/* Hero Header con imagen del artículo */}
+      <div className="relative">
+        <div 
+          className="h-96 bg-cover bg-center relative"
+          style={{ 
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('${article.imagen || article.image || backgroundImages[0]}')`
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-primary-900/80 to-rustic-900/60"></div>
+          
+          {/* Navigation */}
+          <div className="relative z-10 max-w-5xl mx-auto px-4 py-6">
+            <div className="flex items-center justify-between">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => navigate('/blog')}
+                className="flex items-center text-white/90 hover:text-white transition-colors bg-black/20 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20"
+              >
+                <ArrowLeft className="w-5 h-5 mr-2" />
+                Volver al blog
+              </motion.button>
+              
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => navigate('/')}
+                className="text-white/90 hover:text-white transition-colors font-semibold bg-black/20 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20"
+              >
+                🥩 Nuestra Carne
+              </motion.button>
+            </div>
+          </div>
+
+          {/* Article Title */}
+          <div className="absolute bottom-0 left-0 right-0 p-8">
+            <div className="max-w-5xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                <div className="flex items-center space-x-4 mb-4">
+                  <span className="bg-amber-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+                    🔥 Premium
+                  </span>
+                  <span className="bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-semibold border border-white/30">
+                    <ChefHat className="w-4 h-4 inline mr-2" />
+                    Consejos Pro
+                  </span>
+                </div>
+                
+                <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
+                  {article.titulo}
+                </h1>
+                
+                <div className="flex flex-wrap items-center text-white/90 space-x-6">
+                  <div className="flex items-center">
+                    <Calendar className="w-5 h-5 mr-2" />
+                    <span>
+                      {new Date(article.fecha || article.published_at || Date.now()).toLocaleDateString('es-ES', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                      })}
+                    </span>
+                  </div>
+                  
+                  <div className="flex items-center">
+                    <User className="w-5 h-5 mr-2" />
+                    <span className="font-semibold">Nuestra Carne</span>
+                  </div>
+                  
+                  <div className="flex items-center">
+                    <Clock className="w-5 h-5 mr-2" />
+                    <span>5 min lectura</span>
+                  </div>
+                  
+                  <div className="flex items-center">
+                    <Eye className="w-5 h-5 mr-2" />
+                    <span>2.3k vistas</span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </div>
 
-      <article className="max-w-4xl mx-auto px-4 py-12">
-        {/* Article Header */}
-        <motion.header
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-8"
+      <article className="relative z-10 max-w-5xl mx-auto px-4 py-12">
+        {/* Floating Action Bar */}
+        <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="fixed right-8 top-1/2 transform -translate-y-1/2 bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-4 space-y-4 border border-gray-200 z-30 hidden lg:block"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-rustic-900 mb-6 leading-tight">
-            {article.titulo}
-          </h1>
-          
-          <div className="flex flex-wrap items-center text-rustic-600 mb-6">
-            <div className="flex items-center mr-6 mb-2">
-              <Calendar className="w-5 h-5 mr-2" />
-              <span>
-                {new Date(article.fecha || article.published_at || Date.now()).toLocaleDateString('es-ES', {
-                  day: 'numeric',
-                  month: 'long',
-                  year: 'numeric'
-                })}
-              </span>
-            </div>
-            
-            <div className="flex items-center mr-6 mb-2">
-              <User className="w-5 h-5 mr-2" />
-              <span>Nuestra Carne</span>
-            </div>
-            
-            <div className="flex items-center mb-2">
-              <Clock className="w-5 h-5 mr-2" />
-              <span>5 min lectura</span>
-            </div>
-          </div>
-
-          {/* Share Buttons */}
-          <div className="flex items-center space-x-4 mb-8">
-            <span className="text-rustic-600 font-semibold">Compartir:</span>
-            <button
-              onClick={shareOnWhatsApp}
-              className="flex items-center space-x-2 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
-            >
-              <MessageCircle className="w-4 h-4" />
-              <span>WhatsApp</span>
-            </button>
-            <button
-              onClick={shareOnFacebook}
-              className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              <Facebook className="w-4 h-4" />
-              <span>Facebook</span>
-            </button>
-            <button
-              onClick={shareOnTwitter}
-              className="flex items-center space-x-2 bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-500 transition-colors"
-            >
-              <Twitter className="w-4 h-4" />
-              <span>Twitter</span>
-            </button>
-          </div>
-        </motion.header>
-
-        {/* Featured Image */}
-        {(article.imagen || article.image) && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-8"
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={shareOnWhatsApp}
+            className="flex items-center justify-center w-12 h-12 bg-green-500 text-white rounded-xl hover:bg-green-600 transition-colors shadow-lg"
+            title="Compartir en WhatsApp"
           >
-            <img
-              src={article.imagen || article.image}
-              alt={article.titulo}
-              className="w-full h-64 md:h-96 object-cover rounded-xl shadow-lg"
-              onError={(e) => {
-                e.target.style.display = 'none';
-              }}
-            />
-          </motion.div>
-        )}
+            <MessageCircle className="w-5 h-5" />
+          </motion.button>
+          
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={shareOnFacebook}
+            className="flex items-center justify-center w-12 h-12 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors shadow-lg"
+            title="Compartir en Facebook"
+          >
+            <Facebook className="w-5 h-5" />
+          </motion.button>
+          
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={shareOnTwitter}
+            className="flex items-center justify-center w-12 h-12 bg-blue-400 text-white rounded-xl hover:bg-blue-500 transition-colors shadow-lg"
+            title="Compartir en Twitter"
+          >
+            <Twitter className="w-5 h-5" />
+          </motion.button>
+          
+          <div className="border-t border-gray-200 pt-4">
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setLiked(!liked)}
+              className={`flex items-center justify-center w-12 h-12 rounded-xl transition-colors shadow-lg ${
+                liked ? 'bg-red-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-red-50 hover:text-red-500'
+              }`}
+              title="Me gusta"
+            >
+              <Heart className={`w-5 h-5 ${liked ? 'fill-current' : ''}`} />
+            </motion.button>
+            
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setBookmarked(!bookmarked)}
+              className={`flex items-center justify-center w-12 h-12 rounded-xl transition-colors shadow-lg mt-2 ${
+                bookmarked ? 'bg-amber-500 text-white' : 'bg-gray-100 text-gray-600 hover:bg-amber-50 hover:text-amber-500'
+              }`}
+              title="Guardar"
+            >
+              <Bookmark className={`w-5 h-5 ${bookmarked ? 'fill-current' : ''}`} />
+            </motion.button>
+          </div>
+        </motion.div>
 
-        {/* Article Content */}
+        {/* Mobile Share Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="prose prose-lg max-w-none mb-12"
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="lg:hidden mb-8"
+        >
+          <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-2xl border border-gray-200">
+            <h3 className="text-lg font-bold text-rustic-900 mb-4">Compartir este artículo:</h3>
+            <div className="flex space-x-4">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={shareOnWhatsApp}
+                className="flex items-center space-x-2 bg-green-500 text-white px-4 py-3 rounded-xl hover:bg-green-600 transition-colors flex-1 justify-center shadow-lg"
+              >
+                <MessageCircle className="w-5 h-5" />
+                <span className="font-semibold">WhatsApp</span>
+              </motion.button>
+              
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={shareOnFacebook}
+                className="flex items-center space-x-2 bg-blue-600 text-white px-4 py-3 rounded-xl hover:bg-blue-700 transition-colors flex-1 justify-center shadow-lg"
+              >
+                <Facebook className="w-5 h-5" />
+                <span className="font-semibold">Facebook</span>
+              </motion.button>
+              
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={shareOnTwitter}
+                className="flex items-center space-x-2 bg-blue-400 text-white px-4 py-3 rounded-xl hover:bg-blue-500 transition-colors flex-1 justify-center shadow-lg"
+              >
+                <Twitter className="w-5 h-5" />
+                <span className="font-semibold">Twitter</span>
+              </motion.button>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Article Content */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="bg-white/98 backdrop-blur-sm rounded-3xl shadow-2xl p-8 md:p-12 mb-12 border border-gray-200"
         >
           <div 
-            className="text-rustic-800 leading-relaxed"
+            className="prose prose-lg prose-rustic max-w-none text-rustic-800 leading-relaxed"
+            style={{
+              fontSize: '1.125rem',
+              lineHeight: '1.75'
+            }}
             dangerouslySetInnerHTML={{ 
               __html: article.contenido || 'Contenido del artículo próximamente disponible...' 
             }}
@@ -257,71 +402,100 @@ const BlogPost = () => {
         {/* Related Articles */}
         {relatedArticles.length > 0 && (
           <motion.section
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="border-t border-rustic-200 pt-12"
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mb-12"
           >
-            <h2 className="text-2xl font-bold text-rustic-900 mb-8">Artículos relacionados</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {relatedArticles.map((relatedArticle, index) => (
-                <article
-                  key={relatedArticle.id || index}
-                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-                  onClick={() => navigate(`/blog/${createSlug(relatedArticle.titulo)}`)}
-                >
-                  <div className="aspect-video bg-gradient-to-br from-rustic-100 to-primary-100 relative">
-                    {relatedArticle.imagen || relatedArticle.image ? (
-                      <img
-                        src={relatedArticle.imagen || relatedArticle.image}
-                        alt={relatedArticle.titulo}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          e.target.style.display = 'none';
-                        }}
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <span className="text-4xl">🥩</span>
-                      </div>
-                    )}
-                  </div>
-                  
-                  <div className="p-4">
-                    <h3 className="font-bold text-rustic-900 mb-2 line-clamp-2">
-                      {relatedArticle.titulo}
-                    </h3>
-                    <p className="text-sm text-rustic-600 line-clamp-2">
-                      {relatedArticle.resumen || 
-                       (relatedArticle.contenido ? relatedArticle.contenido.replace(/<[^>]*>/g, '').substring(0, 100) + '...' : '')}
-                    </p>
-                  </div>
-                </article>
-              ))}
+            <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border border-gray-200">
+              <div className="flex items-center mb-8">
+                <Award className="w-8 h-8 text-amber-500 mr-3" />
+                <h2 className="text-3xl font-bold text-rustic-900">Artículos relacionados</h2>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {relatedArticles.map((relatedArticle, index) => (
+                  <motion.article
+                    key={relatedArticle.id || index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.7 + index * 0.1 }}
+                    className="group bg-gray-50 rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer"
+                    onClick={() => navigate(`/blog/${createSlug(relatedArticle.titulo)}`)}
+                    whileHover={{ y: -5 }}
+                  >
+                    <div className="aspect-video bg-gradient-to-br from-rustic-100 to-primary-100 relative overflow-hidden">
+                      {relatedArticle.imagen || relatedArticle.image ? (
+                        <img
+                          src={relatedArticle.imagen || relatedArticle.image}
+                          alt={relatedArticle.titulo}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          onError={(e) => {
+                            e.target.src = backgroundImages[index % backgroundImages.length];
+                          }}
+                        />
+                      ) : (
+                        <div 
+                          className="w-full h-full bg-cover bg-center flex items-center justify-center"
+                          style={{ 
+                            backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url('${backgroundImages[index % backgroundImages.length]}')`
+                          }}
+                        >
+                          <span className="text-4xl">🥩</span>
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div className="p-4">
+                      <h3 className="font-bold text-rustic-900 mb-2 line-clamp-2 group-hover:text-primary-600 transition-colors">
+                        {relatedArticle.titulo}
+                      </h3>
+                      <p className="text-sm text-rustic-600 line-clamp-2">
+                        {relatedArticle.resumen || 
+                         (relatedArticle.contenido ? relatedArticle.contenido.replace(/<[^>]*>/g, '').substring(0, 100) + '...' : '')}
+                      </p>
+                    </div>
+                  </motion.article>
+                ))}
+              </div>
             </div>
           </motion.section>
         )}
 
         {/* Call to Action */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="bg-primary-50 border border-primary-200 rounded-xl p-8 mt-12 text-center"
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="bg-gradient-to-r from-primary-600 to-amber-600 rounded-3xl p-8 md:p-12 text-center shadow-2xl relative overflow-hidden"
         >
-          <h3 className="text-2xl font-bold text-rustic-900 mb-4">
-            ¿Te gustó este artículo?
-          </h3>
-          <p className="text-rustic-700 mb-6">
-            Descubre nuestra selección premium de carnes Angus y haz tu pedido hoy mismo.
-          </p>
-          <button
-            onClick={() => navigate('/')}
-            className="bg-primary-500 text-white px-8 py-3 rounded-lg hover:bg-primary-600 transition-colors font-semibold"
-          >
-            Ver productos 🥩
-          </button>
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="white" fill-opacity="0.1"%3E%3Cpolygon points="50 0 60 40 100 50 60 60 50 100 40 60 0 50 40 40"/%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+          
+          <div className="relative z-10">
+            <motion.div
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.9 }}
+              className="text-6xl mb-6"
+            >
+              🥩
+            </motion.div>
+            
+            <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              ¿Te gustó este artículo?
+            </h3>
+            <p className="text-white/95 mb-8 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+              Descubre nuestra selección premium de carnes Angus y haz realidad todas estas técnicas y recetas increíbles.
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => navigate('/')}
+              className="bg-white text-primary-600 px-10 py-4 rounded-2xl hover:bg-gray-50 transition-colors font-bold text-lg md:text-xl shadow-2xl"
+            >
+              Ver productos premium 🔥
+            </motion.button>
+          </div>
         </motion.div>
       </article>
     </div>
