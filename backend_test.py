@@ -4,7 +4,7 @@ import json
 from datetime import datetime
 
 class NuestraCarneTester:
-    def __init__(self, base_url="http://localhost:8080/api"):
+    def __init__(self, base_url="https://nuestra-carne-app.ondigitalocean.app/api"):
         self.base_url = base_url
         self.auth_token = None
         self.tests_run = 0
