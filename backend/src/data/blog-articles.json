@@ -158,5 +158,15 @@
     "fecha": "2025-06-03T14:00:34.106Z",
     "autor": "Nuestra Carne",
     "activo": true
+  },
+  {
+    "id": "8dea94b2-5105-4fac-91ce-d283f4b1adca",
+    "titulo": "Test Article 2025-06-03 14:01:12",
+    "resumen": "This is a test article created by automated testing",
+    "contenido": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.",
+    "imagen": "/images/blog/test-article.jpg",
+    "fecha": "2025-06-03T14:01:12.963Z",
+    "autor": "Nuestra Carne",
+    "activo": true
   }
 ]
