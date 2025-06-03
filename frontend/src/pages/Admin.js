@@ -398,15 +398,76 @@ const Admin = () => {
 
                   <div>
                     <label className="block text-sm font-semibold text-rustic-700 mb-2">
-                      URL de imagen
+                      Imagen del artículo
                     </label>
-                    <input
-                      type="url"
-                      value={formData.imagen}
-                      onChange={(e) => setFormData({...formData, imagen: e.target.value})}
-                      className="w-full px-4 py-3 border border-rustic-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder="https://ejemplo.com/imagen.jpg"
-                    />
+                    
+                    {/* Imagen actual o placeholder */}
+                    <div className="mb-4">
+                      {formData.imagen ? (
+                        <div className="relative">
+                          <img
+                            src={formData.imagen}
+                            alt="Vista previa"
+                            className="w-full h-48 object-cover rounded-lg border border-rustic-200"
+                            onError={(e) => {
+                              e.target.src = 'https://via.placeholder.com/400x200/f3f4f6/9ca3af?text=Imagen+no+disponible';
+                            }}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setFormData({...formData, imagen: ''})}
+                            className="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition-colors shadow-lg"
+                            title="Eliminar imagen"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="w-full h-48 bg-gray-100 rounded-lg border border-rustic-200 flex items-center justify-center">
+                          <div className="text-center">
+                            <ImageIcon className="w-12 h-12 text-gray-400 mx-auto mb-2" />
+                            <p className="text-gray-500">Sin imagen seleccionada</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    
+                    {/* Opciones de imagen */}
+                    <div className="space-y-3">
+                      <div className="flex flex-wrap gap-3">
+                        <button
+                          type="button"
+                          onClick={() => setShowMediaUploader(true)}
+                          className="flex items-center space-x-2 bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-colors"
+                        >
+                          <Upload className="w-4 h-4" />
+                          <span>Subir nueva imagen</span>
+                        </button>
+                        
+                        <button
+                          type="button"
+                          onClick={() => setShowMediaGallery(true)}
+                          className="flex items-center space-x-2 bg-amber-500 text-white px-4 py-2 rounded-lg hover:bg-amber-600 transition-colors"
+                        >
+                          <Camera className="w-4 h-4" />
+                          <span>Galería de medios</span>
+                        </button>
+                      </div>
+                      
+                      {/* URL manual como alternativa */}
+                      <div className="border-t border-rustic-200 pt-3">
+                        <label className="block text-xs font-medium text-rustic-500 mb-2">
+                          O ingresa una URL manualmente:
+                        </label>
+                        <input
+                          type="url"
+                          value={formData.imagen}
+                          onChange={(e) => setFormData({...formData, imagen: e.target.value})}
+                          className="w-full px-3 py-2 text-sm border border-rustic-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                          placeholder="https://ejemplo.com/imagen.jpg"
+                        />
+                      </div>
+                    </div>
                   </div>
 
                   <div>
