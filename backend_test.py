@@ -57,7 +57,7 @@ class NuestraCarneTester:
         return self.run_test(
             "Health Check",
             "GET",
-            "orders/health",
+            "health",
             200
         )
 
