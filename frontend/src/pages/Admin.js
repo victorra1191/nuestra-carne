@@ -1,543 +1,552 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Plus, Edit3, Trash2, Eye, EyeOff, LogOut, Upload, Save, ArrowLeft } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { 
+  Eye, 
+  EyeOff, 
+  Plus, 
+  Edit3, 
+  Trash2, 
+  Save, 
+  X, 
+  Calendar,
+  User,
+  LogOut,
+  FileText,
+  Image as ImageIcon,
+  AlertCircle
+} from 'lucide-react';
 
 const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [articles, setArticles] = useState([]);
-  const [currentView, setCurrentView] = useState('login'); // login, dashboard, create, edit
-  const [selectedArticle, setSelectedArticle] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+  const [editingArticle, setEditingArticle] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
   
-  // Estados del formulario
+  // Detectar automáticamente la URL del backend
+  const getBackendURL = () => {
+    // En desarrollo local
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return 'http://localhost:8080/api';
+    }
+    // En producción
+    return 'https://nuestracarnepa.com/api';
+  };
+  
+  const API_BASE = process.env.REACT_APP_BACKEND_URL || getBackendURL();
+
   const [formData, setFormData] = useState({
     titulo: '',
-    resumen: '',
     contenido: '',
-    imagen: ''
+    resumen: '',
+    imagen: '',
+    fecha: new Date().toISOString().split('T')[0]
   });
 
-  const navigate = useNavigate();
-  const API_BASE = process.env.REACT_APP_BACKEND_URL;
-
   useEffect(() => {
-    const token = localStorage.getItem('adminToken');
-    if (token) {
+    const authStatus = localStorage.getItem('adminAuth');
+    if (authStatus === 'true') {
       setIsAuthenticated(true);
-      setCurrentView('dashboard');
-      loadArticles();
+      fetchArticles();
     }
   }, []);
 
-  const login = async (username, password) => {
+  const fetchArticles = async () => {
     try {
       setLoading(true);
+      const response = await fetch(`${API_BASE}/admin/blog/all-articles`, {
+        headers: {
+          'Authorization': `Basic ${btoa('admin:nuestra123')}`
+        }
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        setArticles(data.articles || []);
+      } else {
+        throw new Error(data.error || 'Error al cargar artículos');
+      }
+    } catch (error) {
+      console.error('Error fetching articles:', error);
+      setError('Error al cargar los artículos');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLogin = async (username, password) => {
+    try {
+      setLoading(true);
+      setError('');
+      
       const response = await fetch(`${API_BASE}/admin/login`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({ username, password })
       });
       
       const data = await response.json();
       
       if (data.success) {
-        localStorage.setItem('adminToken', data.token);
+        localStorage.setItem('adminAuth', 'true');
         setIsAuthenticated(true);
-        setCurrentView('dashboard');
-        loadArticles();
-        setMessage('¡Login exitoso!');
+        fetchArticles();
       } else {
-        setMessage('Credenciales inválidas');
+        throw new Error(data.error || 'Error de autenticación');
       }
     } catch (error) {
-      setMessage('Error de conexión');
+      console.error('Login error:', error);
+      setError('Error de conexión. Verifica tu conexión a internet.');
     } finally {
       setLoading(false);
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem('adminToken');
+  const handleLogout = () => {
+    localStorage.removeItem('adminAuth');
     setIsAuthenticated(false);
-    setCurrentView('login');
-    setMessage('');
+    setArticles([]);
+    setShowForm(false);
+    setEditingArticle(null);
   };
 
-  const getAuthHeaders = () => {
-    const token = localStorage.getItem('adminToken');
-    return {
-      'Content-Type': 'application/json',
-      'Authorization': `Basic ${token}`
-    };
-  };
-
-  const loadArticles = async () => {
-    try {
-      const response = await fetch(`${API_BASE}/admin/blog/all-articles`, {
-        headers: getAuthHeaders()
-      });
-      const data = await response.json();
-      if (data.success) {
-        setArticles(data.articles);
-      }
-    } catch (error) {
-      console.error('Error cargando artículos:', error);
-    }
-  };
-
-  const handleImageUpload = async (file) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
     try {
       setLoading(true);
-      const formData = new FormData();
-      formData.append('image', file);
+      setError('');
       
-      const response = await fetch(`${API_BASE}/admin/upload-image`, {
-        method: 'POST',
-        headers: {
-          'Authorization': `Basic ${localStorage.getItem('adminToken')}`
-        },
-        body: formData
-      });
-      
-      const data = await response.json();
-      if (data.success) {
-        return data.imageUrl;
-      } else {
-        throw new Error(data.error);
-      }
-    } catch (error) {
-      setMessage('Error subiendo imagen: ' + error.message);
-      return null;
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const saveArticle = async () => {
-    try {
-      setLoading(true);
-      const url = selectedArticle 
-        ? `${API_BASE}/admin/blog/articles/${selectedArticle.id}`
+      const url = editingArticle 
+        ? `${API_BASE}/admin/blog/articles/${editingArticle.id}`
         : `${API_BASE}/admin/blog/articles`;
       
-      const method = selectedArticle ? 'PUT' : 'POST';
+      const method = editingArticle ? 'PUT' : 'POST';
       
       const response = await fetch(url, {
         method,
-        headers: getAuthHeaders(),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Basic ${btoa('admin:nuestra123')}`
+        },
         body: JSON.stringify(formData)
       });
       
       const data = await response.json();
+      
       if (data.success) {
-        setMessage(selectedArticle ? 'Artículo actualizado!' : 'Artículo creado!');
-        loadArticles();
-        setCurrentView('dashboard');
-        resetForm();
+        fetchArticles();
+        setShowForm(false);
+        setEditingArticle(null);
+        setFormData({
+          titulo: '',
+          contenido: '',
+          resumen: '',
+          imagen: '',
+          fecha: new Date().toISOString().split('T')[0]
+        });
       } else {
-        setMessage('Error: ' + data.error);
+        throw new Error(data.error || 'Error al guardar artículo');
       }
     } catch (error) {
-      setMessage('Error guardando artículo');
+      console.error('Error saving article:', error);
+      setError('Error al guardar el artículo');
     } finally {
       setLoading(false);
     }
   };
 
-  const deleteArticle = async (id) => {
-    if (!window.confirm('¿Estás seguro de eliminar este artículo?')) return;
+  const handleEdit = (article) => {
+    setEditingArticle(article);
+    setFormData({
+      titulo: article.titulo || '',
+      contenido: article.contenido || '',
+      resumen: article.resumen || '',
+      imagen: article.imagen || article.image || '',
+      fecha: article.fecha || article.published_at || new Date().toISOString().split('T')[0]
+    });
+    setShowForm(true);
+  };
+
+  const handleDelete = async (articleId) => {
+    if (!window.confirm('¿Estás seguro de que quieres eliminar este artículo?')) {
+      return;
+    }
     
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE}/admin/blog/articles/${id}`, {
+      const response = await fetch(`${API_BASE}/admin/blog/articles/${articleId}`, {
         method: 'DELETE',
-        headers: getAuthHeaders()
+        headers: {
+          'Authorization': `Basic ${btoa('admin:nuestra123')}`
+        }
       });
       
       const data = await response.json();
+      
       if (data.success) {
-        setMessage('Artículo eliminado!');
-        loadArticles();
+        fetchArticles();
       } else {
-        setMessage('Error eliminando artículo');
+        throw new Error(data.error || 'Error al eliminar artículo');
       }
     } catch (error) {
-      setMessage('Error eliminando artículo');
+      console.error('Error deleting article:', error);
+      setError('Error al eliminar el artículo');
     } finally {
       setLoading(false);
     }
   };
 
-  const toggleArticleStatus = async (article) => {
-    try {
-      setLoading(true);
-      const response = await fetch(`${API_BASE}/admin/blog/articles/${article.id}`, {
-        method: 'PUT',
-        headers: getAuthHeaders(),
-        body: JSON.stringify({ ...article, activo: !article.activo })
-      });
-      
-      const data = await response.json();
-      if (data.success) {
-        setMessage(article.activo ? 'Artículo ocultado!' : 'Artículo publicado!');
-        loadArticles();
-      }
-    } catch (error) {
-      setMessage('Error actualizando estado');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const editArticle = (article) => {
-    setSelectedArticle(article);
-    setFormData({
-      titulo: article.titulo,
-      resumen: article.resumen,
-      contenido: article.contenido,
-      imagen: article.imagen
-    });
-    setCurrentView('edit');
-  };
-
-  const resetForm = () => {
-    setFormData({ titulo: '', resumen: '', contenido: '', imagen: '' });
-    setSelectedArticle(null);
-  };
-
-  // Componente de Login
   const LoginForm = () => {
     const [credentials, setCredentials] = useState({ username: '', password: '' });
-    
-    const handleSubmit = (e) => {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const onSubmit = (e) => {
       e.preventDefault();
-      login(credentials.username, credentials.password);
+      handleLogin(credentials.username, credentials.password);
     };
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-primary-500 to-rustic-600 flex items-center justify-center p-4">
-        <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
+      <div className="min-h-screen bg-gradient-to-br from-primary-50 to-rustic-50 flex items-center justify-center p-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md"
+        >
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-rustic-900 mb-2">Panel Admin</h1>
-            <p className="text-rustic-600">Nuestra Carne Blog</p>
+            <h1 className="text-3xl font-bold text-rustic-900 mb-2">🥩 Admin Panel</h1>
+            <p className="text-rustic-600">Panel de administración Nuestra Carne</p>
           </div>
-          
-          <form onSubmit={handleSubmit} className="space-y-6">
+
+          {error && (
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6 flex items-center">
+              <AlertCircle className="w-5 h-5 text-red-500 mr-2" />
+              <span className="text-red-700">{error}</span>
+            </div>
+          )}
+
+          <form onSubmit={onSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-rustic-700 mb-2">
+              <label className="block text-sm font-semibold text-rustic-700 mb-2">
                 Usuario
               </label>
               <input
                 type="text"
-                required
-                className="w-full px-4 py-3 border border-rustic-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 value={credentials.username}
                 onChange={(e) => setCredentials({...credentials, username: e.target.value})}
+                className="w-full px-4 py-3 border border-rustic-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                placeholder="Ingresa tu usuario"
+                required
               />
             </div>
-            
+
             <div>
-              <label className="block text-sm font-medium text-rustic-700 mb-2">
+              <label className="block text-sm font-semibold text-rustic-700 mb-2">
                 Contraseña
               </label>
-              <input
-                type="password"
-                required
-                className="w-full px-4 py-3 border border-rustic-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                value={credentials.password}
-                onChange={(e) => setCredentials({...credentials, password: e.target.value})}
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  value={credentials.password}
+                  onChange={(e) => setCredentials({...credentials, password: e.target.value})}
+                  className="w-full px-4 py-3 pr-12 border border-rustic-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  placeholder="Ingresa tu contraseña"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-rustic-400 hover:text-rustic-600"
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
             </div>
-            
+
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-primary-500 text-white py-3 rounded-lg font-semibold hover:bg-primary-600 disabled:opacity-50"
+              className="w-full bg-primary-500 text-white py-3 px-4 rounded-lg hover:bg-primary-600 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Iniciando...' : 'Iniciar Sesión'}
+              {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
             </button>
           </form>
-          
-          {message && (
-            <div className="mt-4 p-3 bg-red-100 text-red-700 rounded-lg text-center">
-              {message}
-            </div>
-          )}
-          
-          <div className="mt-6 text-center">
-            <button
-              onClick={() => navigate('/')}
-              className="text-rustic-600 hover:text-rustic-800 text-sm"
-            >
-              ← Volver al sitio
-            </button>
+
+          <div className="mt-6 text-center text-sm text-rustic-500">
+            <p>Credenciales por defecto: admin / nuestra123</p>
           </div>
-        </div>
+        </motion.div>
       </div>
     );
   };
 
-  // Componente Dashboard
-  const Dashboard = () => (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
+  if (!isAuthenticated) {
+    return <LoginForm />;
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-rustic-50">
+      {/* Header */}
+      <div className="bg-white shadow-sm border-b border-rustic-200">
+        <div className="max-w-7xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Panel de Administración</h1>
-              <p className="text-gray-600">Gestión del Blog - Nuestra Carne</p>
+              <h1 className="text-2xl font-bold text-rustic-900">🥩 Panel Admin</h1>
+              <p className="text-rustic-600">Gestión de blog Nuestra Carne</p>
             </div>
-            <div className="flex space-x-4">
-              <button
-                onClick={() => navigate('/')}
-                className="flex items-center px-4 py-2 text-gray-600 hover:text-gray-800"
-              >
-                <ArrowLeft size={20} className="mr-2" />
-                Ver Sitio
-              </button>
+            
+            <div className="flex items-center space-x-4">
               <button
                 onClick={() => {
-                  resetForm();
-                  setCurrentView('create');
+                  setShowForm(true);
+                  setEditingArticle(null);
+                  setFormData({
+                    titulo: '',
+                    contenido: '',
+                    resumen: '',
+                    imagen: '',
+                    fecha: new Date().toISOString().split('T')[0]
+                  });
                 }}
-                className="flex items-center px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600"
+                className="flex items-center space-x-2 bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-colors"
               >
-                <Plus size={20} className="mr-2" />
-                Nuevo Artículo
+                <Plus className="w-4 h-4" />
+                <span>Nuevo Artículo</span>
               </button>
+              
               <button
-                onClick={logout}
-                className="flex items-center px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+                onClick={handleLogout}
+                className="flex items-center space-x-2 bg-rustic-500 text-white px-4 py-2 rounded-lg hover:bg-rustic-600 transition-colors"
               >
-                <LogOut size={20} className="mr-2" />
-                Salir
+                <LogOut className="w-4 h-4" />
+                <span>Cerrar Sesión</span>
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {message && (
-          <div className="mb-6 p-4 bg-green-100 text-green-700 rounded-lg">
-            {message}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        {error && (
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6 flex items-center">
+            <AlertCircle className="w-5 h-5 text-red-500 mr-2" />
+            <span className="text-red-700">{error}</span>
           </div>
         )}
 
-        <div className="bg-white rounded-lg shadow">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900">
-              Artículos del Blog ({articles.length})
-            </h2>
+        {/* Article Form Modal */}
+        {showForm && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-white rounded-xl shadow-xl w-full max-w-4xl max-h-[90vh] overflow-y-auto"
+            >
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-bold text-rustic-900">
+                    {editingArticle ? 'Editar Artículo' : 'Nuevo Artículo'}
+                  </h2>
+                  <button
+                    onClick={() => {
+                      setShowForm(false);
+                      setEditingArticle(null);
+                    }}
+                    className="text-rustic-500 hover:text-rustic-700"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-rustic-700 mb-2">
+                        Título *
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.titulo}
+                        onChange={(e) => setFormData({...formData, titulo: e.target.value})}
+                        className="w-full px-4 py-3 border border-rustic-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-rustic-700 mb-2">
+                        Fecha
+                      </label>
+                      <input
+                        type="date"
+                        value={formData.fecha}
+                        onChange={(e) => setFormData({...formData, fecha: e.target.value})}
+                        className="w-full px-4 py-3 border border-rustic-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-rustic-700 mb-2">
+                      URL de imagen
+                    </label>
+                    <input
+                      type="url"
+                      value={formData.imagen}
+                      onChange={(e) => setFormData({...formData, imagen: e.target.value})}
+                      className="w-full px-4 py-3 border border-rustic-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      placeholder="https://ejemplo.com/imagen.jpg"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-rustic-700 mb-2">
+                      Resumen *
+                    </label>
+                    <textarea
+                      value={formData.resumen}
+                      onChange={(e) => setFormData({...formData, resumen: e.target.value})}
+                      rows={3}
+                      className="w-full px-4 py-3 border border-rustic-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      placeholder="Breve descripción del artículo..."
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-rustic-700 mb-2">
+                      Contenido *
+                    </label>
+                    <textarea
+                      value={formData.contenido}
+                      onChange={(e) => setFormData({...formData, contenido: e.target.value})}
+                      rows={12}
+                      className="w-full px-4 py-3 border border-rustic-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      placeholder="Contenido completo del artículo (HTML permitido)..."
+                      required
+                    />
+                  </div>
+
+                  <div className="flex items-center justify-end space-x-4">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setShowForm(false);
+                        setEditingArticle(null);
+                      }}
+                      className="px-6 py-3 border border-rustic-300 text-rustic-700 rounded-lg hover:bg-rustic-50 transition-colors"
+                    >
+                      Cancelar
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="flex items-center space-x-2 bg-primary-500 text-white px-6 py-3 rounded-lg hover:bg-primary-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <Save className="w-4 h-4" />
+                      <span>{loading ? 'Guardando...' : 'Guardar'}</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </motion.div>
           </div>
-          
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Título
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Fecha
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Estado
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Acciones
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {articles.map((article) => (
-                  <tr key={article.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4">
-                      <div>
-                        <div className="text-sm font-medium text-gray-900">
-                          {article.titulo}
-                        </div>
-                        <div className="text-sm text-gray-500">
-                          {article.resumen.substring(0, 100)}...
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {new Date(article.fecha).toLocaleDateString('es-ES')}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                        article.activo 
-                          ? 'bg-green-100 text-green-800' 
-                          : 'bg-red-100 text-red-800'
-                      }`}>
-                        {article.activo ? 'Publicado' : 'Oculto'}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+        )}
+
+        {/* Articles List */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          {loading && articles.length === 0 ? (
+            // Loading state
+            [1, 2, 3, 4, 5, 6].map((index) => (
+              <div key={index} className="bg-white rounded-xl shadow-md p-6 animate-pulse">
+                <div className="h-4 bg-gray-300 rounded mb-4 w-3/4"></div>
+                <div className="h-3 bg-gray-300 rounded mb-2"></div>
+                <div className="h-3 bg-gray-300 rounded mb-2 w-5/6"></div>
+                <div className="h-3 bg-gray-300 rounded w-2/3"></div>
+              </div>
+            ))
+          ) : articles.length === 0 ? (
+            <div className="col-span-full text-center py-12">
+              <FileText className="w-16 h-16 text-rustic-300 mx-auto mb-4" />
+              <h3 className="text-xl font-bold text-rustic-700 mb-2">No hay artículos</h3>
+              <p className="text-rustic-500">Crea tu primer artículo para comenzar</p>
+            </div>
+          ) : (
+            articles.map((article, index) => (
+              <motion.div
+                key={article.id || index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow"
+              >
+                {(article.imagen || article.image) && (
+                  <div className="aspect-video bg-gray-200 rounded-t-xl overflow-hidden">
+                    <img 
+                      src={article.imagen || article.image}
+                      alt={article.titulo}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                      }}
+                    />
+                  </div>
+                )}
+                
+                <div className="p-6">
+                  <div className="flex items-center text-sm text-rustic-500 mb-3">
+                    <Calendar className="w-4 h-4 mr-1" />
+                    <span>
+                      {new Date(article.fecha || article.published_at || Date.now()).toLocaleDateString('es-ES')}
+                    </span>
+                  </div>
+                  
+                  <h3 className="text-xl font-bold text-rustic-900 mb-3 line-clamp-2">
+                    {article.titulo}
+                  </h3>
+                  
+                  <p className="text-rustic-700 mb-4 line-clamp-3">
+                    {article.resumen || 
+                     (article.contenido ? article.contenido.replace(/<[^>]*>/g, '').substring(0, 150) + '...' : '')}
+                  </p>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center text-sm text-rustic-500">
+                      <User className="w-4 h-4 mr-1" />
+                      <span>Nuestra Carne</span>
+                    </div>
+                    
+                    <div className="flex items-center space-x-2">
                       <button
-                        onClick={() => editArticle(article)}
-                        className="text-indigo-600 hover:text-indigo-900"
+                        onClick={() => handleEdit(article)}
+                        className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                        title="Editar artículo"
                       >
-                        <Edit3 size={16} />
+                        <Edit3 className="w-4 h-4" />
                       </button>
+                      
                       <button
-                        onClick={() => toggleArticleStatus(article)}
-                        className="text-yellow-600 hover:text-yellow-900"
+                        onClick={() => handleDelete(article.id)}
+                        className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                        title="Eliminar artículo"
                       >
-                        {article.activo ? <EyeOff size={16} /> : <Eye size={16} />}
+                        <Trash2 className="w-4 h-4" />
                       </button>
-                      <button
-                        onClick={() => deleteArticle(article.id)}
-                        className="text-red-600 hover:text-red-900"
-                      >
-                        <Trash2 size={16} />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))
+          )}
         </div>
       </div>
     </div>
   );
-
-  // Componente Formulario de Artículo
-  const ArticleForm = () => {
-    const handleImageChange = async (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        const imageUrl = await handleImageUpload(file);
-        if (imageUrl) {
-          setFormData({...formData, imagen: imageUrl});
-        }
-      }
-    };
-
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <div className="bg-white shadow-sm border-b">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center py-4">
-              <h1 className="text-2xl font-bold text-gray-900">
-                {selectedArticle ? 'Editar Artículo' : 'Nuevo Artículo'}
-              </h1>
-              <div className="flex space-x-4">
-                <button
-                  onClick={() => setCurrentView('dashboard')}
-                  className="flex items-center px-4 py-2 text-gray-600 hover:text-gray-800"
-                >
-                  <ArrowLeft size={20} className="mr-2" />
-                  Volver
-                </button>
-                <button
-                  onClick={saveArticle}
-                  disabled={loading}
-                  className="flex items-center px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 disabled:opacity-50"
-                >
-                  <Save size={20} className="mr-2" />
-                  {loading ? 'Guardando...' : 'Guardar'}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          {message && (
-            <div className="mb-6 p-4 bg-green-100 text-green-700 rounded-lg">
-              {message}
-            </div>
-          )}
-
-          <div className="bg-white rounded-lg shadow p-6">
-            <div className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Título del Artículo
-                </label>
-                <input
-                  type="text"
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  value={formData.titulo}
-                  onChange={(e) => setFormData({...formData, titulo: e.target.value})}
-                  placeholder="Ej: Los mejores cortes para parrilla"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Resumen (se muestra en la lista de artículos)
-                </label>
-                <textarea
-                  required
-                  rows={3}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  value={formData.resumen}
-                  onChange={(e) => setFormData({...formData, resumen: e.target.value})}
-                  placeholder="Breve descripción del artículo..."
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Contenido del Artículo
-                </label>
-                <textarea
-                  required
-                  rows={12}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  value={formData.contenido}
-                  onChange={(e) => setFormData({...formData, contenido: e.target.value})}
-                  placeholder="Escribe el contenido completo del artículo aquí..."
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Imagen del Artículo
-                </label>
-                <div className="flex items-center space-x-4">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                    className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100"
-                  />
-                  {formData.imagen && (
-                    <img 
-                      src={formData.imagen} 
-                      alt="Preview" 
-                      className="w-20 h-20 object-cover rounded-lg"
-                    />
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  // Renderizado principal
-  if (!isAuthenticated && currentView === 'login') {
-    return <LoginForm />;
-  }
-
-  if (currentView === 'dashboard') {
-    return <Dashboard />;
-  }
-
-  if (currentView === 'create' || currentView === 'edit') {
-    return <ArticleForm />;
-  }
-
-  return <LoginForm />;
 };
 
 export default Admin;
