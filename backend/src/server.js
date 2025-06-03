@@ -68,6 +68,7 @@ const upload = multer({
 // Rutas de API
 app.use('/api', orderRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/media', mediaRoutes);
 
 // Ruta para subir imágenes del blog
 app.post('/api/admin/upload-image', upload.single('image'), (req, res) => {
