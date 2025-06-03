@@ -15,7 +15,7 @@
     }
   },
   {
-    "id": "2", 
+    "id": "2",
     "titulo": "Carne premium: ¿Qué hace que un corte valga cada centavo?",
     "resumen": "¿Qué hace que un corte de carne sea premium? ¿Vale la pena gastar más en un ribeye o un tomahawk? Descubre las diferencias reales entre carne comercial y premium.",
     "contenido": "¿Qué hace que un corte de carne sea \"premium\"? ¿Vale la pena gastar más en un ribeye o un tomahawk? La respuesta corta: sí, pero solo si sabes por qué. Hoy queremos llevarte detrás del sabor, para que descubras qué estás comprando realmente cuando eliges un corte premium.\n\n**La diferencia comienza desde el campo**\n\nLa carne premium proviene de animales bien alimentados, criados con estándares más exigentes y bajo condiciones que garantizan bienestar animal. Esto se traduce en marmoleo natural, esas pequeñas vetas de grasa que se derriten al cocinar y le dan a la carne una textura jugosa y un sabor envolvente.\n\n**Calidad que se nota**\n\nUn corte comercial puede sacarte de apuros, pero un cowboy steak, bien seleccionado, bien cortado y bien cocinado, juega en otra liga. En Nuestra Carne nos aseguramos de que cada pieza tenga ese balance perfecto entre grasa, color y firmeza que distingue lo común de lo excepcional.\n\n**Experiencia completa**\n\nAdemás, cuidamos el empaque, la refrigeración y el manejo del tiempo justo para que el sabor llegue intacto a tu mesa. Sabemos que cuando decides invertir en un corte premium, no es solo por hambre: es por el momento.\n\n**¿Cuándo elegir premium?**\n\n¿Vas a recibir visitas? ¿Quieres darte un gusto sin salir de casa? Este tipo de carne no es para todos los días… pero cuando llega el día, hazlo bien.\n\n✨ Haz tu pedido hoy y lleva tu cena al siguiente nivel con nuestros cortes premium.\n\nTe recomendamos empezar con un ribeye sellado en sartén y terminado al horno con mantequilla de ajo. Pocas cosas superan eso.",
@@ -148,5 +148,15 @@
       "metaDescription": "Aprende 3 recetas fáciles que parecen de restaurante: entraña con chimichurri, lagarto guisado y ribeye al horno. Consejos de chef para casa.",
       "keywords": "recetas faciles carne, entraña chimichurri, lagarto guisado, ribeye horno, recetas panama carne, platos impresionantes casa"
     }
+  },
+  {
+    "id": "d3a2b9da-e17d-4328-9caf-88b33604e678",
+    "titulo": "Test Article 2025-06-03 14:00:34",
+    "resumen": "This is a test article created by automated testing",
+    "contenido": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.",
+    "imagen": "/images/blog/test-article.jpg",
+    "fecha": "2025-06-03T14:00:34.106Z",
+    "autor": "Nuestra Carne",
+    "activo": true
   }
 ]
