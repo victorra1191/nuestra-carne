@@ -712,6 +712,21 @@ const LandingPage = () => {
               </motion.div>
             ))}
           </div>
+          
+          {/* Ver todos los artículos */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-center mt-12"
+          >
+            <button
+              onClick={() => navigate('/blog')}
+              className="bg-primary-500 text-white px-8 py-4 rounded-lg hover:bg-primary-600 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl"
+            >
+              Ver todos los artículos →
+            </button>
+          </motion.div>
         </div>
       </section>
 
