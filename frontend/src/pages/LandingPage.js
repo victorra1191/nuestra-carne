@@ -42,17 +42,8 @@ const LandingPage = () => {
   }, [blogPosts]);
   const navigate = useNavigate();
   
-  // Detectar automáticamente la URL del backend
-  const getBackendURL = () => {
-    // En desarrollo local
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-      return 'http://localhost:8080/api';
-    }
-    // En producción
-    return 'https://nuestracarnepa.com/api';
-  };
-  
-  const API_BASE = process.env.REACT_APP_BACKEND_URL || getBackendURL();
+  // Forzar URL del backend para producción
+  const API_BASE = 'https://nuestracarnepa.com/api';
 
   // Datos de cortes panameños - SOLO 11 SELECCIONADOS PARA EL LANDING
   const cortes = [
