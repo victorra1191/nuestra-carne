@@ -21,6 +21,25 @@ const LandingPage = () => {
   const [blogPosts, setBlogPosts] = useState([]);
   const [loadingBlog, setLoadingBlog] = useState(true);
   const [blogError, setBlogError] = useState(null);
+
+  // SEO dinámico - actualizar meta tags cuando carguen los artículos
+  useEffect(() => {
+    if (blogPosts.length > 0) {
+      // Actualizar meta description con contenido dinámico del blog
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        const latestArticle = blogPosts[0];
+        const dynamicDescription = `🥩 Carne premium Angus en Panamá. Ribeye, New York Strip, Filet Mignon y más. Blog: "${latestArticle.titulo}". Entrega a domicilio. ¡Ordena ya!`;
+        metaDescription.setAttribute('content', dynamicDescription);
+      }
+      
+      // Actualizar Open Graph title con último artículo
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle && blogPosts[0]) {
+        ogTitle.setAttribute('content', `Nuestra Carne - ${blogPosts[0].titulo} | Carne Premium Angus`);
+      }
+    }
+  }, [blogPosts]);
   const navigate = useNavigate();
   
   const API_BASE = process.env.REACT_APP_BACKEND_URL;
