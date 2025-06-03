@@ -327,7 +327,10 @@ const BlogList = () => {
           className="mt-16 text-center"
         >
           <div className="bg-gradient-to-r from-primary-600 to-amber-600 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="white" fill-opacity="0.1"%3E%3Cpolygon points="50 0 60 40 100 50 60 60 50 100 40 60 0 50 40 40"/%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+            <div 
+              className="absolute inset-0 opacity-20"
+              style={{ backgroundImage: `url('${backgroundPattern}')` }}
+            ></div>
             
             <div className="relative z-10">
               <h3 className="text-3xl font-bold text-white mb-4">
