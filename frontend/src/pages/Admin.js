@@ -26,6 +26,8 @@ const Admin = () => {
   const [editingArticle, setEditingArticle] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showMediaUploader, setShowMediaUploader] = useState(false);
+  const [showMediaGallery, setShowMediaGallery] = useState(false);
   
   // Detectar automáticamente la URL del backend
   const getBackendURL = () => {
