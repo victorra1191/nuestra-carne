@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import MediaUploader from '../components/MediaUploader';
 import { 
   Eye, 
   EyeOff, 
@@ -13,7 +14,9 @@ import {
   LogOut,
   FileText,
   Image as ImageIcon,
-  AlertCircle
+  AlertCircle,
+  Upload,
+  Camera
 } from 'lucide-react';
 
 const Admin = () => {
