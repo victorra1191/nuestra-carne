@@ -9,6 +9,7 @@ require('dotenv').config();
 
 const orderRoutes = require('./routes/orderRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const mediaRoutes = require('./routes/mediaRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
