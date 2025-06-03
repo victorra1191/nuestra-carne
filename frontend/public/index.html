@@ -1,24 +1,102 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="description" content="A product of emergent.sh" />
-        <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-        <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-        <title>Emergent | Fullstack App</title>
+        <meta name="theme-color" content="#8B4513" />
+        
+        <!-- SEO Meta Tags -->
+        <title>Nuestra Carne - Carne Premium Angus en Panamá | Entrega a Domicilio</title>
+        <meta name="description" content="🥩 Carne premium Angus en Panamá. Ribeye, New York Strip, Filet Mignon y más. Entrega a domicilio. Calidad garantizada. ¡Ordena ya!" />
+        <meta name="keywords" content="carne angus panama, ribeye panama, filet mignon, new york strip, carne premium, entrega domicilio panama, parrilla, barbacoa, carne calidad" />
+        <meta name="author" content="Nuestra Carne" />
+        <meta name="robots" content="index, follow" />
+        
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://nuestracarnepa.com/" />
+        <meta property="og:title" content="Nuestra Carne - Carne Premium Angus en Panamá" />
+        <meta property="og:description" content="🥩 La mejor carne Angus de Panamá. Ribeye, New York Strip, Filet Mignon y más. Entrega a domicilio. ¡Ordena ya!" />
+        <meta property="og:image" content="https://nuestracarnepa.com/images/logo-nc-blanco.png" />
+        <meta property="og:site_name" content="Nuestra Carne" />
+        <meta property="og:locale" content="es_PA" />
+        
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://nuestracarnepa.com/" />
+        <meta property="twitter:title" content="Nuestra Carne - Carne Premium Angus en Panamá" />
+        <meta property="twitter:description" content="🥩 La mejor carne Angus de Panamá. Ribeye, New York Strip, Filet Mignon y más. Entrega a domicilio. ¡Ordena ya!" />
+        <meta property="twitter:image" content="https://nuestracarnepa.com/images/logo-nc-blanco.png" />
+        
+        <!-- Local Business Schema -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "name": "Nuestra Carne",
+          "description": "Carnicería premium especializada en carne Angus de alta calidad en Panamá",
+          "url": "https://nuestracarnepa.com",
+          "logo": "https://nuestracarnepa.com/images/logo-nc-blanco.png",
+          "image": "https://nuestracarnepa.com/images/logo-nc-blanco.png",
+          "telephone": "+507 6917-2690",
+          "email": "info@nuestracarnepa.com",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "PA",
+            "addressLocality": "Ciudad de Panamá"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "8.9824",
+            "longitude": "-79.5199"
+          },
+          "openingHours": "Mo-Su 08:00-20:00",
+          "priceRange": "$$",
+          "servesCuisine": "Carne Premium",
+          "paymentAccepted": "Efectivo, Transferencia",
+          "currenciesAccepted": "USD",
+          "serviceArea": {
+            "@type": "City",
+            "name": "Ciudad de Panamá"
+          }
+        }
+        </script>
+        
+        <!-- Product Schema for Featured Products -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Product",
+          "name": "Ribeye Premium Angus",
+          "description": "Corte premium Angus con marmoleo excepcional, perfecto para parrilla",
+          "brand": "Nuestra Carne",
+          "category": "Carne Premium",
+          "offers": {
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "price": "25.00",
+            "priceCurrency": "USD",
+            "seller": {
+              "@type": "Organization",
+              "name": "Nuestra Carne"
+            }
+          }
+        }
+        </script>
+        
+        <!-- Favicon -->
+        <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+        <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+        
+        <!-- Manifest -->
+        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+        
+        <!-- Canonical URL -->
+        <link rel="canonical" href="https://nuestracarnepa.com/" />
+        
+        <!-- Preconnect for performance -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     </head>
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
