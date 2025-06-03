@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Calendar, Clock, User, Search } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, User, Search, Flame, Award, Star } from 'lucide-react';
 
 const BlogList = () => {
   const [articles, setArticles] = useState([]);
@@ -21,6 +21,14 @@ const BlogList = () => {
   };
   
   const API_BASE = process.env.REACT_APP_BACKEND_URL || getBackendURL();
+
+  // Imágenes de fondo atractivas
+  const backgroundImages = [
+    'https://images.pexels.com/photos/31313536/pexels-photo-31313536.jpeg',
+    'https://images.pexels.com/photos/1482803/pexels-photo-1482803.jpeg',
+    'https://images.unsplash.com/photo-1556269923-e4ef51d69638',
+    'https://images.unsplash.com/photo-1508615263227-c5d58c1e5821'
+  ];
 
   useEffect(() => {
     fetchArticles();
@@ -66,103 +74,196 @@ const BlogList = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-rustic-50 to-amber-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-500 mx-auto mb-4"></div>
-          <p className="text-rustic-600">Cargando artículos...</p>
+      <div className="min-h-screen bg-gradient-to-br from-rustic-900 via-rustic-800 to-primary-900 flex items-center justify-center relative">
+        {/* Fondo con patrón */}
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
+        
+        <div className="text-center z-10">
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+            className="w-16 h-16 border-4 border-amber-500 border-t-transparent rounded-full mx-auto mb-6"
+          />
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="text-white text-lg font-semibold"
+          >
+            Cargando deliciosos artículos...
+          </motion.p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rustic-50 to-amber-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b border-rustic-200">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <button
-              onClick={() => navigate('/')}
-              className="flex items-center text-rustic-600 hover:text-primary-600 transition-colors"
-            >
-              <ArrowLeft className="w-5 h-5 mr-2" />
-              Volver al inicio
-            </button>
-            
-            <div className="text-center">
-              <h1 className="text-3xl font-bold text-rustic-900">
-                🥩 Blog Nuestra Carne
-              </h1>
-              <p className="text-rustic-600 mt-2">
-                Consejos, recetas y todo sobre carne premium
-              </p>
+    <div className="min-h-screen bg-gradient-to-br from-rustic-900 via-rustic-800 to-primary-900 relative">
+      {/* Fondo con patrón decorativo */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]"></div>
+      
+      {/* Header Hero con imagen de fondo */}
+      <div className="relative">
+        <div 
+          className="h-80 bg-cover bg-center relative"
+          style={{ 
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url('${backgroundImages[0]}')`
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-primary-900/80 to-rustic-900/80"></div>
+          
+          <div className="relative z-10 max-w-6xl mx-auto px-4 h-full flex items-center">
+            <div className="w-full">
+              <div className="flex items-center justify-between mb-8">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => navigate('/')}
+                  className="flex items-center text-white/90 hover:text-white transition-colors bg-black/20 backdrop-blur-sm px-4 py-2 rounded-lg"
+                >
+                  <ArrowLeft className="w-5 h-5 mr-2" />
+                  Volver al inicio
+                </motion.button>
+                
+                <div className="hidden md:flex items-center space-x-4 text-white/70">
+                  <div className="flex items-center">
+                    <Flame className="w-5 h-5 mr-2 text-amber-400" />
+                    <span>Consejos Premium</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Award className="w-5 h-5 mr-2 text-amber-400" />
+                    <span>Recetas Exclusivas</span>
+                  </div>
+                </div>
+              </div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-center"
+              >
+                <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
+                  🥩 <span className="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">Blog</span> Nuestra Carne
+                </h1>
+                <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
+                  Descubre los secretos de la carne premium, técnicas de parrilla profesionales y recetas que elevarán tus platos al siguiente nivel
+                </p>
+                
+                <div className="flex items-center justify-center space-x-6 text-white/80">
+                  <div className="flex items-center">
+                    <Star className="w-5 h-5 mr-2 text-amber-400" />
+                    <span>+{articles.length} Artículos</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Calendar className="w-5 h-5 mr-2 text-amber-400" />
+                    <span>Actualizado diariamente</span>
+                  </div>
+                </div>
+              </motion.div>
             </div>
-            
-            <div className="w-24"></div> {/* Spacer */}
           </div>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-12">
-        {/* Search Bar */}
-        <div className="mb-8">
-          <div className="relative max-w-lg mx-auto">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-rustic-400 w-5 h-5" />
-            <input
-              type="text"
-              placeholder="Buscar artículos..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-rustic-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-            />
+      <div className="relative z-10 max-w-6xl mx-auto px-4 py-12">
+        {/* Search Bar mejorada */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mb-12"
+        >
+          <div className="relative max-w-2xl mx-auto">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-amber-500 rounded-xl blur opacity-20"></div>
+            <div className="relative bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl">
+              <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-rustic-400 w-6 h-6" />
+              <input
+                type="text"
+                placeholder="Buscar artículos sobre carne, parrilla, recetas..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-16 pr-6 py-4 bg-transparent text-rustic-800 placeholder-rustic-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 text-lg"
+              />
+            </div>
           </div>
-        </div>
+        </motion.div>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-8">
-            <p className="text-red-700">{error}</p>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-red-500/10 backdrop-blur-sm border border-red-500/20 rounded-xl p-6 mb-8 text-center"
+          >
+            <p className="text-red-200 text-lg">{error}</p>
+          </motion.div>
         )}
 
         {/* Articles Grid */}
         {filteredArticles.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-rustic-600 text-lg">
-              {searchTerm ? 'No se encontraron artículos con ese término' : 'No hay artículos disponibles'}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-20"
+          >
+            <div className="text-8xl mb-6">🔍</div>
+            <h3 className="text-3xl font-bold text-white mb-4">
+              {searchTerm ? 'No se encontraron artículos' : 'No hay artículos disponibles'}
+            </h3>
+            <p className="text-white/70 text-lg">
+              {searchTerm ? 'Intenta con otro término de búsqueda' : 'Pronto tendremos contenido increíble para ti'}
             </p>
-          </div>
+          </motion.div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredArticles.map((article, index) => (
               <motion.article
                 key={article.id || index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="group relative bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden hover:shadow-3xl transition-all duration-500 cursor-pointer"
                 onClick={() => navigate(`/blog/${createSlug(article.titulo)}`)}
+                whileHover={{ y: -5, scale: 1.02 }}
               >
+                {/* Efecto de brillo */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                
                 <div className="aspect-video bg-gradient-to-br from-rustic-100 to-primary-100 relative overflow-hidden">
                   {article.imagen || article.image ? (
                     <img
                       src={article.imagen || article.image}
                       alt={article.titulo}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                       onError={(e) => {
-                        e.target.style.display = 'none';
+                        e.target.src = backgroundImages[index % backgroundImages.length];
                       }}
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center">
+                    <div 
+                      className="w-full h-full bg-cover bg-center flex items-center justify-center"
+                      style={{ 
+                        backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1)), url('${backgroundImages[index % backgroundImages.length]}')`
+                      }}
+                    >
                       <div className="text-6xl">🥩</div>
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  {/* Overlay con gradiente */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  {/* Badge de categoría */}
+                  <div className="absolute top-4 left-4">
+                    <span className="bg-amber-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
+                      Premium
+                    </span>
+                  </div>
                 </div>
                 
-                <div className="p-6">
+                <div className="p-6 relative">
                   <div className="flex items-center text-sm text-rustic-500 mb-3">
-                    <Calendar className="w-4 h-4 mr-1" />
+                    <Calendar className="w-4 h-4 mr-2" />
                     <span>
                       {new Date(article.fecha || article.published_at || Date.now()).toLocaleDateString('es-ES', {
                         day: 'numeric',
@@ -170,34 +271,73 @@ const BlogList = () => {
                         year: 'numeric'
                       })}
                     </span>
-                    <Clock className="w-4 h-4 ml-4 mr-1" />
+                    <Clock className="w-4 h-4 ml-4 mr-2" />
                     <span>5 min lectura</span>
                   </div>
                   
-                  <h2 className="text-xl font-bold text-rustic-900 mb-3 group-hover:text-primary-600 transition-colors">
+                  <h2 className="text-xl font-bold text-rustic-900 mb-3 group-hover:text-primary-600 transition-colors line-clamp-2">
                     {article.titulo}
                   </h2>
                   
-                  <p className="text-rustic-700 line-clamp-3 mb-4">
+                  <p className="text-rustic-700 line-clamp-3 mb-4 leading-relaxed">
                     {article.resumen || 
                      (article.contenido ? article.contenido.replace(/<[^>]*>/g, '').substring(0, 150) + '...' : 'Contenido disponible próximamente...')}
                   </p>
                   
                   <div className="flex items-center justify-between">
                     <div className="flex items-center text-sm text-rustic-500">
-                      <User className="w-4 h-4 mr-1" />
-                      <span>Nuestra Carne</span>
+                      <User className="w-4 h-4 mr-2" />
+                      <span className="font-semibold">Nuestra Carne</span>
                     </div>
                     
-                    <span className="text-primary-600 font-semibold text-sm group-hover:text-primary-700">
-                      Leer más →
-                    </span>
+                    <motion.div
+                      whileHover={{ x: 5 }}
+                      className="flex items-center text-primary-600 font-semibold text-sm group-hover:text-primary-700"
+                    >
+                      <span>Leer más</span>
+                      <motion.span
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        className="ml-2"
+                      >
+                        →
+                      </motion.span>
+                    </motion.div>
                   </div>
                 </div>
               </motion.article>
             ))}
           </div>
         )}
+
+        {/* Call to Action */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="mt-16 text-center"
+        >
+          <div className="bg-gradient-to-r from-primary-600 to-amber-600 rounded-2xl p-8 shadow-2xl relative overflow-hidden">
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="white" fill-opacity="0.1"%3E%3Cpolygon points="50 0 60 40 100 50 60 60 50 100 40 60 0 50 40 40"/%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+            
+            <div className="relative z-10">
+              <h3 className="text-3xl font-bold text-white mb-4">
+                ¿Te gustó nuestro contenido?
+              </h3>
+              <p className="text-white/90 mb-6 text-lg max-w-2xl mx-auto">
+                Descubre nuestra selección premium de carnes Angus y haz realidad todas estas recetas increíbles.
+              </p>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => navigate('/')}
+                className="bg-white text-primary-600 px-8 py-4 rounded-xl hover:bg-gray-50 transition-colors font-bold text-lg shadow-xl"
+              >
+                Ver productos premium 🥩
+              </motion.button>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
