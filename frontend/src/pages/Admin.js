@@ -296,6 +296,29 @@ const Admin = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-rustic-50">
+      {/* Media Uploaders */}
+      {showMediaUploader && (
+        <MediaUploader
+          onImageSelect={(imageUrl) => {
+            setFormData({...formData, imagen: imageUrl});
+            setShowMediaUploader(false);
+          }}
+          selectedImage={formData.imagen}
+          onClose={() => setShowMediaUploader(false)}
+        />
+      )}
+      
+      {showMediaGallery && (
+        <MediaUploader
+          showGallery={true}
+          onImageSelect={(imageUrl) => {
+            setFormData({...formData, imagen: imageUrl});
+            setShowMediaGallery(false);
+          }}
+          selectedImage={formData.imagen}
+          onClose={() => setShowMediaGallery(false)}
+        />
+      )}
       {/* Header */}
       <div className="bg-white shadow-sm border-b border-rustic-200">
         <div className="max-w-7xl mx-auto px-4 py-4">
