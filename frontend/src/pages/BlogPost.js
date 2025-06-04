@@ -370,16 +370,6 @@ const BlogPost = () => {
                 <Facebook className="w-5 h-5" />
                 <span className="font-semibold">Facebook</span>
               </motion.button>
-              
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={shareOnTwitter}
-                className="flex items-center space-x-2 bg-blue-400 text-white px-4 py-3 rounded-xl hover:bg-blue-500 transition-colors flex-1 justify-center shadow-lg"
-              >
-                <Twitter className="w-5 h-5" />
-                <span className="font-semibold">Twitter</span>
-              </motion.button>
             </div>
           </div>
         </motion.div>
