@@ -199,7 +199,7 @@ const BlogPost = () => {
           
           {/* Navigation */}
           <div className="relative z-10 max-w-5xl mx-auto px-4 py-6">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mb-6">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -229,7 +229,7 @@ const BlogPost = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <div className="flex items-center space-x-4 mb-4">
+                <div className="flex flex-wrap items-center gap-4 mb-6">
                   <span className="bg-amber-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
                     🔥 Premium
                   </span>
