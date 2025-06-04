@@ -392,11 +392,11 @@ const BlogPost = () => {
           className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 mb-12 border border-gray-200"
         >
           <div 
-            className="prose prose-lg prose-gray max-w-none text-gray-800 leading-relaxed"
+            className="prose prose-lg max-w-none leading-relaxed"
             style={{
               fontSize: '1.125rem',
               lineHeight: '1.75',
-              color: '#374151' // Gris oscuro legible
+              color: '#1f2937'
             }}
             dangerouslySetInnerHTML={{ 
               __html: article.contenido || 'Contenido del artículo próximamente disponible...' 
