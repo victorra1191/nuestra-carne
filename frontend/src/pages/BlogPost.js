@@ -389,14 +389,14 @@ const BlogPost = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 mb-12 border border-gray-200"
+          className="bg-amber-50 rounded-3xl shadow-2xl p-8 md:p-12 mb-12 border border-amber-200"
         >
           <div 
             className="prose prose-lg max-w-none leading-relaxed"
             style={{
               fontSize: '1.125rem',
               lineHeight: '1.75',
-              color: '#1f2937'
+              color: '#374151' // Texto gris oscuro legible
             }}
             dangerouslySetInnerHTML={{ 
               __html: article.contenido || 'Contenido del artículo próximamente disponible...' 
