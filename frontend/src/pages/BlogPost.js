@@ -389,13 +389,14 @@ const BlogPost = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="bg-white/98 backdrop-blur-sm rounded-3xl shadow-2xl p-8 md:p-12 mb-12 border border-gray-200"
+          className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 mb-12 border border-gray-200"
         >
           <div 
-            className="prose prose-lg prose-rustic max-w-none text-rustic-800 leading-relaxed"
+            className="prose prose-lg prose-gray max-w-none text-gray-800 leading-relaxed"
             style={{
               fontSize: '1.125rem',
-              lineHeight: '1.75'
+              lineHeight: '1.75',
+              color: '#374151' // Gris oscuro legible
             }}
             dangerouslySetInnerHTML={{ 
               __html: article.contenido || 'Contenido del artículo próximamente disponible...' 
