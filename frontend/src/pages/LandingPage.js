@@ -498,8 +498,8 @@ const LandingPage = () => {
             >
               <div className="aspect-video bg-gray-200 rounded-lg mb-6 overflow-hidden">
                 <img 
-                  src="/images/heroes/hero-parrilla.jpg"
-                  alt="Parrilla"
+                  src="https://images.pexels.com/photos/32449862/pexels-photo-32449862.jpeg"
+                  alt="Parrilla - Carne Premium"
                   className="w-full h-full object-cover"
                 />
               </div>
