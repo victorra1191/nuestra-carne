@@ -26,6 +26,11 @@ const OrderForm = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [orderItems, setOrderItems] = useState([]);
+  const [productos, setProductos] = useState([]);
+  const [loadingProducts, setLoadingProducts] = useState(true);
+  const { isAuthenticated, user, isWholesaleUser } = useAuth();
+  
+  const API_BASE = process.env.REACT_APP_BACKEND_URL;
   const [customerData, setCustomerData] = useState({
     tipoCliente: 'individual',
     nombre: '',
