@@ -403,7 +403,7 @@ const LandingPage = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-bold text-rustic-900 mb-4">
+            <h2 className="text-4xl md:text-6xl font-bold text-primary-900 mb-4">
               ¿Por Qué Elegir <span className="text-gradient">NUESTRA CARNE?</span>
             </h2>
           </motion.div>
