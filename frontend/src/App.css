@@ -226,8 +226,6 @@
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
 }
-  animation: float 3s ease-in-out infinite;
-}
 
 @media (max-width: 768px) {
   .hero-bg {
