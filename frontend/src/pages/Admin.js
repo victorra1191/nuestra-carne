@@ -16,8 +16,15 @@ import {
   Image as ImageIcon,
   AlertCircle,
   Upload,
-  Camera
+  Camera,
+  Package,
+  Crown,
+  Home,
+  Settings,
+  BarChart3
 } from 'lucide-react';
+import AdminProducts from '../components/AdminProducts';
+import AdminWholesale from '../components/AdminWholesale';
 
 const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
