@@ -70,7 +70,7 @@ const OrderForm = () => {
   }, [isAuthenticated, user, API_BASE]);
 
   // Productos estáticos como fallback
-  const productos = [
+  const staticProductos = [
     { codigo: '20001', nombre: 'New york rebanado', precioKg: 9.26, precioLb: 4.20, categoria: 'Premium' },
     { codigo: '20002', nombre: 'Filete Limpio /sin cordón', precioKg: 15.50, precioLb: 7.03, categoria: 'Premium' },
     { codigo: '20003', nombre: 'Lomo redondo porcionado', precioKg: 7.75, precioLb: 3.52, categoria: 'Plancha' },
