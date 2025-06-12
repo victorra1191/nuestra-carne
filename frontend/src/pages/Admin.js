@@ -35,6 +35,7 @@ const Admin = () => {
   const [error, setError] = useState('');
   const [showMediaUploader, setShowMediaUploader] = useState(false);
   const [showMediaGallery, setShowMediaGallery] = useState(false);
+  const [activeSection, setActiveSection] = useState('blog'); // Estado para manejar secciones
   
   // URL del backend desde variable de entorno
   const API_BASE = process.env.REACT_APP_BACKEND_URL || 'https://nuestracarnepa.com/api';
