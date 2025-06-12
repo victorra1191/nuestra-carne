@@ -13,8 +13,8 @@ const BlogPost = () => {
   const [liked, setLiked] = useState(false);
   const [bookmarked, setBookmarked] = useState(false);
   
-  // Forzar URL del backend para producción
-  const API_BASE = 'https://nuestracarnepa.com/api';
+  // URL del backend desde variable de entorno
+  const API_BASE = process.env.REACT_APP_BACKEND_URL || 'https://nuestracarnepa.com/api';
 
   // Imágenes de fondo premium
   const backgroundImages = [
