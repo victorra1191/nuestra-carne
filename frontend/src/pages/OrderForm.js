@@ -414,7 +414,17 @@ const OrderForm = () => {
                 className="flex items-center gap-2 text-primary-700 hover:text-primary-500 transition-colors"
               >
                 <Home size={20} />
-                <span className="font-semibold">Nuestra Carne</span>
+                <img 
+                  src="/images/logo/nuestra-carne-logo.png"
+                  alt="Nuestra Carne Logo"
+                  className="h-8 w-auto"
+                  onError={(e) => {
+                    // Fallback al texto si no encuentra la imagen
+                    e.target.style.display = 'none';
+                    e.target.nextElementSibling.style.display = 'inline';
+                  }}
+                />
+                <span style={{display: 'none'}} className="font-semibold">Nuestra Carne</span>
               </button>
               
               {isAuthenticated && (
