@@ -68,7 +68,7 @@ const BlogList = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-rustic-900 via-rustic-800 to-primary-900 flex items-center justify-center relative">
+      <div className="min-h-screen bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900 flex items-center justify-center relative">
         {/* Fondo con patrón */}
         <div 
           className="absolute inset-0"
@@ -95,7 +95,7 @@ const BlogList = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rustic-900 via-rustic-800 to-primary-900 relative">
+    <div className="min-h-screen bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900 relative">
       {/* Fondo con patrón decorativo */}
       <div 
         className="absolute inset-0"
@@ -110,7 +110,7 @@ const BlogList = () => {
             backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url('${backgroundImages[0]}')`
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-primary-900/80 to-rustic-900/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-primary-900/80 to-primary-900/80"></div>
           
           <div className="relative z-10 max-w-6xl mx-auto px-4 h-full flex items-center">
             <div className="w-full">
@@ -177,13 +177,13 @@ const BlogList = () => {
           <div className="relative max-w-2xl mx-auto">
             <div className="absolute inset-0 bg-gradient-to-r from-primary-500 to-amber-500 rounded-xl blur opacity-20"></div>
             <div className="relative bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl">
-              <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-rustic-400 w-6 h-6" />
+              <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-primary-400 w-6 h-6" />
               <input
                 type="text"
                 placeholder="Buscar artículos sobre carne, parrilla, recetas..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-16 pr-6 py-4 bg-transparent text-rustic-800 placeholder-rustic-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 text-lg"
+                className="w-full pl-16 pr-6 py-4 bg-transparent text-primary-800 placeholder-primary-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 text-lg"
               />
             </div>
           </div>
@@ -229,7 +229,7 @@ const BlogList = () => {
                 {/* Efecto de brillo */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
                 
-                <div className="aspect-video bg-gradient-to-br from-rustic-100 to-primary-100 relative overflow-hidden">
+                <div className="aspect-video bg-gradient-to-br from-primary-100 to-primary-100 relative overflow-hidden">
                   {article.imagen || article.image ? (
                     <img
                       src={article.imagen || article.image}
@@ -262,7 +262,7 @@ const BlogList = () => {
                 </div>
                 
                 <div className="p-6 relative">
-                  <div className="flex items-center text-sm text-rustic-500 mb-3">
+                  <div className="flex items-center text-sm text-primary-500 mb-3">
                     <Calendar className="w-4 h-4 mr-2" />
                     <span>
                       {new Date(article.fecha || article.published_at || Date.now()).toLocaleDateString('es-ES', {
@@ -275,17 +275,17 @@ const BlogList = () => {
                     <span>5 min lectura</span>
                   </div>
                   
-                  <h2 className="text-xl font-bold text-rustic-900 mb-3 group-hover:text-primary-600 transition-colors line-clamp-2">
+                  <h2 className="text-xl font-bold text-primary-900 mb-3 group-hover:text-primary-600 transition-colors line-clamp-2">
                     {article.titulo}
                   </h2>
                   
-                  <p className="text-rustic-700 line-clamp-3 mb-4 leading-relaxed">
+                  <p className="text-primary-700 line-clamp-3 mb-4 leading-relaxed">
                     {article.resumen || 
                      (article.contenido ? article.contenido.replace(/<[^>]*>/g, '').substring(0, 150) + '...' : 'Contenido disponible próximamente...')}
                   </p>
                   
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center text-sm text-rustic-500">
+                    <div className="flex items-center text-sm text-primary-500">
                       <User className="w-4 h-4 mr-2" />
                       <span className="font-semibold">Nuestra Carne</span>
                     </div>
