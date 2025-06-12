@@ -414,9 +414,42 @@ const OrderForm = () => {
                 <Home size={20} />
                 <span className="font-semibold">Nuestra Carne</span>
               </button>
+              
+              {isAuthenticated && (
+                <>
+                  <span className="text-primary-400">|</span>
+                  <div className="flex items-center gap-2">
+                    <User size={16} className="text-primary-600" />
+                    <span className="text-primary-900 font-medium">{user?.nombre}</span>
+                    {isWholesaleUser() && (
+                      <div className="flex items-center gap-1">
+                        <Crown size={16} className="text-yellow-500" />
+                        <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-medium">
+                          Mayorista
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
             </div>
             
             <div className="flex items-center gap-8">
+              {!isAuthenticated && (
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 flex items-center gap-2">
+                  <AlertCircle size={16} className="text-blue-600" />
+                  <span className="text-blue-800 text-sm">
+                    <button 
+                      onClick={() => navigate('/auth')} 
+                      className="font-medium underline hover:no-underline"
+                    >
+                      Regístrate
+                    </button> para precios especiales y dashboard personalizado
+                  </span>
+                </div>
+              )}
+              
+              <div className="flex items-center gap-4">
               <div className="flex items-center gap-4">
                 {[1, 2, 3].map((step) => (
                   <div key={step} className="flex items-center gap-2">
