@@ -28,6 +28,7 @@ import AdminProducts from '../components/AdminProducts';
 import AdminWholesale from '../components/AdminWholesale';
 
 const Admin = () => {
+  const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [articles, setArticles] = useState([]);
   const [showForm, setShowForm] = useState(false);
