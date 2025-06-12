@@ -418,8 +418,8 @@ const LandingPage = () => {
               <div className="bg-primary-100 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6">
                 <Award className="text-primary-500" size={40} />
               </div>
-              <h3 className="text-xl font-bold text-rustic-900 mb-3">100% Angus Panameña</h3>
-              <p className="text-rustic-700">
+              <h3 className="text-xl font-bold text-primary-900 mb-3">100% Angus Panameña</h3>
+              <p className="text-primary-700">
                 Seleccionamos únicamente ganado Angus criado localmente con los más altos estándares de calidad.
               </p>
             </motion.div>
