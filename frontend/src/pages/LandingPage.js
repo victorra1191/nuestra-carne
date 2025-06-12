@@ -222,6 +222,62 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Top Navigation Bar */}
+      <div className="bg-white/95 backdrop-blur-md border-b border-primary-200 sticky top-0 z-40">
+        <div className="container-custom py-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-primary-500 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-lg">NC</span>
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-primary-900">Nuestra Carne</h1>
+                <p className="text-sm text-primary-600">Angus Premium Panamá</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              {isAuthenticated ? (
+                <div className="flex items-center space-x-4">
+                  <span className="text-primary-700">Hola, {user?.nombre}</span>
+                  <button
+                    onClick={() => navigate('/dashboard')}
+                    className="flex items-center space-x-2 text-primary-600 hover:text-primary-800 transition-colors"
+                  >
+                    <User size={16} />
+                    <span>Mi Dashboard</span>
+                  </button>
+                  <button
+                    onClick={logout}
+                    className="flex items-center space-x-2 text-primary-600 hover:text-primary-800 transition-colors"
+                  >
+                    <LogOut size={16} />
+                    <span>Salir</span>
+                  </button>
+                </div>
+              ) : (
+                <div className="flex items-center space-x-3">
+                  <button
+                    onClick={() => navigate('/auth')}
+                    className="flex items-center space-x-2 text-primary-600 hover:text-primary-800 transition-colors"
+                  >
+                    <LogIn size={16} />
+                    <span>Iniciar Sesión</span>
+                  </button>
+                  <button
+                    onClick={() => navigate('/auth')}
+                    className="bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-colors flex items-center space-x-2"
+                  >
+                    <UserPlus size={16} />
+                    <span>Registrarse</span>
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* WhatsApp Float Button */}
       <motion.button
         onClick={() => handleWhatsAppOrder()}
