@@ -348,8 +348,8 @@ const LandingPage = () => {
                   />
                 </div>
                 
-                <h3 className="text-xl font-bold text-rustic-900 mb-2">{corte.nombre}</h3>
-                <p className="text-rustic-700 mb-3">{corte.descripcion}</p>
+                <h3 className="text-xl font-bold text-primary-900 mb-2">{corte.nombre}</h3>
+                <p className="text-primary-700 mb-3">{corte.descripcion}</p>
                 
                 <div className="flex flex-wrap gap-2 mb-3">
                   {corte.cocina.map((metodo, idx) => (
