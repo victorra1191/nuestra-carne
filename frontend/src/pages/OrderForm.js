@@ -69,6 +69,24 @@ const OrderForm = () => {
     fetchProducts();
   }, [isAuthenticated, user, API_BASE]);
 
+  // Pre-llenar datos del usuario autenticado
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      setCustomerData(prevData => ({
+        ...prevData,
+        tipoCliente: user.tipo || 'individual',
+        nombre: user.nombre || '',
+        telefono: user.telefono || '',
+        email: user.email || '',
+        // Solo pre-llenar si no hay datos previos
+        direccion: prevData.direccion || '',
+        fechaEntrega: prevData.fechaEntrega || '',
+        horaEntrega: prevData.horaEntrega || '',
+        notas: prevData.notas || ''
+      }));
+    }
+  }, [isAuthenticated, user]);
+
   // Productos estáticos como fallback
   const staticProductos = [
     { codigo: '20001', nombre: 'New york rebanado', precioKg: 9.26, precioLb: 4.20, categoria: 'Premium' },
