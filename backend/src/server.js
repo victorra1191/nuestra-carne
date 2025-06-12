@@ -12,7 +12,7 @@ const adminRoutes = require('./routes/adminRoutes');
 const mediaRoutes = require('./routes/mediaRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8001;
 
 // Middleware de seguridad
 app.use(helmet());
