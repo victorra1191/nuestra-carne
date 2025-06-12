@@ -250,6 +250,8 @@ const OrderForm = () => {
       ];
     } else if (dayOfWeek === 6) { // Sábado
       return ['09:00', '10:00', '11:00', '12:00'];
+    } else if (dayOfWeek === 0) { // Domingo
+      return ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00'];
     }
     return [];
   };
