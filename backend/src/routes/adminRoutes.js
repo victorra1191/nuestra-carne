@@ -102,6 +102,21 @@ const writeBlogData = (data) => {
 // RUTAS PÚBLICAS (sin autenticación)
 
 // Obtener todos los artículos públicos
+// Ruta para obtener artículos públicos (nueva ruta compatible)
+router.get('/articles', (req, res) => {
+  try {
+    const articles = readBlogData().filter(article => article.activo);
+    res.json({
+      success: true,
+      articles: articles.sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
+    });
+  } catch (error) {
+    console.error('Error fetching articles:', error);
+    res.status(500).json({ success: false, error: 'Error al cargar artículos' });
+  }
+});
+
+// Ruta para obtener artículos públicos (ruta original)
 router.get('/blog/articles', (req, res) => {
   try {
     const articles = readBlogData().filter(article => article.activo);
