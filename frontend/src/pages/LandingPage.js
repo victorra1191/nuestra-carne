@@ -26,6 +26,7 @@ const LandingPage = () => {
   const [blogPosts, setBlogPosts] = useState([]);
   const [loadingBlog, setLoadingBlog] = useState(true);
   const [blogError, setBlogError] = useState(null);
+  const { isAuthenticated, user, logout } = useAuth();
 
   // SEO dinámico - actualizar meta tags cuando carguen los artículos
   useEffect(() => {
