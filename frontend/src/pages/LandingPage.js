@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import { 
   Phone, 
   MapPin, 
@@ -13,7 +14,11 @@ import {
   MessageCircle,
   ShoppingCart,
   CheckCircle,
-  Mail
+  Mail,
+  User,
+  LogIn,
+  UserPlus,
+  LogOut
 } from 'lucide-react';
 
 const LandingPage = () => {
