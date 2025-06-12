@@ -42,8 +42,8 @@ const LandingPage = () => {
   }, [blogPosts]);
   const navigate = useNavigate();
   
-  // Forzar URL del backend para producción
-  const API_BASE = 'https://nuestracarnepa.com/api';
+  // URL del backend desde variable de entorno
+  const API_BASE = process.env.REACT_APP_BACKEND_URL || 'https://nuestracarnepa.com/api';
 
   // Datos de cortes panameños - SOLO 11 SELECCIONADOS PARA EL LANDING
   const cortes = [
