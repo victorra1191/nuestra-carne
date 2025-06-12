@@ -29,8 +29,8 @@ const Admin = () => {
   const [showMediaUploader, setShowMediaUploader] = useState(false);
   const [showMediaGallery, setShowMediaGallery] = useState(false);
   
-  // Forzar URL del backend para producción
-  const API_BASE = 'https://nuestracarnepa.com/api';
+  // URL del backend desde variable de entorno
+  const API_BASE = process.env.REACT_APP_BACKEND_URL || 'https://nuestracarnepa.com/api';
 
   const [formData, setFormData] = useState({
     titulo: '',
