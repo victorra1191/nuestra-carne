@@ -562,8 +562,8 @@ const LandingPage = () => {
             >
               <div className="aspect-video bg-gray-200 rounded-lg mb-6 overflow-hidden">
                 <img 
-                  src="/images/heroes/hero-guisados.jpg"
-                  alt="Guisados"
+                  src="https://images.pexels.com/photos/998244/pexels-photo-998244.jpeg"
+                  alt="Guisados - Beef Stew"
                   className="w-full h-full object-cover"
                 />
               </div>
