@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import { 
   ShoppingCart, 
   User, 
@@ -15,7 +16,9 @@ import {
   Phone,
   MapPin,
   Clock,
-  Home
+  Home,
+  Crown,
+  AlertCircle
 } from 'lucide-react';
 
 const OrderForm = () => {
