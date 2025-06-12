@@ -713,5 +713,71 @@ const Admin = () => {
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Blog Section */}
         {activeSection === 'blog' && (
+      <div className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4">
+          <nav className="flex space-x-8">
+            <button
+              onClick={() => setActiveSection('blog')}
+              className={`py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
+                activeSection === 'blog'
+                  ? 'border-primary-500 text-primary-600'
+                  : 'border-transparent text-primary-500 hover:text-primary-700 hover:border-primary-300'
+              }`}
+            >
+              <div className="flex items-center space-x-2">
+                <FileText size={16} />
+                <span>Blog</span>
+              </div>
+            </button>
+            
+            <button
+              onClick={() => setActiveSection('products')}
+              className={`py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
+                activeSection === 'products'
+                  ? 'border-primary-500 text-primary-600'
+                  : 'border-transparent text-primary-500 hover:text-primary-700 hover:border-primary-300'
+              }`}
+            >
+              <div className="flex items-center space-x-2">
+                <Package size={16} />
+                <span>Productos</span>
+              </div>
+            </button>
+            
+            <button
+              onClick={() => setActiveSection('wholesale')}
+              className={`py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
+                activeSection === 'wholesale'
+                  ? 'border-primary-500 text-primary-600'
+                  : 'border-transparent text-primary-500 hover:text-primary-700 hover:border-primary-300'
+              }`}
+            >
+              <div className="flex items-center space-x-2">
+                <Crown size={16} />
+                <span>Mayoristas</span>
+              </div>
+            </button>
+            
+            <button
+              onClick={() => setActiveSection('stats')}
+              className={`py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
+                activeSection === 'stats'
+                  ? 'border-primary-500 text-primary-600'
+                  : 'border-transparent text-primary-500 hover:text-primary-700 hover:border-primary-300'
+              }`}
+            >
+              <div className="flex items-center space-x-2">
+                <BarChart3 size={16} />
+                <span>Estadísticas</span>
+              </div>
+            </button>
+          </nav>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* Blog Section */}
+        {activeSection === 'blog' && (
 
 export default Admin;
