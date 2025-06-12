@@ -13,12 +13,12 @@ const BlogList = () => {
   // URL del backend desde variable de entorno
   const API_BASE = process.env.REACT_APP_BACKEND_URL || 'https://nuestracarnepa.com/api';
 
-  // Imágenes de fondo atractivas
+  // Imágenes de fondo con nueva paleta roja
   const backgroundImages = [
-    'https://images.pexels.com/photos/31313536/pexels-photo-31313536.jpeg',
+    'https://images.unsplash.com/photo-1592771584685-c3c2edcd5c31', // Blog hero mejorada
     'https://images.pexels.com/photos/1482803/pexels-photo-1482803.jpeg',
-    'https://images.unsplash.com/photo-1556269923-e4ef51d69638',
-    'https://images.unsplash.com/photo-1508615263227-c5d58c1e5821'
+    'https://images.pexels.com/photos/32449862/pexels-photo-32449862.jpeg', // Parrilla
+    'https://images.pexels.com/photos/18861865/pexels-photo-18861865.jpeg'  // Plancha
   ];
 
   useEffect(() => {
