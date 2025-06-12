@@ -27,13 +27,29 @@ const writeJSONFile = async (filePath, data) => {
 // Verificar autenticación admin
 const verifyAdmin = (req, res, next) => {
   const auth = req.headers.authorization;
-  if (!auth || !auth.includes('admin:nuestra123')) {
+  if (!auth || !auth.startsWith('Basic ')) {
     return res.status(401).json({
       success: false,
       error: 'No autorizado'
     });
   }
-  next();
+  
+  try {
+    const credentials = Buffer.from(auth.split(' ')[1], 'base64').toString();
+    if (credentials === 'admin:nuestra123') {
+      next();
+    } else {
+      return res.status(401).json({
+        success: false,
+        error: 'No autorizado'
+      });
+    }
+  } catch (error) {
+    return res.status(401).json({
+      success: false,
+      error: 'No autorizado'
+    });
+  }
 };
 
 /**
