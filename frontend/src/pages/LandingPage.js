@@ -321,10 +321,10 @@ const LandingPage = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-bold text-rustic-900 mb-4">
+            <h2 className="text-4xl md:text-6xl font-bold text-primary-900 mb-4">
               🥩 Conoce Tus <span className="text-gradient">CORTES</span>
             </h2>
-            <p className="text-xl text-rustic-700 max-w-3xl mx-auto">
+            <p className="text-xl text-primary-700 max-w-3xl mx-auto">
               20+ cortes premium de carne Angus panameña. Cada uno seleccionado y preparado 
               por nuestros expertos carniceros para garantizar la máxima calidad y sabor.
             </p>
