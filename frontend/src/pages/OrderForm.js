@@ -83,7 +83,7 @@ const OrderForm = () => {
     { codigo: '20046', nombre: 'Ossobuco de res rebanado', precioKg: 6.77, precioLb: 3.07, categoria: 'Guisos' },
     { codigo: '20047', nombre: 'Arañita', precioKg: 20.20, precioLb: 9.16, categoria: 'Premium' },
     { codigo: '20048', nombre: 'Carne de guisar', precioKg: 8.35, precioLb: 3.79, categoria: 'Guisos' },
-    { codigo: '20049', nombre: 'Brisket', precioKg: 6.50, precioLb: 2.95, categoria: 'Guisos' },
+    { codigo: '20049', nombre: 'Brisket', precioKg: 6.50, precioLb: 2.95, categoria: 'Premium' },
     { codigo: '20050', nombre: 'Pulpa blanca en bistec', precioKg: 7.25, precioLb: 3.29, categoria: 'Premium' },
     { codigo: '20051', nombre: 'Huevo', precioKg: 1.00, precioLb: 0.45, categoria: 'Especiales' },
     { codigo: '20052', nombre: 'Tuétano /Canoa', precioKg: 5.00, precioLb: 2.27, categoria: 'Especiales' },
