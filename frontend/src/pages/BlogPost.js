@@ -113,7 +113,7 @@ const BlogPost = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-rustic-900 via-rustic-800 to-primary-900 flex items-center justify-center relative">
+      <div className="min-h-screen bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900 flex items-center justify-center relative">
         <div 
           className="absolute inset-0"
           style={{ backgroundImage: `url('${backgroundPattern}')` }}
@@ -140,7 +140,7 @@ const BlogPost = () => {
 
   if (error || !article) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-rustic-900 via-rustic-800 to-primary-900 flex items-center justify-center relative">
+      <div className="min-h-screen bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900 flex items-center justify-center relative">
         <div 
           className="absolute inset-0"
           style={{ backgroundImage: `url('${backgroundPattern}')` }}
@@ -180,7 +180,7 @@ const BlogPost = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-rustic-900 via-rustic-800 to-primary-900 relative">
+    <div className="min-h-screen bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900 relative">
       {/* Fondo con patrón */}
       <div 
           className="absolute inset-0"
@@ -195,7 +195,7 @@ const BlogPost = () => {
             backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('${article.imagen || article.image || backgroundImages[0]}')`
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-primary-900/80 to-rustic-900/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-primary-900/80 to-primary-900/60"></div>
           
           {/* Navigation */}
           <div className="relative z-10 max-w-5xl mx-auto px-4 py-6">
@@ -339,7 +339,7 @@ const BlogPost = () => {
           className="lg:hidden mb-8"
         >
           <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-2xl border border-gray-200">
-            <h3 className="text-lg font-bold text-rustic-900 mb-4">Compartir este artículo:</h3>
+            <h3 className="text-lg font-bold text-primary-900 mb-4">Compartir este artículo:</h3>
             <div className="flex space-x-4">
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -395,7 +395,7 @@ const BlogPost = () => {
             <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border border-gray-200">
               <div className="flex items-center mb-8">
                 <Award className="w-8 h-8 text-amber-500 mr-3" />
-                <h2 className="text-3xl font-bold text-rustic-900">Artículos relacionados</h2>
+                <h2 className="text-3xl font-bold text-primary-900">Artículos relacionados</h2>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -409,7 +409,7 @@ const BlogPost = () => {
                     onClick={() => navigate(`/blog/${createSlug(relatedArticle.titulo)}`)}
                     whileHover={{ y: -5 }}
                   >
-                    <div className="aspect-video bg-gradient-to-br from-rustic-100 to-primary-100 relative overflow-hidden">
+                    <div className="aspect-video bg-gradient-to-br from-primary-100 to-primary-100 relative overflow-hidden">
                       {relatedArticle.imagen || relatedArticle.image ? (
                         <img
                           src={relatedArticle.imagen || relatedArticle.image}
@@ -432,10 +432,10 @@ const BlogPost = () => {
                     </div>
                     
                     <div className="p-4">
-                      <h3 className="font-bold text-rustic-900 mb-2 line-clamp-2 group-hover:text-primary-600 transition-colors">
+                      <h3 className="font-bold text-primary-900 mb-2 line-clamp-2 group-hover:text-primary-600 transition-colors">
                         {relatedArticle.titulo}
                       </h3>
-                      <p className="text-sm text-rustic-600 line-clamp-2">
+                      <p className="text-sm text-primary-600 line-clamp-2">
                         {relatedArticle.resumen || 
                          (relatedArticle.contenido ? relatedArticle.contenido.replace(/<[^>]*>/g, '').substring(0, 100) + '...' : '')}
                       </p>
