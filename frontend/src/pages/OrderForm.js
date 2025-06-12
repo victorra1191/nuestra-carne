@@ -42,7 +42,34 @@ const OrderForm = () => {
     notas: ''
   });
 
-  // Productos completos con códigos - LISTA OFICIAL COMPLETA 63 PRODUCTOS
+  // Cargar productos según el tipo de usuario
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoadingProducts(true);
+        const endpoint = isWholesaleUser() ? '/api/products/wholesale' : '/api/products/retail';
+        const response = await fetch(`${API_BASE}${endpoint}`);
+        const data = await response.json();
+        
+        if (data.success) {
+          setProductos(data.products);
+        } else {
+          // Fallback a productos estáticos si hay error
+          setProductos(staticProductos);
+        }
+      } catch (error) {
+        console.error('Error cargando productos:', error);
+        // Fallback a productos estáticos
+        setProductos(staticProductos);
+      } finally {
+        setLoadingProducts(false);
+      }
+    };
+
+    fetchProducts();
+  }, [isAuthenticated, user, API_BASE]);
+
+  // Productos estáticos como fallback
   const productos = [
     { codigo: '20001', nombre: 'New york rebanado', precioKg: 9.26, precioLb: 4.20, categoria: 'Premium' },
     { codigo: '20002', nombre: 'Filete Limpio /sin cordón', precioKg: 15.50, precioLb: 7.03, categoria: 'Premium' },
