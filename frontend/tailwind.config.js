@@ -7,42 +7,54 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Paleta Rústico-Moderna para Carnicería
+        // Nueva Paleta Roja - Nuestra Carne
         primary: {
-          50: '#fef7f3',
-          100: '#fdeee6', 
-          200: '#fbd6c5',
-          300: '#f7b89d',
-          400: '#f28c6b',
-          500: '#ed6737', // Rojo cálido principal
-          600: '#de5429',
-          700: '#b94124',
-          800: '#943624',
-          900: '#783022',
+          50: '#fef2f2',
+          100: '#fee2e2',
+          200: '#fecaca',
+          300: '#fca5a5',
+          400: '#f87171',
+          500: '#c53030', // Rojo principal (similar a FOLDCOTONE 1082)
+          600: '#b91c1c',
+          700: '#991b1b',
+          800: '#7f1d1d',
+          900: '#651c1c',
         },
-        rustic: {
-          50: '#faf9f7',
-          100: '#f2efeb',
-          200: '#e6ddd4',
-          300: '#d4c5b5',
-          400: '#bfa48f',
-          500: '#a68968', // Marrón cálido
-          600: '#8f7355',
-          700: '#755e47',
-          800: '#5f4d3d',
-          900: '#4d3f34',
+        wine: {
+          50: '#fdf2f8',
+          100: '#fce7f3',
+          200: '#fbcfe8',
+          300: '#f9a8d4',
+          400: '#f472b6',
+          500: '#8b2635', // Vino (similar a FOLDCOTONE 3344)
+          600: '#7c1f2a',
+          700: '#6d1b25',
+          800: '#5e1720',
+          900: '#4f141b',
         },
         accent: {
-          50: '#f9f7f4',
-          100: '#f0ebe3',
-          200: '#e0d4c2',
-          300: '#ccb798',
-          400: '#b59867',
-          500: '#a57c3c', // Dorado cálido
-          600: '#8f6730',
-          700: '#77542a',
-          800: '#614528',
-          900: '#4f3a24',
+          50: '#fef7f3',
+          100: '#feeee8',
+          200: '#fdd5c4',
+          300: '#fcba9f',
+          400: '#fa8f56',
+          500: '#e6b3b8', // Rojo 20% (similar a FOLDCOTONE 1054)
+          600: '#d19ca3',
+          700: '#bc858e',
+          800: '#a76e79',
+          900: '#925764',
+        },
+        rustic: {
+          50: '#fafafa',
+          100: '#f5f5f5',
+          200: '#e5e5e5',
+          300: '#d4d4d4',
+          400: '#a3a3a3',
+          500: '#737373', // Neutro cálido
+          600: '#525252',
+          700: '#404040',
+          800: '#262626',
+          900: '#171717',
         }
       },
       fontFamily: {
