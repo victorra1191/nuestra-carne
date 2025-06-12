@@ -731,7 +731,7 @@ const OrderForm = () => {
                           required
                         />
                         <p className="text-sm text-primary-600 mt-1">
-                          Lun-Vie: 8AM-5PM | Sáb: 9AM-12PM
+                          Lun-Vie: 8AM-5PM | Sáb: 9AM-12PM | Dom: 9AM-2PM
                         </p>
                       </div>
                       
