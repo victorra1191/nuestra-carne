@@ -28,7 +28,7 @@ const BlogList = () => {
   const fetchArticles = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE}/admin/blog/articles`);
+      const response = await fetch(`${API_BASE}/api/admin/articles`);
       const data = await response.json();
       
       if (data.success) {
