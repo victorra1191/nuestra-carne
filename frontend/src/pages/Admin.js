@@ -207,7 +207,7 @@ const Admin = () => {
     };
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-primary-50 to-rustic-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-50 flex items-center justify-center p-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -215,8 +215,8 @@ const Admin = () => {
           className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md"
         >
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-rustic-900 mb-2">🥩 Admin Panel</h1>
-            <p className="text-rustic-600">Panel de administración Nuestra Carne</p>
+            <h1 className="text-3xl font-bold text-primary-900 mb-2">🥩 Admin Panel</h1>
+            <p className="text-primary-600">Panel de administración Nuestra Carne</p>
           </div>
 
           {error && (
@@ -228,21 +228,21 @@ const Admin = () => {
 
           <form onSubmit={onSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-semibold text-rustic-700 mb-2">
+              <label className="block text-sm font-semibold text-primary-700 mb-2">
                 Usuario
               </label>
               <input
                 type="text"
                 value={credentials.username}
                 onChange={(e) => setCredentials({...credentials, username: e.target.value})}
-                className="w-full px-4 py-3 border border-rustic-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="w-full px-4 py-3 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                 placeholder="Ingresa tu usuario"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-rustic-700 mb-2">
+              <label className="block text-sm font-semibold text-primary-700 mb-2">
                 Contraseña
               </label>
               <div className="relative">
@@ -250,14 +250,14 @@ const Admin = () => {
                   type={showPassword ? 'text' : 'password'}
                   value={credentials.password}
                   onChange={(e) => setCredentials({...credentials, password: e.target.value})}
-                  className="w-full px-4 py-3 pr-12 border border-rustic-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  className="w-full px-4 py-3 pr-12 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   placeholder="Ingresa tu contraseña"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-rustic-400 hover:text-rustic-600"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-primary-400 hover:text-primary-600"
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
@@ -273,7 +273,7 @@ const Admin = () => {
             </button>
           </form>
 
-          <div className="mt-6 text-center text-sm text-rustic-500">
+          <div className="mt-6 text-center text-sm text-primary-500">
             <p>Credenciales por defecto: admin / nuestra123</p>
           </div>
         </motion.div>
@@ -286,7 +286,7 @@ const Admin = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-rustic-50">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-50">
       {/* Media Uploaders */}
       {showMediaUploader && (
         <MediaUploader
@@ -311,12 +311,12 @@ const Admin = () => {
         />
       )}
       {/* Header */}
-      <div className="bg-white shadow-sm border-b border-rustic-200">
+      <div className="bg-white shadow-sm border-b border-primary-200">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-rustic-900">🥩 Panel Admin</h1>
-              <p className="text-rustic-600">Gestión de blog Nuestra Carne</p>
+              <h1 className="text-2xl font-bold text-primary-900">🥩 Panel Admin</h1>
+              <p className="text-primary-600">Gestión de blog Nuestra Carne</p>
             </div>
             
             <div className="flex items-center space-x-4">
@@ -340,7 +340,7 @@ const Admin = () => {
               
               <button
                 onClick={handleLogout}
-                className="flex items-center space-x-2 bg-rustic-500 text-white px-4 py-2 rounded-lg hover:bg-rustic-600 transition-colors"
+                className="flex items-center space-x-2 bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-colors"
               >
                 <LogOut className="w-4 h-4" />
                 <span>Cerrar Sesión</span>
@@ -368,7 +368,7 @@ const Admin = () => {
             >
               <div className="p-6">
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold text-rustic-900">
+                  <h2 className="text-2xl font-bold text-primary-900">
                     {editingArticle ? 'Editar Artículo' : 'Nuevo Artículo'}
                   </h2>
                   <button
@@ -376,7 +376,7 @@ const Admin = () => {
                       setShowForm(false);
                       setEditingArticle(null);
                     }}
-                    className="text-rustic-500 hover:text-rustic-700"
+                    className="text-primary-500 hover:text-primary-700"
                   >
                     <X className="w-6 h-6" />
                   </button>
@@ -385,33 +385,33 @@ const Admin = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label className="block text-sm font-semibold text-rustic-700 mb-2">
+                      <label className="block text-sm font-semibold text-primary-700 mb-2">
                         Título *
                       </label>
                       <input
                         type="text"
                         value={formData.titulo}
                         onChange={(e) => setFormData({...formData, titulo: e.target.value})}
-                        className="w-full px-4 py-3 border border-rustic-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                         required
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-rustic-700 mb-2">
+                      <label className="block text-sm font-semibold text-primary-700 mb-2">
                         Fecha
                       </label>
                       <input
                         type="date"
                         value={formData.fecha}
                         onChange={(e) => setFormData({...formData, fecha: e.target.value})}
-                        className="w-full px-4 py-3 border border-rustic-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-rustic-700 mb-2">
+                    <label className="block text-sm font-semibold text-primary-700 mb-2">
                       Imagen del artículo
                     </label>
                     
@@ -422,7 +422,7 @@ const Admin = () => {
                           <img
                             src={formData.imagen}
                             alt="Vista previa"
-                            className="w-full h-48 object-cover rounded-lg border border-rustic-200"
+                            className="w-full h-48 object-cover rounded-lg border border-primary-200"
                             onError={(e) => {
                               e.target.src = 'https://via.placeholder.com/400x200/f3f4f6/9ca3af?text=Imagen+no+disponible';
                             }}
@@ -437,7 +437,7 @@ const Admin = () => {
                           </button>
                         </div>
                       ) : (
-                        <div className="w-full h-48 bg-gray-100 rounded-lg border border-rustic-200 flex items-center justify-center">
+                        <div className="w-full h-48 bg-gray-100 rounded-lg border border-primary-200 flex items-center justify-center">
                           <div className="text-center">
                             <ImageIcon className="w-12 h-12 text-gray-400 mx-auto mb-2" />
                             <p className="text-gray-500">Sin imagen seleccionada</p>
@@ -469,15 +469,15 @@ const Admin = () => {
                       </div>
                       
                       {/* URL manual como alternativa */}
-                      <div className="border-t border-rustic-200 pt-3">
-                        <label className="block text-xs font-medium text-rustic-500 mb-2">
+                      <div className="border-t border-primary-200 pt-3">
+                        <label className="block text-xs font-medium text-primary-500 mb-2">
                           O ingresa una URL manualmente:
                         </label>
                         <input
                           type="url"
                           value={formData.imagen}
                           onChange={(e) => setFormData({...formData, imagen: e.target.value})}
-                          className="w-full px-3 py-2 text-sm border border-rustic-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                          className="w-full px-3 py-2 text-sm border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                           placeholder="https://ejemplo.com/imagen.jpg"
                         />
                       </div>
@@ -485,28 +485,28 @@ const Admin = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-rustic-700 mb-2">
+                    <label className="block text-sm font-semibold text-primary-700 mb-2">
                       Resumen *
                     </label>
                     <textarea
                       value={formData.resumen}
                       onChange={(e) => setFormData({...formData, resumen: e.target.value})}
                       rows={3}
-                      className="w-full px-4 py-3 border border-rustic-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                       placeholder="Breve descripción del artículo..."
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-rustic-700 mb-2">
+                    <label className="block text-sm font-semibold text-primary-700 mb-2">
                       Contenido *
                     </label>
                     <textarea
                       value={formData.contenido}
                       onChange={(e) => setFormData({...formData, contenido: e.target.value})}
                       rows={12}
-                      className="w-full px-4 py-3 border border-rustic-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                       placeholder="Contenido completo del artículo (HTML permitido)..."
                       required
                     />
@@ -519,7 +519,7 @@ const Admin = () => {
                         setShowForm(false);
                         setEditingArticle(null);
                       }}
-                      className="px-6 py-3 border border-rustic-300 text-rustic-700 rounded-lg hover:bg-rustic-50 transition-colors"
+                      className="px-6 py-3 border border-primary-300 text-primary-700 rounded-lg hover:bg-primary-50 transition-colors"
                     >
                       Cancelar
                     </button>
@@ -552,9 +552,9 @@ const Admin = () => {
             ))
           ) : articles.length === 0 ? (
             <div className="col-span-full text-center py-12">
-              <FileText className="w-16 h-16 text-rustic-300 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-rustic-700 mb-2">No hay artículos</h3>
-              <p className="text-rustic-500">Crea tu primer artículo para comenzar</p>
+              <FileText className="w-16 h-16 text-primary-300 mx-auto mb-4" />
+              <h3 className="text-xl font-bold text-primary-700 mb-2">No hay artículos</h3>
+              <p className="text-primary-500">Crea tu primer artículo para comenzar</p>
             </div>
           ) : (
             articles.map((article, index) => (
@@ -579,24 +579,24 @@ const Admin = () => {
                 )}
                 
                 <div className="p-6">
-                  <div className="flex items-center text-sm text-rustic-500 mb-3">
+                  <div className="flex items-center text-sm text-primary-500 mb-3">
                     <Calendar className="w-4 h-4 mr-1" />
                     <span>
                       {new Date(article.fecha || article.published_at || Date.now()).toLocaleDateString('es-ES')}
                     </span>
                   </div>
                   
-                  <h3 className="text-xl font-bold text-rustic-900 mb-3 line-clamp-2">
+                  <h3 className="text-xl font-bold text-primary-900 mb-3 line-clamp-2">
                     {article.titulo}
                   </h3>
                   
-                  <p className="text-rustic-700 mb-4 line-clamp-3">
+                  <p className="text-primary-700 mb-4 line-clamp-3">
                     {article.resumen || 
                      (article.contenido ? article.contenido.replace(/<[^>]*>/g, '').substring(0, 150) + '...' : '')}
                   </p>
                   
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center text-sm text-rustic-500">
+                    <div className="flex items-center text-sm text-primary-500">
                       <User className="w-4 h-4 mr-1" />
                       <span>Nuestra Carne</span>
                     </div>
