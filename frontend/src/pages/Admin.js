@@ -329,26 +329,36 @@ const Admin = () => {
             
             <div className="flex items-center space-x-4">
               <button
-                onClick={() => {
-                  setShowForm(true);
-                  setEditingArticle(null);
-                  setFormData({
-                    titulo: '',
-                    contenido: '',
-                    resumen: '',
-                    imagen: '',
-                    fecha: new Date().toISOString().split('T')[0]
-                  });
-                }}
-                className="flex items-center space-x-2 bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-colors"
+                onClick={() => navigate('/')}
+                className="flex items-center space-x-2 text-primary-600 hover:text-primary-800 transition-colors"
               >
-                <Plus className="w-4 h-4" />
-                <span>Nuevo Artículo</span>
+                <Home className="w-4 h-4" />
+                <span>Ver Sitio</span>
               </button>
+              
+              {activeSection === 'blog' && (
+                <button
+                  onClick={() => {
+                    setShowForm(true);
+                    setEditingArticle(null);
+                    setFormData({
+                      titulo: '',
+                      contenido: '',
+                      resumen: '',
+                      imagen: '',
+                      fecha: new Date().toISOString().split('T')[0]
+                    });
+                  }}
+                  className="flex items-center space-x-2 bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>Nuevo Artículo</span>
+                </button>
+              )}
               
               <button
                 onClick={handleLogout}
-                className="flex items-center space-x-2 bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-colors"
+                className="flex items-center space-x-2 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors"
               >
                 <LogOut className="w-4 h-4" />
                 <span>Cerrar Sesión</span>
