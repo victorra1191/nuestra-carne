@@ -310,25 +310,6 @@ const LandingPage = () => {
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto"
           >
-            {/* Logo NC Blanco */}
-            <div className="mb-8">
-              <div className="w-32 h-32 mx-auto bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center border-2 border-white/30 p-2">
-                <img 
-                  src="/images/logo-nc-blanco.png" 
-                  alt="Logo NC Blanco - Nuestra Carne"
-                  className="w-full h-full object-contain"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                    e.target.nextSibling.style.display = 'block';
-                  }}
-                />
-                <div className="text-center" style={{ display: 'none' }}>
-                  <p className="text-2xl font-bold mb-1 text-white">NC</p>
-                  <p className="text-xs opacity-75 text-white">Nuestra Carne</p>
-                </div>
-              </div>
-            </div>
-            
             <div className="delivery-badge mb-6">
               <Truck size={20} />
               <span>DELIVERY GRATIS en Ciudad de Panamá</span>
