@@ -313,7 +313,7 @@ const LandingPage = () => {
       </section>
 
       {/* Conoce Tus Cortes Section */}
-      <section id="cortes" className="section-padding bg-rustic-50">
+      <section id="cortes" className="section-padding bg-primary-50">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -433,8 +433,8 @@ const LandingPage = () => {
               <div className="bg-primary-100 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6">
                 <ChefHat className="text-primary-500" size={40} />
               </div>
-              <h3 className="text-xl font-bold text-rustic-900 mb-3">Carniceros Expertos</h3>
-              <p className="text-rustic-700">
+              <h3 className="text-xl font-bold text-primary-900 mb-3">Carniceros Expertos</h3>
+              <p className="text-primary-700">
                 Más de 20 años de experiencia en el arte de seleccionar y preparar los mejores cortes.
               </p>
             </motion.div>
@@ -448,8 +448,8 @@ const LandingPage = () => {
               <div className="bg-primary-100 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6">
                 <CheckCircle className="text-primary-500" size={40} />
               </div>
-              <h3 className="text-xl font-bold text-rustic-900 mb-3">Sin Hormonas Innecesarias</h3>
-              <p className="text-rustic-700">
+              <h3 className="text-xl font-bold text-primary-900 mb-3">Sin Hormonas Innecesarias</h3>
+              <p className="text-primary-700">
                 Garantizamos carne natural, libre de hormonas y antibióticos innecesarios para tu tranquilidad.
               </p>
             </motion.div>
@@ -463,8 +463,8 @@ const LandingPage = () => {
               <div className="bg-primary-100 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6">
                 <Flame className="text-primary-500" size={40} />
               </div>
-              <h3 className="text-xl font-bold text-rustic-900 mb-3">Frescura Garantizada</h3>
-              <p className="text-rustic-700">
+              <h3 className="text-xl font-bold text-primary-900 mb-3">Frescura Garantizada</h3>
+              <p className="text-primary-700">
                 Trabajamos diariamente para asegurar que recibas la carne más fresca del mercado.
               </p>
             </motion.div>
@@ -473,7 +473,7 @@ const LandingPage = () => {
       </section>
 
       {/* Tipos de Cocina Section */}
-      <section className="section-padding bg-rustic-100">
+      <section className="section-padding bg-primary-100">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -481,10 +481,10 @@ const LandingPage = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-bold text-rustic-900 mb-4">
+            <h2 className="text-4xl md:text-6xl font-bold text-primary-900 mb-4">
               🔥 Tipos de <span className="text-gradient">COCINA</span>
             </h2>
-            <p className="text-xl text-rustic-700 max-w-3xl mx-auto">
+            <p className="text-xl text-primary-700 max-w-3xl mx-auto">
               Cada corte tiene su método perfecto. Te ayudamos a sacar el máximo sabor de tu carne Angus.
             </p>
           </motion.div>
@@ -503,10 +503,10 @@ const LandingPage = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-2xl font-bold text-rustic-900 mb-4">🔥 PARRILLA</h3>
+              <h3 className="text-2xl font-bold text-primary-900 mb-4">🔥 PARRILLA</h3>
               <div className="space-y-2 text-left">
-                <p className="text-rustic-700"><strong>Perfectos para parrilla:</strong></p>
-                <ul className="text-rustic-600 space-y-1">
+                <p className="text-primary-700"><strong>Perfectos para parrilla:</strong></p>
+                <ul className="text-primary-600 space-y-1">
                   <li>• Filet Mignon - Término medio</li>
                   <li>• Costilla - Cocción lenta</li>
                   <li>• Entraña - Fuego alto</li>
@@ -535,10 +535,10 @@ const LandingPage = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-2xl font-bold text-rustic-900 mb-4">🍳 PLANCHA</h3>
+              <h3 className="text-2xl font-bold text-primary-900 mb-4">🍳 PLANCHA</h3>
               <div className="space-y-2 text-left">
-                <p className="text-rustic-700"><strong>Ideales para plancha:</strong></p>
-                <ul className="text-rustic-600 space-y-1">
+                <p className="text-primary-700"><strong>Ideales para plancha:</strong></p>
+                <ul className="text-primary-600 space-y-1">
                   <li>• Bistec - Rápido y jugoso</li>
                   <li>• Palomilla - Tierno</li>
                   <li>• Medallones - Premium</li>
@@ -567,10 +567,10 @@ const LandingPage = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-2xl font-bold text-rustic-900 mb-4">🍲 GUISADOS</h3>
+              <h3 className="text-2xl font-bold text-primary-900 mb-4">🍲 GUISADOS</h3>
               <div className="space-y-2 text-left">
-                <p className="text-rustic-700"><strong>Perfectos para guisar:</strong></p>
-                <ul className="text-rustic-600 space-y-1">
+                <p className="text-primary-700"><strong>Perfectos para guisar:</strong></p>
+                <ul className="text-primary-600 space-y-1">
                   <li>• Falda - Estofados</li>
                   <li>• Pecho - Cocción lenta</li>
                   <li>• Rabo - Caldos</li>
@@ -598,7 +598,7 @@ const LandingPage = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-bold text-rustic-900 mb-4">
+            <h2 className="text-4xl md:text-6xl font-bold text-primary-900 mb-4">
               🚚 Nuestros <span className="text-gradient">SERVICIOS</span>
             </h2>
           </motion.div>
@@ -611,11 +611,11 @@ const LandingPage = () => {
               className="card-rustic text-center"
             >
               <Truck className="text-primary-500 mx-auto mb-4" size={48} />
-              <h3 className="text-2xl font-bold text-rustic-900 mb-4">Delivery GRATIS</h3>
-              <p className="text-rustic-700 mb-4">
+              <h3 className="text-2xl font-bold text-primary-900 mb-4">Delivery GRATIS</h3>
+              <p className="text-primary-700 mb-4">
                 Entrega gratuita en toda Ciudad de Panamá. Pedidos mínimos de $30.
               </p>
-              <div className="text-rustic-600 text-sm space-y-1 mb-6">
+              <div className="text-primary-600 text-sm space-y-1 mb-6">
                 <p><Clock size={16} className="inline mr-2" />Lun-Vie: 8:00 AM - 5:00 PM</p>
                 <p><Clock size={16} className="inline mr-2" />Sáb: 9:00 AM - 12:00 PM</p>
               </div>
@@ -634,11 +634,11 @@ const LandingPage = () => {
               className="card-rustic text-center"
             >
               <MapPin className="text-primary-500 mx-auto mb-4" size={48} />
-              <h3 className="text-2xl font-bold text-rustic-900 mb-4">Recogida en Tienda</h3>
-              <p className="text-rustic-700 mb-4">
+              <h3 className="text-2xl font-bold text-primary-900 mb-4">Recogida en Tienda</h3>
+              <p className="text-primary-700 mb-4">
                 Visítanos en Aguadulce. ¡Descuentos especiales para recoger en tienda!
               </p>
-              <div className="text-rustic-600 text-sm space-y-1 mb-6">
+              <div className="text-primary-600 text-sm space-y-1 mb-6">
                 <p><MapPin size={16} className="inline mr-2" />Vía Interamericana</p>
                 <p className="text-xs">Frente a Estación Puma, Aguadulce</p>
               </div>
@@ -657,11 +657,11 @@ const LandingPage = () => {
               className="card-rustic text-center"
             >
               <ChefHat className="text-primary-500 mx-auto mb-4" size={48} />
-              <h3 className="text-2xl font-bold text-rustic-900 mb-4">Cortes Personalizados</h3>
-              <p className="text-rustic-700 mb-4">
+              <h3 className="text-2xl font-bold text-primary-900 mb-4">Cortes Personalizados</h3>
+              <p className="text-primary-700 mb-4">
                 Nuestros expertos preparan tu carne exactamente como la necesitas.
               </p>
-              <div className="text-rustic-600 text-sm space-y-1 mb-6">
+              <div className="text-primary-600 text-sm space-y-1 mb-6">
                 <p>• Grosor personalizado</p>
                 <p>• Porciones específicas</p>
                 <p>• Marinados especiales</p>
@@ -678,7 +678,7 @@ const LandingPage = () => {
       </section>
 
       {/* Testimonios Section */}
-      <section className="section-padding bg-rustic-50">
+      <section className="section-padding bg-primary-50">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -686,7 +686,7 @@ const LandingPage = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-bold text-rustic-900 mb-4">
+            <h2 className="text-4xl md:text-6xl font-bold text-primary-900 mb-4">
               ⭐ Lo Que Dicen <span className="text-gradient">NUESTROS CLIENTES</span>
             </h2>
           </motion.div>
@@ -705,10 +705,10 @@ const LandingPage = () => {
                     <Star key={i} className="text-accent-500 fill-current" size={20} />
                   ))}
                 </div>
-                <p className="text-rustic-700 mb-4 italic">"{testimonio.texto}"</p>
+                <p className="text-primary-700 mb-4 italic">"{testimonio.texto}"</p>
                 <div>
-                  <p className="font-semibold text-rustic-900">{testimonio.nombre}</p>
-                  <p className="text-sm text-rustic-600">{testimonio.ubicacion}</p>
+                  <p className="font-semibold text-primary-900">{testimonio.nombre}</p>
+                  <p className="text-sm text-primary-600">{testimonio.ubicacion}</p>
                 </div>
               </motion.div>
             ))}
@@ -740,10 +740,10 @@ const LandingPage = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-bold text-rustic-900 mb-4">
+            <h2 className="text-4xl md:text-6xl font-bold text-primary-900 mb-4">
               📚 <span className="text-gradient">APRENDE</span> con Nosotros
             </h2>
-            <p className="text-xl text-rustic-700">
+            <p className="text-xl text-primary-700">
               Consejos, recetas y secretos de nuestros expertos carniceros
             </p>
           </motion.div>
@@ -765,8 +765,8 @@ const LandingPage = () => {
             ) : blogError ? (
               // Estado de error
               <div className="col-span-full text-center py-8">
-                <p className="text-rustic-600 mb-4">⚠️ {blogError}</p>
-                <p className="text-sm text-rustic-500">Mostrando contenido de respaldo</p>
+                <p className="text-primary-600 mb-4">⚠️ {blogError}</p>
+                <p className="text-sm text-primary-500">Mostrando contenido de respaldo</p>
               </div>
             ) : null}
             
@@ -796,8 +796,8 @@ const LandingPage = () => {
                       year: 'numeric'
                     })}
                   </p>
-                  <h3 className="text-xl font-bold text-rustic-900 mb-3">{post.titulo}</h3>
-                  <p className="text-rustic-700 mb-4">
+                  <h3 className="text-xl font-bold text-primary-900 mb-3">{post.titulo}</h3>
+                  <p className="text-primary-700 mb-4">
                     {post.resumen || post.contenido?.substring(0, 150) + '...' || 'Contenido disponible próximamente...'}
                   </p>
                   <button 
@@ -885,12 +885,12 @@ const LandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-rustic-900 text-white section-padding">
+      <footer className="bg-primary-900 text-white section-padding">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <h3 className="text-2xl font-bold mb-4 text-primary-300">Nuestra Carne</h3>
-              <p className="text-rustic-300 mb-4">
+              <p className="text-primary-300 mb-4">
                 Del productor a tu mesa. Carne Angus panameña premium con más de 20 años de experiencia.
               </p>
               <div className="flex gap-4">
@@ -905,7 +905,7 @@ const LandingPage = () => {
             
             <div>
               <h4 className="text-lg font-semibold mb-4 text-primary-300">Contacto</h4>
-              <div className="space-y-2 text-rustic-300">
+              <div className="space-y-2 text-primary-300">
                 <p className="flex items-center gap-2">
                   <Phone size={16} />
                   +507 6917-2690
@@ -920,7 +920,7 @@ const LandingPage = () => {
             
             <div>
               <h4 className="text-lg font-semibold mb-4 text-primary-300">Síguenos</h4>
-              <div className="space-y-2 text-rustic-300">
+              <div className="space-y-2 text-primary-300">
                 <p className="flex items-center gap-2">
                   <span className="text-green-400">@</span>
                   @nuestracarnepa
@@ -937,7 +937,7 @@ const LandingPage = () => {
             
             <div>
               <h4 className="text-lg font-semibold mb-4 text-primary-300">Horarios</h4>
-              <div className="space-y-2 text-rustic-300">
+              <div className="space-y-2 text-primary-300">
                 <p><strong>Delivery Ciudad de Panamá:</strong></p>
                 <p>Lun-Vie: 8:00 AM - 5:00 PM</p>
                 <p>Sáb: 9:00 AM - 12:00 PM</p>
@@ -947,7 +947,7 @@ const LandingPage = () => {
             
             <div>
               <h4 className="text-lg font-semibold mb-4 text-primary-300">Servicios</h4>
-              <ul className="space-y-2 text-rustic-300">
+              <ul className="space-y-2 text-primary-300">
                 <li>• Delivery gratis en Ciudad de Panamá</li>
                 <li>• Recogida en tienda</li>
                 <li>• Cortes personalizados</li>
@@ -957,8 +957,8 @@ const LandingPage = () => {
             </div>
           </div>
           
-          <div className="border-t border-rustic-700 mt-12 pt-8 text-center">
-            <p className="text-rustic-400">
+          <div className="border-t border-primary-700 mt-12 pt-8 text-center">
+            <p className="text-primary-400">
               © 2024 Nuestra Carne. Todos los derechos reservados. | 
               <strong className="text-primary-300"> ¡La mejor carne Angus de Panamá!</strong>
             </p>
@@ -982,7 +982,7 @@ const LandingPage = () => {
             className="bg-white rounded-xl p-8 max-w-md w-full"
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 className="text-2xl font-bold text-rustic-900 mb-4">{selectedCut.nombre}</h3>
+            <h3 className="text-2xl font-bold text-primary-900 mb-4">{selectedCut.nombre}</h3>
             <div className="aspect-video bg-gray-200 rounded-lg mb-4 overflow-hidden">
               <img 
                 src={selectedCut.imagen} 
@@ -990,7 +990,7 @@ const LandingPage = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <p className="text-rustic-700 mb-4">{selectedCut.descripcion}</p>
+            <p className="text-primary-700 mb-4">{selectedCut.descripcion}</p>
             <div className="flex flex-wrap gap-2 mb-4">
               {selectedCut.cocina.map((metodo, idx) => (
                 <span key={idx} className="cooking-method">
