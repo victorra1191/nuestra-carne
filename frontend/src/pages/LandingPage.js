@@ -227,23 +227,19 @@ const LandingPage = () => {
         <div className="container-custom py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-3">
+              <div className="flex items-center">
                 <img 
                   src="/images/logo/nuestra-carne-logo.png"
                   alt="Nuestra Carne Logo"
-                  className="h-12 w-auto"
+                  className="h-16 w-auto"
                   onError={(e) => {
                     // Fallback al icono NC si no encuentra la imagen
                     e.target.style.display = 'none';
                     e.target.nextElementSibling.style.display = 'flex';
                   }}
                 />
-                <div className="w-12 h-12 bg-primary-500 rounded-lg flex items-center justify-center" style={{display: 'none'}}>
-                  <span className="text-white font-bold text-lg">NC</span>
-                </div>
-                <div>
-                  <h1 className="text-xl font-bold text-primary-900">Nuestra Carne</h1>
-                  <p className="text-sm text-primary-600">Angus Premium Panamá</p>
+                <div className="w-16 h-16 bg-primary-500 rounded-lg flex items-center justify-center" style={{display: 'none'}}>
+                  <span className="text-white font-bold text-xl">NC</span>
                 </div>
               </div>
             </div>
