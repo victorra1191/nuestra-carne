@@ -1,7 +1,7 @@
-/* App.css - Estilos específicos para componentes */
+/* App.css - Estilos específicos para componentes con nueva paleta roja */
 
 .hero-bg {
-  background: linear-gradient(135deg, rgba(237, 103, 55, 0.9) 0%, rgba(139, 69, 19, 0.8) 100%),
+  background: linear-gradient(135deg, rgba(197, 48, 48, 0.9) 0%, rgba(139, 38, 53, 0.8) 100%),
               url('https://images.pexels.com/photos/12884545/pexels-photo-12884545.jpeg') center/cover;
   min-height: 100vh;
 }
@@ -18,11 +18,11 @@
 
 .cut-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(237, 103, 55, 0.3);
+  box-shadow: 0 20px 40px rgba(197, 48, 48, 0.3);
 }
 
 .price-badge {
-  background: linear-gradient(45deg, #ed6737, #a57c3c);
+  background: linear-gradient(45deg, #c53030, #8b2635);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 25px;
@@ -32,9 +32,9 @@
 }
 
 .cooking-method {
-  background: rgba(237, 103, 55, 0.1);
-  border: 1px solid rgba(237, 103, 55, 0.3);
-  color: #ed6737;
+  background: rgba(197, 48, 48, 0.1);
+  border: 1px solid rgba(197, 48, 48, 0.3);
+  color: #c53030;
   padding: 0.25rem 0.75rem;
   border-radius: 15px;
   font-size: 0.85rem;
@@ -55,8 +55,8 @@
 }
 
 .testimonial-card {
-  background: linear-gradient(135deg, #fff 0%, #f9f7f4 100%);
-  border-left: 4px solid #ed6737;
+  background: linear-gradient(135deg, #fff 0%, #fef2f2 100%);
+  border-left: 4px solid #c53030;
 }
 
 .blog-card {
@@ -69,11 +69,11 @@
 
 .blog-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(237, 103, 55, 0.2);
+  box-shadow: 0 15px 40px rgba(197, 48, 48, 0.2);
 }
 
 .cta-section {
-  background: linear-gradient(135deg, #ed6737 0%, #a57c3c 100%);
+  background: linear-gradient(135deg, #c53030 0%, #8b2635 100%);
   position: relative;
   overflow: hidden;
 }
@@ -98,6 +98,134 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Nuevas secciones con imágenes */
+.parrilla-section {
+  background: linear-gradient(135deg, rgba(197, 48, 48, 0.1) 0%, rgba(230, 179, 184, 0.1) 100%),
+              url('https://images.pexels.com/photos/32449862/pexels-photo-32449862.jpeg') center/cover;
+  background-attachment: fixed;
+}
+
+.plancha-section {
+  background: linear-gradient(135deg, rgba(139, 38, 53, 0.1) 0%, rgba(230, 179, 184, 0.1) 100%),
+              url('https://images.pexels.com/photos/18861865/pexels-photo-18861865.jpeg') center/cover;
+  background-attachment: fixed;
+}
+
+.guiso-section {
+  background: linear-gradient(135deg, rgba(230, 179, 184, 0.1) 0%, rgba(197, 48, 48, 0.1) 100%),
+              url('https://images.pexels.com/photos/998244/pexels-photo-998244.jpeg') center/cover;
+  background-attachment: fixed;
+}
+
+.blog-hero {
+  background: linear-gradient(135deg, rgba(197, 48, 48, 0.8) 0%, rgba(139, 38, 53, 0.7) 100%),
+              url('https://images.unsplash.com/photo-1592771584685-c3c2edcd5c31') center/cover;
+  background-attachment: fixed;
+}
+
+/* Gradientes de texto mejorados */
+.text-gradient {
+  background: linear-gradient(45deg, #c53030, #8b2635);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Efectos glass mejorados */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Botones mejorados */
+.btn-primary {
+  background: linear-gradient(45deg, #c53030, #8b2635);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(197, 48, 48, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(197, 48, 48, 0.4);
+}
+
+.btn-outline {
+  background: transparent;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: 2px solid white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background: white;
+  color: #c53030;
+}
+
+.btn-secondary {
+  background: linear-gradient(45deg, #e6b3b8, #d19ca3);
+  color: #8b2635;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Cards mejoradas */
+.card-rustic {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(197, 48, 48, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(197, 48, 48, 0.1);
+}
+
+.card-rustic:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(197, 48, 48, 0.2);
+}
+
+/* Utilidades adicionales */
+.container-custom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section-padding {
+  padding: 5rem 0;
+}
+
+/* Animaciones */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); }
+  50% { box-shadow: 0 4px 30px rgba(37, 211, 102, 0.6); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
   animation: float 3s ease-in-out infinite;
 }
 
