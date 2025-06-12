@@ -1,0 +1,14 @@
+[
+  {
+    "id": "e95820ef-429a-4419-a75b-d37043adc651",
+    "nombre": "victor rodriguez",
+    "email": "victor1191@gmail.com",
+    "telefono": "65080983",
+    "password": "vara1191.",
+    "tipo": "individual",
+    "estado": "activo",
+    "fechaRegistro": "2025-06-12T15:08:31.221Z",
+    "pedidos": [],
+    "promociones": []
+  }
+]
