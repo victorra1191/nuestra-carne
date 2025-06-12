@@ -308,8 +308,20 @@ const Admin = () => {
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-primary-900">🥩 Panel Admin</h1>
-              <p className="text-primary-600">Gestión completa Nuestra Carne</p>
+              <img 
+                src="/images/logo/nuestra-carne-logo.png"
+                alt="Nuestra Carne Logo"
+                className="h-12 w-auto"
+                onError={(e) => {
+                  // Fallback al texto si no encuentra la imagen
+                  e.target.style.display = 'none';
+                  e.target.nextElementSibling.style.display = 'block';
+                }}
+              />
+              <div style={{display: 'none'}}>
+                <h1 className="text-2xl font-bold text-primary-900">🥩 Panel Admin</h1>
+                <p className="text-primary-600">Gestión completa Nuestra Carne</p>
+              </div>
             </div>
             
             <div className="flex items-center space-x-4">
