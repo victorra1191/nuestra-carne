@@ -366,15 +366,15 @@ const OrderForm = () => {
   };
 
   return (
-    <div className="min-h-screen bg-rustic-50">
+    <div className="min-h-screen bg-primary-50">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b border-rustic-200">
+      <div className="bg-white shadow-sm border-b border-primary-200">
         <div className="container-custom section-padding py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <button
                 onClick={() => navigate('/')}
-                className="flex items-center gap-2 text-rustic-700 hover:text-primary-500 transition-colors"
+                className="flex items-center gap-2 text-primary-700 hover:text-primary-500 transition-colors"
               >
                 <Home size={20} />
                 <span className="font-semibold">Nuestra Carne</span>
@@ -390,18 +390,18 @@ const OrderForm = () => {
                         ? 'bg-primary-500 text-white'
                         : currentStep > step
                         ? 'bg-green-500 text-white'
-                        : 'bg-rustic-200 text-rustic-600'
+                        : 'bg-primary-200 text-primary-600'
                     }`}>
                       {currentStep > step ? <CheckCircle size={16} /> : step}
                     </div>
                     <span className={`text-sm font-medium ${
-                      currentStep >= step ? 'text-rustic-900' : 'text-rustic-500'
+                      currentStep >= step ? 'text-primary-900' : 'text-primary-500'
                     }`}>
                       {step === 1 && 'Productos'}
                       {step === 2 && 'Datos'}
                       {step === 3 && 'Confirmar'}
                     </span>
-                    {step < 3 && <ArrowRight size={16} className="text-rustic-400" />}
+                    {step < 3 && <ArrowRight size={16} className="text-primary-400" />}
                   </div>
                 ))}
               </div>
@@ -423,10 +423,10 @@ const OrderForm = () => {
               transition={{ duration: 0.3 }}
             >
               <div className="text-center mb-12">
-                <h1 className="text-4xl md:text-6xl font-bold text-rustic-900 mb-4">
+                <h1 className="text-4xl md:text-6xl font-bold text-primary-900 mb-4">
                   🛒 Selecciona Tus <span className="text-gradient">PRODUCTOS</span>
                 </h1>
-                <p className="text-xl text-rustic-700">
+                <p className="text-xl text-primary-700">
                   Elige de nuestra selección premium de carne Angus panameña
                 </p>
               </div>
@@ -436,7 +436,7 @@ const OrderForm = () => {
                 <div className="lg:col-span-2">
                   {categorias.map(categoria => (
                     <div key={categoria} className="mb-8">
-                      <h3 className="text-2xl font-bold text-rustic-900 mb-4 border-b-2 border-primary-500 pb-2">
+                      <h3 className="text-2xl font-bold text-primary-900 mb-4 border-b-2 border-primary-500 pb-2">
                         {categoria}
                       </h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -446,12 +446,12 @@ const OrderForm = () => {
                             <div key={producto.codigo} className="card-rustic">
                               <div className="flex justify-between items-start mb-3">
                                 <div>
-                                  <h4 className="font-semibold text-rustic-900">{producto.nombre}</h4>
-                                  <p className="text-sm text-rustic-600">Código: {producto.codigo}</p>
+                                  <h4 className="font-semibold text-primary-900">{producto.nombre}</h4>
+                                  <p className="text-sm text-primary-600">Código: {producto.codigo}</p>
                                 </div>
                                 <div className="text-right">
                                   <p className="font-bold text-primary-500">${producto.precioLb.toFixed(2)}/lb</p>
-                                  <p className="text-sm text-rustic-600">${producto.precioKg.toFixed(2)}/kg</p>
+                                  <p className="text-sm text-primary-600">${producto.precioKg.toFixed(2)}/kg</p>
                                 </div>
                               </div>
                               <button
@@ -471,22 +471,22 @@ const OrderForm = () => {
                 {/* Carrito */}
                 <div className="lg:col-span-1">
                   <div className="card-rustic sticky top-6">
-                    <h3 className="text-xl font-bold text-rustic-900 mb-4 flex items-center gap-2">
+                    <h3 className="text-xl font-bold text-primary-900 mb-4 flex items-center gap-2">
                       <ShoppingCart size={20} />
                       Tu Pedido
                     </h3>
                     
                     {orderItems.length === 0 ? (
-                      <p className="text-rustic-600 text-center py-8">
+                      <p className="text-primary-600 text-center py-8">
                         Agrega productos a tu pedido
                       </p>
                     ) : (
                       <>
                         <div className="space-y-4 mb-6">
                           {orderItems.map(item => (
-                            <div key={item.codigo} className="border border-rustic-200 rounded-lg p-3">
+                            <div key={item.codigo} className="border border-primary-200 rounded-lg p-3">
                               <div className="flex justify-between items-start mb-2">
-                                <h5 className="font-medium text-rustic-900 text-sm">{item.nombre}</h5>
+                                <h5 className="font-medium text-primary-900 text-sm">{item.nombre}</h5>
                                 <button
                                   onClick={() => removeFromCart(item.codigo)}
                                   className="text-red-500 hover:text-red-700"
@@ -498,7 +498,7 @@ const OrderForm = () => {
                               <div className="flex items-center gap-2 mb-2">
                                 <button
                                   onClick={() => updateQuantity(item.codigo, item.cantidad - 1)}
-                                  className="w-6 h-6 bg-rustic-200 rounded flex items-center justify-center"
+                                  className="w-6 h-6 bg-primary-200 rounded flex items-center justify-center"
                                 >
                                   <Minus size={12} />
                                 </button>
@@ -512,7 +512,7 @@ const OrderForm = () => {
                                 <select
                                   value={item.unidad}
                                   onChange={(e) => changeUnit(item.codigo, e.target.value)}
-                                  className="ml-2 text-sm border border-rustic-300 rounded px-2 py-1"
+                                  className="ml-2 text-sm border border-primary-300 rounded px-2 py-1"
                                 >
                                   <option value="libras">libras</option>
                                   <option value="kilos">kilos</option>
@@ -526,7 +526,7 @@ const OrderForm = () => {
                           ))}
                         </div>
                         
-                        <div className="border-t border-rustic-300 pt-4">
+                        <div className="border-t border-primary-300 pt-4">
                           <div className="flex justify-between items-center mb-4">
                             <span className="text-lg font-bold">Total:</span>
                             <span className="text-xl font-bold text-primary-500">
@@ -561,10 +561,10 @@ const OrderForm = () => {
               transition={{ duration: 0.3 }}
             >
               <div className="text-center mb-12">
-                <h1 className="text-4xl md:text-6xl font-bold text-rustic-900 mb-4">
+                <h1 className="text-4xl md:text-6xl font-bold text-primary-900 mb-4">
                   📋 Tus <span className="text-gradient">DATOS</span>
                 </h1>
-                <p className="text-xl text-rustic-700">
+                <p className="text-xl text-primary-700">
                   Información para procesar tu pedido
                 </p>
               </div>
@@ -574,13 +574,13 @@ const OrderForm = () => {
                   <form className="space-y-6">
                     {/* Tipo de Cliente */}
                     <div>
-                      <label className="block text-sm font-semibold text-rustic-900 mb-2">
+                      <label className="block text-sm font-semibold text-primary-900 mb-2">
                         Tipo de Cliente
                       </label>
                       <select
                         value={customerData.tipoCliente}
                         onChange={(e) => setCustomerData({...customerData, tipoCliente: e.target.value})}
-                        className="w-full border border-rustic-300 rounded-lg px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
+                        className="w-full border border-primary-300 rounded-lg px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
                       >
                         <option value="individual">Individual</option>
                         <option value="empresa">Empresa</option>
@@ -590,27 +590,27 @@ const OrderForm = () => {
                     {/* Información Personal */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-semibold text-rustic-900 mb-2">
+                        <label className="block text-sm font-semibold text-primary-900 mb-2">
                           Nombre Completo *
                         </label>
                         <input
                           type="text"
                           value={customerData.nombre}
                           onChange={(e) => setCustomerData({...customerData, nombre: e.target.value})}
-                          className="w-full border border-rustic-300 rounded-lg px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
+                          className="w-full border border-primary-300 rounded-lg px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
                           required
                         />
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-semibold text-rustic-900 mb-2">
+                        <label className="block text-sm font-semibold text-primary-900 mb-2">
                           Teléfono *
                         </label>
                         <input
                           type="tel"
                           value={customerData.telefono}
                           onChange={(e) => setCustomerData({...customerData, telefono: e.target.value})}
-                          className="w-full border border-rustic-300 rounded-lg px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
+                          className="w-full border border-primary-300 rounded-lg px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
                           placeholder="+507 6XXX-XXXX"
                           required
                         />
@@ -618,31 +618,31 @@ const OrderForm = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-rustic-900 mb-2">
+                      <label className="block text-sm font-semibold text-primary-900 mb-2">
                         Email *
                       </label>
                       <input
                         type="email"
                         value={customerData.email}
                         onChange={(e) => setCustomerData({...customerData, email: e.target.value})}
-                        className="w-full border border-rustic-300 rounded-lg px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
+                        className="w-full border border-primary-300 rounded-lg px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
                         required
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-rustic-900 mb-2">
+                      <label className="block text-sm font-semibold text-primary-900 mb-2">
                         Dirección de Entrega *
                       </label>
                       <textarea
                         value={customerData.direccion}
                         onChange={(e) => setCustomerData({...customerData, direccion: e.target.value})}
-                        className="w-full border border-rustic-300 rounded-lg px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
+                        className="w-full border border-primary-300 rounded-lg px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
                         rows="3"
                         placeholder="Dirección completa en Ciudad de Panamá"
                         required
                       />
-                      <p className="text-sm text-rustic-600 mt-1">
+                      <p className="text-sm text-primary-600 mt-1">
                         Solo delivery en Ciudad de Panamá
                       </p>
                     </div>
@@ -650,7 +650,7 @@ const OrderForm = () => {
                     {/* Fecha y Hora de Entrega */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-semibold text-rustic-900 mb-2">
+                        <label className="block text-sm font-semibold text-primary-900 mb-2">
                           Fecha de Entrega *
                         </label>
                         <input
@@ -658,22 +658,22 @@ const OrderForm = () => {
                           value={customerData.fechaEntrega}
                           onChange={(e) => setCustomerData({...customerData, fechaEntrega: e.target.value, horaEntrega: ''})}
                           min={getMinDate()}
-                          className="w-full border border-rustic-300 rounded-lg px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
+                          className="w-full border border-primary-300 rounded-lg px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
                           required
                         />
-                        <p className="text-sm text-rustic-600 mt-1">
+                        <p className="text-sm text-primary-600 mt-1">
                           Lun-Vie: 8AM-5PM | Sáb: 9AM-12PM
                         </p>
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-semibold text-rustic-900 mb-2">
+                        <label className="block text-sm font-semibold text-primary-900 mb-2">
                           Hora de Entrega *
                         </label>
                         <select
                           value={customerData.horaEntrega}
                           onChange={(e) => setCustomerData({...customerData, horaEntrega: e.target.value})}
-                          className="w-full border border-rustic-300 rounded-lg px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
+                          className="w-full border border-primary-300 rounded-lg px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
                           required
                           disabled={!customerData.fechaEntrega}
                         >
@@ -686,13 +686,13 @@ const OrderForm = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-rustic-900 mb-2">
+                      <label className="block text-sm font-semibold text-primary-900 mb-2">
                         Notas Especiales
                       </label>
                       <textarea
                         value={customerData.notas}
                         onChange={(e) => setCustomerData({...customerData, notas: e.target.value})}
-                        className="w-full border border-rustic-300 rounded-lg px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
+                        className="w-full border border-primary-300 rounded-lg px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
                         rows="3"
                         placeholder="Instrucciones especiales, grosor de cortes, etc."
                       />
@@ -732,10 +732,10 @@ const OrderForm = () => {
               transition={{ duration: 0.3 }}
             >
               <div className="text-center mb-12">
-                <h1 className="text-4xl md:text-6xl font-bold text-rustic-900 mb-4">
+                <h1 className="text-4xl md:text-6xl font-bold text-primary-900 mb-4">
                   ✅ Confirma Tu <span className="text-gradient">PEDIDO</span>
                 </h1>
-                <p className="text-xl text-rustic-700">
+                <p className="text-xl text-primary-700">
                   Revisa toda la información antes de enviar
                 </p>
               </div>
@@ -743,39 +743,39 @@ const OrderForm = () => {
               <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Información del Cliente */}
                 <div className="card-rustic">
-                  <h3 className="text-xl font-bold text-rustic-900 mb-4 flex items-center gap-2">
+                  <h3 className="text-xl font-bold text-primary-900 mb-4 flex items-center gap-2">
                     <User size={20} />
                     Información del Cliente
                   </h3>
                   
                   <div className="space-y-3">
                     <div className="flex justify-between">
-                      <span className="text-rustic-600">Nombre:</span>
+                      <span className="text-primary-600">Nombre:</span>
                       <span className="font-semibold">{customerData.nombre}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-rustic-600">Teléfono:</span>
+                      <span className="text-primary-600">Teléfono:</span>
                       <span className="font-semibold">{customerData.telefono}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-rustic-600">Email:</span>
+                      <span className="text-primary-600">Email:</span>
                       <span className="font-semibold">{customerData.email}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-rustic-600">Dirección:</span>
+                      <span className="text-primary-600">Dirección:</span>
                       <span className="font-semibold text-right">{customerData.direccion}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-rustic-600">Fecha Entrega:</span>
+                      <span className="text-primary-600">Fecha Entrega:</span>
                       <span className="font-semibold">{customerData.fechaEntrega}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-rustic-600">Hora Entrega:</span>
+                      <span className="text-primary-600">Hora Entrega:</span>
                       <span className="font-semibold">{customerData.horaEntrega}</span>
                     </div>
                     {customerData.notas && (
-                      <div className="pt-3 border-t border-rustic-200">
-                        <span className="text-rustic-600">Notas:</span>
+                      <div className="pt-3 border-t border-primary-200">
+                        <span className="text-primary-600">Notas:</span>
                         <p className="font-semibold mt-1">{customerData.notas}</p>
                       </div>
                     )}
@@ -784,17 +784,17 @@ const OrderForm = () => {
 
                 {/* Resumen del Pedido */}
                 <div className="card-rustic">
-                  <h3 className="text-xl font-bold text-rustic-900 mb-4 flex items-center gap-2">
+                  <h3 className="text-xl font-bold text-primary-900 mb-4 flex items-center gap-2">
                     <ShoppingCart size={20} />
                     Resumen del Pedido
                   </h3>
                   
                   <div className="space-y-3 mb-6">
                     {orderItems.map(item => (
-                      <div key={item.codigo} className="flex justify-between items-center border-b border-rustic-200 pb-2">
+                      <div key={item.codigo} className="flex justify-between items-center border-b border-primary-200 pb-2">
                         <div>
                           <h5 className="font-medium">{item.nombre}</h5>
-                          <p className="text-sm text-rustic-600">
+                          <p className="text-sm text-primary-600">
                             {item.cantidad} {item.unidad} × ${(item.unidad === 'libras' ? item.precioLb : item.precioKg).toFixed(2)}
                           </p>
                         </div>
@@ -805,7 +805,7 @@ const OrderForm = () => {
                     ))}
                   </div>
                   
-                  <div className="border-t border-rustic-300 pt-4">
+                  <div className="border-t border-primary-300 pt-4">
                     <div className="flex justify-between items-center mb-4">
                       <span className="text-xl font-bold">Total:</span>
                       <span className="text-2xl font-bold text-primary-500">
@@ -852,7 +852,7 @@ const OrderForm = () => {
                 </div>
                 
                 <div className="text-center mt-6">
-                  <p className="text-rustic-600 text-sm">
+                  <p className="text-primary-600 text-sm">
                     Al enviar tu pedido, recibirás una confirmación por email y WhatsApp.
                     <br />
                     Nuestro equipo te contactará para coordinar la entrega.
