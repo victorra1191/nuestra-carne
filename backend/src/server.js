@@ -17,13 +17,17 @@ const adminProductRoutes = require('./routes/adminProductRoutes');
 const app = express();
 const PORT = process.env.PORT || 8001;
 
+// Configurar trust proxy para DigitalOcean
+app.set('trust proxy', 1);
+
 // Middleware de seguridad
 app.use(helmet());
 
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutos
-  max: 100 // máximo 100 requests por IP
+  max: 100, // máximo 100 requests por IP
+  trustProxy: true
 });
 app.use(limiter);
 
