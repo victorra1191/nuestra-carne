@@ -530,8 +530,8 @@ const LandingPage = () => {
             >
               <div className="aspect-video bg-gray-200 rounded-lg mb-6 overflow-hidden">
                 <img 
-                  src="/images/heroes/hero-plancha.jpg"
-                  alt="Plancha"
+                  src="https://images.pexels.com/photos/18861865/pexels-photo-18861865.jpeg"
+                  alt="Plancha - Carne Pan Seared"
                   className="w-full h-full object-cover"
                 />
               </div>
