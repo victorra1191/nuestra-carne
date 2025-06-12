@@ -244,4 +244,19 @@
     right: 15px;
     padding: 12px 16px;
   }
+
+  .section-padding {
+    padding: 3rem 0;
+  }
+
+  .container-custom {
+    padding: 0 1rem;
+  }
+
+  .parrilla-section,
+  .plancha-section,
+  .guiso-section,
+  .blog-hero {
+    background-attachment: scroll;
+  }
 }
