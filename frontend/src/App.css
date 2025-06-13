@@ -1,8 +1,7 @@
 /* App.css - Estilos específicos para componentes con nueva paleta roja */
 
 .hero-bg {
-  background: linear-gradient(135deg, rgba(197, 48, 48, 0.9) 0%, rgba(139, 38, 53, 0.8) 100%),
-              url('./hero/hero-carne-principal.svg') center/cover;
+  background: linear-gradient(135deg, rgba(197, 48, 48, 0.9) 0%, rgba(139, 38, 53, 0.8) 100%);
   min-height: 100vh;
   background-attachment: fixed;
 }
