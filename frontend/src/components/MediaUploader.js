@@ -116,7 +116,7 @@ const MediaUploader = ({ onImageSelect, selectedImage, showGallery = false, onCl
         // Múltiples archivos
         files.forEach(file => formData.append('images', file));
         
-        const response = await fetch(`${API_BASE}/media/upload-multiple`, {
+        const response = await fetch(`${API_BASE}/api/media/upload-multiple`, {
           method: 'POST',
           headers: {
             'Authorization': `Basic ${btoa('admin:nuestra123')}`
