@@ -728,12 +728,18 @@ const OrderForm = () => {
                     <div>
                       <label className="block text-sm font-semibold text-primary-900 mb-2">
                         Email *
+                        {isAuthenticated && user?.email && (
+                          <span className="text-green-600 text-xs ml-2">✓ Pre-llenado</span>
+                        )}
                       </label>
                       <input
                         type="email"
                         value={customerData.email}
                         onChange={(e) => setCustomerData({...customerData, email: e.target.value})}
-                        className="w-full border border-primary-300 rounded-lg px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
+                        className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent ${
+                          isAuthenticated && user?.email ? 'border-green-300 bg-green-50' : 'border-primary-200'
+                        }`}
+                        placeholder="tu@email.com"
                         required
                       />
                     </div>
