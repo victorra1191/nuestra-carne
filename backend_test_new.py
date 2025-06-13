@@ -331,13 +331,16 @@ class NuestraCarneTester:
             print("❌ Cannot test wholesale requests - no admin token available")
             return False, {}
             
+        # The API expects Basic auth with admin:nuestra123 format
+        basic_auth = "Basic " + "admin:nuestra123".encode('base64').decode('utf-8').strip()
+        
         success, response = self.run_test(
             "Get Wholesale Requests",
             "GET",
             "auth/wholesale-requests",
             200,
             auth=True,
-            auth_token=self.admin_auth_header
+            auth_token=basic_auth
         )
         
         if success:
