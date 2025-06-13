@@ -85,7 +85,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('./cta-background.svg') center/cover;
+  background: linear-gradient(135deg, #c53030 0%, #8b2635 100%);
   opacity: 0.3;
 }
 
