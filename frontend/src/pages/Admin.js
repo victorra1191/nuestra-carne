@@ -412,6 +412,20 @@ const Admin = () => {
                 <span>Mayoristas</span>
               </div>
             </button>
+            
+            <button
+              onClick={() => setActiveSection('orders')}
+              className={`py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
+                activeSection === 'orders'
+                  ? 'border-primary-500 text-primary-600'
+                  : 'border-transparent text-primary-500 hover:text-primary-700 hover:border-primary-300'
+              }`}
+            >
+              <div className="flex items-center space-x-2">
+                <ShoppingCart size={16} />
+                <span>Pedidos</span>
+              </div>
+            </button>
           </nav>
         </div>
       </div>
