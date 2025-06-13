@@ -252,4 +252,156 @@ router.get('/health', (req, res) => {
   });
 });
 
+/**
+ * GET /api/orders/user/:userId
+ * Obtener pedidos de un usuario específico
+ */
+router.get('/user/:userId', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const orders = await readOrdersFile();
+    
+    // Filtrar pedidos por usuario
+    const userOrders = orders.filter(order => 
+      order.usuarioId === userId || 
+      order.cliente.email === req.query.email
+    );
+
+    // Ordenar por fecha (más recientes primero)
+    userOrders.sort((a, b) => new Date(b.fechaCreacion) - new Date(a.fechaCreacion));
+
+    res.json({
+      success: true,
+      orders: userOrders
+    });
+
+  } catch (error) {
+    console.error('Error obteniendo pedidos del usuario:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Error interno del servidor'
+    });
+  }
+});
+
+/**
+ * GET /api/orders/all
+ * Obtener todos los pedidos (solo admin)
+ */
+router.get('/all', async (req, res) => {
+  try {
+    // TODO: Agregar autenticación de admin aquí
+    
+    const orders = await readOrdersFile();
+    
+    // Ordenar por fecha (más recientes primero)
+    orders.sort((a, b) => new Date(b.fechaCreacion) - new Date(a.fechaCreacion));
+
+    res.json({
+      success: true,
+      orders: orders,
+      total: orders.length,
+      stats: {
+        pendientes: orders.filter(o => o.estado === 'pendiente').length,
+        en_proceso: orders.filter(o => o.estado === 'en_proceso').length,
+        en_camino: orders.filter(o => o.estado === 'en_camino').length,
+        entregados: orders.filter(o => o.estado === 'entregado').length,
+        cancelados: orders.filter(o => o.estado === 'cancelado').length
+      }
+    });
+
+  } catch (error) {
+    console.error('Error obteniendo todos los pedidos:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Error interno del servidor'
+    });
+  }
+});
+
+/**
+ * PUT /api/orders/:orderId/status
+ * Actualizar estado de un pedido (solo admin)
+ */
+router.put('/:orderId/status', async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const { estado, notas } = req.body;
+
+    // Validar estado
+    const validStates = ['pendiente', 'en_proceso', 'en_camino', 'entregado', 'cancelado'];
+    if (!validStates.includes(estado)) {
+      return res.status(400).json({
+        success: false,
+        error: 'Estado inválido',
+        validStates: validStates
+      });
+    }
+
+    const orders = await readOrdersFile();
+    const orderIndex = orders.findIndex(order => order.id === orderId);
+
+    if (orderIndex === -1) {
+      return res.status(404).json({
+        success: false,
+        error: 'Pedido no encontrado'
+      });
+    }
+
+    // Actualizar pedido
+    orders[orderIndex].estado = estado;
+    orders[orderIndex].fechaActualizacion = new Date().toISOString();
+    if (notas) {
+      orders[orderIndex].notas = notas;
+    }
+
+    await writeOrdersFile(orders);
+
+    res.json({
+      success: true,
+      message: 'Estado del pedido actualizado',
+      order: orders[orderIndex]
+    });
+
+  } catch (error) {
+    console.error('Error actualizando estado del pedido:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Error interno del servidor'
+    });
+  }
+});
+
+/**
+ * GET /api/orders/:orderId
+ * Obtener detalles de un pedido específico
+ */
+router.get('/:orderId', async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const orders = await readOrdersFile();
+    
+    const order = orders.find(order => order.id === orderId);
+
+    if (!order) {
+      return res.status(404).json({
+        success: false,
+        error: 'Pedido no encontrado'
+      });
+    }
+
+    res.json({
+      success: true,
+      order: order
+    });
+
+  } catch (error) {
+    console.error('Error obteniendo detalles del pedido:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Error interno del servidor'
+    });
+  }
+});
+
 module.exports = router;
