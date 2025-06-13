@@ -189,7 +189,7 @@ const MediaUploader = ({ onImageSelect, selectedImage, showGallery = false, onCl
     try {
       setLoading(true);
       
-      const response = await fetch(`${API_BASE}/media/images/${filename}`, {
+      const response = await fetch(`${API_BASE}/api/media/images/${filename}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Basic ${btoa('admin:nuestra123')}`
