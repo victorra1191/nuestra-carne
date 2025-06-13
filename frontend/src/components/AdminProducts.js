@@ -114,7 +114,7 @@ const AdminProducts = ({ API_BASE }) => {
 
   const handleSaveEdit = async () => {
     try {
-      const response = await fetch(`${API_BASE}/admin/products/${editingProduct.codigo}`, {
+      const response = await fetch(`${API_BASE}/api/admin/products/${editingProduct.codigo}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
