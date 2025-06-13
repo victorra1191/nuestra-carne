@@ -23,11 +23,12 @@ app.set('trust proxy', 1);
 // Middleware de seguridad
 app.use(helmet());
 
-// Rate limiting
+// Rate limiting con configuración para DigitalOcean
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutos
   max: 100, // máximo 100 requests por IP
-  trustProxy: true
+  trustProxy: true,
+  skipSuccessfulRequests: true // No contar requests exitosos
 });
 app.use(limiter);
 
