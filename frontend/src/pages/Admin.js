@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import MediaUploader from '../components/MediaUploader';
+import AdminProducts from '../components/AdminProducts';
+import AdminWholesale from '../components/AdminWholesale';
+import AdminOrders from '../components/AdminOrders';
 import { 
   Eye, 
   EyeOff, 
@@ -22,10 +25,9 @@ import {
   Crown,
   Home,
   Settings,
-  BarChart3
+  BarChart3,
+  ShoppingCart
 } from 'lucide-react';
-import AdminProducts from '../components/AdminProducts';
-import AdminWholesale from '../components/AdminWholesale';
 
 const Admin = () => {
   const navigate = useNavigate();
