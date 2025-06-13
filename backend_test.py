@@ -4,12 +4,26 @@ import json
 from datetime import datetime
 
 class NuestraCarneTester:
-    def __init__(self, base_url="https://nuestra-carne-app.ondigitalocean.app/api"):
+    def __init__(self, base_url="https://nuestracarnepa.com/api"):
         self.base_url = base_url
         self.auth_token = None
         self.tests_run = 0
         self.tests_passed = 0
         self.auth_header = None
+        self.user_id = None
+        self.test_user = {
+            "nombre": "Test User",
+            "email": f"test.user.{datetime.now().strftime('%Y%m%d%H%M%S')}@example.com",
+            "telefono": "+507 6123-4567",
+            "password": "TestPassword123!"
+        }
+        self.wholesale_user = {
+            "nombre": "Test Wholesale",
+            "email": f"test.wholesale.{datetime.now().strftime('%Y%m%d%H%M%S')}@example.com",
+            "telefono": "+507 6987-6543",
+            "password": "WholesaleTest123!",
+            "tipo": "mayorista"
+        }
 
     def run_test(self, name, method, endpoint, expected_status, data=None, auth=False):
         """Run a single API test"""
