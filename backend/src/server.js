@@ -105,11 +105,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../../frontend/build', 'index.html'));
 });
 
-// Ruta catch-all para React Router
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../frontend/build', 'index.html'));
-});
-
 // Middleware de manejo de errores
 app.use((err, req, res, next) => {
   console.error(err.stack);
@@ -125,6 +120,11 @@ app.use('/api/*', (req, res) => {
     success: false, 
     error: 'Endpoint no encontrado' 
   });
+});
+
+// Ruta catch-all para React Router (DEBE IR AL FINAL)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../frontend/build', 'index.html'));
 });
 
 app.listen(PORT, '0.0.0.0', () => {
