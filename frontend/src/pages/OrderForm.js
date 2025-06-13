@@ -680,7 +680,7 @@ const OrderForm = () => {
                         className="w-full border border-primary-300 rounded-lg px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200"
                       >
                         <option value="individual">Individual</option>
-                        <option value="empresa">Empresa</option>
+                        <option value="empresa">Empresa (Precios Mayoristas)</option>
                       </select>
                     </div>
 
