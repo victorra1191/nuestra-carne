@@ -312,17 +312,52 @@ const UserDashboard = () => {
               >
                 <h1 className="text-3xl font-bold text-primary-900">Mis Pedidos</h1>
                 
+                {loadingOrders ? (
+                  <div className="bg-white rounded-xl shadow-sm p-6">
+                    <div className="text-center py-8">
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
+                      <p className="text-primary-600">Cargando tus pedidos...</p>
+                    </div>
+                  </div>
+                ) : ordersError ? (
+                  <div className="bg-red-50 border border-red-200 rounded-xl p-6">
+                    <div className="text-center">
+                      <AlertCircle className="text-red-500 mx-auto mb-2" size={24} />
+                      <p className="text-red-600 mb-4">{ordersError}</p>
+                      <button 
+                        onClick={() => window.location.reload()}
+                        className="btn-primary"
+                      >
+                        Intentar de nuevo
+                      </button>
+                    </div>
+                  </div>
+                ) : orders.length === 0 ? (
+                  <div className="bg-white rounded-xl shadow-sm p-6">
+                    <div className="text-center py-8">
+                      <ShoppingBag className="text-gray-400 mx-auto mb-4" size={48} />
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">No tienes pedidos aún</h3>
+                      <p className="text-gray-600 mb-6">¡Haz tu primer pedido y disfruta de nuestra carne premium!</p>
+                      <button 
+                        onClick={() => navigate('/haz-tu-pedido')}
+                        className="btn-primary"
+                      >
+                        Hacer mi primer pedido
+                      </button>
+                    </div>
+                  </div>
+                ) : (
                 <div className="bg-white rounded-xl shadow-sm p-6">
                   <div className="space-y-6">
                     {orders.map((order) => (
                       <div key={order.id} className="border border-primary-200 rounded-lg p-6">
                         <div className="flex items-center justify-between mb-4">
                           <div>
-                            <h3 className="text-lg font-bold text-primary-900">Pedido #{order.id}</h3>
+                            <h3 className="text-lg font-bold text-primary-900">Pedido #{order.id.slice(-8)}</h3>
                             <div className="flex items-center space-x-4 text-sm text-primary-600">
                               <span className="flex items-center space-x-1">
                                 <Calendar size={16} />
-                                <span>{new Date(order.fecha).toLocaleDateString('es-ES')}</span>
+                                <span>{new Date(order.fecha || order.fechaCreacion).toLocaleDateString('es-ES')}</span>
                               </span>
                               <span className="flex items-center space-x-1">
                                 <DollarSign size={16} />
@@ -338,11 +373,28 @@ const UserDashboard = () => {
                         <div className="mb-4">
                           <h4 className="font-semibold text-primary-900 mb-2">Productos:</h4>
                           <ul className="list-disc list-inside text-primary-700 space-y-1">
-                            {order.productos.map((producto, index) => (
-                              <li key={index}>{producto}</li>
+                            {(Array.isArray(order.productos) ? order.productos : []).map((producto, index) => (
+                              <li key={index}>
+                                {typeof producto === 'string' ? 
+                                  producto : 
+                                  `${producto.nombre} - ${producto.cantidad}${producto.unidad || 'lb'} - $${producto.subtotal.toFixed(2)}`
+                                }
+                              </li>
                             ))}
                           </ul>
                         </div>
+
+                        {order.cliente?.fechaEntrega && (
+                          <div className="mb-4">
+                            <h4 className="font-semibold text-primary-900 mb-2">Entrega programada:</h4>
+                            <p className="text-primary-700">
+                              📅 {order.cliente.fechaEntrega} a las {order.cliente.horaEntrega}
+                            </p>
+                            <p className="text-primary-600 text-sm">
+                              📍 {order.cliente.direccion}
+                            </p>
+                          </div>
+                        )}
 
                         {order.estado === 'en_camino' && (
                           <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
