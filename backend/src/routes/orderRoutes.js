@@ -109,15 +109,25 @@ router.post('/submit', orderLimiter, async (req, res) => {
       });
     }
 
-    // Preparar datos del pedido
+    // Crear el pedido con ID único
+    const orderId = uuidv4();
     const orderData = {
+      id: orderId,
       cliente,
       productos,
       total,
       fecha: new Date().toISOString(),
-      estado: 'pendiente'
+      estado: 'pendiente',
+      fechaCreacion: new Date().toISOString(),
+      usuarioId: req.headers['user-id'] || null // Si viene del frontend autenticado
     };
 
+    // Guardar el pedido en el archivo
+    const orders = await readOrdersFile();
+    orders.push(orderData);
+    await writeOrdersFile(orders);
+
+    console.log(`📦 Pedido ${orderId} guardado exitosamente`);
     console.log(`📧 Procesando emails para ${cliente.nombre}...`);
 
     // Enviar emails usando Zoho
