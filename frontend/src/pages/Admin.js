@@ -181,7 +181,7 @@ const Admin = () => {
 
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE}/admin/articles/${articleSlug}`, {
+      const response = await fetch(`${API_BASE}/api/admin/articles/${articleSlug}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Basic ${btoa('admin:nuestra123')}`
