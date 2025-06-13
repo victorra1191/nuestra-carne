@@ -76,14 +76,6 @@ const UserDashboard = () => {
 
     fetchUserOrders();
   }, [user, API_BASE]);
-    {
-      id: '3',
-      fecha: '2024-12-05',
-      total: 120.75,
-      estado: 'entregado',
-      productos: ['Tomahawk 1lb', 'Entraña 2lb', 'Vacio 1.5lb']
-    }
-  ]);
 
   const [promotions] = useState([
     {
