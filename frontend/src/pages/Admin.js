@@ -711,6 +711,11 @@ const Admin = () => {
         {activeSection === 'wholesale' && (
           <AdminWholesale API_BASE={API_BASE} />
         )}
+
+        {/* Orders Section */}
+        {activeSection === 'orders' && (
+          <AdminOrders />
+        )}
       </div>
     </div>
   );
