@@ -1,6 +1,29 @@
 const express = require('express');
 const router = express.Router();
 const SMTPEmailService = require('../services/SMTPEmailService');
+const fs = require('fs').promises;
+const path = require('path');
+const { v4: uuidv4 } = require('uuid');
+
+// Archivos de datos
+const ORDERS_FILE = path.join(__dirname, '../data/orders.json');
+
+// Funciones helper para manejo de archivos
+const readOrdersFile = async () => {
+  try {
+    const data = await fs.readFile(ORDERS_FILE, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      return [];
+    }
+    throw error;
+  }
+};
+
+const writeOrdersFile = async (orders) => {
+  await fs.writeFile(ORDERS_FILE, JSON.stringify(orders, null, 2));
+};
 
 // Instancia del servicio de email
 const emailService = new SMTPEmailService();
