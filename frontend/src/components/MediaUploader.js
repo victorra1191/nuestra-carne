@@ -44,7 +44,7 @@ const MediaUploader = ({ onImageSelect, selectedImage, showGallery = false, onCl
       setLoading(true);
       setError('');
       
-      const response = await fetch(`${API_BASE}/media/gallery`, {
+      const response = await fetch(`${API_BASE}/api/media/gallery`, {
         headers: {
           'Authorization': `Basic ${btoa('admin:nuestra123')}`
         }
