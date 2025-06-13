@@ -74,6 +74,7 @@ const upload = multer({
 });
 
 // Rutas de API
+app.use('/api/orders', orderRoutes);
 app.use('/api', orderRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/admin', adminProductRoutes);
