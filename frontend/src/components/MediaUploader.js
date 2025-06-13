@@ -90,7 +90,7 @@ const MediaUploader = ({ onImageSelect, selectedImage, showGallery = false, onCl
       if (files.length === 1) {
         formData.append('image', files[0]);
         
-        const response = await fetch(`${API_BASE}/media/upload`, {
+        const response = await fetch(`${API_BASE}/api/media/upload`, {
           method: 'POST',
           headers: {
             'Authorization': `Basic ${btoa('admin:nuestra123')}`
