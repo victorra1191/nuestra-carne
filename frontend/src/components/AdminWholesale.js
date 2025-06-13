@@ -27,7 +27,7 @@ const AdminWholesale = ({ API_BASE }) => {
   const fetchRequests = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE}/api/auth/wholesale-requests`, {
+      const response = await fetch(`${API_BASE}/auth/wholesale-requests`, {
         headers: {
           'Authorization': `Basic ${btoa('admin:nuestra123')}`
         }
@@ -50,7 +50,7 @@ const AdminWholesale = ({ API_BASE }) => {
 
   const handleApprove = async (requestId) => {
     try {
-      const response = await fetch(`${API_BASE}/api/auth/wholesale-requests/${requestId}/approve`, {
+      const response = await fetch(`${API_BASE}/auth/wholesale-requests/${requestId}/approve`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ const AdminWholesale = ({ API_BASE }) => {
 
   const handleReject = async (requestId) => {
     try {
-      const response = await fetch(`${API_BASE}/api/auth/wholesale-requests/${requestId}/reject`, {
+      const response = await fetch(`${API_BASE}/auth/wholesale-requests/${requestId}/reject`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -46,7 +46,7 @@ const BlogPost = () => {
   const fetchArticle = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE}/api/admin/articles`);
+      const response = await fetch(`${API_BASE}/admin/articles`);
       const data = await response.json();
       
       if (data.success && data.articles) {
@@ -74,7 +74,7 @@ const BlogPost = () => {
 
   const fetchRelatedArticles = async () => {
     try {
-      const response = await fetch(`${API_BASE}/api/admin/articles`);
+      const response = await fetch(`${API_BASE}/admin/articles`);
       const data = await response.json();
       
       if (data.success && data.articles) {

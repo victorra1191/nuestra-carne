@@ -63,7 +63,7 @@ const AdminProducts = ({ API_BASE }) => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE}/api/admin/products/all`, {
+      const response = await fetch(`${API_BASE}/admin/products/all`, {
         headers: {
           'Authorization': `Basic ${btoa('admin:nuestra123')}`
         }
@@ -86,7 +86,7 @@ const AdminProducts = ({ API_BASE }) => {
 
   const fetchStats = async () => {
     try {
-      const response = await fetch(`${API_BASE}/api/admin/stats`, {
+      const response = await fetch(`${API_BASE}/admin/stats`, {
         headers: {
           'Authorization': `Basic ${btoa('admin:nuestra123')}`
         }
@@ -114,7 +114,7 @@ const AdminProducts = ({ API_BASE }) => {
 
   const handleSaveEdit = async () => {
     try {
-      const response = await fetch(`${API_BASE}/api/admin/products/${editingProduct.codigo}`, {
+      const response = await fetch(`${API_BASE}/admin/products/${editingProduct.codigo}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -146,7 +146,7 @@ const AdminProducts = ({ API_BASE }) => {
     try {
       const newAvailability = !product.disponible;
       
-      const response = await fetch(`${API_BASE}/api/admin/products/${product.codigo}/toggle`, {
+      const response = await fetch(`${API_BASE}/admin/products/${product.codigo}/toggle`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -99,7 +99,7 @@ const Admin = () => {
   const fetchArticles = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE}/api/admin/articles`, {
+      const response = await fetch(`${API_BASE}/admin/articles`, {
         headers: {
           'Authorization': `Basic ${btoa('admin:nuestra123')}`
         }
@@ -126,8 +126,8 @@ const Admin = () => {
 
     try {
       const url = editingArticle 
-        ? `${API_BASE}/api/admin/articles/${editingArticle.slug}`
-        : `${API_BASE}/api/admin/articles`;
+        ? `${API_BASE}/admin/articles/${editingArticle.slug}`
+        : `${API_BASE}/admin/articles`;
       
       const method = editingArticle ? 'PUT' : 'POST';
 
@@ -181,7 +181,7 @@ const Admin = () => {
 
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE}/api/admin/articles/${articleSlug}`, {
+      const response = await fetch(`${API_BASE}/admin/articles/${articleSlug}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Basic ${btoa('admin:nuestra123')}`
