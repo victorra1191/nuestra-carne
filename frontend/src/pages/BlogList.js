@@ -13,12 +13,12 @@ const BlogList = () => {
   // URL del backend desde variable de entorno
   const API_BASE = process.env.REACT_APP_BACKEND_URL || 'https://nuestracarnepa.com/api';
 
-  // Imágenes de fondo con URLs más confiables
+  // Imágenes de fondo locales y confiables
   const backgroundImages = [
-    'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', // Carne asada
-    'https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', // Parrilla
-    'https://images.unsplash.com/photo-1558030137-d2ec90b36e15?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80', // Plancha
-    'https://images.unsplash.com/photo-1574781330855-d0db3304d1d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'  // Guisados
+    '/images/blog/parrilla.svg', // Parrilla
+    '/images/blog/parrilla.svg', // Parrilla
+    '/images/blog/plancha.svg', // Plancha
+    '/images/blog/guisados.svg'  // Guisados
   ];
 
   useEffect(() => {
