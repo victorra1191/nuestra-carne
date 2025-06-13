@@ -31,23 +31,51 @@ const UserDashboard = () => {
     nombre: user?.nombre || '',
     telefono: user?.telefono || ''
   });
+  
+  const API_BASE = process.env.REACT_APP_BACKEND_URL;
+  
+  // Estados para pedidos reales
+  const [orders, setOrders] = useState([]);
+  const [loadingOrders, setLoadingOrders] = useState(true);
+  const [ordersError, setOrdersError] = useState(null);
 
-  // Datos simulados para el dashboard (en producción vendrían del backend)
-  const [orders] = useState([
-    {
-      id: '1',
-      fecha: '2024-12-15',
-      total: 85.50,
-      estado: 'entregado',
-      productos: ['Entraña 2lb', 'Rib-eye 1.5lb', 'Arañita 1lb']
-    },
-    {
-      id: '2',
-      fecha: '2024-12-10',
-      total: 65.30,
-      estado: 'en_camino',
-      productos: ['Filet Mignon 1lb', 'Bistec 2lb']
-    },
+  // Cargar pedidos del usuario
+  useEffect(() => {
+    const fetchUserOrders = async () => {
+      if (!user?.id) return;
+      
+      try {
+        setLoadingOrders(true);
+        setOrdersError(null);
+        
+        const response = await fetch(`${API_BASE}/api/orders/user/${user.id}?email=${user.email}`);
+        const data = await response.json();
+        
+        if (data.success) {
+          setOrders(data.orders || []);
+        } else {
+          throw new Error('Error al cargar pedidos');
+        }
+      } catch (error) {
+        console.error('Error fetching user orders:', error);
+        setOrdersError('Error al cargar tus pedidos');
+        // Mantener datos simulados como fallback
+        setOrders([
+          {
+            id: '1',
+            fecha: '2024-12-15',
+            total: 85.50,
+            estado: 'entregado',
+            productos: ['Entraña 2lb', 'Rib-eye 1.5lb', 'Arañita 1lb']
+          }
+        ]);
+      } finally {
+        setLoadingOrders(false);
+      }
+    };
+
+    fetchUserOrders();
+  }, [user, API_BASE]);
     {
       id: '3',
       fecha: '2024-12-05',
