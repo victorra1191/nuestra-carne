@@ -146,7 +146,7 @@ const AdminProducts = ({ API_BASE }) => {
     try {
       const newAvailability = !product.disponible;
       
-      const response = await fetch(`${API_BASE}/admin/products/${product.codigo}/toggle`, {
+      const response = await fetch(`${API_BASE}/api/admin/products/${product.codigo}/toggle`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
