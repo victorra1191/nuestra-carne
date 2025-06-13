@@ -71,8 +71,114 @@ class NuestraCarneTester:
         return self.run_test(
             "Health Check",
             "GET",
-            "health",
+            "orders/health",
             200
+        )
+
+    # 1. Product APIs Tests
+    def test_retail_products(self):
+        """Test retail products endpoint"""
+        success, response = self.run_test(
+            "Get Retail Products",
+            "GET",
+            "products/retail",
+            200
+        )
+        
+        if success:
+            products = response.get('products', [])
+            print(f"Found {len(products)} retail products")
+            if products:
+                print(f"First product: {products[0]['nombre']} - ${products[0]['precioLb']} per lb")
+        
+        return success, response
+
+    def test_wholesale_products(self):
+        """Test wholesale products endpoint"""
+        success, response = self.run_test(
+            "Get Wholesale Products",
+            "GET",
+            "products/wholesale",
+            200
+        )
+        
+        if success:
+            products = response.get('products', [])
+            print(f"Found {len(products)} wholesale products")
+            if products:
+                print(f"First product: {products[0]['nombre']} - ${products[0]['precioLb']} per lb")
+        
+        return success, response
+
+    # 2. Authentication APIs Tests
+    def test_user_registration(self):
+        """Test user registration"""
+        success, response = self.run_test(
+            "User Registration",
+            "POST",
+            "auth/register",
+            200,
+            data=self.test_user
+        )
+        
+        if success and response.get('success'):
+            print(f"User registered: {response.get('user', {}).get('nombre')}")
+            self.user_id = response.get('user', {}).get('id')
+        
+        return success, response
+
+    def test_wholesale_registration(self):
+        """Test wholesale user registration"""
+        success, response = self.run_test(
+            "Wholesale User Registration",
+            "POST",
+            "auth/register",
+            200,
+            data=self.wholesale_user
+        )
+        
+        if success and response.get('success'):
+            print(f"Wholesale user registered: {response.get('user', {}).get('nombre')}")
+            print(f"Status: {response.get('user', {}).get('estado')}")
+        
+        return success, response
+
+    def test_user_login(self):
+        """Test user login"""
+        login_data = {
+            "email": self.test_user["email"],
+            "password": self.test_user["password"]
+        }
+        
+        success, response = self.run_test(
+            "User Login",
+            "POST",
+            "auth/login",
+            200,
+            data=login_data
+        )
+        
+        if success and response.get('success') and 'token' in response:
+            self.auth_token = response['token']
+            self.auth_header = f"Bearer {self.auth_token}"
+            self.user_id = response.get('user', {}).get('id')
+            print(f"Login successful, token: {self.auth_token}")
+            return True, response
+        
+        return success, response
+
+    def test_user_profile(self):
+        """Test getting user profile"""
+        if not self.user_id:
+            print("❌ Cannot test profile - no user ID available")
+            return False, {}
+        
+        return self.run_test(
+            "Get User Profile",
+            "GET",
+            f"auth/profile/{self.user_id}",
+            200,
+            auth=True
         )
 
     def test_admin_login(self, username, password):
