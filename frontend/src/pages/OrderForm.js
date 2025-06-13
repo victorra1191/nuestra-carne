@@ -42,12 +42,14 @@ const OrderForm = () => {
     notas: ''
   });
 
-  // Cargar productos según el tipo de usuario
+  // Cargar productos según el tipo de usuario (autenticado o seleccionado en formulario)
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         setLoadingProducts(true);
-        const endpoint = isWholesaleUser() ? '/api/products/wholesale' : '/api/products/retail';
+        // Usar precios mayoristas si: 1) usuario mayorista logueado, o 2) selecciona "empresa" en formulario
+        const useWholesale = isWholesaleUser() || customerData.tipoCliente === 'empresa';
+        const endpoint = useWholesale ? '/api/products/wholesale' : '/api/products/retail';
         const response = await fetch(`${API_BASE}${endpoint}`);
         const data = await response.json();
         
@@ -67,7 +69,7 @@ const OrderForm = () => {
     };
 
     fetchProducts();
-  }, [isAuthenticated, user, API_BASE]);
+  }, [isAuthenticated, user, customerData.tipoCliente, API_BASE]);
 
   // Pre-llenar datos del usuario autenticado
   useEffect(() => {
