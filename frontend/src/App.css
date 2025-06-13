@@ -86,7 +86,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('https://images.pexels.com/photos/1482803/pexels-photo-1482803.jpeg') center/cover;
+  background: url('/images/cta-background.svg') center/cover;
   opacity: 0.3;
 }
 
