@@ -139,7 +139,7 @@ router.post('/submit', orderLimiter, async (req, res) => {
     res.json({
       success: true,
       message: 'Pedido procesado exitosamente',
-      orderId: emailResult.orderId,
+      orderId: orderId,
       emailsSent: true,
       data: {
         cliente: cliente.nombre,
