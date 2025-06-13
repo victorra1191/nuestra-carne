@@ -63,7 +63,7 @@ const AdminProducts = ({ API_BASE }) => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE}/admin/products/all`, {
+      const response = await fetch(`${API_BASE}/api/admin/products/all`, {
         headers: {
           'Authorization': `Basic ${btoa('admin:nuestra123')}`
         }
