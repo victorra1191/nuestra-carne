@@ -310,6 +310,7 @@ const OrderForm = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'user-id': user?.id || null
         },
         body: JSON.stringify(orderData)
       });
