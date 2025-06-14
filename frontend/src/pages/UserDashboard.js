@@ -58,17 +58,11 @@ const UserDashboard = () => {
         }
       } catch (error) {
         console.error('Error fetching user orders:', error);
-        setOrdersError('Error al cargar tus pedidos');
-        // Mantener datos simulados como fallback
-        setOrders([
-          {
-            id: '1',
-            fecha: '2024-12-15',
-            total: 85.50,
-            estado: 'entregado',
-            productos: ['Entraña 2lb', 'Rib-eye 1.5lb', 'Arañita 1lb']
-          }
-        ]);
+        console.error('API_BASE:', API_BASE);
+        console.error('User ID:', user?.id);
+        console.error('User email:', user?.email);
+        setOrdersError(`Error al cargar tus pedidos: ${error.message}`);
+        setOrders([]); // Sin fallback de datos simulados
       } finally {
         setLoadingOrders(false);
       }
