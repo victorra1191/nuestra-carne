@@ -42,19 +42,34 @@ const UserDashboard = () => {
   // Cargar pedidos del usuario
   useEffect(() => {
     const fetchUserOrders = async () => {
-      if (!user?.id) return;
+      console.log('🔍 Fetching user orders...');
+      console.log('User:', user);
+      console.log('API_BASE:', API_BASE);
+      
+      if (!user?.id) {
+        console.log('❌ No user ID, skipping fetch');
+        setLoadingOrders(false);
+        return;
+      }
       
       try {
         setLoadingOrders(true);
         setOrdersError(null);
         
-        const response = await fetch(`${API_BASE}/api/orders/user/${user.id}?email=${user.email}`);
+        const url = `${API_BASE}/api/orders/user/${user.id}?email=${user.email}`;
+        console.log('🌐 Fetching from URL:', url);
+        
+        const response = await fetch(url);
+        console.log('📥 Response status:', response.status);
+        
         const data = await response.json();
+        console.log('📦 Response data:', data);
         
         if (data.success) {
           setOrders(data.orders || []);
+          console.log('✅ Orders loaded:', data.orders?.length || 0);
         } else {
-          throw new Error('Error al cargar pedidos');
+          throw new Error(data.error || 'Error al cargar pedidos');
         }
       } catch (error) {
         console.error('Error fetching user orders:', error);
