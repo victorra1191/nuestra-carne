@@ -942,7 +942,7 @@ const LandingPage = () => {
             <div>
               <h3 className="text-2xl font-bold mb-4 text-primary-300">Nuestra Carne</h3>
               <p className="text-primary-300 mb-4">
-                Del productor a tu mesa. Carne Angus panameña premium con más de 20 años de experiencia.
+                Del productor a tu mesa. Carne 100% Nacional panameña premium con más de 20 años de experiencia.
               </p>
               <div className="flex gap-4">
                 <button
