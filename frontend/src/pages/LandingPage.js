@@ -317,7 +317,7 @@ const LandingPage = () => {
             </h1>
             
             <p className="text-xl md:text-2xl mb-8 text-gray-100 max-w-2xl mx-auto">
-              🥩 <strong>Carne Angus Panameña Premium</strong><br/>
+              🥩 <strong>Carne 100% Nacional Premium</strong><br/>
               Seleccionada con cuidado por expertos carniceros con +20 años de experiencia
             </p>
 
