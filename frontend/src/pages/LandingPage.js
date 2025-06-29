@@ -376,7 +376,7 @@ const LandingPage = () => {
               🥩 Conoce Tus <span className="text-gradient">CORTES</span>
             </h2>
             <p className="text-xl text-primary-700 max-w-3xl mx-auto">
-              20+ cortes premium de carne Angus panameña. Cada uno seleccionado y preparado 
+              20+ cortes premium de carne 100% Nacional panameña. Cada uno seleccionado y preparado 
               por nuestros expertos carniceros para garantizar la máxima calidad y sabor.
             </p>
           </motion.div>
