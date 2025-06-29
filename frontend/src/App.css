@@ -261,3 +261,29 @@
     background-attachment: scroll;
   }
 }
+
+/* Botón negro para contraste */
+.btn-black {
+  background: linear-gradient(45deg, #000000, #1a1a1a);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.3px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-black:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Texto en negro fuerte */
+.text-black-strong {
+  color: #000000;
+  font-weight: 700;
+}
