@@ -473,7 +473,7 @@ const BlogPost = () => {
               ¿Te gustó este artículo?
             </h3>
             <p className="text-white/95 mb-8 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-              Descubre nuestra selección premium de carnes Angus y haz realidad todas estas técnicas y recetas increíbles.
+              Descubre nuestra selección premium de carnes 100% Nacional y haz realidad todas estas técnicas y recetas increíbles.
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
