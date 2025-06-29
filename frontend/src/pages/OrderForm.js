@@ -527,7 +527,7 @@ const OrderForm = () => {
                   🛒 Selecciona Tus <span className="text-gradient">PRODUCTOS</span>
                 </h1>
                 <p className="text-xl text-primary-700">
-                  Elige de nuestra selección premium de carne Angus panameña
+                  Elige de nuestra selección premium de carne 100% Nacional panameña
                 </p>
               </div>
 
