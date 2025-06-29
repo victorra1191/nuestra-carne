@@ -42,7 +42,7 @@ const LandingPage = () => {
       // Actualizar Open Graph title con último artículo
       const ogTitle = document.querySelector('meta[property="og:title"]');
       if (ogTitle && blogPosts[0]) {
-        ogTitle.setAttribute('content', `Nuestra Carne - ${blogPosts[0].titulo} | Carne Premium Angus`);
+        ogTitle.setAttribute('content', `Nuestra Carne - ${blogPosts[0].titulo} | Carne 100% Nacional`);
       }
     }
   }, [blogPosts]);
