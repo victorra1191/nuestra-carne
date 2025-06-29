@@ -918,7 +918,7 @@ const LandingPage = () => {
               <div className="glass-effect rounded-lg p-6">
                 <CheckCircle className="text-green-300 mx-auto mb-3" size={32} />
                 <h4 className="font-bold mb-2">Calidad Garantizada</h4>
-                <p className="text-sm">100% satisfacción o devolvemos tu dinero</p>
+                <p className="text-sm">100% satisfacción asegurada</p>
               </div>
               <div className="glass-effect rounded-lg p-6">
                 <Truck className="text-green-300 mx-auto mb-3" size={32} />
