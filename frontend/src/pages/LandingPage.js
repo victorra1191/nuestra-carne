@@ -687,7 +687,7 @@ const LandingPage = () => {
               <MapPin className="text-primary-500 mx-auto mb-4" size={48} />
               <h3 className="text-2xl font-bold text-primary-900 mb-4">Recogida en Tienda</h3>
               <p className="text-primary-700 mb-4">
-                Visítanos en Aguadulce. ¡Descuentos especiales para recoger en tienda!
+                Visítanos en nuestra tienda. ¡Descuentos especiales para recoger en tienda!
               </p>
               <div className="text-primary-600 text-sm space-y-1 mb-6">
                 <p><MapPin size={16} className="inline mr-2" />Vía Interamericana</p>
