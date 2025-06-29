@@ -156,7 +156,7 @@ const LandingPage = () => {
   const handleWhatsAppOrder = (corte = null) => {
     const message = corte 
       ? `¡Hola! Quiero ordenar ${corte.nombre} (${corte.precio}). ¿Tienen disponible?`
-      : "¡Hola! Quiero hacer un pedido de carne Angus. ¿Cuáles son los cortes disponibles?";
+      : "¡Hola! Quiero hacer un pedido de carne 100% Nacional. ¿Cuáles son los cortes disponibles?";
     
     const whatsappUrl = `https://wa.me/50769172690?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
