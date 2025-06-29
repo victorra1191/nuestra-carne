@@ -14,11 +14,11 @@ module.exports = {
           200: '#fecaca',
           300: '#fca5a5',
           400: '#f87171',
-          500: '#c53030', // Rojo principal (similar a FOLDCOTONE 1082)
-          600: '#b91c1c',
-          700: '#991b1b',
-          800: '#7f1d1d',
-          900: '#651c1c',
+          500: '#E60033', // Rojo principal (FOLDCOTONE 1082)
+          600: '#cc002e',
+          700: '#b30029',
+          800: '#990024',
+          900: '#80001f',
         },
         wine: {
           50: '#fdf2f8',
