@@ -18,7 +18,7 @@
 
 .cut-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(197, 48, 48, 0.3);
+  box-shadow: 0 20px 40px rgba(230, 0, 51, 0.3);
 }
 
 .price-badge {
