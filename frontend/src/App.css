@@ -147,11 +147,14 @@
   color: white;
   padding: 12px 24px;
   border-radius: 8px;
-  font-weight: 600;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(197, 48, 48, 0.3);
+  box-shadow: 0 4px 15px rgba(230, 0, 51, 0.4);
 }
 
 .btn-primary:hover {
