@@ -963,9 +963,8 @@ const LandingPage = () => {
                 </p>
                 <p className="flex items-center gap-2">
                   <MapPin size={16} />
-                  Vía Interamericana, Aguadulce
+                  C. 139 Este, Panamá, Provincia de Panamá
                 </p>
-                <p className="text-sm">Frente a Estación Puma</p>
               </div>
             </div>
             
