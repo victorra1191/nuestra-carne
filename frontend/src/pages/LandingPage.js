@@ -35,7 +35,7 @@ const LandingPage = () => {
       const metaDescription = document.querySelector('meta[name="description"]');
       if (metaDescription) {
         const latestArticle = blogPosts[0];
-        const dynamicDescription = `🥩 Carne premium Angus en Panamá. Ribeye, New York Strip, Filet Mignon y más. Blog: "${latestArticle.titulo}". Entrega a domicilio. ¡Ordena ya!`;
+        const dynamicDescription = `🥩 Carne 100% Nacional en Panamá. Ribeye, New York Strip, Filet Mignon y más. Blog: "${latestArticle.titulo}". Entrega a domicilio. ¡Ordena ya!`;
         metaDescription.setAttribute('content', dynamicDescription);
       }
       
