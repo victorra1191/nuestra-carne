@@ -206,7 +206,7 @@ const LandingPage = () => {
             fecha: "12 Ene 2024"
           },
           {
-            titulo: "Recetas Tradicionales Panameñas con Carne Angus",
+            titulo: "Recetas Tradicionales Panameñas con Carne 100% Nacional",
             resumen: "Descubre cómo preparar tus platos favoritos con nuestros cortes...",
             imagen: "/images/blog/recetas-tradicionales.jpg",
             fecha: "10 Ene 2024"
