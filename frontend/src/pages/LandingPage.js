@@ -690,8 +690,8 @@ const LandingPage = () => {
                 Visítanos en nuestra tienda. ¡Descuentos especiales para recoger en tienda!
               </p>
               <div className="text-primary-600 text-sm space-y-1 mb-6">
-                <p><MapPin size={16} className="inline mr-2" />Vía Interamericana</p>
-                <p className="text-xs">Frente a Estación Puma, Aguadulce</p>
+                <p><MapPin size={16} className="inline mr-2" />C. 139 Este, Panamá</p>
+                <p className="text-xs">Provincia de Panamá</p>
               </div>
               <button
                 onClick={() => handleOrderNow()}
