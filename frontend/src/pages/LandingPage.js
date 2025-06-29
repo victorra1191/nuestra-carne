@@ -536,7 +536,7 @@ const LandingPage = () => {
               🔥 Tipos de <span className="text-gradient">COCINA</span>
             </h2>
             <p className="text-xl text-primary-700 max-w-3xl mx-auto">
-              Cada corte tiene su método perfecto. Te ayudamos a sacar el máximo sabor de tu carne Angus.
+              Cada corte tiene su método perfecto. Te ayudamos a sacar el máximo sabor de tu carne 100% Nacional.
             </p>
           </motion.div>
 
