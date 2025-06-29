@@ -345,7 +345,7 @@ const LandingPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
               <div className="glass-effect rounded-lg p-4">
                 <Award className="text-accent-300 mx-auto mb-2" size={32} />
-                <h3 className="font-semibold">100% Angus</h3>
+                <h3 className="font-semibold">100% Nacional</h3>
                 <p className="text-sm">Carne premium panameña</p>
               </div>
               <div className="glass-effect rounded-lg p-4">
