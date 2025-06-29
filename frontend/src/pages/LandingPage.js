@@ -923,7 +923,7 @@ const LandingPage = () => {
               <div className="glass-effect rounded-lg p-6">
                 <Truck className="text-green-300 mx-auto mb-3" size={32} />
                 <h4 className="font-bold mb-2">Entrega Rápida</h4>
-                <p className="text-sm">En el mismo día en Ciudad de Panamá</p>
+                <p className="text-sm">Su pedido en menos de 48 horas. Entrega gratis dentro del área metropolitana para pedidos de mínimo USD $20</p>
               </div>
               <div className="glass-effect rounded-lg p-6">
                 <Star className="text-green-300 mx-auto mb-3" size={32} />
