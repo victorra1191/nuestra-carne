@@ -1011,7 +1011,7 @@ const LandingPage = () => {
           <div className="border-t border-primary-700 mt-12 pt-8 text-center">
             <p className="text-primary-400">
               © 2024 Nuestra Carne. Todos los derechos reservados. | 
-              <strong className="text-primary-300"> ¡La mejor carne Angus de Panamá!</strong>
+              <strong className="text-primary-300"> ¡La mejor carne 100% Nacional de Panamá!</strong>
             </p>
           </div>
         </div>
