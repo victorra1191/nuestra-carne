@@ -1003,7 +1003,7 @@ const LandingPage = () => {
                 <li>• Recogida en tienda</li>
                 <li>• Cortes personalizados</li>
                 <li>• Asesoría de cocina</li>
-                <li>• Carne premium Angus</li>
+                <li>• Carne premium 100% Nacional</li>
               </ul>
             </div>
           </div>
