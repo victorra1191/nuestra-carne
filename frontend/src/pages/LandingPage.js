@@ -356,7 +356,7 @@ const LandingPage = () => {
               <div className="glass-effect rounded-lg p-4">
                 <Truck className="text-accent-300 mx-auto mb-2" size={32} />
                 <h3 className="font-semibold">Delivery Gratis</h3>
-                <p className="text-sm">En toda Ciudad de Panamá</p>
+                <p className="text-sm">En toda Ciudad de Panamá (pedidos +$20)</p>
               </div>
             </div>
           </motion.div>
