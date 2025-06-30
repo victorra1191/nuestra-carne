@@ -265,11 +265,18 @@ const BlogList = () => {
                   <div className="flex items-center text-sm text-primary-500 mb-3">
                     <Calendar className="w-4 h-4 mr-2" />
                     <span>
-                      {new Date(article.fecha || article.published_at || Date.now()).toLocaleDateString('es-ES', {
-                        day: 'numeric',
-                        month: 'long',
-                        year: 'numeric'
-                      })}
+                      {(() => {
+                        try {
+                          const date = new Date(article.fecha || article.published_at);
+                          return date.toLocaleDateString('es-ES', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                          });
+                        } catch (error) {
+                          return 'Fecha no disponible';
+                        }
+                      })()}
                     </span>
                     <Clock className="w-4 h-4 ml-4 mr-2" />
                     <span>5 min lectura</span>
