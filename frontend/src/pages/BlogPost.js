@@ -247,11 +247,18 @@ const BlogPost = () => {
                   <div className="flex items-center">
                     <Calendar className="w-5 h-5 mr-2" />
                     <span>
-                      {new Date(article.fecha || article.published_at || Date.now()).toLocaleDateString('es-ES', {
-                        day: 'numeric',
-                        month: 'long',
-                        year: 'numeric'
-                      })}
+                      {(() => {
+                        try {
+                          const date = new Date(article.fecha || article.published_at);
+                          return date.toLocaleDateString('es-ES', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                          });
+                        } catch (error) {
+                          return 'Fecha no disponible';
+                        }
+                      })()}
                     </span>
                   </div>
                   
