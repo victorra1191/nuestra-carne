@@ -664,7 +664,7 @@ const LandingPage = () => {
               <Truck className="text-primary-500 mx-auto mb-4" size={48} />
               <h3 className="text-2xl font-bold text-primary-900 mb-4">Delivery GRATIS</h3>
               <p className="text-primary-700 mb-4">
-                Entrega gratuita en toda Ciudad de Panamá. Pedidos mínimos de $30.
+                Entrega gratuita en toda Ciudad de Panamá. Pedidos mínimos de $20.
               </p>
               <div className="text-primary-600 text-sm space-y-1 mb-6">
                 <p><Clock size={16} className="inline mr-2" />Lun-Vie: 8:00 AM - 5:00 PM</p>
