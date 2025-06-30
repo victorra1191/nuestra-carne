@@ -998,7 +998,7 @@ const LandingPage = () => {
             <div>
               <h4 className="text-lg font-semibold mb-4 text-primary-300">Servicios</h4>
               <ul className="space-y-2 text-primary-300">
-                <li>• Delivery gratis en Ciudad de Panamá</li>
+                <li>• Delivery gratis en Ciudad de Panamá (pedidos +$20)</li>
                 <li>• Recogida en tienda</li>
                 <li>• Cortes personalizados</li>
                 <li>• Asesoría de cocina</li>
