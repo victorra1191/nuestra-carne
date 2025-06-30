@@ -159,7 +159,7 @@ const BlogList = () => {
                   🥩 <span className="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">Blog</span> Nuestra Carne
                 </h1>
                 <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
-                  Descubre los secretos de la carne premium, técnicas de parrilla profesionales y recetas que elevarán tus platos al siguiente nivel
+                  Descubre los secretos de la carne 100% Nacional, técnicas de parrilla profesionales y recetas que elevarán tus platos al siguiente nivel
                 </p>
                 
                 <div className="flex items-center justify-center space-x-6 text-white/80">
