@@ -28,17 +28,29 @@ const BlogList = () => {
   const fetchArticles = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE}/admin/articles`);
-      const data = await response.json();
+      setError(null); // Reset error state
       
-      if (data.success) {
-        setArticles(data.articles || []);
+      console.log('Fetching articles from:', `${API_BASE}/admin/articles`);
+      const response = await fetch(`${API_BASE}/admin/articles`);
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const data = await response.json();
+      console.log('API Response:', data);
+      
+      if (data.success && data.articles) {
+        setArticles(data.articles);
+        console.log('Articles loaded successfully:', data.articles.length);
       } else {
-        throw new Error('Error al cargar artículos');
+        throw new Error('Respuesta inválida del servidor');
       }
     } catch (error) {
       console.error('Error fetching articles:', error);
-      setError('Error al cargar los artículos del blog');
+      setError(`Error al cargar los artículos del blog: ${error.message}`);
+      // No establecer artículos de respaldo aquí
+      setArticles([]);
     } finally {
       setLoading(false);
     }
