@@ -10,8 +10,17 @@ const BlogList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   
-  // URL del backend desde variable de entorno
-  const API_BASE = process.env.REACT_APP_BACKEND_URL || 'https://nuestracarnepa.com/api';
+  // URL del backend desde variable de entorno con fallbacks
+  const getApiBase = () => {
+    // En producción, usar la URL actual del sitio + /api
+    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+      return `${window.location.protocol}//${window.location.hostname}/api`;
+    }
+    // En desarrollo local
+    return process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001/api';
+  };
+  
+  const API_BASE = getApiBase();
 
   // Imágenes de fondo locales y confiables
   const backgroundImages = [
