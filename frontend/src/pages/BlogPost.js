@@ -15,15 +15,20 @@ const BlogPost = () => {
   
   // URL del backend - Fix específico para producción
   const getApiBase = () => {
-    // Si estamos en el preview de emergent, usar la URL específica
-    if (typeof window !== 'undefined' && window.location.hostname.includes('emergentagent.com')) {
-      return 'https://meat-delivery-fix-preview.emergentagent.com/api';
+    // Si estamos en el preview de emergent, usar la URL dinámica actual
+    if (typeof window !== 'undefined' && window.location.hostname.includes('.preview.emergentagent.com')) {
+      // Usar el mismo hostname pero reemplazar frontend con backend
+      const backendUrl = `${window.location.protocol}//${window.location.hostname}/api`;
+      console.log('🎯 [BlogPost] Using emergent preview URL:', backendUrl);
+      return backendUrl;
     }
     // Si estamos en el dominio final
     if (typeof window !== 'undefined' && window.location.hostname.includes('nuestracarnepa.com')) {
+      console.log('🎯 [BlogPost] Using nuestracarnepa URL');
       return 'https://nuestracarnepa.com/api';
     }
     // En desarrollo local
+    console.log('🎯 [BlogPost] Using local development URL');
     return process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001/api';
   };
   
