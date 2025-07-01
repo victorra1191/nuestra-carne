@@ -82,6 +82,7 @@ const BlogList = () => {
         stack: error.stack
       });
       setError(`Error al cargar los artículos del blog: ${error.message}`);
+      console.log('❌ [BlogList] Setting articles to empty array');
       setArticles([]);
     } finally {
       setLoading(false);
