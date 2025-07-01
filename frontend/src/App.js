@@ -6,6 +6,7 @@ import LandingPage from './pages/LandingPage';
 import OrderForm from './pages/OrderForm';
 import Admin from './pages/Admin';
 import BlogList from './pages/BlogList';
+import BlogPost from './pages/BlogPost';
 import BlogTest from './pages/BlogTest';
 import Auth from './pages/Auth';
 import UserDashboard from './pages/UserDashboard';
