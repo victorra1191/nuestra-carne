@@ -5,7 +5,20 @@ const BlogTest = () => {
   const [error, setError] = useState(null);
   const [url, setUrl] = useState('');
 
-  const API_BASE = process.env.REACT_APP_BACKEND_URL || 'https://nuestracarnepa.com/api';
+  const getApiBase = () => {
+    // Si estamos en el preview de emergent, usar la URL específica
+    if (typeof window !== 'undefined' && window.location.hostname.includes('emergentagent.com')) {
+      return 'https://meat-delivery-fix-preview.emergentagent.com/api';
+    }
+    // Si estamos en el dominio final
+    if (typeof window !== 'undefined' && window.location.hostname.includes('nuestracarnepa.com')) {
+      return 'https://nuestracarnepa.com/api';
+    }
+    // En desarrollo local
+    return process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001/api';
+  };
+
+  const API_BASE = getApiBase();
 
   useEffect(() => {
     setUrl(`${API_BASE}/admin/articles`);
