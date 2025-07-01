@@ -41,6 +41,7 @@ const BlogList = () => {
   ];
 
   useEffect(() => {
+    console.log('🚀 [BlogList] Component mounted, initial articles:', articles);
     fetchArticles();
   }, []);
 
