@@ -12,15 +12,21 @@ const BlogList = () => {
   
   // URL del backend - Fix específico para producción
   const getApiBase = () => {
+    console.log('🔍 [BlogList] Window hostname:', window.location?.hostname);
+    console.log('🔍 [BlogList] Full URL:', window.location?.href);
+    
     // Si estamos en el preview de emergent, usar la URL específica
     if (typeof window !== 'undefined' && window.location.hostname.includes('emergentagent.com')) {
+      console.log('🎯 [BlogList] Using emergentagent URL');
       return 'https://meat-delivery-fix-preview.emergentagent.com/api';
     }
     // Si estamos en el dominio final
     if (typeof window !== 'undefined' && window.location.hostname.includes('nuestracarnepa.com')) {
+      console.log('🎯 [BlogList] Using nuestracarnepa URL');
       return 'https://nuestracarnepa.com/api';
     }
     // En desarrollo local
+    console.log('🎯 [BlogList] Using local development URL');
     return process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001/api';
   };
   
