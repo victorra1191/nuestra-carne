@@ -68,6 +68,7 @@ const BlogList = () => {
       console.log('✅ [BlogList] Articles count:', data.articles?.length || 0);
       
       if (data.success && data.articles) {
+        console.log('✅ [BlogList] Setting articles:', data.articles);
         setArticles(data.articles);
         console.log('✅ [BlogList] Articles loaded successfully:', data.articles.length);
       } else {
