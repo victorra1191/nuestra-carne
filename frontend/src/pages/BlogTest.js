@@ -6,9 +6,12 @@ const BlogTest = () => {
   const [url, setUrl] = useState('');
 
   const getApiBase = () => {
-    // Si estamos en el preview de emergent, usar la URL específica
-    if (typeof window !== 'undefined' && window.location.hostname.includes('emergentagent.com')) {
-      return 'https://meat-delivery-fix-preview.emergentagent.com/api';
+    // Si estamos en el preview de emergent, usar la URL dinámica actual
+    if (typeof window !== 'undefined' && window.location.hostname.includes('.preview.emergentagent.com')) {
+      // Usar el mismo hostname pero reemplazar frontend con backend
+      const backendUrl = `${window.location.protocol}//${window.location.hostname}/api`;
+      console.log('🎯 [BlogTest] Using emergent preview URL:', backendUrl);
+      return backendUrl;
     }
     // Si estamos en el dominio final
     if (typeof window !== 'undefined' && window.location.hostname.includes('nuestracarnepa.com')) {
