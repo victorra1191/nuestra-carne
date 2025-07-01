@@ -15,10 +15,12 @@ const BlogList = () => {
     console.log('🔍 [BlogList] Window hostname:', window.location?.hostname);
     console.log('🔍 [BlogList] Full URL:', window.location?.href);
     
-    // Si estamos en el preview de emergent, usar la URL específica
-    if (typeof window !== 'undefined' && window.location.hostname.includes('emergentagent.com')) {
-      console.log('🎯 [BlogList] Using emergentagent URL');
-      return 'https://meat-delivery-fix-preview.emergentagent.com/api';
+    // Si estamos en el preview de emergent, usar la URL dinámica actual
+    if (typeof window !== 'undefined' && window.location.hostname.includes('.preview.emergentagent.com')) {
+      // Usar el mismo hostname pero reemplazar frontend con backend
+      const backendUrl = `${window.location.protocol}//${window.location.hostname}/api`;
+      console.log('🎯 [BlogList] Using emergent preview URL:', backendUrl);
+      return backendUrl;
     }
     // Si estamos en el dominio final
     if (typeof window !== 'undefined' && window.location.hostname.includes('nuestracarnepa.com')) {
