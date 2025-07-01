@@ -39,26 +39,37 @@ const BlogList = () => {
       setLoading(true);
       setError(null); // Reset error state
       
-      console.log('Fetching articles from:', `${API_BASE}/admin/articles`);
-      const response = await fetch(`${API_BASE}/admin/articles`);
+      const apiUrl = `${API_BASE}/admin/articles`;
+      console.log('🔍 [BlogList] Fetching articles from:', apiUrl);
+      console.log('🔍 [BlogList] API_BASE:', API_BASE);
+      console.log('🔍 [BlogList] window.location:', window.location);
+      
+      const response = await fetch(apiUrl);
+      console.log('📡 [BlogList] Response status:', response.status);
+      console.log('📡 [BlogList] Response OK:', response.ok);
       
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
       }
       
       const data = await response.json();
-      console.log('API Response:', data);
+      console.log('✅ [BlogList] API Response success:', data.success);
+      console.log('✅ [BlogList] Articles count:', data.articles?.length || 0);
       
       if (data.success && data.articles) {
         setArticles(data.articles);
-        console.log('Articles loaded successfully:', data.articles.length);
+        console.log('✅ [BlogList] Articles loaded successfully:', data.articles.length);
       } else {
         throw new Error('Respuesta inválida del servidor');
       }
     } catch (error) {
-      console.error('Error fetching articles:', error);
+      console.error('❌ [BlogList] Error fetching articles:', error);
+      console.error('❌ [BlogList] Error details:', {
+        message: error.message,
+        name: error.name,
+        stack: error.stack
+      });
       setError(`Error al cargar los artículos del blog: ${error.message}`);
-      // No establecer artículos de respaldo aquí
       setArticles([]);
     } finally {
       setLoading(false);
