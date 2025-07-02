@@ -2,10 +2,22 @@ import requests
 import sys
 import json
 from datetime import datetime
+import os
 
 class NuestraCarneTester:
-    def __init__(self, base_url="https://nuestracarnepa.com/api"):
-        self.base_url = base_url
+    def __init__(self):
+        # Get the backend URL from environment variable or use a default
+        with open('/app/frontend/.env', 'r') as f:
+            env_content = f.read()
+            for line in env_content.split('\n'):
+                if line.startswith('REACT_APP_BACKEND_URL='):
+                    self.base_url = line.split('=')[1].strip() + '/api'
+                    break
+            else:
+                self.base_url = "https://3dcfa13f-a6be-427a-9c5c-fb83a0d4c3e5.preview.emergentagent.com/api"
+        
+        print(f"Using backend URL: {self.base_url}")
+        
         self.auth_token = None
         self.tests_run = 0
         self.tests_passed = 0
