@@ -54,11 +54,11 @@ const LandingPage = () => {
   // Datos de cortes panameños - SOLO 11 SELECCIONADOS PARA EL LANDING
   const cortes = [
     {
-      nombre: "Arrachera",
-      descripcion: "Corte premium para parrilla, lleno de sabor",
-      precio: "Consultar precio", 
-      cocina: ["Parrilla", "Marinado", "Plancha"],
-      imagen: "/images/productos/arrachera.jpg"
+      nombre: "Pulpa Negra",
+      descripcion: "Corte premium para parrilla y plancha, muy jugoso",
+      precio: "$4.01/lb", 
+      cocina: ["Parrilla", "Plancha", "Bistec"],
+      imagen: "/images/productos/pulpa-negra.jpg"
     },
     {
       nombre: "Bistec Picado",
