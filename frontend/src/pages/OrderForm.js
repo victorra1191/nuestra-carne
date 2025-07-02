@@ -532,45 +532,9 @@ const OrderForm = () => {
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* Lista de Productos */}
-                <div className="lg:col-span-2">
-                  {categorias.map(categoria => (
-                    <div key={categoria} className="mb-8">
-                      <h3 className="text-2xl font-bold text-primary-900 mb-4 border-b-2 border-primary-500 pb-2">
-                        {categoria}
-                      </h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {productosDisponibles
-                          .filter(producto => producto.categoria === categoria)
-                          .map(producto => (
-                            <div key={producto.codigo} className="card-rustic">
-                              <div className="flex justify-between items-start mb-3">
-                                <div>
-                                  <h4 className="font-semibold text-primary-900">{producto.nombre}</h4>
-                                  <p className="text-sm text-primary-600">Código: {producto.codigo}</p>
-                                </div>
-                                <div className="text-right">
-                                  <p className="font-bold text-primary-500">${producto.precioLb.toFixed(2)}/lb</p>
-                                  <p className="text-sm text-primary-600">${producto.precioKg.toFixed(2)}/kg</p>
-                                </div>
-                              </div>
-                              <button
-                                onClick={() => addToCart(producto)}
-                                className="btn-primary w-full flex items-center justify-center gap-2"
-                              >
-                                <Plus size={16} />
-                                Agregar al Pedido
-                              </button>
-                            </div>
-                          ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Carrito */}
-                <div className="lg:col-span-1">
-                  <div className="card-rustic sticky top-6">
+                {/* Carrito - Arriba en móvil, derecha en desktop */}
+                <div className="lg:col-span-1 lg:order-2 order-1">
+                  <div className="card-rustic lg:sticky lg:top-6">
                     <h3 className="text-xl font-bold text-primary-900 mb-4 flex items-center gap-2">
                       <ShoppingCart size={20} />
                       Tu Pedido
@@ -647,6 +611,13 @@ const OrderForm = () => {
                     )}
                   </div>
                 </div>
+
+                {/* Lista de Productos con Acordeón en Móvil */}
+                <ProductosAccordion 
+                  categorias={categorias}
+                  productosDisponibles={productosDisponibles}
+                  addToCart={addToCart}
+                />
               </div>
             </motion.div>
           )}
