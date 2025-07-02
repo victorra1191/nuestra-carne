@@ -991,7 +991,7 @@ const LandingPage = () => {
                 <p><strong>Delivery Ciudad de Panamá:</strong></p>
                 <p>Lun-Vie: 8:00 AM - 5:00 PM</p>
                 <p>Sáb: 9:00 AM - 12:00 PM</p>
-                <p className="text-primary-300 font-semibold">¡Delivery GRATIS! (pedidos +$20)</p>
+                <p className="text-primary-300 font-semibold">¡Delivery GRATIS! (pedidos +$50)</p>
               </div>
             </div>
             
