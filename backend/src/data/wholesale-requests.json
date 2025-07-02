@@ -1,0 +1,12 @@
+[
+  {
+    "id": "5e975e9f-4f00-4b22-bb48-99b8d0742d50",
+    "userId": "28933356-e407-4a1b-8170-061d3721b9d2",
+    "nombre": "Test Wholesale",
+    "email": "test.wholesale.20250702143228@example.com",
+    "telefono": "+507 6987-6543",
+    "fechaSolicitud": "2025-07-02T14:32:30.340Z",
+    "estado": "pendiente",
+    "comentarios": ""
+  }
+]

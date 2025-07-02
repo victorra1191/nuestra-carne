@@ -1,1 +1,36 @@
-[]
+[
+  {
+    "id": "0fd6e7cf-a142-4ba7-8491-fd4e6f792d7c",
+    "cliente": {
+      "tipoCliente": "individual",
+      "nombre": "Test Customer",
+      "telefono": "+507 6000-0000",
+      "email": "test@example.com",
+      "direccion": "Test Address, Panama City",
+      "fechaEntrega": "2025-02-20",
+      "horaEntrega": "14:00",
+      "notas": "This is a test order"
+    },
+    "productos": [
+      {
+        "codigo": "20047",
+        "nombre": "Arañita",
+        "cantidad": 2,
+        "unidad": "libras",
+        "subtotal": 18.32
+      },
+      {
+        "codigo": "20002",
+        "nombre": "Filete Limpio",
+        "cantidad": 1,
+        "unidad": "libras",
+        "subtotal": 7.03
+      }
+    ],
+    "total": 25.35,
+    "fecha": "2025-07-02T14:32:29.157Z",
+    "estado": "pendiente",
+    "fechaCreacion": "2025-07-02T14:32:29.157Z",
+    "usuarioId": null
+  }
+]
