@@ -695,9 +695,9 @@ const LandingPage = () => {
               </div>
               <button
                 onClick={() => handleOrderNow()}
-                className="btn-outline w-full"
+                className="btn-primary w-full"
               >
-                Hacer Pedido Recogida
+                Hacer Pedido de Recogida
               </button>
             </motion.div>
 
