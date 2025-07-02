@@ -308,7 +308,7 @@ const LandingPage = () => {
           >
             <div className="delivery-badge mb-6">
               <Truck size={20} />
-              <span>DELIVERY GRATIS en Ciudad de Panamá (pedidos +$20)</span>
+              <span>DELIVERY GRATIS en Ciudad de Panamá (pedidos +$50)</span>
             </div>
             
             <h1 className="text-6xl md:text-8xl font-bold mb-6 leading-tight">
