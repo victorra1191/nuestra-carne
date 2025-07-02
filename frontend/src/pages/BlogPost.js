@@ -417,7 +417,7 @@ const BlogPost = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="bg-amber-50 rounded-3xl shadow-2xl p-8 md:p-12 mb-12 border border-amber-200"
+          className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 md:p-12 mb-12 border border-gray-200"
         >
           <div 
             className="prose prose-lg prose-gray max-w-none"
