@@ -148,35 +148,5 @@
       "metaDescription": "Aprende 3 recetas fáciles que parecen de restaurante: entraña con chimichurri, lagarto guisado y ribeye al horno. Consejos de chef para casa.",
       "keywords": "recetas faciles carne, entraña chimichurri, lagarto guisado, ribeye horno, recetas panama carne, platos impresionantes casa"
     }
-  },
-  {
-    "id": "d3a2b9da-e17d-4328-9caf-88b33604e678",
-    "titulo": "Test Article 2025-06-03 14:00:34",
-    "resumen": "This is a test article created by automated testing",
-    "contenido": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.",
-    "imagen": "/images/blog/test-article.jpg",
-    "fecha": "2025-06-03T14:00:34.106Z",
-    "autor": "Nuestra Carne",
-    "activo": true
-  },
-  {
-    "id": "8dea94b2-5105-4fac-91ce-d283f4b1adca",
-    "titulo": "Test Article 2025-06-03 14:01:12",
-    "resumen": "This is a test article created by automated testing",
-    "contenido": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.",
-    "imagen": "/images/blog/test-article.jpg",
-    "fecha": "2025-06-03T14:01:12.963Z",
-    "autor": "Nuestra Carne",
-    "activo": true
-  },
-  {
-    "id": "74a79a33-da96-4cce-94f9-b309473104a2",
-    "titulo": "Test Article 2025-07-02 14:32:29",
-    "resumen": "This is a test article created by automated testing",
-    "contenido": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.",
-    "imagen": "/images/blog/test-article.jpg",
-    "fecha": "2025-07-02T14:32:29.136Z",
-    "autor": "Nuestra Carne",
-    "activo": true
   }
 ]
