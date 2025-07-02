@@ -24,6 +24,7 @@ function App() {
             <Route path="/haz-tu-pedido" element={<OrderForm />} />
             <Route path="/blog" element={<BlogList />} />
             <Route path="/blog-test" element={<BlogTest />} />
+          <Route path="/debug-api" element={<DebugApi />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/admin" element={<Admin />} />
             <Route path="/admin/*" element={<Admin />} />
