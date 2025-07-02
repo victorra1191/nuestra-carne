@@ -721,7 +721,7 @@ const LandingPage = () => {
                 onClick={() => handleOrderNow()}
                 className="btn-secondary w-full"
               >
-                Solicitar Corte Personalizado
+                Solicitar Cortes Selectos
               </button>
             </motion.div>
           </div>
