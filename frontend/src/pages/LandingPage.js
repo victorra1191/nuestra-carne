@@ -708,14 +708,14 @@ const LandingPage = () => {
               className="card-rustic text-center"
             >
               <ChefHat className="text-primary-500 mx-auto mb-4" size={48} />
-              <h3 className="text-2xl font-bold text-primary-900 mb-4">Cortes Personalizados</h3>
+              <h3 className="text-2xl font-bold text-primary-900 mb-4">Cortes Selectos</h3>
               <p className="text-primary-700 mb-4">
-                Nuestros expertos preparan tu carne exactamente como la necesitas.
+                Nuestros expertos saben lo que te gusta y como te gusta.
               </p>
               <div className="text-primary-600 text-sm space-y-1 mb-6">
-                <p>• Grosor personalizado</p>
-                <p>• Porciones específicas</p>
-                <p>• Marinados especiales</p>
+                <p>• Grosor correcto</p>
+                <p>• Proporciones correctas</p>
+                <p>• Sabor correcto</p>
               </div>
               <button
                 onClick={() => handleOrderNow()}
