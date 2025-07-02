@@ -182,3 +182,5 @@ agent_communication:
     message: "Starting comprehensive backend API testing for Nuestra Carne meat delivery system."
   - agent: "testing"
     message: "Completed initial testing. 7 out of 10 API endpoints are working correctly. Issues found with order submission and wholesale management APIs."
+  - agent: "testing"
+    message: "Verified that the /api/admin/articles endpoint is working correctly. Successfully retrieved 12 public blog articles and created a new test article. The API returns properly structured JSON data with all expected fields. Order submission still fails with a 500 error, and wholesale user login fails with a 403 error due to pending approval status."
