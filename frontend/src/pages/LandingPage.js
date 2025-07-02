@@ -890,7 +890,7 @@ const LandingPage = () => {
             </h2>
             <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
               La mejor carne 100% Nacional panameña te está esperando.<br/>
-              <strong>Delivery GRATIS en Ciudad de Panamá (pedidos +$20)</strong>
+              <strong>Delivery GRATIS en Ciudad de Panamá (pedidos +$50)</strong>
             </p>
             
             <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
