@@ -15,21 +15,16 @@ const BlogList = () => {
     console.log('🔍 [BlogList] Window hostname:', window.location?.hostname);
     console.log('🔍 [BlogList] Full URL:', window.location?.href);
     
-    // Si estamos en el preview de emergent, usar la URL dinámica actual
-    if (typeof window !== 'undefined' && window.location.hostname.includes('.preview.emergentagent.com')) {
-      // Usar el mismo hostname pero reemplazar frontend con backend
-      const backendUrl = `${window.location.protocol}//${window.location.hostname}/api`;
-      console.log('🎯 [BlogList] Using emergent preview URL:', backendUrl);
+    // Usar la variable de entorno si está disponible
+    if (process.env.REACT_APP_BACKEND_URL) {
+      const backendUrl = `${process.env.REACT_APP_BACKEND_URL}/api`;
+      console.log('🎯 [BlogList] Using environment variable URL:', backendUrl);
       return backendUrl;
     }
-    // Si estamos en el dominio final
-    if (typeof window !== 'undefined' && window.location.hostname.includes('nuestracarnepa.com')) {
-      console.log('🎯 [BlogList] Using nuestracarnepa URL');
-      return 'https://nuestracarnepa.com/api';
-    }
-    // En desarrollo local
+    
+    // Fallback para desarrollo local
     console.log('🎯 [BlogList] Using local development URL');
-    return (process.env.REACT_APP_BACKEND_URL ? `${process.env.REACT_APP_BACKEND_URL}/api` : 'http://localhost:8001/api');
+    return 'http://localhost:8001/api';
   };
   
   const API_BASE = getApiBase();
