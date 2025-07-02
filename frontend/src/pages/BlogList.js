@@ -10,24 +10,8 @@ const BlogList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   
-  // URL del backend - Fix específico para producción
-  const getApiBase = () => {
-    console.log('🔍 [BlogList] Window hostname:', window.location?.hostname);
-    console.log('🔍 [BlogList] Full URL:', window.location?.href);
-    
-    // Usar la variable de entorno si está disponible
-    if (process.env.REACT_APP_BACKEND_URL) {
-      const backendUrl = `${process.env.REACT_APP_BACKEND_URL}/api`;
-      console.log('🎯 [BlogList] Using environment variable URL:', backendUrl);
-      return backendUrl;
-    }
-    
-    // Fallback para desarrollo local
-    console.log('🎯 [BlogList] Using local development URL');
-    return 'http://localhost:8001/api';
-  };
-  
-  const API_BASE = getApiBase();
+  // URL del backend - Solución directa y robusta
+  const API_BASE = 'https://3dcfa13f-a6be-427a-9c5c-fb83a0d4c3e5.preview.emergentagent.com/api';
 
   // Imágenes de fondo locales y confiables
   const backgroundImages = [
