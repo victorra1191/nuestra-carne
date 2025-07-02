@@ -107,6 +107,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "Successfully logged in as admin, retrieved all articles, and created a new article"
+      - working: true
+        agent: "testing"
+        comment: "Verified that the /api/admin/articles endpoint is working correctly. Successfully retrieved 12 public blog articles and created a new test article. The API returns properly structured JSON data with all expected fields."
 
   - task: "Order API - Order Submission"
     implemented: true
