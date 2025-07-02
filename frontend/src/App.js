@@ -8,6 +8,7 @@ import Admin from './pages/Admin';
 import BlogList from './pages/BlogList';
 import BlogPost from './pages/BlogPost';
 import BlogTest from './pages/BlogTest';
+import DebugApi from './pages/DebugApi';
 import Auth from './pages/Auth';
 import UserDashboard from './pages/UserDashboard';
 import './App.css';
