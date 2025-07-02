@@ -667,8 +667,8 @@ const LandingPage = () => {
                 Entrega gratuita en toda Ciudad de Panamá. Pedidos mínimos de $50.
               </p>
               <div className="text-primary-600 text-sm space-y-1 mb-6">
-                <p><Clock size={16} className="inline mr-2" />Lun-Vie: 8:00 AM - 5:00 PM</p>
-                <p><Clock size={16} className="inline mr-2" />Sáb: 9:00 AM - 12:00 PM</p>
+                <p><Clock size={16} className="inline mr-2" />Lun-Vie: 9:00 AM - 4:00 PM</p>
+                <p><Clock size={16} className="inline mr-2" />Sáb: 8:00 AM - 12:00 PM</p>
               </div>
               <button
                 onClick={() => handleOrderNow()}
