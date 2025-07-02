@@ -288,3 +288,66 @@
   color: #000000;
   font-weight: 700;
 }
+
+/* Estilos específicos para el contenido del blog */
+.content-area {
+  line-height: 1.8;
+  font-size: 1.1rem;
+  color: #374151;
+}
+
+.content-area h3 {
+  color: #8B2635;
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.content-area p {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.content-area strong {
+  color: #E60033;
+  font-weight: 700;
+}
+
+.content-area ul {
+  margin: 1.5rem 0;
+  padding-left: 1rem;
+}
+
+.content-area li {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+  color: #4B5563;
+}
+
+.content-area li strong {
+  color: #E60033;
+}
+
+/* Mejorar separación en el BlogPost */
+.blog-post-container {
+  padding: 4rem 1rem;
+}
+
+@media (max-width: 768px) {
+  .content-area {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  
+  .content-area h3 {
+    font-size: 1.125rem;
+    margin-top: 1.5rem;
+  }
+  
+  .blog-post-container {
+    padding: 2rem 1rem;
+  }
+}
