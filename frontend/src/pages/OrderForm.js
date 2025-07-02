@@ -590,9 +590,9 @@ const OrderForm = () => {
             
             <div className="flex items-center gap-8">
               {!isAuthenticated && (
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 flex items-center gap-2">
-                  <AlertCircle size={16} className="text-blue-600" />
-                  <span className="text-blue-800 text-sm">
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-center gap-3 max-w-md">
+                  <AlertCircle size={18} className="text-blue-600 flex-shrink-0" />
+                  <span className="text-blue-800 text-sm leading-relaxed">
                     <button 
                       onClick={() => navigate('/auth')} 
                       className="font-medium underline hover:no-underline"
