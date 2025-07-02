@@ -423,6 +423,127 @@ const OrderForm = () => {
     return message;
   };
 
+  // Componente de Acordeón para Productos (Móvil)
+  const ProductosAccordion = ({ categorias, productosDisponibles, addToCart }) => {
+    const [openCategories, setOpenCategories] = useState(new Set());
+
+    const toggleCategory = (categoria) => {
+      const newOpenCategories = new Set(openCategories);
+      if (newOpenCategories.has(categoria)) {
+        newOpenCategories.delete(categoria);
+      } else {
+        newOpenCategories.add(categoria);
+      }
+      setOpenCategories(newOpenCategories);
+    };
+
+    return (
+      <div className="lg:col-span-2 lg:order-1 order-2">
+        {/* Vista Desktop - Layout Original */}
+        <div className="hidden lg:block">
+          {categorias.map(categoria => (
+            <div key={categoria} className="mb-8">
+              <h3 className="text-2xl font-bold text-primary-900 mb-4 border-b-2 border-primary-500 pb-2">
+                {categoria}
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {productosDisponibles
+                  .filter(producto => producto.categoria === categoria)
+                  .map(producto => (
+                    <div key={producto.codigo} className="card-rustic">
+                      <div className="flex justify-between items-start mb-3">
+                        <div>
+                          <h4 className="font-semibold text-primary-900">{producto.nombre}</h4>
+                          <p className="text-sm text-primary-600">Código: {producto.codigo}</p>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-bold text-primary-500">${producto.precioLb.toFixed(2)}/lb</p>
+                          <p className="text-sm text-primary-600">${producto.precioKg.toFixed(2)}/kg</p>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() => addToCart(producto)}
+                        className="btn-primary w-full flex items-center justify-center gap-2"
+                      >
+                        <Plus size={16} />
+                        Agregar al Pedido
+                      </button>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Vista Móvil - Acordeón */}
+        <div className="lg:hidden space-y-4">
+          {categorias.map(categoria => {
+            const isOpen = openCategories.has(categoria);
+            const productosCategoria = productosDisponibles.filter(producto => producto.categoria === categoria);
+            
+            return (
+              <div key={categoria} className="border border-primary-200 rounded-lg overflow-hidden">
+                <button
+                  onClick={() => toggleCategory(categoria)}
+                  className="w-full px-4 py-4 bg-primary-100 hover:bg-primary-200 transition-colors flex items-center justify-between"
+                >
+                  <h3 className="text-lg font-bold text-primary-900">{categoria}</h3>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-primary-600">
+                      {productosCategoria.length} productos
+                    </span>
+                    <motion.div
+                      animate={{ rotate: isOpen ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <ArrowRight size={20} className="text-primary-700" />
+                    </motion.div>
+                  </div>
+                </button>
+                
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="p-4 space-y-3 bg-white">
+                        {productosCategoria.map(producto => (
+                          <div key={producto.codigo} className="border border-primary-100 rounded-lg p-3">
+                            <div className="flex justify-between items-start mb-3">
+                              <div className="flex-1">
+                                <h4 className="font-semibold text-primary-900 text-sm">{producto.nombre}</h4>
+                                <p className="text-xs text-primary-600">Código: {producto.codigo}</p>
+                              </div>
+                              <div className="text-right ml-2">
+                                <p className="font-bold text-primary-500 text-sm">${producto.precioLb.toFixed(2)}/lb</p>
+                                <p className="text-xs text-primary-600">${producto.precioKg.toFixed(2)}/kg</p>
+                              </div>
+                            </div>
+                            <button
+                              onClick={() => addToCart(producto)}
+                              className="btn-primary w-full text-sm py-2 flex items-center justify-center gap-2"
+                            >
+                              <Plus size={14} />
+                              Agregar al Pedido
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-primary-50">
       {/* Header */}
