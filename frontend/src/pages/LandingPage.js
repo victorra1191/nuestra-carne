@@ -1011,7 +1011,7 @@ const LandingPage = () => {
               <ul className="space-y-2 text-primary-300">
                 <li>• Delivery gratis en Ciudad de Panamá (pedidos +$50)</li>
                 <li>• Recogida en tienda</li>
-                <li>• Cortes personalizados</li>
+                <li>• Cortes selectos</li>
                 <li>• Asesoría de cocina</li>
                 <li>• Carne premium 100% Nacional</li>
               </ul>
