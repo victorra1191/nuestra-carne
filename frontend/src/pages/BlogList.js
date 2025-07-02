@@ -29,7 +29,7 @@ const BlogList = () => {
     }
     // En desarrollo local
     console.log('🎯 [BlogList] Using local development URL');
-    return process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001/api';
+    return (process.env.REACT_APP_BACKEND_URL ? `${process.env.REACT_APP_BACKEND_URL}/api` : 'http://localhost:8001/api');
   };
   
   const API_BASE = getApiBase();
