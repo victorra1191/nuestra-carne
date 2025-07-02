@@ -97,7 +97,39 @@ const BlogPost = () => {
     }
   };
 
-  const shareOnWhatsApp = () => {
+  // Función para procesar el contenido markdown a HTML
+  const processContent = (content) => {
+    if (!content) return 'Contenido del artículo próximamente disponible...';
+    
+    return content
+      // Convertir negritas **texto** a <strong>texto</strong>
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      // Convertir párrafos (doble salto de línea) a <p>
+      .split('\n\n')
+      .map(paragraph => {
+        if (paragraph.trim()) {
+          // Si es un título (empieza con **)
+          if (paragraph.trim().startsWith('**') && paragraph.trim().endsWith('**')) {
+            const title = paragraph.replace(/\*\*(.*?)\*\*/g, '$1');
+            return `<h3 class="text-xl font-bold text-primary-800 mt-8 mb-4">${title}</h3>`;
+          }
+          // Si es una lista (contiene •)
+          else if (paragraph.includes('•')) {
+            const items = paragraph.split('\n').filter(line => line.trim().startsWith('•'));
+            const listItems = items.map(item => 
+              `<li class="mb-2">${item.replace('•', '').trim().replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</li>`
+            ).join('');
+            return `<ul class="list-disc list-inside space-y-2 my-6 ml-4">${listItems}</ul>`;
+          }
+          // Párrafo normal
+          else {
+            return `<p class="mb-6 leading-relaxed">${paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</p>`;
+          }
+        }
+        return '';
+      })
+      .join('');
+  };
     const url = window.location.href;
     const text = `🥩 ¡Mira este artículo increíble sobre carne premium! ${article?.titulo}`;
     window.open(`https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`, '_blank');
