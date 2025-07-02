@@ -933,7 +933,7 @@ const OrderForm = () => {
                     <div className="bg-green-50 border border-green-200 rounded-lg p-3 mb-4">
                       <p className="text-green-700 text-sm flex items-center gap-2">
                         <CheckCircle size={16} />
-                        Delivery GRATIS en Ciudad de Panamá (pedidos +$20)
+                        Delivery GRATIS en Ciudad de Panamá (pedidos +$50)
                       </p>
                     </div>
                   </div>
