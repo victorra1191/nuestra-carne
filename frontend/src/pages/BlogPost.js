@@ -420,11 +420,10 @@ const BlogPost = () => {
           className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 md:p-12 mb-12 border border-gray-200"
         >
           <div 
-            className="prose prose-lg prose-gray max-w-none"
+            className="content-area max-w-none text-gray-700"
             style={{
-              fontSize: '1.125rem',
-              lineHeight: '1.75',
-              color: '#374151'
+              fontSize: '1.1rem',
+              lineHeight: '1.8',
             }}
             dangerouslySetInnerHTML={{ 
               __html: processContent(article.contenido)
