@@ -130,6 +130,8 @@ const BlogPost = () => {
       })
       .join('');
   };
+
+  const shareOnWhatsApp = () => {
     const url = window.location.href;
     const text = `🥩 ¡Mira este artículo increíble sobre carne premium! ${article?.titulo}`;
     window.open(`https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`, '_blank');
