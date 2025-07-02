@@ -427,7 +427,7 @@ const BlogPost = () => {
               color: '#374151'
             }}
             dangerouslySetInnerHTML={{ 
-              __html: article.contenido || 'Contenido del artículo próximamente disponible...' 
+              __html: processContent(article.contenido)
             }}
           />
         </motion.div>
