@@ -989,8 +989,8 @@ const LandingPage = () => {
               <h4 className="text-lg font-semibold mb-4 text-primary-300">Horarios</h4>
               <div className="space-y-2 text-primary-300">
                 <p><strong>Delivery Ciudad de Panamá:</strong></p>
-                <p>Lun-Vie: 8:00 AM - 5:00 PM</p>
-                <p>Sáb: 9:00 AM - 12:00 PM</p>
+                <p>Lun-Vie: 9:00 AM - 4:00 PM</p>
+                <p>Sáb: 8:00 AM - 12:00 PM</p>
                 <p className="text-primary-300 font-semibold">¡Delivery GRATIS! (pedidos +$50)</p>
               </div>
             </div>
