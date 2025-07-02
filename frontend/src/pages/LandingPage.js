@@ -318,7 +318,7 @@ const LandingPage = () => {
             
             <p className="text-xl md:text-2xl mb-8 text-gray-100 max-w-2xl mx-auto">
               🥩 <strong>Carne 100% Nacional Premium</strong><br/>
-              Seleccionada con cuidado por expertos carniceros con +20 años de experiencia
+              Seleccionada con cuidado por expertos carniceros
             </p>
 
             <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-8">
