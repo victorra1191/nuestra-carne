@@ -351,7 +351,7 @@ const LandingPage = () => {
               <div className="glass-effect rounded-lg p-4">
                 <ChefHat className="text-accent-300 mx-auto mb-2" size={32} />
                 <h3 className="font-semibold">Expertos Carniceros</h3>
-                <p className="text-sm">+20 años de experiencia</p>
+                <p className="text-sm">Expertos carniceros</p>
               </div>
               <div className="glass-effect rounded-lg p-4">
                 <Truck className="text-accent-300 mx-auto mb-2" size={32} />
