@@ -486,7 +486,7 @@ const LandingPage = () => {
               </div>
               <h3 className="text-xl font-bold text-primary-900 mb-3">Carniceros Expertos</h3>
               <p className="text-primary-700">
-                Más de 20 años de experiencia en el arte de seleccionar y preparar los mejores cortes.
+                El arte de seleccionar y preparar los mejores cortes por expertos carniceros.
               </p>
             </motion.div>
 
