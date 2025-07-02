@@ -324,7 +324,7 @@ const LandingPage = () => {
             <div className="flex flex-col md:flex-row gap-4 justify-center items-center mb-8">
               <motion.button
                 onClick={() => handleOrderNow()}
-                className="btn-primary text-lg px-10 py-4 flex items-center gap-3"
+                className="bg-green-600 hover:bg-green-700 text-white text-lg px-10 py-4 flex items-center gap-3 rounded-lg font-bold transition-all duration-300 shadow-lg hover:shadow-xl"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
