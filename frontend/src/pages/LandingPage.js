@@ -514,9 +514,9 @@ const LandingPage = () => {
               <div className="bg-primary-100 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6">
                 <Flame className="text-primary-500" size={40} />
               </div>
-              <h3 className="text-xl font-bold text-primary-900 mb-3">Frescura Garantizada</h3>
+              <h3 className="text-xl font-bold text-primary-900 mb-3">Sin Inyecciones de Agua</h3>
               <p className="text-primary-700">
-                Trabajamos diariamente para asegurar que recibas la carne más fresca del mercado.
+                Nuestra carne es completamente natural, sin inyecciones de agua que alteren su sabor y textura original.
               </p>
             </motion.div>
           </div>
