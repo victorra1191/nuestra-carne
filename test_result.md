@@ -92,6 +92,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "Successfully retrieved 13 public blog articles"
+      - working: true
+        agent: "testing"
+        comment: "Verified that the /api/admin/articles endpoint is working correctly. Successfully retrieved 12 public blog articles with proper JSON structure including id, titulo, resumen, contenido, imagen, fecha, autor, and activo fields."
 
   - task: "Blog API - Admin Management"
     implemented: true
