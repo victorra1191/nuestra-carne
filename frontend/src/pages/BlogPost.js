@@ -324,7 +324,7 @@ const BlogPost = () => {
         </div>
       </div>
 
-      <article className="relative z-10 max-w-5xl mx-auto px-4 py-12">
+      <article className="relative z-10 max-w-5xl mx-auto px-4 py-16">
         {/* Floating Action Bar */}
         <motion.div
           initial={{ opacity: 0, x: 50 }}
