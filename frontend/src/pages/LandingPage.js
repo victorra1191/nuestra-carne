@@ -996,6 +996,17 @@ const LandingPage = () => {
             </div>
             
             <div>
+              <h4 className="text-lg font-semibold mb-4 text-primary-300">Métodos de Pago</h4>
+              <div className="space-y-2 text-primary-300">
+                <p>• Visa</p>
+                <p>• Mastercard</p>
+                <p>• ACH</p>
+                <p>• Yappy</p>
+                <p className="text-sm">Aceptamos múltiples formas de pago</p>
+              </div>
+            </div>
+            
+            <div>
               <h4 className="text-lg font-semibold mb-4 text-primary-300">Servicios</h4>
               <ul className="space-y-2 text-primary-300">
                 <li>• Delivery gratis en Ciudad de Panamá (pedidos +$50)</li>
