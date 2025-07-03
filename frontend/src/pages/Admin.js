@@ -105,7 +105,7 @@ const Admin = () => {
   const fetchArticles = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE}/api/admin/articles`, {
+      const response = await fetch(`${API_BASE}/admin/articles`, {
         headers: {
           'Authorization': `Basic ${btoa('admin:nuestra123')}`
         }
