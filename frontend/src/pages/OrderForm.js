@@ -287,7 +287,7 @@ const OrderForm = () => {
 
     setLoadingPromocion(true);
     try {
-      const response = await fetch(`${API_BASE}/api/promociones/validate`, {
+      const response = await fetch(`${API_BASE}/promociones/validate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
