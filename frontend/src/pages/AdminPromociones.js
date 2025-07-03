@@ -21,9 +21,20 @@ const AdminPromociones = () => {
     categorias: []
   });
 
-  const API_BASE = process.env.REACT_APP_BACKEND_URL ? 
-    `${process.env.REACT_APP_BACKEND_URL}/api` : 
-    'http://localhost:8001/api';
+  const getApiBase = () => {
+    // Hardcode para producción (bypass env var issue)
+    if (typeof window !== 'undefined' && window.location.hostname === 'nuestracarnepa.com') {
+      return 'https://nuestracarnepa.com/api';
+    }
+    
+    // Para desarrollo local
+    if (process.env.REACT_APP_BACKEND_URL) {
+      return `${process.env.REACT_APP_BACKEND_URL}/api`;
+    }
+    return 'http://localhost:8001/api';
+  };
+
+  const API_BASE = getApiBase();
 
   useEffect(() => {
     fetchPromociones();
