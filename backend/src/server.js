@@ -42,8 +42,20 @@ app.use(cors({
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Servir archivos estáticos del frontend
-app.use(express.static(path.join(__dirname, '../../frontend/build')));
+// Middleware de logging para debug
+app.use('/api', (req, res, next) => {
+  console.log(`🌐 [API] ${req.method} ${req.path} - Query:`, req.query, '- Body:', Object.keys(req.body));
+  next();
+});
+
+// RUTAS DE API PRIMERO - ANTES del middleware de archivos estáticos
+app.use('/api/auth', authRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/admin', adminProductRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api', orderRoutes);
+app.use('/api/media', mediaRoutes);
+app.use('/api/products', productRoutes);
 
 // Configurar multer para subida de imágenes
 const storage = multer.diskStorage({
