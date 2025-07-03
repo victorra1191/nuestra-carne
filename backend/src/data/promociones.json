@@ -1,0 +1,19 @@
+[
+  {
+    "id": "promo-001",
+    "nombre": "Descuento Bienvenida",
+    "tipo": "porcentaje",
+    "valor": 10,
+    "descripcion": "10% de descuento para nuevos clientes",
+    "codigo": "BIENVENIDA10",
+    "montoMinimo": 30,
+    "fechaInicio": "2025-01-01T00:00:00.000Z",
+    "fechaFin": "2025-12-31T23:59:59.999Z",
+    "activa": true,
+    "usoMaximo": 100,
+    "usoActual": 0,
+    "aplicableA": "todos",
+    "categorias": [],
+    "fechaCreacion": "2025-07-03T13:00:00.000Z"
+  }
+]
