@@ -792,7 +792,73 @@ const OrderForm = () => {
                         </div>
                         
                         <div className="border-t border-primary-300 pt-4">
-                          <div className="flex justify-between items-center mb-4">
+                          {/* Sección de Promociones */}
+                          <div className="mb-4">
+                            <h4 className="text-sm font-semibold text-primary-900 mb-2">Código Promocional</h4>
+                            {!promocionAplicada ? (
+                              <div className="flex gap-2">
+                                <input
+                                  type="text"
+                                  placeholder="Ingresa código"
+                                  value={promocionCodigo}
+                                  onChange={(e) => setPromocionCodigo(e.target.value.toUpperCase())}
+                                  className="flex-1 border border-primary-300 rounded px-3 py-2 text-sm"
+                                />
+                                <button
+                                  onClick={aplicarPromocion}
+                                  disabled={loadingPromocion || !promocionCodigo.trim()}
+                                  className="bg-green-500 text-white px-4 py-2 rounded text-sm hover:bg-green-600 disabled:opacity-50"
+                                >
+                                  {loadingPromocion ? 'Validando...' : 'Aplicar'}
+                                </button>
+                              </div>
+                            ) : (
+                              <div className="bg-green-50 border border-green-200 rounded p-3">
+                                <div className="flex justify-between items-center">
+                                  <div>
+                                    <p className="text-sm font-medium text-green-800">{promocionAplicada.codigo}</p>
+                                    <p className="text-xs text-green-600">{promocionAplicada.descripcion}</p>
+                                  </div>
+                                  <button
+                                    onClick={removerPromocion}
+                                    className="text-red-500 hover:text-red-700 text-sm"
+                                  >
+                                    Remover
+                                  </button>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Resumen de costos */}
+                          <div className="space-y-2 mb-4">
+                            <div className="flex justify-between text-sm">
+                              <span>Subtotal:</span>
+                              <span>${calculateSubtotal().toFixed(2)}</span>
+                            </div>
+                            
+                            {descuentoPromocion > 0 && (
+                              <div className="flex justify-between text-sm text-green-600">
+                                <span>Descuento ({promocionAplicada?.codigo}):</span>
+                                <span>-${descuentoPromocion.toFixed(2)}</span>
+                              </div>
+                            )}
+                            
+                            <div className="flex justify-between text-sm">
+                              <span>Delivery:</span>
+                              <span className={deliveryFee === 0 ? 'text-green-600' : ''}>
+                                {deliveryFee === 0 ? 'GRATIS' : `$${deliveryFee.toFixed(2)}`}
+                              </span>
+                            </div>
+                            
+                            {deliveryFee > 0 && (
+                              <p className="text-xs text-primary-600">
+                                Delivery gratis en pedidos de $50 o más
+                              </p>
+                            )}
+                          </div>
+
+                          <div className="flex justify-between items-center mb-4 pt-2 border-t border-primary-200">
                             <span className="text-lg font-bold">Total:</span>
                             <span className="text-xl font-bold text-primary-500">
                               ${calculateTotal().toFixed(2)}
