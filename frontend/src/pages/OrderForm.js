@@ -42,6 +42,15 @@ const OrderForm = () => {
     notas: ''
   });
 
+  // Estados para promociones y delivery
+  const [promocionCodigo, setPromocionCodigo] = useState('');
+  const [promocionAplicada, setPromocionAplicada] = useState(null);
+  const [descuentoPromocion, setDescuentoPromocion] = useState(0);
+  const [loadingPromocion, setLoadingPromocion] = useState(false);
+  const [deliveryFee, setDeliveryFee] = useState(0);
+  const DELIVERY_FEE_AMOUNT = 3.50;
+  const DELIVERY_FREE_MINIMUM = 50.00;
+
   // Cargar productos según el tipo de usuario (autenticado o seleccionado en formulario)
   useEffect(() => {
     const fetchProducts = async () => {
