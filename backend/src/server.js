@@ -61,13 +61,13 @@ app.get('/api/health', (req, res) => {
 });
 
 app.use('/api/auth', authRoutes);
+app.use('/api/promociones', promocionesRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/admin', adminProductRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api', orderRoutes);
 app.use('/api/media', mediaRoutes);
 app.use('/api/products', productRoutes);
-app.use('/api/promociones', promocionesRoutes);
 
 // Configurar multer para subida de imágenes
 const storage = multer.diskStorage({
