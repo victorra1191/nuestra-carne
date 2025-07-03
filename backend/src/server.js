@@ -119,6 +119,9 @@ app.post('/api/admin/upload-image', upload.single('image'), (req, res) => {
   }
 });
 
+// Servir archivos estáticos del frontend (DESPUÉS de las rutas API)
+app.use(express.static(path.join(__dirname, '../../frontend/build')));
+
 // Ruta principal del frontend
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../../frontend/build', 'index.html'));
