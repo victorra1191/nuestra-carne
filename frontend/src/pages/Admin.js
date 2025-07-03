@@ -26,7 +26,8 @@ import {
   Home,
   Settings,
   BarChart3,
-  ShoppingCart
+  ShoppingCart,
+  Tag
 } from 'lucide-react';
 
 const Admin = () => {
