@@ -13,6 +13,7 @@ const mediaRoutes = require('./routes/mediaRoutes');
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const adminProductRoutes = require('./routes/adminProductRoutes');
+const promocionesRoutes = require('./routes/promocionesRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 8001;
