@@ -44,7 +44,9 @@ const Admin = () => {
   const [activeSection, setActiveSection] = useState('blog');
   
   // URL del backend desde variable de entorno
-  const API_BASE = process.env.REACT_APP_BACKEND_URL || 'https://nuestracarnepa.com/api';
+  const API_BASE = process.env.REACT_APP_BACKEND_URL ? 
+    `${process.env.REACT_APP_BACKEND_URL}/api` : 
+    'http://localhost:8001/api';
 
   const [formData, setFormData] = useState({
     titulo: '',
