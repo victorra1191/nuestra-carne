@@ -1161,17 +1161,42 @@ const OrderForm = () => {
                   </div>
                   
                   <div className="border-t border-primary-300 pt-4">
-                    <div className="flex justify-between items-center mb-4">
+                    {/* Resumen detallado de costos */}
+                    <div className="space-y-3 mb-4">
+                      <div className="flex justify-between">
+                        <span>Subtotal:</span>
+                        <span>${calculateSubtotal().toFixed(2)}</span>
+                      </div>
+                      
+                      {descuentoPromocion > 0 && (
+                        <div className="flex justify-between text-green-600">
+                          <span>Descuento ({promocionAplicada?.codigo}):</span>
+                          <span>-${descuentoPromocion.toFixed(2)}</span>
+                        </div>
+                      )}
+                      
+                      <div className="flex justify-between">
+                        <span>Delivery:</span>
+                        <span className={deliveryFee === 0 ? 'text-green-600 font-semibold' : ''}>
+                          {deliveryFee === 0 ? 'GRATIS' : `$${deliveryFee.toFixed(2)}`}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between items-center mb-4 pt-3 border-t border-primary-200">
                       <span className="text-xl font-bold">Total:</span>
                       <span className="text-2xl font-bold text-primary-500">
                         ${calculateTotal().toFixed(2)}
                       </span>
                     </div>
                     
-                    <div className="bg-green-50 border border-green-200 rounded-lg p-3 mb-4">
-                      <p className="text-green-700 text-sm flex items-center gap-2">
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
+                      <p className="text-blue-700 text-sm flex items-center gap-2">
                         <CheckCircle size={16} />
-                        Delivery GRATIS en Ciudad de Panamá (pedidos +$50)
+                        {deliveryFee === 0 ? 
+                          'Delivery GRATIS incluido' : 
+                          `Delivery $${deliveryFee.toFixed(2)} - GRATIS en pedidos +$50`
+                        }
                       </p>
                     </div>
                   </div>
