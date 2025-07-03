@@ -248,8 +248,79 @@ const OrderForm = () => {
     setOrderItems(orderItems.filter(item => item.codigo !== codigo));
   };
 
-  const calculateTotal = () => {
+  const calculateSubtotal = () => {
     return orderItems.reduce((total, item) => total + item.subtotal, 0);
+  };
+
+  const calculateTotal = () => {
+    const subtotal = calculateSubtotal();
+    const totalConDescuento = subtotal - descuentoPromocion;
+    const finalTotal = totalConDescuento + deliveryFee;
+    return finalTotal;
+  };
+
+  // Calcular delivery fee basado en el subtotal
+  const updateDeliveryFee = () => {
+    const subtotal = calculateSubtotal();
+    const totalConDescuento = subtotal - descuentoPromocion;
+    
+    if (totalConDescuento < DELIVERY_FREE_MINIMUM) {
+      setDeliveryFee(DELIVERY_FEE_AMOUNT);
+    } else {
+      setDeliveryFee(0);
+    }
+  };
+
+  // Actualizar delivery fee cuando cambie el carrito o promoción
+  useEffect(() => {
+    updateDeliveryFee();
+  }, [orderItems, descuentoPromocion]);
+
+  // Función para aplicar código promocional
+  const aplicarPromocion = async () => {
+    if (!promocionCodigo.trim()) {
+      alert('Por favor ingresa un código promocional');
+      return;
+    }
+
+    setLoadingPromocion(true);
+    try {
+      const response = await fetch(`${API_BASE}/api/promociones/validate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          codigo: promocionCodigo,
+          montoTotal: calculateSubtotal(),
+          productos: orderItems
+        })
+      });
+
+      const data = await response.json();
+      
+      if (data.success) {
+        setPromocionAplicada(data.promocion);
+        setDescuentoPromocion(data.descuento);
+        alert(`¡Promoción aplicada! Descuento: $${data.descuento.toFixed(2)}`);
+      } else {
+        alert(data.error || 'Código promocional inválido');
+        setPromocionAplicada(null);
+        setDescuentoPromocion(0);
+      }
+    } catch (error) {
+      console.error('Error al validar promoción:', error);
+      alert('Error al validar promoción');
+    } finally {
+      setLoadingPromocion(false);
+    }
+  };
+
+  // Función para remover promoción
+  const removerPromocion = () => {
+    setPromocionCodigo('');
+    setPromocionAplicada(null);
+    setDescuentoPromocion(0);
   };
 
   // Validar fechas y horas de entrega
