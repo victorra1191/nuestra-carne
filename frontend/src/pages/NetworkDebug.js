@@ -21,6 +21,12 @@ const NetworkDebug = () => {
   }, []);
 
   const constructApiUrl = () => {
+    // Solución hardcodeada para producción para evitar problemas de env vars
+    if (window.location.hostname === 'nuestracarnepa.com') {
+      return 'https://nuestracarnepa.com/api';
+    }
+    
+    // Para desarrollo local
     if (process.env.REACT_APP_BACKEND_URL) {
       return `${process.env.REACT_APP_BACKEND_URL}/api`;
     }
