@@ -34,5 +34,17 @@
     "fechaRegistro": "2025-07-03T12:39:20.567Z",
     "pedidos": [],
     "promociones": []
+  },
+  {
+    "id": "c23532c7-a921-44c5-99db-c0897e1cff7f",
+    "nombre": "testuser",
+    "email": "test@example.com",
+    "telefono": "123456",
+    "password": "password123",
+    "tipo": "individual",
+    "estado": "activo",
+    "fechaRegistro": "2025-07-03T12:59:52.617Z",
+    "pedidos": [],
+    "promociones": []
   }
 ]
