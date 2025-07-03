@@ -87,17 +87,17 @@ const upload = multer({
 
 // Middleware de logging para debug
 app.use('/api', (req, res, next) => {
-  console.log(`🌐 [API] ${req.method} ${req.path}`);
+  console.log(`🌐 [API] ${req.method} ${req.path} - Query:`, req.query, '- Body:', Object.keys(req.body));
   next();
 });
 
-// Rutas de API - ANTES del middleware de archivos estáticos
-app.use('/api/orders', orderRoutes);
-app.use('/api', orderRoutes);
+// RUTAS DE API PRIMERO - ANTES del middleware de archivos estáticos
+app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/admin', adminProductRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api', orderRoutes);
 app.use('/api/media', mediaRoutes);
-app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 
 // Ruta para subir imágenes del blog
