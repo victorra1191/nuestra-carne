@@ -73,7 +73,13 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 } // 5MB max
 });
 
-// Rutas de API
+// Middleware de logging para debug
+app.use('/api', (req, res, next) => {
+  console.log(`🌐 [API] ${req.method} ${req.path}`);
+  next();
+});
+
+// Rutas de API - ANTES del middleware de archivos estáticos
 app.use('/api/orders', orderRoutes);
 app.use('/api', orderRoutes);
 app.use('/api/admin', adminRoutes);
