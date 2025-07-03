@@ -10,8 +10,14 @@ const BlogList = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
   
-  // URL del backend - Usar variable de entorno
+  // URL del backend - Con hardcode para producción
   const getApiBase = () => {
+    // Hardcode para producción (bypass env var issue)
+    if (typeof window !== 'undefined' && window.location.hostname === 'nuestracarnepa.com') {
+      return 'https://nuestracarnepa.com/api';
+    }
+    
+    // Para desarrollo local
     if (process.env.REACT_APP_BACKEND_URL) {
       return `${process.env.REACT_APP_BACKEND_URL}/api`;
     }
