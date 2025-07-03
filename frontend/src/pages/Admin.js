@@ -732,6 +732,11 @@ const Admin = () => {
         {activeSection === 'orders' && (
           <AdminOrders />
         )}
+
+        {/* Promociones Section */}
+        {activeSection === 'promociones' && (
+          <AdminPromociones />
+        )}
       </div>
     </div>
   );
