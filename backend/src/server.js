@@ -49,6 +49,16 @@ app.use('/api', (req, res, next) => {
 });
 
 // RUTAS DE API PRIMERO - ANTES del middleware de archivos estáticos
+// Ruta de debug para verificar que el servidor esté funcionando
+app.get('/api/health', (req, res) => {
+  res.json({ 
+    success: true, 
+    message: 'Backend funcionando correctamente',
+    timestamp: new Date().toISOString(),
+    routes: ['auth', 'admin', 'orders', 'products', 'media']
+  });
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/admin', adminProductRoutes);
