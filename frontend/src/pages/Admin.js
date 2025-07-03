@@ -43,10 +43,21 @@ const Admin = () => {
   const [showMediaGallery, setShowMediaGallery] = useState(false);
   const [activeSection, setActiveSection] = useState('blog');
   
-  // URL del backend desde variable de entorno
-  const API_BASE = process.env.REACT_APP_BACKEND_URL ? 
-    `${process.env.REACT_APP_BACKEND_URL}/api` : 
-    'http://localhost:8001/api';
+  // URL del backend - Con hardcode para producción
+  const getApiBase = () => {
+    // Hardcode para producción (bypass env var issue)
+    if (typeof window !== 'undefined' && window.location.hostname === 'nuestracarnepa.com') {
+      return 'https://nuestracarnepa.com/api';
+    }
+    
+    // Para desarrollo local
+    if (process.env.REACT_APP_BACKEND_URL) {
+      return `${process.env.REACT_APP_BACKEND_URL}/api`;
+    }
+    return 'http://localhost:8001/api';
+  };
+  
+  const API_BASE = getApiBase();
 
   const [formData, setFormData] = useState({
     titulo: '',
