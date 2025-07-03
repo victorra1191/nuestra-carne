@@ -111,6 +111,7 @@ app.use('/api/orders', orderRoutes);
 app.use('/api', orderRoutes);
 app.use('/api/media', mediaRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/promociones', promocionesRoutes);
 
 // Ruta para subir imágenes del blog
 app.post('/api/admin/upload-image', upload.single('image'), (req, res) => {
