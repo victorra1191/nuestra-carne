@@ -103,15 +103,6 @@ app.use('/api', (req, res, next) => {
   next();
 });
 
-// RUTAS DE API PRIMERO - ANTES del middleware de archivos estáticos
-app.use('/api/auth', authRoutes);
-app.use('/api/admin', adminRoutes);
-app.use('/api/admin', adminProductRoutes);
-app.use('/api/orders', orderRoutes);
-app.use('/api', orderRoutes);
-app.use('/api/media', mediaRoutes);
-app.use('/api/products', productRoutes);
-app.use('/api/promociones', promocionesRoutes);
 
 // Ruta para subir imágenes del blog
 app.post('/api/admin/upload-image', upload.single('image'), (req, res) => {
