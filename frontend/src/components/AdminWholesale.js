@@ -81,7 +81,7 @@ const AdminWholesale = ({ API_BASE }) => {
 
   const handleReject = async (requestId) => {
     try {
-      const response = await fetch(`${API_BASE}/api/auth/wholesale-requests/${requestId}/reject`, {
+      const response = await fetch(`${API_BASE}/auth/wholesale-requests/${requestId}/reject`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
