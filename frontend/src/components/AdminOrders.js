@@ -32,7 +32,7 @@ const AdminOrders = () => {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE}/api/orders/all`);
+      const response = await fetch(`${API_BASE}/orders/all`);
       const data = await response.json();
       
       if (data.success) {
