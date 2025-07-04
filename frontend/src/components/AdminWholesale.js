@@ -27,7 +27,7 @@ const AdminWholesale = ({ API_BASE }) => {
   const fetchRequests = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE}/api/auth/wholesale-requests`, {
+      const response = await fetch(`${API_BASE}/auth/wholesale-requests`, {
         headers: {
           'Authorization': `Basic ${btoa('admin:nuestra123')}`
         }
