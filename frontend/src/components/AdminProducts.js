@@ -155,13 +155,10 @@ const AdminProducts = ({ API_BASE }) => {
       const data = await response.json();
 
       if (data.success) {
-        // Actualizar el producto en la lista local
-        setProducts(products.map(p => 
-          p.codigo === product.codigo 
-            ? { ...p, disponible: newAvailability }
-            : p
-        ));
-        fetchStats(); // Actualizar estadísticas
+        // Refrescar todos los productos desde el servidor para mostrar datos actualizados
+        await fetchProducts();
+        await fetchStats(); // Actualizar estadísticas
+        setError('');
       } else {
         setError('Error al cambiar disponibilidad');
       }
