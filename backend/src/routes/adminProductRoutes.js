@@ -84,18 +84,32 @@ router.put('/products/:codigo', verifyAdmin, async (req, res) => {
     const { codigo } = req.params;
     const { precioKg, precioLb, disponible, categoria } = req.body;
 
-    // Por ahora, como estamos usando arrays estáticos, 
-    // solo retornamos éxito (en producción actualizaríamos la base de datos)
+    // Leer productos actuales
+    let products = await readJSONFile(PRODUCTS_FILE);
+    
+    // Buscar el producto a actualizar
+    const productIndex = products.findIndex(p => p.codigo === codigo);
+    
+    if (productIndex === -1) {
+      return res.status(404).json({
+        success: false,
+        error: 'Producto no encontrado'
+      });
+    }
+
+    // Actualizar los campos proporcionados
+    if (precioKg !== undefined) products[productIndex].precioKg = parseFloat(precioKg);
+    if (precioLb !== undefined) products[productIndex].precioLb = parseFloat(precioLb);
+    if (disponible !== undefined) products[productIndex].disponible = Boolean(disponible);
+    if (categoria !== undefined) products[productIndex].categoria = categoria;
+
+    // Guardar cambios
+    await writeJSONFile(PRODUCTS_FILE, products);
     
     res.json({
       success: true,
       message: `Producto ${codigo} actualizado exitosamente`,
-      updatedFields: {
-        precioKg,
-        precioLb,
-        disponible,
-        categoria
-      }
+      product: products[productIndex]
     });
 
   } catch (error) {
