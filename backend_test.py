@@ -100,6 +100,31 @@ class NuestraCarneTester:
         if success:
             products = response.get('products', [])
             print(f"Found {len(products)} retail products")
+            
+            # Check if the response has the expected structure
+            if 'success' not in response or not response['success']:
+                print("❌ Response missing 'success: true' field")
+                return False, response
+                
+            if 'products' not in response or not isinstance(response['products'], list):
+                print("❌ Response missing 'products' array")
+                return False, response
+            
+            # Check for specific product - Costillón entero (codigo: 20014)
+            costillon = next((p for p in products if p.get('codigo') == '20014'), None)
+            if costillon:
+                print(f"Found Costillón entero: {costillon['nombre']} - ${costillon['precioLb']} per lb")
+                
+                # Verify the price is 3.33 (not 3.29)
+                if costillon['precioLb'] == 3.33:
+                    print("✅ Costillón entero has the correct price of $3.33 per lb")
+                else:
+                    print(f"❌ Costillón entero has incorrect price: ${costillon['precioLb']} (expected $3.33)")
+                    return False, response
+            else:
+                print("❌ Costillón entero (codigo: 20014) not found in products list")
+                return False, response
+                
             if products:
                 print(f"First product: {products[0]['nombre']} - ${products[0]['precioLb']} per lb")
         
