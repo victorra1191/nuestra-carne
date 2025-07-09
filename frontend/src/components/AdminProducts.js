@@ -141,15 +141,11 @@ const AdminProducts = ({ API_BASE }) => {
 
   const handleToggleAvailability = async (product) => {
     try {
-      const newAvailability = !product.disponible;
-      
       const response = await fetch(`${API_BASE}/admin/products/${product.codigo}/toggle`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': `Basic ${btoa('admin:nuestra123')}`
-        },
-        body: JSON.stringify({ disponible: newAvailability })
+        }
       });
 
       const data = await response.json();
