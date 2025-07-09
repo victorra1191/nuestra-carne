@@ -81,7 +81,13 @@ const defaultWholesalePrices = [
  */
 router.get('/wholesale', async (req, res) => {
   try {
-    const prices = await readJSONFile(WHOLESALE_PRICES_FILE);
+    let prices = await readJSONFile(WHOLESALE_PRICES_FILE);
+    
+    // Si no existe el archivo, crear con precios por defecto
+    if (!prices || prices.length === 0) {
+      prices = defaultWholesalePrices;
+      await writeJSONFile(WHOLESALE_PRICES_FILE, prices);
+    }
     
     res.json({
       success: true,
