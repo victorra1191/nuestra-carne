@@ -58,8 +58,8 @@ const verifyAdmin = (req, res, next) => {
  */
 router.get('/products/all', verifyAdmin, async (req, res) => {
   try {
-    // Productos base (retail)
-    const retailProducts = [
+    // Leer productos desde el archivo JSON
+    const products = await readJSONFile(PRODUCTS_FILE);
       { codigo: '20001', nombre: 'New york rebanado', precioKg: 9.26, precioLb: 4.20, categoria: 'Premium', disponible: true },
       { codigo: '20002', nombre: 'Filete Limpio /sin cordón', precioKg: 15.50, precioLb: 7.03, categoria: 'Premium', disponible: true },
       { codigo: '20003', nombre: 'Lomo redondo porcionado', precioKg: 7.75, precioLb: 3.52, categoria: 'Plancha', disponible: true },
