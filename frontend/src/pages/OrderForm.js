@@ -69,24 +69,58 @@ const OrderForm = () => {
     const fetchProducts = async () => {
       try {
         setLoadingProducts(true);
+        
+        // Logging detallado para debugging
+        console.log('🔍 [OrderForm] Iniciando carga de productos...');
+        console.log('🔍 [OrderForm] isWholesaleUser():', isWholesaleUser());
+        console.log('🔍 [OrderForm] customerData.tipoCliente:', customerData.tipoCliente);
+        console.log('🔍 [OrderForm] API_BASE:', API_BASE);
+        
         // Usar precios mayoristas si: 1) usuario mayorista logueado, o 2) selecciona "empresa" en formulario
         const useWholesale = isWholesaleUser() || customerData.tipoCliente === 'empresa';
         const endpoint = useWholesale ? '/api/products/wholesale' : '/api/products/retail';
-        const response = await fetch(`${API_BASE}${endpoint}`);
+        const fullURL = `${API_BASE}${endpoint}`;
+        
+        console.log('🔍 [OrderForm] useWholesale:', useWholesale);
+        console.log('🔍 [OrderForm] endpoint:', endpoint);
+        console.log('🔍 [OrderForm] fullURL:', fullURL);
+        
+        console.log('🔍 [OrderForm] Realizando fetch a:', fullURL);
+        const response = await fetch(fullURL);
+        
+        console.log('🔍 [OrderForm] Response status:', response.status);
+        console.log('🔍 [OrderForm] Response ok:', response.ok);
+        console.log('🔍 [OrderForm] Response headers:', response.headers);
+        
         const data = await response.json();
         
-        if (data.success) {
+        console.log('🔍 [OrderForm] Datos recibidos:', data);
+        console.log('🔍 [OrderForm] data.success:', data.success);
+        console.log('🔍 [OrderForm] data.products length:', data.products?.length);
+        
+        if (data.success && data.products) {
+          // Verificar precios específicos para debugging
+          const costillonEntero = data.products.find(p => p.codigo === '20014');
+          console.log('🔍 [OrderForm] Costillón entero encontrado:', costillonEntero);
+          
           setProductos(data.products);
+          console.log('✅ [OrderForm] Productos cargados exitosamente desde API');
         } else {
+          console.log('❌ [OrderForm] API retornó error o datos inválidos, usando fallback');
+          console.log('❌ [OrderForm] Reason: data.success =', data.success, 'data.products =', data.products);
           // Fallback a productos estáticos si hay error
           setProductos(staticProductos);
         }
       } catch (error) {
-        console.error('Error cargando productos:', error);
+        console.error('❌ [OrderForm] Error cargando productos:', error);
+        console.error('❌ [OrderForm] Error message:', error.message);
+        console.error('❌ [OrderForm] Error stack:', error.stack);
         // Fallback a productos estáticos
         setProductos(staticProductos);
+        console.log('⚠️ [OrderForm] Usando staticProductos como fallback');
       } finally {
         setLoadingProducts(false);
+        console.log('🔍 [OrderForm] Terminada carga de productos');
       }
     };
 
