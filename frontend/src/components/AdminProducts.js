@@ -126,13 +126,10 @@ const AdminProducts = ({ API_BASE }) => {
       const data = await response.json();
 
       if (data.success) {
-        // Actualizar el producto en la lista local
-        setProducts(products.map(p => 
-          p.codigo === editingProduct.codigo 
-            ? { ...p, ...editForm }
-            : p
-        ));
+        // Refrescar todos los productos desde el servidor para mostrar datos actualizados
+        await fetchProducts();
         setEditingProduct(null);
+        setError('');
       } else {
         setError('Error al actualizar producto');
       }
