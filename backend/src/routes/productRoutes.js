@@ -3,8 +3,22 @@ const router = express.Router();
 const fs = require('fs').promises;
 const path = require('path');
 
-// Archivo de precios mayoristas
+// Archivos de datos
+const PRODUCTS_FILE = path.join(__dirname, '../data/products.json');
 const WHOLESALE_PRICES_FILE = path.join(__dirname, '../data/wholesale-prices.json');
+
+// Funciones helper
+const readJSONFile = async (filePath) => {
+  try {
+    const data = await fs.readFile(filePath, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      return [];
+    }
+    throw error;
+  }
+};
 
 // Precios mayoristas por defecto (30% de descuento aproximadamente)
 const defaultWholesalePrices = [
