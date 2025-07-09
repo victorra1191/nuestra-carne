@@ -1,33 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const fs = require('fs').promises;
 const path = require('path');
+const { readJSONFile, writeJSONFile } = require('../utils/fileUtils');
 
 // Archivos de datos
 const PRODUCTS_FILE = path.join(__dirname, '../data/products.json');
 const WHOLESALE_PRICES_FILE = path.join(__dirname, '../data/wholesale-prices.json');
-
-// Funciones helper
-const readJSONFile = async (filePath) => {
-  try {
-    const data = await fs.readFile(filePath, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    if (error.code === 'ENOENT') {
-      // Si no existe el archivo, crear con precios por defecto
-      if (filePath === WHOLESALE_PRICES_FILE) {
-        await writeJSONFile(filePath, defaultWholesalePrices);
-        return defaultWholesalePrices;
-      }
-      return [];
-    }
-    throw error;
-  }
-};
-
-const writeJSONFile = async (filePath, data) => {
-  await fs.writeFile(filePath, JSON.stringify(data, null, 2));
-};
 
 // Precios mayoristas por defecto (30% de descuento aproximadamente)
 const defaultWholesalePrices = [
