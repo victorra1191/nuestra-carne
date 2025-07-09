@@ -225,50 +225,290 @@
   },
   {
     "codigo": "20030",
-    "nombre": "Lomo cola",
+    "nombre": "Costilla de res picada",
+    "precioKg": 5.72,
+    "precioLb": 2.59,
+    "categoria": "Parrilla",
+    "disponible": true
+  },
+  {
+    "codigo": "20031",
+    "nombre": "Pulpa blanca entera",
+    "precioKg": 7,
+    "precioLb": 3.18,
+    "categoria": "Premium",
+    "disponible": true
+  },
+  {
+    "codigo": "20032",
+    "nombre": "Entraña",
+    "precioKg": 9.39,
+    "precioLb": 4.26,
+    "categoria": "Premium",
+    "disponible": true
+  },
+  {
+    "codigo": "20033",
+    "nombre": "Lomito",
+    "precioKg": 8,
+    "precioLb": 3.63,
+    "categoria": "Premium",
+    "disponible": true
+  },
+  {
+    "codigo": "20034",
+    "nombre": "Vacio",
+    "precioKg": 8,
+    "precioLb": 3.63,
+    "categoria": "Premium",
+    "disponible": true
+  },
+  {
+    "codigo": "20035",
+    "nombre": "Falda Gruesa",
+    "precioKg": 6.25,
+    "precioLb": 2.83,
+    "categoria": "Guisos",
+    "disponible": true
+  },
+  {
+    "codigo": "20036",
+    "nombre": "Ropa vieja",
+    "precioKg": 6.75,
+    "precioLb": 3.06,
+    "categoria": "Guisos",
+    "disponible": true
+  },
+  {
+    "codigo": "20037",
+    "nombre": "Rabo",
+    "precioKg": 6.85,
+    "precioLb": 3.11,
+    "categoria": "Guisos",
+    "disponible": true
+  },
+  {
+    "codigo": "20038",
+    "nombre": "Rib- eye porcionado",
+    "precioKg": 9.5,
+    "precioLb": 4.31,
+    "categoria": "Premium",
+    "disponible": true
+  },
+  {
+    "codigo": "20039",
+    "nombre": "Prime rib (asado en tiras)",
+    "precioKg": 6,
+    "precioLb": 2.72,
+    "categoria": "Parrilla",
+    "disponible": true
+  },
+  {
+    "codigo": "20040",
+    "nombre": "Pajarilla",
+    "precioKg": 2,
+    "precioLb": 0.91,
+    "categoria": "Especiales",
+    "disponible": true
+  },
+  {
+    "codigo": "20041",
+    "nombre": "Corazón",
+    "precioKg": 3,
+    "precioLb": 1.36,
+    "categoria": "Especiales",
+    "disponible": true
+  },
+  {
+    "codigo": "20042",
+    "nombre": "Bofe",
+    "precioKg": 3.5,
+    "precioLb": 1.59,
+    "categoria": "Especiales",
+    "disponible": true
+  },
+  {
+    "codigo": "20043",
+    "nombre": "Hueso blanco",
+    "precioKg": 1.25,
+    "precioLb": 0.57,
+    "categoria": "Especiales",
+    "disponible": true
+  },
+  {
+    "codigo": "20044",
+    "nombre": "Hueso rojo",
+    "precioKg": 2,
+    "precioLb": 0.91,
+    "categoria": "Especiales",
+    "disponible": true
+  },
+  {
+    "codigo": "20045",
+    "nombre": "Piltrafa",
+    "precioKg": 0.04,
+    "precioLb": 0.02,
+    "categoria": "Especiales",
+    "disponible": true
+  },
+  {
+    "codigo": "20046",
+    "nombre": "Ossobuco de res rebanado",
+    "precioKg": 6.77,
+    "precioLb": 3.07,
+    "categoria": "Guisos",
+    "disponible": true
+  },
+  {
+    "codigo": "20047",
+    "nombre": "Arañita",
+    "precioKg": 20.2,
+    "precioLb": 9.16,
+    "categoria": "Premium",
+    "disponible": true
+  },
+  {
+    "codigo": "20048",
+    "nombre": "Carne de guisar",
+    "precioKg": 8.35,
+    "precioLb": 3.79,
+    "categoria": "Guisos",
+    "disponible": true
+  },
+  {
+    "codigo": "20049",
+    "nombre": "Brisket",
+    "precioKg": 6.5,
+    "precioLb": 2.95,
+    "categoria": "Premium",
+    "disponible": true
+  },
+  {
+    "codigo": "20050",
+    "nombre": "Pulpa blanca en bistec",
+    "precioKg": 7.25,
+    "precioLb": 3.29,
+    "categoria": "Premium",
+    "disponible": true
+  },
+  {
+    "codigo": "20051",
+    "nombre": "Huevo",
+    "precioKg": 1,
+    "precioLb": 0.45,
+    "categoria": "Especiales",
+    "disponible": true
+  },
+  {
+    "codigo": "20052",
+    "nombre": "Tuétano /Canoa",
+    "precioKg": 5,
+    "precioLb": 2.27,
+    "categoria": "Especiales",
+    "disponible": true
+  },
+  {
+    "codigo": "20053",
+    "nombre": "Lomo paleta (little)",
+    "precioKg": 7.85,
+    "precioLb": 3.56,
+    "categoria": "Plancha",
+    "disponible": true
+  },
+  {
+    "codigo": "20054",
+    "nombre": "Bistec Picado",
+    "precioKg": 7,
+    "precioLb": 3.18,
+    "categoria": "Plancha",
+    "disponible": true
+  },
+  {
+    "codigo": "20055",
+    "nombre": "Tomahawk",
+    "precioKg": 12,
+    "precioLb": 5.44,
+    "categoria": "Premium",
+    "disponible": true
+  },
+  {
+    "codigo": "20056",
+    "nombre": "Carne Molida de Segunda",
+    "precioKg": 3.04,
+    "precioLb": 1.38,
+    "categoria": "Molida",
+    "disponible": true
+  },
+  {
+    "codigo": "20057",
+    "nombre": "Filetillo",
+    "precioKg": 7,
+    "precioLb": 3.18,
+    "categoria": "Plancha",
+    "disponible": true
+  },
+  {
+    "codigo": "20058",
+    "nombre": "Babilla entera",
+    "precioKg": 7.15,
+    "precioLb": 3.24,
+    "categoria": "Plancha",
+    "disponible": true
+  },
+  {
+    "codigo": "20059",
+    "nombre": "Lomo redondo entero",
     "precioKg": 7.5,
     "precioLb": 3.4,
     "categoria": "Plancha",
     "disponible": true
   },
   {
-    "codigo": "20031",
-    "nombre": "Lagarto entero",
-    "precioKg": 7.85,
-    "precioLb": 3.56,
-    "categoria": "Guisos",
-    "disponible": true
-  },
-  {
-    "codigo": "20032",
-    "nombre": "Pulpa",
-    "precioKg": 7.2,
-    "precioLb": 3.27,
-    "categoria": "Guisos",
-    "disponible": true
-  },
-  {
-    "codigo": "20033",
-    "nombre": "Cuadril entero",
-    "precioKg": 8.16,
-    "precioLb": 3.7,
+    "codigo": "20060",
+    "nombre": "Rincón entero",
+    "precioKg": 8.71,
+    "precioLb": 3.95,
     "categoria": "Premium",
     "disponible": true
   },
   {
-    "codigo": "20034",
-    "nombre": "Sobrecostilla",
-    "precioKg": 8.75,
-    "precioLb": 3.97,
+    "codigo": "20061",
+    "nombre": "Palomilla entera",
+    "precioKg": 6.25,
+    "precioLb": 2.83,
+    "categoria": "Plancha",
+    "disponible": true
+  },
+  {
+    "codigo": "20062",
+    "nombre": "Pulpa negra entera",
+    "precioKg": 8.59,
+    "precioLb": 3.9,
+    "categoria": "Premium",
+    "disponible": true
+  },
+  {
+    "codigo": "20063",
+    "nombre": "Costilla de res entera",
+    "precioKg": 5.47,
+    "precioLb": 2.48,
     "categoria": "Parrilla",
     "disponible": true
   },
   {
-    "codigo": "20035",
-    "nombre": "Entraña",
+    "codigo": "20064",
+    "nombre": "Jarrete entero",
+    "precioKg": 6.28,
+    "precioLb": 2.85,
+    "categoria": "Guisos",
+    "disponible": true
+  },
+  {
+    "codigo": "20065",
+    "nombre": "Carne de hamburguesa- 24 onzas",
     "precioKg": 8.5,
     "precioLb": 3.86,
-    "categoria": "Premium",
+    "categoria": "Molida",
     "disponible": true
   }
 ]
