@@ -17,6 +17,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "Successfully retrieved 59 retail products with correct pricing"
+      - working: true
+        agent: "testing"
+        comment: "Verified that the /api/products/retail endpoint is working correctly. Successfully retrieved 29 retail products with proper JSON structure. Confirmed that 'Costillón entero' (codigo: 20014) has the correct price of 3.33 (not 3.29). Verified that the data is being read from products.json file and not hardcoded values."
 
   - task: "Product API - Wholesale Prices"
     implemented: true
