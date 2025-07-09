@@ -128,18 +128,34 @@ router.put('/products/:codigo', verifyAdmin, async (req, res) => {
 router.put('/products/:codigo/toggle', verifyAdmin, async (req, res) => {
   try {
     const { codigo } = req.params;
-    const { disponible } = req.body;
 
-    // Simular actualización (en producción actualizaríamos la base de datos)
+    // Leer productos actuales
+    let products = await readJSONFile(PRODUCTS_FILE);
+    
+    // Buscar el producto a actualizar
+    const productIndex = products.findIndex(p => p.codigo === codigo);
+    
+    if (productIndex === -1) {
+      return res.status(404).json({
+        success: false,
+        error: 'Producto no encontrado'
+      });
+    }
+
+    // Toggle del estado disponible
+    products[productIndex].disponible = !products[productIndex].disponible;
+
+    // Guardar cambios
+    await writeJSONFile(PRODUCTS_FILE, products);
     
     res.json({
       success: true,
-      message: `Producto ${codigo} ${disponible ? 'habilitado' : 'deshabilitado'} exitosamente`,
-      disponible
+      message: `Producto ${codigo} ${products[productIndex].disponible ? 'habilitado' : 'deshabilitado'} exitosamente`,
+      product: products[productIndex]
     });
 
   } catch (error) {
-    console.error('Error actualizando disponibilidad:', error);
+    console.error('Error toggling producto:', error);
     res.status(500).json({
       success: false,
       error: 'Error interno del servidor'
