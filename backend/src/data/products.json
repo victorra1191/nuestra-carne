@@ -1,36 +1,274 @@
 [
-  { "codigo": "20001", "nombre": "New york rebanado", "precioKg": 9.26, "precioLb": 4.20, "categoria": "Premium", "disponible": true },
-  { "codigo": "20002", "nombre": "Filete Limpio /sin cordón", "precioKg": 15.50, "precioLb": 7.03, "categoria": "Premium", "disponible": true },
-  { "codigo": "20003", "nombre": "Lomo redondo porcionado", "precioKg": 7.75, "precioLb": 3.52, "categoria": "Plancha", "disponible": true },
-  { "codigo": "20004", "nombre": "Punta Palomilla entera (picanha)", "precioKg": 10.55, "precioLb": 4.79, "categoria": "Premium", "disponible": true },
-  { "codigo": "20005", "nombre": "Pulpa negra en bistec", "precioKg": 8.84, "precioLb": 4.01, "categoria": "Premium", "disponible": true },
-  { "codigo": "20006", "nombre": "Rincón en bistec", "precioKg": 8.96, "precioLb": 4.06, "categoria": "Premium", "disponible": true },
-  { "codigo": "20007", "nombre": "Babilla en bistec", "precioKg": 7.40, "precioLb": 3.36, "categoria": "Plancha", "disponible": true },
-  { "codigo": "20008", "nombre": "Lomo Mulato", "precioKg": 0.00, "precioLb": 0.00, "categoria": "No Disponible", "disponible": false },
-  { "codigo": "20009", "nombre": "Lomo rayado", "precioKg": 7.85, "precioLb": 3.56, "categoria": "Plancha", "disponible": true },
-  { "codigo": "20010", "nombre": "Puyazo", "precioKg": 0.00, "precioLb": 0.00, "categoria": "No Disponible", "disponible": false },
-  { "codigo": "20011", "nombre": "Bistec/Milanesa", "precioKg": 7.75, "precioLb": 3.52, "categoria": "Plancha", "disponible": true },
-  { "codigo": "20012", "nombre": "Lomo de cinta sin hueso", "precioKg": 0.00, "precioLb": 0.00, "categoria": "No Disponible", "disponible": false },
-  { "codigo": "20013", "nombre": "Fajita", "precioKg": 0.00, "precioLb": 0.00, "categoria": "No Disponible", "disponible": false },
-  { "codigo": "20014", "nombre": "Costillón entero", "precioKg": 7.25, "precioLb": 3.29, "categoria": "Parrilla", "disponible": true },
-  { "codigo": "20015", "nombre": "New york entero", "precioKg": 7.45, "precioLb": 3.38, "categoria": "Premium", "disponible": true },
-  { "codigo": "20017", "nombre": "Falda", "precioKg": 4.75, "precioLb": 2.15, "categoria": "Guisos", "disponible": true },
-  { "codigo": "20018", "nombre": "Jarrete porcionado", "precioKg": 6.53, "precioLb": 2.96, "categoria": "Guisos", "disponible": true },
-  { "codigo": "20019", "nombre": "Rib- eye entero", "precioKg": 9.25, "precioLb": 4.20, "categoria": "Premium", "disponible": true },
-  { "codigo": "20020", "nombre": "Flat Iron Steak", "precioKg": 8.50, "precioLb": 3.86, "categoria": "Premium", "disponible": true },
-  { "codigo": "20021", "nombre": "Costillon en porciones", "precioKg": 8.69, "precioLb": 3.94, "categoria": "Parrilla", "disponible": true },
-  { "codigo": "20022", "nombre": "Carne molida especial", "precioKg": 7.99, "precioLb": 3.62, "categoria": "Molida", "disponible": true },
-  { "codigo": "20023", "nombre": "Arrachera", "precioKg": 0.00, "precioLb": 0.00, "categoria": "No Disponible", "disponible": false },
-  { "codigo": "20024", "nombre": "Mondongo", "precioKg": 2.30, "precioLb": 1.04, "categoria": "Especiales", "disponible": true },
-  { "codigo": "20025", "nombre": "Lengua", "precioKg": 5.54, "precioLb": 2.51, "categoria": "Especiales", "disponible": true },
-  { "codigo": "20026", "nombre": "Hígado", "precioKg": 4.20, "precioLb": 1.91, "categoria": "Especiales", "disponible": true },
-  { "codigo": "20027", "nombre": "Pata", "precioKg": 2.00, "precioLb": 0.91, "categoria": "Especiales", "disponible": true },
-  { "codigo": "20028", "nombre": "Trip tip (punta Rincón)", "precioKg": 9.60, "precioLb": 4.35, "categoria": "Premium", "disponible": true },
-  { "codigo": "20029", "nombre": "Palomilla en bistec", "precioKg": 6.50, "precioLb": 2.95, "categoria": "Plancha", "disponible": true },
-  { "codigo": "20030", "nombre": "Lomo cola", "precioKg": 7.50, "precioLb": 3.40, "categoria": "Plancha", "disponible": true },
-  { "codigo": "20031", "nombre": "Lagarto entero", "precioKg": 7.85, "precioLb": 3.56, "categoria": "Guisos", "disponible": true },
-  { "codigo": "20032", "nombre": "Pulpa", "precioKg": 7.20, "precioLb": 3.27, "categoria": "Guisos", "disponible": true },
-  { "codigo": "20033", "nombre": "Cuadril entero", "precioKg": 8.16, "precioLb": 3.70, "categoria": "Premium", "disponible": true },
-  { "codigo": "20034", "nombre": "Sobrecostilla", "precioKg": 8.75, "precioLb": 3.97, "categoria": "Parrilla", "disponible": true },
-  { "codigo": "20035", "nombre": "Entraña", "precioKg": 8.50, "precioLb": 3.86, "categoria": "Premium", "disponible": true }
+  {
+    "codigo": "20001",
+    "nombre": "New york rebanado",
+    "precioKg": 9.26,
+    "precioLb": 4.2,
+    "categoria": "Premium",
+    "disponible": true
+  },
+  {
+    "codigo": "20002",
+    "nombre": "Filete Limpio /sin cordón",
+    "precioKg": 15.5,
+    "precioLb": 7.03,
+    "categoria": "Premium",
+    "disponible": true
+  },
+  {
+    "codigo": "20003",
+    "nombre": "Lomo redondo porcionado",
+    "precioKg": 7.75,
+    "precioLb": 3.52,
+    "categoria": "Plancha",
+    "disponible": true
+  },
+  {
+    "codigo": "20004",
+    "nombre": "Punta Palomilla entera (picanha)",
+    "precioKg": 10.55,
+    "precioLb": 4.79,
+    "categoria": "Premium",
+    "disponible": true
+  },
+  {
+    "codigo": "20005",
+    "nombre": "Pulpa negra en bistec",
+    "precioKg": 8.84,
+    "precioLb": 4.01,
+    "categoria": "Premium",
+    "disponible": true
+  },
+  {
+    "codigo": "20006",
+    "nombre": "Rincón en bistec",
+    "precioKg": 8.96,
+    "precioLb": 4.06,
+    "categoria": "Premium",
+    "disponible": true
+  },
+  {
+    "codigo": "20007",
+    "nombre": "Babilla en bistec",
+    "precioKg": 7.4,
+    "precioLb": 3.36,
+    "categoria": "Plancha",
+    "disponible": true
+  },
+  {
+    "codigo": "20008",
+    "nombre": "Lomo Mulato",
+    "precioKg": 0,
+    "precioLb": 0,
+    "categoria": "No Disponible",
+    "disponible": false
+  },
+  {
+    "codigo": "20009",
+    "nombre": "Lomo rayado",
+    "precioKg": 7.85,
+    "precioLb": 3.56,
+    "categoria": "Plancha",
+    "disponible": true
+  },
+  {
+    "codigo": "20010",
+    "nombre": "Puyazo",
+    "precioKg": 0,
+    "precioLb": 0,
+    "categoria": "No Disponible",
+    "disponible": false
+  },
+  {
+    "codigo": "20011",
+    "nombre": "Bistec/Milanesa",
+    "precioKg": 7.75,
+    "precioLb": 3.52,
+    "categoria": "Plancha",
+    "disponible": true
+  },
+  {
+    "codigo": "20012",
+    "nombre": "Lomo de cinta sin hueso",
+    "precioKg": 0,
+    "precioLb": 0,
+    "categoria": "No Disponible",
+    "disponible": false
+  },
+  {
+    "codigo": "20013",
+    "nombre": "Fajita",
+    "precioKg": 0,
+    "precioLb": 0,
+    "categoria": "No Disponible",
+    "disponible": false
+  },
+  {
+    "codigo": "20014",
+    "nombre": "Costillón entero",
+    "precioKg": 7.35,
+    "precioLb": 3.33,
+    "categoria": "Parrilla",
+    "disponible": true
+  },
+  {
+    "codigo": "20015",
+    "nombre": "New york entero",
+    "precioKg": 7.45,
+    "precioLb": 3.38,
+    "categoria": "Premium",
+    "disponible": true
+  },
+  {
+    "codigo": "20017",
+    "nombre": "Falda",
+    "precioKg": 4.75,
+    "precioLb": 2.15,
+    "categoria": "Guisos",
+    "disponible": true
+  },
+  {
+    "codigo": "20018",
+    "nombre": "Jarrete porcionado",
+    "precioKg": 6.53,
+    "precioLb": 2.96,
+    "categoria": "Guisos",
+    "disponible": true
+  },
+  {
+    "codigo": "20019",
+    "nombre": "Rib- eye entero",
+    "precioKg": 9.25,
+    "precioLb": 4.2,
+    "categoria": "Premium",
+    "disponible": true
+  },
+  {
+    "codigo": "20020",
+    "nombre": "Flat Iron Steak",
+    "precioKg": 8.5,
+    "precioLb": 3.86,
+    "categoria": "Premium",
+    "disponible": true
+  },
+  {
+    "codigo": "20021",
+    "nombre": "Costillon en porciones",
+    "precioKg": 8.69,
+    "precioLb": 3.94,
+    "categoria": "Parrilla",
+    "disponible": true
+  },
+  {
+    "codigo": "20022",
+    "nombre": "Carne molida especial",
+    "precioKg": 7.99,
+    "precioLb": 3.62,
+    "categoria": "Molida",
+    "disponible": true
+  },
+  {
+    "codigo": "20023",
+    "nombre": "Arrachera",
+    "precioKg": 0,
+    "precioLb": 0,
+    "categoria": "No Disponible",
+    "disponible": false
+  },
+  {
+    "codigo": "20024",
+    "nombre": "Mondongo",
+    "precioKg": 2.3,
+    "precioLb": 1.04,
+    "categoria": "Especiales",
+    "disponible": true
+  },
+  {
+    "codigo": "20025",
+    "nombre": "Lengua",
+    "precioKg": 5.54,
+    "precioLb": 2.51,
+    "categoria": "Especiales",
+    "disponible": true
+  },
+  {
+    "codigo": "20026",
+    "nombre": "Hígado",
+    "precioKg": 4.2,
+    "precioLb": 1.91,
+    "categoria": "Especiales",
+    "disponible": true
+  },
+  {
+    "codigo": "20027",
+    "nombre": "Pata",
+    "precioKg": 2,
+    "precioLb": 0.91,
+    "categoria": "Especiales",
+    "disponible": true
+  },
+  {
+    "codigo": "20028",
+    "nombre": "Trip tip (punta Rincón)",
+    "precioKg": 9.6,
+    "precioLb": 4.35,
+    "categoria": "Premium",
+    "disponible": true
+  },
+  {
+    "codigo": "20029",
+    "nombre": "Palomilla en bistec",
+    "precioKg": 6.5,
+    "precioLb": 2.95,
+    "categoria": "Plancha",
+    "disponible": true
+  },
+  {
+    "codigo": "20030",
+    "nombre": "Lomo cola",
+    "precioKg": 7.5,
+    "precioLb": 3.4,
+    "categoria": "Plancha",
+    "disponible": true
+  },
+  {
+    "codigo": "20031",
+    "nombre": "Lagarto entero",
+    "precioKg": 7.85,
+    "precioLb": 3.56,
+    "categoria": "Guisos",
+    "disponible": true
+  },
+  {
+    "codigo": "20032",
+    "nombre": "Pulpa",
+    "precioKg": 7.2,
+    "precioLb": 3.27,
+    "categoria": "Guisos",
+    "disponible": true
+  },
+  {
+    "codigo": "20033",
+    "nombre": "Cuadril entero",
+    "precioKg": 8.16,
+    "precioLb": 3.7,
+    "categoria": "Premium",
+    "disponible": true
+  },
+  {
+    "codigo": "20034",
+    "nombre": "Sobrecostilla",
+    "precioKg": 8.75,
+    "precioLb": 3.97,
+    "categoria": "Parrilla",
+    "disponible": true
+  },
+  {
+    "codigo": "20035",
+    "nombre": "Entraña",
+    "precioKg": 8.5,
+    "precioLb": 3.86,
+    "categoria": "Premium",
+    "disponible": true
+  }
 ]
