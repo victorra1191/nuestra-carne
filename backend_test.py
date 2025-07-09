@@ -14,7 +14,7 @@ class NuestraCarneTester:
                     self.base_url = line.split('=')[1].strip() + '/api'
                     break
             else:
-                self.base_url = "https://3dcfa13f-a6be-427a-9c5c-fb83a0d4c3e5.preview.emergentagent.com/api"
+                self.base_url = "https://3f6e3eb6-b7b3-4d90-915b-995a506e1c38.preview.emergentagent.com/api"
         
         print(f"Using backend URL: {self.base_url}")
         

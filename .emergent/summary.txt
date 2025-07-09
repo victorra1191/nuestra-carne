@@ -1,79 +1,76 @@
 <analysis>
-The previous AI engineer meticulously advanced the Nuestra Carne application from a nearly complete state, resolving critical frontend-backend disconnections and initial image display issues by implementing local SVG placeholders. A major effort was dedicated to building a comprehensive order management system, involving extensive backend API development and frontend integration. Subsequently, the focus shifted to extensive content and design updates based on user feedback, including text changes (ANGUS to 100% Nacional), color palette adjustments, address corrections, and button style enhancements. A recurring challenge has been ensuring these local changes are correctly reflected in the live preview and production environments, often complicated by Git synchronization issues, build failures, and persistent debugging of the blog loading and hero image display due to inconsistent URL resolution and caching/CORS problems in the deployment pipeline.
+The previous AI engineer effectively transformed the Nuestra Carne application from an initial MVP, tackling critical frontend-backend disconnections and diverse feature requests. Early efforts resolved image display issues via local SVGs and established a comprehensive order management system. Subsequent work involved extensive content updates across the landing page, including text alterations, address corrections, and design refinements like a new color palette and button enhancements. A major challenge involved persistent debugging of blog loading and hero image display in deployed environments, primarily due to inconsistent API URL resolution and a recurring double  prefix issue, eventually requiring direct URL hardcoding for production.
+
+More recently, the focus shifted to implementing a robust promotions system with an admin panel and a dynamic delivery fee based on order total. This involved creating new backend routes, a JSON data store for promotions, and integrating the logic into the . The latest work concentrates on resolving a critical synchronization problem: product edits made in the admin panel were not reflecting on the public-facing order form. This was traced to hardcoded product data in backend routes and the frontend  falling back to static data upon API errors. The current task is to debug this product price inconsistency in the OrderForm.
 </analysis>
 
 <product_requirements>
-The Nuestra Carne application is an online meat shop, initially featuring a new red palette design, user authentication, a wholesalers portal, and an admin panel. Prior to this session, the application faced frontend-backend disconnection issues, misconfigured URLs, and gray images. Immediate tasks included fixing these connections and verifying deploy functionality.
-
-During the session, new requirements and issues emerged:
-*   **Text & Content:** Change ANGUS to Carne 100% Nacional, modify the main claim to Carne 100% Nacional, adjust calidad garantizada to remove money-back guarantee, update entrega rápida to Su pedido en menos de 48 horas and add delivery conditions (free delivery for orders +0 within the metropolitan area).
-*   **Address Correction:** Update Agua Dulce to C. 139 Este, Panamá, Provincia de Panamá in the footer.
-*   **Design & Branding:** Incorporate more black, use a stronger wine red brand color (FOLDCOTONE palette), and make the Haz tu pedido button more visible and robust.
-*   **Image Issues:** Resolve hero image not appearing in production (initially due to external URLs, later due to build path issues).
-*   **Blog Functionality:** Fix blog not loading in preview/production (Error al cargar, Invalid Date errors), despite backend API functioning.
+The Nuestra Carne application is an online meat shop, initially suffering from frontend-backend disconnections, misconfigured URLs, and placeholder images. The primary goal was to fix these core issues and expand functionality. Explicit user requests and problems to solve included:
+*   **Content Updates**: Revise 48 horas to 2 días, 0 to 0 for free delivery thresholds across UI components (Hero, Delivery, CTA, Footer, OrderForm). Update main claim from ANGUS to Carne 100% Nacional and refine calidad garantizada text.
+*   **Address Correction**: Change C. 139 Este, Panamá, Provincia de Panamá to Coopugan - Llanos de Curundú.
+*   **Design & Branding**: Integrate black and a wine red (FOLDCOTONE) color palette. Enhance visibility and robustness of the Haz tu pedido button. Add payment methods (Visa, Mastercard, Ach, Yappy) to the footer.
+*   **Image Issues**: Resolve hero image failing to appear in production/preview.
+*   **Blog Functionality**: Fix blog not loading in production/preview (Error al cargar artículos, Invalid Date), and improve text formatting within blog posts (bolding, spacing, lists).
+*   **Mobile Optimization**: Implement cart/order summary positioned at the top on mobile, and make meat categories in the order form function as an accordion.
+*   **Product/Service Content**: Change 20 años de experiencia to expertos carniceros, Arrachera to Pulpa negra, Frescura Garantizada to Sin Inyecciones de agua. Update operating hours and add a Cortes Selectos section.
+*   **Admin/Features**: Implement a comprehensive promotions system with an admin dashboard for creating and managing promotions. Add a .50 delivery fee for orders under 0, with free delivery for orders 0 and above. Ensure real-time synchronization of product edits made in the admin panel to the public-facing order form. Remove test blog articles.
 </product_requirements>
 
 <key_technical_concepts>
--   **Node.js/Express**: Backend framework handling API routes and data.
--   **React**: Frontend framework for dynamic UI.
--   **Supervisor**: Process manager controlling Node.js and React applications.
--   **Environment Variables ()**: Configuration for backend/frontend URLs.
--   **API Routing**: Express.js, with critical  prefix for Kubernetes ingress.
--   **CORS**: Cross-Origin Resource Sharing, a frequent issue between frontend and backend in different environments.
--   **Git/GitHub**: Version control system, central to deployment challenges.
+-   **Node.js/Express**: Backend framework for APIs.
+-   **React**: Frontend framework for UI.
+-   **Supervisor**: Process manager for application services.
+-   **Environment Variables ()**: Configuration management.
+-   **API Routing**:  prefix for Kubernetes ingress.
+-   **JSON File Persistence**: Local data storage for orders, products, blog, and promotions.
+-   **Markdown-to-HTML**: Frontend processing of blog content.
+-   **Responsive Design**: Mobile-first UI adjustments.
 </key_technical_concepts>
 
 <code_architecture>
-The application utilizes a full-stack architecture with a React frontend and a Node.js/Express backend. Order data is managed using a local JSON file () for persistence.
+The application employs a full-stack architecture featuring a React frontend and a Node.js/Express backend. Data persistence is managed via local JSON files.
 
 **Directory Structure:**
 
 
 **Key Files and Changes:**
+*   ****: Main Express application entry point. Critical for middleware ordering; API routes were moved before static file serving to resolve Endpoint not found issues in production. A  route was added for debugging.
+*   ****: **NEW** file. Stores all promotion data, enabling persistence for the new promotions system.
+*   ****: **NEW** file. Centralized storage for all product data, replacing previously hardcoded product lists. This file now acts as the single source of truth for product information.
+*   ****: **NEW** file. Defines backend API endpoints for promotions, including creation, retrieval, updates, deletion, and validation of promo codes.
+*   ****: Handles product management within the admin panel. Modified to read from and write to , enabling actual saving of product edits (prices, availability, categories) and toggle functionality, replacing mock updates.
+*   ****: Manages public-facing product data retrieval. Updated to fetch product data from  to ensure consistency with admin panel updates, removing hardcoded product lists.
+*   ****: Frontend environment variables, specifically . Repeatedly updated to correct hostname mismatches and  suffix inconsistencies in production.
+*   ****: Global stylesheet for frontend. Updated hero background image to a local asset. Implemented new FOLDCOTONE color palette and enhanced button styles. Added specific CSS for blog content to ensure correct markdown rendering and spacing.
+*   ****: Main admin dashboard component. Modified to integrate the new  component and add a navigation link for promotions.
+*   ****: **NEW** file. A React component providing the UI for administrators to manage promotions (create, edit, delete) and view their details.
+*   ****: Frontend component for product management in admin. Enhanced to trigger an immediate data refresh () after any product edit or toggle, ensuring changes are reflected from the backend. Fixed instances of double  in API calls.
+*   ** & **: Components for displaying blog articles. Corrected double  prefixes, improved date formatting, and simplified API URL construction with a direct hardcoded approach for production to bypass  issues.
+*   ****: The public home page. Underwent significant content revisions (text, claims, address, operating hours, service descriptions, product names like Arrachera to Pulpa Negra) and incorporated a new payment methods section in the footer.
+*   ****: User-facing order submission form. Implemented dynamic delivery fee calculation (.50 under 0, free over 0) and integrated the promotion code validation logic. Modified for mobile responsiveness, placing the cart above products and introducing an accordion view for product categories. Currently being debugged for not reflecting product price updates.
+*   ****: **NEW** file. A dedicated debug page to inspect the frontend's constructed API URL and test various backend endpoints directly from the browser, crucial for diagnosing production connectivity issues.
 
-*   ****: Main Express application. Modified to reorder middleware, placing API routes before the static file serving catch-all to prevent HTML being served for API requests.
-*   ****: Supervisor configuration. Corrected to run Node.js/Express backend instead of a Python uvicorn server.
-*   ****: Backend environment variables. Created to specify .
-*   ****: **NEW** file. Persistent storage for all order data.
-*   ****: Backend API for orders. Implemented endpoints for saving, fetching (by user/all), and updating order statuses.
-*   ****: Authentication context. All API calls prefixed with .
-*   ****: Blog listing page. Modified to add  prefix, fix double  in API calls, correct date formatting, add advanced debugging logs, and implement dynamic API URL detection for different environments (localhost, emergent preview, production).
-*   ****: Single blog post page. Similar changes to  for API prefix, double  fix, date formatting, and dynamic API URL detection.
-*   ****: **NEW** file. A temporary page for debugging blog API calls and environment variables in live deployments.
-*   ****: Main landing page. Extensive text updates (ANGUS to 100% Nacional, quality/delivery claims, button text). Updated image references to local assets (, then ). Corrected footer address.
-*   ****: Order submission form. Included  in payload, added delivery condition text.
-*   ****: User's dashboard. Fetches real order data from backend (removed mocked data), added debug logs for API calls.
-*   ****: Main React component. Added routing for the new  page.
-*   ****: Global styles. Updated hero and CTA background images to local SVGs (later to  for hero). Implemented new red and wine color palette, and updated button styles for robustness and visibility.
-*   ****: Tailwind CSS configuration. Updated color definitions to match the new FOLDCOTONE palette.
-*   ****: **NEW** local SVG image files and JPEGs (, , , , , ) to replace problematic external URLs.
-*   ****: Updated meta tags (, , , , , , , ), keywords, and structured data ( address) for SEO.
 </code_architecture>
 
 <pending_tasks>
--   **SMTP Password Configuration**:  in  remains a placeholder.
--   **User Dashboard Orders Confirmation**: User needs to verify if the dashboard now displays actual orders.
--   **Blog Functionality (Production/Preview)**: The blog still reports errors (Error al cargar artículos, Invalid Date) in preview/production despite local fixes and debugging.
--   **Hero Image (Production/Preview)**: The hero image is not appearing in production, only the background color.
+-   **Pulpa Negra Image Upload**: The user needs to manually upload the actual  image to the  directory, as only a placeholder was created.
+-   **Order Form Product Price Synchronization**: Debug why the OrderForm is still displaying old product prices despite backend updates and the  file being correct.
 </pending_tasks>
 
 <current_work>
-Immediately before this summary, the AI engineer was deep-diving into persistent issues with the blog not loading and the hero image not appearing in the preview/production environment, despite previous attempts to fix them locally.
+Immediately prior to this summary, the AI engineer was actively engaged in debugging a critical issue where product price changes, successfully applied and stored in the backend via the admin panel, were not being reflected on the public-facing .
 
-For the **blog issue**, the AI has:
-1.  Identified and fixed double  prefixes in  and .
-2.  Corrected Invalid Date errors by refining date formatting.
-3.  Implemented dynamic API URL detection in , , and  to adapt to different hostnames (localhost,  preview, production).
-4.  Added extensive  debugging statements (with emojis) to trace network requests and responses, URL detection, and error handling for the user to copy.
-5.  Created a new  page in  and  to specifically debug the API call in isolation.
+Specifically, while a product like Costillón entero correctly displays its updated price (.35) in the admin dashboard, the  still shows its old price (.25).
 
-For the **hero image issue**, the AI has:
-1.  Switched the hero background image in  from an external URL (which was being blocked in production) to a local image ().
-2.  Confirmed that Webpack correctly processes and includes this local image in the build output.
+The investigation has revealed:
+1.  The  component now correctly updates the backend's  file and refreshes its own view to show the new prices.
+2.  The backend route  (handled by ), responsible for providing product data to the OrderForm, was previously hardcoding product prices. This was corrected to read from the  file.
+3.  Despite  containing the correct updated price, the  endpoint was still returning the old price in previous tests, leading to confusion about caching or synchronization. However, direct inspection of  showed the correct price, and subsequent manual verification of the  showed correct saving.
+4.  The current leading hypothesis (from Chat Message 665) is that  is falling back to using its  (hardcoded old product data) whenever its  call to  encounters any error. This suggests that even if the backend is updated, a network error, parsing error, or any other issue during the API call or response handling on the frontend side causes it to revert to stale data.
 
-All these changes have been compiled and committed locally. However, the user's latest feedback indicates that the blog is *still* not loading in the preview, and the hero image is *still* not visible in production. The user expressed frustration and mentioned creating a fork. The core problem appears to be a disconnect between local functionality and what's observed in the deployed environments, likely due to Git synchronization or a misconfigured deployment pipeline that doesn't fully reflect the local changes, or a deeper environment-specific issue.
+The AI engineer's immediate action is to add more extensive logging within the  file to precisely pinpoint the cause of this fallback behavior, especially during the  operation for product data. The last command executed was a  on  to prepare for adding these logs.
 </current_work>
 
 <optional_next_step>
-The next step is to continue debugging the blog and hero image issues by thoroughly analyzing the console logs from the deployed preview environment, focusing on the API responses and image loading paths.
+Add detailed logging within  to diagnose why it falls back to  when fetching product data.
 </optional_next_step>
