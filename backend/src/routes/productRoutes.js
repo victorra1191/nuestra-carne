@@ -88,21 +88,6 @@ const defaultWholesalePrices = [
   { codigo: '20065', nombre: 'Carne de hamburguesa- 24 onzas', precioKg: 5.95, precioLb: 2.70, categoria: 'Molida' }
 ];
 
-// Funciones helper
-const readJSONFile = async (filePath) => {
-  try {
-    const data = await fs.readFile(filePath, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    if (error.code === 'ENOENT') {
-      // Si no existe el archivo, crear con precios por defecto
-      await writeJSONFile(filePath, defaultWholesalePrices);
-      return defaultWholesalePrices;
-    }
-    throw error;
-  }
-};
-
 const writeJSONFile = async (filePath, data) => {
   await fs.writeFile(filePath, JSON.stringify(data, null, 2));
 };
@@ -136,10 +121,10 @@ router.get('/wholesale', async (req, res) => {
 router.get('/retail', async (req, res) => {
   try {
     // Leer productos actualizados desde el archivo JSON
-    const allProducts = await readJSONFile(PRODUCTS_FILE);
+    const products = await readJSONFile(PRODUCTS_FILE);
     
     // Filtrar solo productos disponibles para venta minorista
-    const retailProducts = allProducts.filter(product => product.disponible);
+    const retailProducts = products.filter(p => p.precioLb > 0);
     
     res.json({
       success: true,
