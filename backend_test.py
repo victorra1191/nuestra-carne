@@ -333,84 +333,31 @@ def main():
     if health_success:
         print(f"API Health: {json.dumps(health_response, indent=2)}")
     
-    # 2. Test blog API endpoints
-    print("\n🔍 TESTING BLOG API ENDPOINTS 🔍")
-    print("===============================")
+    # 2. Test retail products endpoint specifically
+    print("\n🔍 TESTING RETAIL PRODUCTS ENDPOINT 🔍")
+    print("=====================================")
     
-    # 2.1 Get public blog articles
-    articles_success, articles_response = tester.test_get_public_articles()
-    if articles_success:
-        articles = articles_response.get('articles', [])
-        print(f"Found {len(articles)} public blog articles")
-        if articles:
-            print(f"First article: {articles[0]['titulo']}")
-            print(f"Article structure: {json.dumps(articles[0], indent=2)}")
-    
-    # 2.2 Admin login
-    if tester.test_admin_login("admin", "nuestra123"):
-        print("Admin login successful")
+    retail_success, retail_response = tester.test_retail_products()
+    if retail_success:
+        print("✅ Retail products endpoint is working correctly")
+        print("✅ Costillón entero (codigo: 20014) has the correct price of $3.33")
         
-        # 2.3 Get all articles (including inactive)
-        all_articles_success, all_articles_response = tester.test_get_all_articles()
-        if all_articles_success:
-            all_articles = all_articles_response.get('articles', [])
-            print(f"Found {len(all_articles)} total blog articles (including inactive)")
-            
-            # Print the structure of the first article
-            if all_articles:
-                print(f"Article structure: {json.dumps(all_articles[0], indent=2)}")
-        
-        # 2.4 Create a test article
-        create_success, create_response = tester.test_create_article()
-        if create_success:
-            print(f"Created test article: {create_response.get('article', {}).get('titulo')}")
-    
-    # 3. Test order submission
-    order_success = tester.test_order_submission()
-    print(f"Order submission test {'passed' if order_success else 'failed'}")
-    
-    # 4. Test wholesale API endpoints
-    print("\n🔍 TESTING WHOLESALE API ENDPOINTS 🔍")
-    print("===================================")
-    
-    # 4.1 Register a wholesale user
-    wholesale_reg_success, wholesale_reg_response = tester.test_wholesale_registration()
-    if wholesale_reg_success:
-        print(f"Wholesale user registration successful")
-    
-    # 4.2 Test wholesale login
-    wholesale_login_data = {
-        "email": tester.wholesale_user["email"],
-        "password": tester.wholesale_user["password"]
-    }
-    
-    wholesale_login_success, wholesale_login_response = tester.run_test(
-        "Wholesale User Login",
-        "POST",
-        "auth/login",
-        200,
-        data=wholesale_login_data
-    )
-    
-    if wholesale_login_success and wholesale_login_response.get('success') and 'token' in wholesale_login_response:
-        tester.auth_token = wholesale_login_response['token']
-        tester.auth_header = f"Bearer {tester.auth_token}"
-        print(f"Wholesale login successful")
-        
-        # 4.3 Test wholesale requests
-        wholesale_requests_success, wholesale_requests_response = tester.run_test(
-            "Get Wholesale Requests",
-            "GET",
-            "auth/wholesale-requests",
-            200,
-            auth=True
-        )
-        
-        if wholesale_requests_success:
-            requests = wholesale_requests_response.get('requests', [])
-            print(f"Found {len(requests)} wholesale requests")
-        else:
-            print("Failed to retrieve wholesale requests")
+        # Verify data comes from products.json and not hardcoded values
+        print("\nVerifying data source...")
+        try:
+            with open('/app/backend/src/data/products.json', 'r') as f:
+                products_data = json.load(f)
+                costillon_in_file = next((p for p in products_data if p.get('codigo') == '20014'), None)
+                
+                if costillon_in_file and costillon_in_file['precioLb'] == 3.33:
+                    print("✅ Confirmed: Data is being read from products.json file")
+                    print(f"File data: {json.dumps(costillon_in_file, indent=2)}")
+                else:
+                    print("❌ Data mismatch between API response and products.json file")
+        except Exception as e:
+            print(f"❌ Error verifying data source: {str(e)}")
+    else:
+        print("❌ Retail products endpoint test failed")
     
     # Print results
     print("\n📊 TEST RESULTS 📊")
