@@ -135,81 +135,19 @@ router.get('/wholesale', async (req, res) => {
  */
 router.get('/retail', async (req, res) => {
   try {
-    // Precios minoristas (los existentes en OrderForm.js)
-    const retailProducts = [
-      { codigo: '20001', nombre: 'New york rebanado', precioKg: 9.26, precioLb: 4.20, categoria: 'Premium' },
-      { codigo: '20002', nombre: 'Filete Limpio /sin cordón', precioKg: 15.50, precioLb: 7.03, categoria: 'Premium' },
-      { codigo: '20003', nombre: 'Lomo redondo porcionado', precioKg: 7.75, precioLb: 3.52, categoria: 'Plancha' },
-      { codigo: '20004', nombre: 'Punta Palomilla entera (picanha)', precioKg: 10.55, precioLb: 4.79, categoria: 'Premium' },
-      { codigo: '20005', nombre: 'Pulpa negra en bistec', precioKg: 8.84, precioLb: 4.01, categoria: 'Premium' },
-      { codigo: '20006', nombre: 'Rincón en bistec', precioKg: 8.96, precioLb: 4.06, categoria: 'Premium' },
-      { codigo: '20007', nombre: 'Babilla en bistec', precioKg: 7.40, precioLb: 3.36, categoria: 'Plancha' },
-      { codigo: '20008', nombre: 'Lomo Mulato', precioKg: 0.00, precioLb: 0.00, categoria: 'No Disponible' },
-      { codigo: '20009', nombre: 'Lomo rayado', precioKg: 7.85, precioLb: 3.56, categoria: 'Plancha' },
-      { codigo: '20010', nombre: 'Puyazo', precioKg: 0.00, precioLb: 0.00, categoria: 'No Disponible' },
-      { codigo: '20011', nombre: 'Bistec/Milanesa', precioKg: 7.75, precioLb: 3.52, categoria: 'Plancha' },
-      { codigo: '20012', nombre: 'Lomo de cinta sin hueso', precioKg: 0.00, precioLb: 0.00, categoria: 'No Disponible' },
-      { codigo: '20013', nombre: 'Fajita', precioKg: 0.00, precioLb: 0.00, categoria: 'No Disponible' },
-      { codigo: '20014', nombre: 'Costillón entero', precioKg: 7.25, precioLb: 3.29, categoria: 'Parrilla' },
-      { codigo: '20015', nombre: 'New york entero', precioKg: 7.45, precioLb: 3.38, categoria: 'Premium' },
-      { codigo: '20017', nombre: 'Falda', precioKg: 4.75, precioLb: 2.15, categoria: 'Guisos' },
-      { codigo: '20018', nombre: 'Jarrete porcionado', precioKg: 6.53, precioLb: 2.96, categoria: 'Guisos' },
-      { codigo: '20019', nombre: 'Rib- eye entero', precioKg: 9.25, precioLb: 4.20, categoria: 'Premium' },
-      { codigo: '20020', nombre: 'Flat Iron Steak', precioKg: 8.50, precioLb: 3.86, categoria: 'Premium' },
-      { codigo: '20021', nombre: 'Costillon en porciones', precioKg: 8.69, precioLb: 3.94, categoria: 'Parrilla' },
-      { codigo: '20022', nombre: 'Carne molida especial', precioKg: 7.99, precioLb: 3.62, categoria: 'Molida' },
-      { codigo: '20023', nombre: 'Arrachera', precioKg: 0.00, precioLb: 0.00, categoria: 'No Disponible' },
-      { codigo: '20024', nombre: 'Mondongo', precioKg: 2.30, precioLb: 1.04, categoria: 'Especiales' },
-      { codigo: '20025', nombre: 'Lengua', precioKg: 5.54, precioLb: 2.51, categoria: 'Especiales' },
-      { codigo: '20026', nombre: 'Hígado', precioKg: 4.20, precioLb: 1.91, categoria: 'Especiales' },
-      { codigo: '20027', nombre: 'Pata', precioKg: 2.00, precioLb: 0.91, categoria: 'Especiales' },
-      { codigo: '20028', nombre: 'Trip tip (punta Rincón)', precioKg: 9.60, precioLb: 4.35, categoria: 'Premium' },
-      { codigo: '20029', nombre: 'Palomilla en bistec', precioKg: 6.50, precioLb: 2.95, categoria: 'Plancha' },
-      { codigo: '20030', nombre: 'Costilla de res picada', precioKg: 5.72, precioLb: 2.59, categoria: 'Parrilla' },
-      { codigo: '20031', nombre: 'Pulpa blanca entera', precioKg: 7.00, precioLb: 3.18, categoria: 'Premium' },
-      { codigo: '20032', nombre: 'Entraña', precioKg: 9.39, precioLb: 4.26, categoria: 'Premium' },
-      { codigo: '20033', nombre: 'Lomito', precioKg: 8.00, precioLb: 3.63, categoria: 'Premium' },
-      { codigo: '20034', nombre: 'Vacio', precioKg: 8.00, precioLb: 3.63, categoria: 'Premium' },
-      { codigo: '20035', nombre: 'Falda Gruesa', precioKg: 6.25, precioLb: 2.83, categoria: 'Guisos' },
-      { codigo: '20036', nombre: 'Ropa vieja', precioKg: 6.75, precioLb: 3.06, categoria: 'Guisos' },
-      { codigo: '20037', nombre: 'Rabo', precioKg: 6.85, precioLb: 3.11, categoria: 'Guisos' },
-      { codigo: '20038', nombre: 'Rib- eye porcionado', precioKg: 9.50, precioLb: 4.31, categoria: 'Premium' },
-      { codigo: '20039', nombre: 'Prime rib (asado en tiras)', precioKg: 6.00, precioLb: 2.72, categoria: 'Parrilla' },
-      { codigo: '20040', nombre: 'Pajarilla', precioKg: 2.00, precioLb: 0.91, categoria: 'Especiales' },
-      { codigo: '20041', nombre: 'Corazón', precioKg: 3.00, precioLb: 1.36, categoria: 'Especiales' },
-      { codigo: '20042', nombre: 'Bofe', precioKg: 3.50, precioLb: 1.59, categoria: 'Especiales' },
-      { codigo: '20043', nombre: 'Hueso blanco', precioKg: 1.25, precioLb: 0.57, categoria: 'Especiales' },
-      { codigo: '20044', nombre: 'Hueso rojo', precioKg: 2.00, precioLb: 0.91, categoria: 'Especiales' },
-      { codigo: '20045', nombre: 'Piltrafa', precioKg: 0.04, precioLb: 0.02, categoria: 'Especiales' },
-      { codigo: '20046', nombre: 'Ossobuco de res rebanado', precioKg: 6.77, precioLb: 3.07, categoria: 'Guisos' },
-      { codigo: '20047', nombre: 'Arañita', precioKg: 20.20, precioLb: 9.16, categoria: 'Premium' },
-      { codigo: '20048', nombre: 'Carne de guisar', precioKg: 8.35, precioLb: 3.79, categoria: 'Guisos' },
-      { codigo: '20049', nombre: 'Brisket', precioKg: 6.50, precioLb: 2.95, categoria: 'Premium' },
-      { codigo: '20050', nombre: 'Pulpa blanca en bistec', precioKg: 7.25, precioLb: 3.29, categoria: 'Premium' },
-      { codigo: '20051', nombre: 'Huevo', precioKg: 1.00, precioLb: 0.45, categoria: 'Especiales' },
-      { codigo: '20052', nombre: 'Tuétano /Canoa', precioKg: 5.00, precioLb: 2.27, categoria: 'Especiales' },
-      { codigo: '20053', nombre: 'Lomo paleta (little)', precioKg: 7.85, precioLb: 3.56, categoria: 'Plancha' },
-      { codigo: '20054', nombre: 'Bistec Picado', precioKg: 7.00, precioLb: 3.18, categoria: 'Plancha' },
-      { codigo: '20055', nombre: 'Tomahawk', precioKg: 12.00, precioLb: 5.44, categoria: 'Premium' },
-      { codigo: '20056', nombre: 'Carne Molida de Segunda', precioKg: 3.04, precioLb: 1.38, categoria: 'Molida' },
-      { codigo: '20057', nombre: 'Filetillo', precioKg: 7.00, precioLb: 3.18, categoria: 'Plancha' },
-      { codigo: '20058', nombre: 'Babilla entera', precioKg: 7.15, precioLb: 3.24, categoria: 'Plancha' },
-      { codigo: '20059', nombre: 'Lomo redondo entero', precioKg: 7.50, precioLb: 3.40, categoria: 'Plancha' },
-      { codigo: '20060', nombre: 'Rincón entero', precioKg: 8.71, precioLb: 3.95, categoria: 'Premium' },
-      { codigo: '20061', nombre: 'Palomilla entera', precioKg: 6.25, precioLb: 2.83, categoria: 'Plancha' },
-      { codigo: '20062', nombre: 'Pulpa negra entera', precioKg: 8.59, precioLb: 3.90, categoria: 'Premium' },
-      { codigo: '20063', nombre: 'Costilla de res entera', precioKg: 5.47, precioLb: 2.48, categoria: 'Parrilla' },
-      { codigo: '20064', nombre: 'Jarrete entero', precioKg: 6.28, precioLb: 2.85, categoria: 'Guisos' },
-      { codigo: '20065', nombre: 'Carne de hamburguesa- 24 onzas', precioKg: 8.50, precioLb: 3.86, categoria: 'Molida' }
-    ];
-
+    // Leer productos actualizados desde el archivo JSON
+    const allProducts = await readJSONFile(PRODUCTS_FILE);
+    
+    // Filtrar solo productos disponibles para venta minorista
+    const retailProducts = allProducts.filter(product => product.disponible);
+    
     res.json({
       success: true,
-      products: retailProducts.filter(p => p.precioLb > 0)
+      products: retailProducts
     });
 
   } catch (error) {
-    console.error('Error obteniendo precios minoristas:', error);
+    console.error('Error obteniendo productos retail:', error);
     res.status(500).json({
       success: false,
       error: 'Error interno del servidor'
