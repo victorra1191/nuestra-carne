@@ -19,11 +19,17 @@ function App() {
   // Verificar si está en modo mantenimiento
   const isMaintenanceMode = process.env.REACT_APP_MAINTENANCE_MODE === 'true';
   
+  // Debug log para verificar el valor
+  console.log('🔍 Debug - REACT_APP_MAINTENANCE_MODE:', process.env.REACT_APP_MAINTENANCE_MODE);
+  console.log('🔍 Debug - isMaintenanceMode:', isMaintenanceMode);
+  
   // Si está en modo mantenimiento, mostrar solo la página de mantenimiento
   if (isMaintenanceMode) {
+    console.log('✅ Mostrando página de mantenimiento');
     return <MaintenancePage />;
   }
 
+  console.log('✅ Mostrando aplicación normal');
   return (
     <AuthProvider>
       <Router>
