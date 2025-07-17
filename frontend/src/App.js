@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import MaintenancePage from './components/MaintenancePage';
 import LandingPage from './pages/LandingPage';
 import OrderForm from './pages/OrderForm';
 import Admin from './pages/Admin';
@@ -15,6 +16,14 @@ import UserDashboard from './pages/UserDashboard';
 import './App.css';
 
 function App() {
+  // Verificar si está en modo mantenimiento
+  const isMaintenanceMode = process.env.REACT_APP_MAINTENANCE_MODE === 'true';
+  
+  // Si está en modo mantenimiento, mostrar solo la página de mantenimiento
+  if (isMaintenanceMode) {
+    return <MaintenancePage />;
+  }
+
   return (
     <AuthProvider>
       <Router>
