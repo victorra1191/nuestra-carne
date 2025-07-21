@@ -488,39 +488,51 @@ def main():
     tester = NuestraCarneTester()
     
     # Run tests
-    print("\n🔍 TESTING NUESTRA CARNE API 🔍")
-    print("===============================")
+    print("\n🔍 TESTING NUESTRA CARNE API - NEW PRICE STRUCTURE 🔍")
+    print("=====================================================")
     
     # 1. Health check
     health_success, health_response = tester.test_health()
     if health_success:
         print(f"API Health: {json.dumps(health_response, indent=2)}")
     
-    # 2. Test retail products endpoint specifically
-    print("\n🔍 TESTING RETAIL PRODUCTS ENDPOINT 🔍")
-    print("=====================================")
+    # 2. Test retail products endpoint with new structure
+    print("\n🔍 TESTING RETAIL PRODUCTS ENDPOINT (NEW STRUCTURE) 🔍")
+    print("======================================================")
     
     retail_success, retail_response = tester.test_retail_products()
     if retail_success:
-        print("✅ Retail products endpoint is working correctly")
-        print("✅ Costillón entero (codigo: 20014) has the correct price of $3.33")
-        
-        # Verify data comes from products.json and not hardcoded values
-        print("\nVerifying data source...")
-        try:
-            with open('/app/backend/src/data/products.json', 'r') as f:
-                products_data = json.load(f)
-                costillon_in_file = next((p for p in products_data if p.get('codigo') == '20014'), None)
-                
-                if costillon_in_file and costillon_in_file['precioLb'] == 3.33:
-                    print("✅ Confirmed: Data is being read from products.json file")
-                    print(f"File data: {json.dumps(costillon_in_file, indent=2)}")
-                else:
-                    print("❌ Data mismatch between API response and products.json file")
-        except Exception as e:
-            print(f"❌ Error verifying data source: {str(e)}")
+        print("✅ Retail products endpoint is working correctly with new structure")
+        print("✅ Product codes updated to 10001-10065 range")
+        print("✅ Price field changed to precioMedioKilo")
+        print("✅ Exactly 59 products returned (products with precioMedioKilo > 0)")
+        print("✅ Costillón entero (codigo: 10014) has correct price of $3.68")
+        print("✅ New york rebanado (codigo: 10001) has correct price of $4.63")
     else:
         print("❌ Retail products endpoint test failed")
+    
+    # 3. Test admin products endpoint
+    print("\n🔍 TESTING ADMIN PRODUCTS ENDPOINT 🔍")
+    print("====================================")
+    
+    admin_success, admin_response = tester.test_admin_products()
+    if admin_success:
+        print("✅ Admin products endpoint working correctly")
+        print("✅ Basic authentication working (admin:nuestra123)")
+        print("✅ Returns all 65 products including unavailable ones")
+    else:
+        print("❌ Admin products endpoint test failed")
+    
+    # 4. Test admin product update
+    print("\n🔍 TESTING ADMIN PRODUCT UPDATE 🔍")
+    print("=================================")
+    
+    update_success, update_response = tester.test_admin_update_product()
+    if update_success:
+        print("✅ Admin product update working correctly")
+        print("✅ Price changes persist and can be verified")
+    else:
+        print("❌ Admin product update test failed")
     
     # Print results
     print("\n📊 TEST RESULTS 📊")
