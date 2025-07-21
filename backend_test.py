@@ -262,7 +262,8 @@ class NuestraCarneTester:
         update_url = f"{self.base_url}/admin/products/10014"
         new_price = 4.00  # Test price
         update_data = {
-            "precioMedioKilo": new_price
+            "precioMedioKilo": new_price,
+            "precioKg": new_price * 2  # Since precioKg should be double precioMedioKilo
         }
         
         self.tests_run += 1
