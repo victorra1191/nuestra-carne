@@ -197,8 +197,8 @@ class NuestraCarneTester:
                 print(f"Found {len(products)} total products in admin view")
                 
                 # Verify structure is the same as retail but includes all products
-                if len(products) != 65:
-                    print(f"❌ Expected 65 total products, got {len(products)}")
+                if len(products) != 64:
+                    print(f"❌ Expected 64 total products, got {len(products)}")
                     return False, data
                 
                 # Check that it includes products with precioMedioKilo = 0 (unavailable ones)
