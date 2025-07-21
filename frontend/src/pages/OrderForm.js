@@ -100,7 +100,7 @@ const OrderForm = () => {
         
         if (data.success && data.products) {
           // Verificar precios específicos para debugging
-          const costillonEntero = data.products.find(p => p.codigo === '20014');
+          const costillonEntero = data.products.find(p => p.codigo === '10014');
           console.log('🔍 [OrderForm] Costillón entero encontrado:', costillonEntero);
           
           setProductos(data.products);
