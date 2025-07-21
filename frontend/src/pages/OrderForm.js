@@ -248,7 +248,7 @@ const OrderForm = () => {
           ? { 
               ...item, 
               cantidad: item.cantidad + 1,
-              subtotal: (item.cantidad + 1) * (item.unidad === 'libras' ? item.precioLb : item.precioKg)
+              subtotal: (item.cantidad + 1) * (item.unidad === 'medio kilo' ? item.precioMedioKilo : item.precioKg)
             }
           : item
       ));
