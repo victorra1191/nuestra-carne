@@ -91,7 +91,7 @@ router.get('/wholesale', async (req, res) => {
     
     res.json({
       success: true,
-      products: prices.filter(p => p.precioLb > 0) // Solo productos disponibles
+      products: prices.filter(p => p.precioMedioKilo > 0) // Solo productos disponibles
     });
 
   } catch (error) {
