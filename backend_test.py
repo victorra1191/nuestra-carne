@@ -172,22 +172,143 @@ class NuestraCarneTester:
         
         return success, response
 
-    def test_wholesale_products(self):
-        """Test wholesale products endpoint"""
-        success, response = self.run_test(
-            "Get Wholesale Products",
-            "GET",
-            "products/wholesale",
-            200
-        )
+    def test_admin_products(self):
+        """Test admin products endpoint with basic auth"""
+        # Set up basic auth header
+        import base64
+        credentials = base64.b64encode(b'admin:nuestra123').decode('utf-8')
+        headers = {'Authorization': f'Basic {credentials}'}
         
-        if success:
-            products = response.get('products', [])
-            print(f"Found {len(products)} wholesale products")
-            if products:
-                print(f"First product: {products[0]['nombre']} - ${products[0]['precioLb']} per lb")
+        url = f"{self.base_url}/admin/products/all"
         
-        return success, response
+        self.tests_run += 1
+        print(f"\n🔍 Testing Admin Products Endpoint...")
+        
+        try:
+            response = requests.get(url, headers=headers)
+            success = response.status_code == 200
+            
+            if success:
+                self.tests_passed += 1
+                print(f"✅ Passed - Status: {response.status_code}")
+                
+                data = response.json()
+                products = data.get('products', [])
+                print(f"Found {len(products)} total products in admin view")
+                
+                # Verify structure is the same as retail but includes all products
+                if len(products) != 65:
+                    print(f"❌ Expected 65 total products, got {len(products)}")
+                    return False, data
+                
+                # Check that it includes products with precioMedioKilo = 0 (unavailable ones)
+                unavailable_products = [p for p in products if p.get('precioMedioKilo', 0) == 0]
+                print(f"Found {len(unavailable_products)} unavailable products")
+                
+                # Verify specific products exist
+                costillon = next((p for p in products if p.get('codigo') == '10014'), None)
+                newyork = next((p for p in products if p.get('codigo') == '10001'), None)
+                
+                if costillon and newyork:
+                    print("✅ Admin endpoint returns all products with correct structure")
+                    return True, data
+                else:
+                    print("❌ Missing expected products in admin view")
+                    return False, data
+                    
+            else:
+                print(f"❌ Failed - Expected 200, got {response.status_code}")
+                try:
+                    print(f"Response: {response.json()}")
+                except:
+                    print(f"Response: {response.text}")
+                return False, {}
+
+        except Exception as e:
+            print(f"❌ Failed - Error: {str(e)}")
+            return False, {}
+
+    def test_admin_update_product(self):
+        """Test updating a product price via admin endpoint"""
+        # Set up basic auth header
+        import base64
+        credentials = base64.b64encode(b'admin:nuestra123').decode('utf-8')
+        headers = {
+            'Authorization': f'Basic {credentials}',
+            'Content-Type': 'application/json'
+        }
+        
+        # First, get the current price of product 10014
+        get_url = f"{self.base_url}/admin/products/all"
+        try:
+            get_response = requests.get(get_url, headers=headers)
+            if get_response.status_code == 200:
+                products = get_response.json().get('products', [])
+                costillon = next((p for p in products if p.get('codigo') == '10014'), None)
+                if costillon:
+                    original_price = costillon.get('precioMedioKilo', 0)
+                    print(f"Original price for Costillón entero: ${original_price}")
+                else:
+                    print("❌ Could not find product 10014 for update test")
+                    return False, {}
+            else:
+                print("❌ Could not retrieve products for update test")
+                return False, {}
+        except Exception as e:
+            print(f"❌ Error retrieving product for update: {str(e)}")
+            return False, {}
+        
+        # Update the product price
+        update_url = f"{self.base_url}/admin/products/10014"
+        new_price = 4.00  # Test price
+        update_data = {
+            "precioMedioKilo": new_price
+        }
+        
+        self.tests_run += 1
+        print(f"\n🔍 Testing Admin Product Update...")
+        
+        try:
+            response = requests.put(update_url, json=update_data, headers=headers)
+            success = response.status_code == 200
+            
+            if success:
+                self.tests_passed += 1
+                print(f"✅ Passed - Status: {response.status_code}")
+                
+                data = response.json()
+                if data.get('success'):
+                    updated_product = data.get('product', {})
+                    updated_price = updated_product.get('precioMedioKilo', 0)
+                    
+                    if updated_price == new_price:
+                        print(f"✅ Product price updated successfully to ${updated_price}")
+                        
+                        # Restore original price
+                        restore_data = {"precioMedioKilo": original_price}
+                        restore_response = requests.put(update_url, json=restore_data, headers=headers)
+                        if restore_response.status_code == 200:
+                            print(f"✅ Original price restored to ${original_price}")
+                        
+                        return True, data
+                    else:
+                        print(f"❌ Price not updated correctly. Expected ${new_price}, got ${updated_price}")
+                        return False, data
+                else:
+                    print("❌ Update response indicates failure")
+                    return False, data
+                    
+            else:
+                print(f"❌ Failed - Expected 200, got {response.status_code}")
+                try:
+                    print(f"Response: {response.json()}")
+                except:
+                    print(f"Response: {response.text}")
+                return False, {}
+
+        except Exception as e:
+            print(f"❌ Failed - Error: {str(e)}")
+            return False, {}
 
     # 2. Authentication APIs Tests
     def test_user_registration(self):
