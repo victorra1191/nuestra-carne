@@ -774,9 +774,27 @@ const OrderForm = () => {
                 <h1 className="text-4xl md:text-6xl font-bold text-primary-900 mb-4">
                   🛒 Selecciona Tus <span className="text-gradient">PRODUCTOS</span>
                 </h1>
-                <p className="text-xl text-primary-700">
+                <p className="text-xl text-primary-700 mb-6">
                   Elige de nuestra selección premium de carne 100% Nacional panameña
                 </p>
+                
+                {/* Disclaimer */}
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mx-auto max-w-4xl mb-4">
+                  <div className="flex items-start gap-3">
+                    <div className="bg-yellow-500 rounded-full p-1 flex-shrink-0 mt-1">
+                      <AlertCircle size={16} className="text-white" />
+                    </div>
+                    <div className="text-left">
+                      <h3 className="text-yellow-800 font-semibold mb-2">Información Importante</h3>
+                      <ul className="text-yellow-700 text-sm space-y-1">
+                        <li>• Todos los pedidos serán procesados y entregados en un lapso de <strong>48 horas hábiles</strong></li>
+                        <li>• <strong>No se entregan los domingos</strong></li>
+                        <li>• Toda solicitud está sujeta a <strong>disponibilidad del producto</strong></li>
+                        <li>• Los precios pueden oscilar según el precio final del producto en un aproximado de <strong>medio kilo o kilo</strong></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
