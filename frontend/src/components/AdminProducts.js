@@ -415,13 +415,13 @@ const AdminProducts = ({ API_BASE }) => {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-primary-700 mb-2">
-                      Precio por Libra ($)
+                      Precio Medio Kilo ($)
                     </label>
                     <input
                       type="number"
                       step="0.01"
-                      value={editForm.precioLb}
-                      onChange={(e) => setEditForm({ ...editForm, precioLb: parseFloat(e.target.value) || 0 })}
+                      value={editForm.precioMedioKilo}
+                      onChange={(e) => setEditForm({ ...editForm, precioMedioKilo: parseFloat(e.target.value) || 0 })}
                       className="w-full px-3 py-2 border border-primary-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     />
                   </div>
