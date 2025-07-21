@@ -31,7 +31,7 @@ const AdminProducts = ({ API_BASE }) => {
 
   const [editForm, setEditForm] = useState({
     precioKg: '',
-    precioLb: '',
+    precioMedioKilo: '',
     categoria: '',
     disponible: true
   });
