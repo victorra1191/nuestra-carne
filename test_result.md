@@ -20,6 +20,24 @@ backend:
       - working: true
         agent: "testing"
         comment: "Verified that the /api/products/retail endpoint is working correctly. Successfully retrieved 29 retail products with proper JSON structure. Confirmed that 'Costillón entero' (codigo: 20014) has the correct price of 3.33 (not 3.29). Verified that the data is being read from products.json file and not hardcoded values."
+      - working: true
+        agent: "testing"
+        comment: "UPDATED SYSTEM TESTED: Successfully verified new product system with updated price structure. GET /api/products/retail endpoint now returns exactly 59 products with new codes (10001-10065) and precioMedioKilo field. Confirmed specific products: Product '10014' (Costillón entero) has precioMedioKilo: 3.68, Product '10001' (New york rebanado) has precioMedioKilo: 4.63. All products use new code format and price structure."
+
+  - task: "Product API - Admin Management"
+    implemented: true
+    working: true
+    file: "/app/backend/src/routes/adminProductRoutes.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "testing"
+        comment: "Initial test pending"
+      - working: true
+        agent: "testing"
+        comment: "Successfully tested GET /api/admin/products/all endpoint with basic auth (admin:nuestra123). Returns all 64 products including unavailable ones with precioMedioKilo: 0. PUT /api/admin/products/10014 endpoint successfully updates product prices and changes persist. Fixed admin route to handle new precioMedioKilo field structure."
 
   - task: "Product API - Wholesale Prices"
     implemented: true
