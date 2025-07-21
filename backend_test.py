@@ -89,9 +89,9 @@ class NuestraCarneTester:
 
     # 1. Product APIs Tests
     def test_retail_products(self):
-        """Test retail products endpoint"""
+        """Test retail products endpoint with new price structure"""
         success, response = self.run_test(
-            "Get Retail Products",
+            "Get Retail Products (New Structure)",
             "GET",
             "products/retail",
             200
@@ -110,23 +110,65 @@ class NuestraCarneTester:
                 print("❌ Response missing 'products' array")
                 return False, response
             
-            # Check for specific product - Costillón entero (codigo: 20014)
-            costillon = next((p for p in products if p.get('codigo') == '20014'), None)
+            # Verify exactly 59 products are returned (products with precioMedioKilo > 0)
+            if len(products) != 59:
+                print(f"❌ Expected exactly 59 products, but got {len(products)}")
+                return False, response
+            else:
+                print("✅ Correct number of products returned (59)")
+            
+            # Check for specific product - Costillón entero (codigo: 10014)
+            costillon = next((p for p in products if p.get('codigo') == '10014'), None)
             if costillon:
-                print(f"Found Costillón entero: {costillon['nombre']} - ${costillon['precioLb']} per lb")
+                print(f"Found Costillón entero: {costillon['nombre']} - ${costillon['precioMedioKilo']} per medio kilo")
                 
-                # Verify the price is 3.33 (not 3.29)
-                if costillon['precioLb'] == 3.33:
-                    print("✅ Costillón entero has the correct price of $3.33 per lb")
+                # Verify the price is 3.68
+                if costillon['precioMedioKilo'] == 3.68:
+                    print("✅ Costillón entero has the correct price of $3.68 per medio kilo")
                 else:
-                    print(f"❌ Costillón entero has incorrect price: ${costillon['precioLb']} (expected $3.33)")
+                    print(f"❌ Costillón entero has incorrect price: ${costillon['precioMedioKilo']} (expected $3.68)")
                     return False, response
             else:
-                print("❌ Costillón entero (codigo: 20014) not found in products list")
+                print("❌ Costillón entero (codigo: 10014) not found in products list")
                 return False, response
+            
+            # Check for specific product - New york rebanado (codigo: 10001)
+            newyork = next((p for p in products if p.get('codigo') == '10001'), None)
+            if newyork:
+                print(f"Found New york rebanado: {newyork['nombre']} - ${newyork['precioMedioKilo']} per medio kilo")
+                
+                # Verify the price is 4.63
+                if newyork['precioMedioKilo'] == 4.63:
+                    print("✅ New york rebanado has the correct price of $4.63 per medio kilo")
+                else:
+                    print(f"❌ New york rebanado has incorrect price: ${newyork['precioMedioKilo']} (expected $4.63)")
+                    return False, response
+            else:
+                print("❌ New york rebanado (codigo: 10001) not found in products list")
+                return False, response
+            
+            # Verify all products have the new structure with precioMedioKilo field
+            for product in products:
+                if 'precioMedioKilo' not in product:
+                    print(f"❌ Product {product.get('codigo', 'unknown')} missing precioMedioKilo field")
+                    return False, response
+                if product['precioMedioKilo'] <= 0:
+                    print(f"❌ Product {product.get('codigo', 'unknown')} has invalid precioMedioKilo: {product['precioMedioKilo']}")
+                    return False, response
+            
+            print("✅ All products have valid precioMedioKilo field")
+            
+            # Verify product codes are in the new range (10001-10065)
+            for product in products:
+                codigo = product.get('codigo', '')
+                if not codigo.startswith('100'):
+                    print(f"❌ Product has old code format: {codigo}")
+                    return False, response
+            
+            print("✅ All products use new code format (10001-10065)")
                 
             if products:
-                print(f"First product: {products[0]['nombre']} - ${products[0]['precioLb']} per lb")
+                print(f"First product: {products[0]['nombre']} - ${products[0]['precioMedioKilo']} per medio kilo")
         
         return success, response
 
