@@ -227,12 +227,12 @@ const OrderForm = () => {
         selectedCut.nombre.toLowerCase().includes(p.nombre.toLowerCase())
       );
       
-      if (producto && producto.precioLb > 0) {
+      if (producto && producto.precioMedioKilo > 0) {
         setOrderItems([{
           ...producto,
           cantidad: 1,
-          unidad: 'libras',
-          subtotal: producto.precioLb
+          unidad: 'medio kilo',
+          subtotal: producto.precioMedioKilo
         }]);
       }
     }
