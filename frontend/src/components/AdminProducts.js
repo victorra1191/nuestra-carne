@@ -340,7 +340,7 @@ const AdminProducts = ({ API_BASE }) => {
                         {product.categoria}
                       </span>
                     </td>
-                    <td className="py-3 px-4 font-mono">${product.precioLb?.toFixed(2) || '0.00'}</td>
+                    <td className="py-3 px-4 font-mono">${product.precioMedioKilo?.toFixed(2) || '0.00'}</td>
                     <td className="py-3 px-4 font-mono">${product.precioKg?.toFixed(2) || '0.00'}</td>
                     <td className="py-3 px-4">
                       <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(product.disponible)}`}>
