@@ -106,7 +106,7 @@ const AdminProducts = ({ API_BASE }) => {
     setEditingProduct(product);
     setEditForm({
       precioKg: product.precioKg,
-      precioLb: product.precioLb,
+      precioMedioKilo: product.precioMedioKilo,
       categoria: product.categoria,
       disponible: product.disponible
     });
