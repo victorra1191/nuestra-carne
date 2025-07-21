@@ -231,8 +231,8 @@ const OrderForm = () => {
         setOrderItems([{
           ...producto,
           cantidad: 1,
-          unidad: 'medio kilo',
-          subtotal: producto.precioMedioKilo
+          unidad: 'kilos',
+          subtotal: producto.precioKg
         }]);
       }
     }
