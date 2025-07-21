@@ -65,7 +65,7 @@ router.get('/products/all', verifyAdmin, async (req, res) => {
 router.put('/products/:codigo', verifyAdmin, async (req, res) => {
   try {
     const { codigo } = req.params;
-    const { precioKg, precioLb, disponible, categoria } = req.body;
+    const { precioKg, precioMedioKilo, precioLb, disponible, categoria } = req.body;
 
     // Leer productos actuales
     let products = await readJSONFile(PRODUCTS_FILE);
@@ -82,6 +82,8 @@ router.put('/products/:codigo', verifyAdmin, async (req, res) => {
 
     // Actualizar los campos proporcionados
     if (precioKg !== undefined) products[productIndex].precioKg = parseFloat(precioKg);
+    if (precioMedioKilo !== undefined) products[productIndex].precioMedioKilo = parseFloat(precioMedioKilo);
+    // Keep backward compatibility with precioLb for old clients
     if (precioLb !== undefined) products[productIndex].precioLb = parseFloat(precioLb);
     if (disponible !== undefined) products[productIndex].disponible = Boolean(disponible);
     if (categoria !== undefined) products[productIndex].categoria = categoria;
