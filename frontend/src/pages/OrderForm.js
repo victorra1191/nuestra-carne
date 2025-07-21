@@ -1215,7 +1215,7 @@ const OrderForm = () => {
                         <div>
                           <h5 className="font-medium">{item.nombre}</h5>
                           <p className="text-sm text-primary-600">
-                            {item.cantidad} {item.unidad} × ${(item.unidad === 'medio kilo' ? item.precioMedioKilo : item.precioKg).toFixed(2)}
+                            {item.cantidad} {item.unidad} × ${(item.unidad === 'kilos' ? item.precioKg : item.precioMedioKilo).toFixed(2)}
                           </p>
                         </div>
                         <span className="font-bold text-primary-500">
