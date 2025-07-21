@@ -826,7 +826,7 @@ const OrderForm = () => {
                                   onChange={(e) => changeUnit(item.codigo, e.target.value)}
                                   className="ml-2 text-sm border border-primary-300 rounded px-2 py-1"
                                 >
-                                  <option value="libras">libras</option>
+                                  <option value="medio kilo">medio kilo</option>
                                   <option value="kilos">kilos</option>
                                 </select>
                               </div>
