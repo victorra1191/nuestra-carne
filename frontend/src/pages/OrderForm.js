@@ -214,7 +214,7 @@ const OrderForm = () => {
   ];
 
   // Agrupar productos por categoría
-  const productosDisponibles = productos.filter(p => p.precioLb > 0);
+  const productosDisponibles = productos.filter(p => p.precioMedioKilo > 0);
   const categorias = [...new Set(productosDisponibles.map(p => p.categoria))];
 
   // Pre-cargar producto si viene del landing
