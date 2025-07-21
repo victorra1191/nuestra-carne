@@ -256,8 +256,8 @@ const OrderForm = () => {
       setOrderItems([...orderItems, {
         ...producto,
         cantidad: 1,
-        unidad: 'libras',
-        subtotal: producto.precioLb
+        unidad: 'medio kilo',
+        subtotal: producto.precioMedioKilo
       }]);
     }
   };
