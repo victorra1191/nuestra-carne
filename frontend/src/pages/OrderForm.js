@@ -584,7 +584,7 @@ const OrderForm = () => {
                           <p className="text-sm text-primary-600">Código: {producto.codigo}</p>
                         </div>
                         <div className="text-right">
-                          <p className="font-bold text-primary-500">${producto.precioLb.toFixed(2)}/lb</p>
+                          <p className="font-bold text-primary-500">${producto.precioMedioKilo.toFixed(2)}/½kg</p>
                           <p className="text-sm text-primary-600">${producto.precioKg.toFixed(2)}/kg</p>
                         </div>
                       </div>
