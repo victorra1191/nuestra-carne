@@ -10,7 +10,7 @@
   {
     "codigo": "10002",
     "nombre": "Filete Limpio /sin cordón",
-    "precioKg": 15.50,
+    "precioKg": 15.5,
     "precioMedioKilo": 7.75,
     "categoria": "Premium",
     "disponible": true
@@ -50,16 +50,16 @@
   {
     "codigo": "10007",
     "nombre": "Babilla en bistec",
-    "precioKg": 7.40,
-    "precioMedioKilo": 3.70,
+    "precioKg": 7.4,
+    "precioMedioKilo": 3.7,
     "categoria": "Plancha",
     "disponible": true
   },
   {
     "codigo": "10008",
     "nombre": "Lomo Mulato",
-    "precioKg": 0.00,
-    "precioMedioKilo": 0.00,
+    "precioKg": 0,
+    "precioMedioKilo": 0,
     "categoria": "No Disponible",
     "disponible": false
   },
@@ -74,8 +74,8 @@
   {
     "codigo": "10010",
     "nombre": "Puyazo",
-    "precioKg": 0.00,
-    "precioMedioKilo": 0.00,
+    "precioKg": 0,
+    "precioMedioKilo": 0,
     "categoria": "No Disponible",
     "disponible": false
   },
@@ -90,16 +90,16 @@
   {
     "codigo": "10012",
     "nombre": "Lomo de cinta sin hueso",
-    "precioKg": 0.00,
-    "precioMedioKilo": 0.00,
+    "precioKg": 0,
+    "precioMedioKilo": 0,
     "categoria": "No Disponible",
     "disponible": false
   },
   {
     "codigo": "10013",
     "nombre": "Fajita",
-    "precioKg": 0.00,
-    "precioMedioKilo": 0.00,
+    "precioKg": 0,
+    "precioMedioKilo": 0,
     "categoria": "No Disponible",
     "disponible": false
   },
@@ -138,8 +138,8 @@
   {
     "codigo": "10019",
     "nombre": "Rib- eye entero",
-    "precioKg": 9.60,
-    "precioMedioKilo": 4.80,
+    "precioKg": 9.6,
+    "precioMedioKilo": 4.8,
     "categoria": "Premium",
     "disponible": true
   },
@@ -163,22 +163,22 @@
     "codigo": "10022",
     "nombre": "Carne molida especial",
     "precioKg": 7.99,
-    "precioMedioKilo": 4.00,
+    "precioMedioKilo": 4,
     "categoria": "Molida",
     "disponible": true
   },
   {
     "codigo": "10023",
     "nombre": "Arrachera",
-    "precioKg": 0.00,
-    "precioMedioKilo": 0.00,
+    "precioKg": 0,
+    "precioMedioKilo": 0,
     "categoria": "No Disponible",
     "disponible": false
   },
   {
     "codigo": "10024",
     "nombre": "Mondongo",
-    "precioKg": 2.30,
+    "precioKg": 2.3,
     "precioMedioKilo": 1.15,
     "categoria": "Especiales",
     "disponible": true
@@ -194,15 +194,15 @@
   {
     "codigo": "10026",
     "nombre": "Hígado",
-    "precioKg": 4.20,
-    "precioMedioKilo": 2.10,
+    "precioKg": 4.2,
+    "precioMedioKilo": 2.1,
     "categoria": "Especiales",
     "disponible": true
   },
   {
     "codigo": "10027",
     "nombre": "Pata",
-    "precioKg": 2.10,
+    "precioKg": 2.1,
     "precioMedioKilo": 1.05,
     "categoria": "Especiales",
     "disponible": true
@@ -210,15 +210,15 @@
   {
     "codigo": "10028",
     "nombre": "Trip tip (punta Rincón)",
-    "precioKg": 9.60,
-    "precioMedioKilo": 4.80,
+    "precioKg": 9.6,
+    "precioMedioKilo": 4.8,
     "categoria": "Premium",
     "disponible": true
   },
   {
     "codigo": "10029",
     "nombre": "Palomilla en bistec",
-    "precioKg": 6.50,
+    "precioKg": 6.5,
     "precioMedioKilo": 3.25,
     "categoria": "Plancha",
     "disponible": true
@@ -242,7 +242,7 @@
   {
     "codigo": "10032",
     "nombre": "Entraña",
-    "precioKg": 11.50,
+    "precioKg": 11.5,
     "precioMedioKilo": 5.75,
     "categoria": "Premium",
     "disponible": true
@@ -250,23 +250,23 @@
   {
     "codigo": "10033",
     "nombre": "Lomito",
-    "precioKg": 8.00,
-    "precioMedioKilo": 4.00,
+    "precioKg": 8,
+    "precioMedioKilo": 4,
     "categoria": "Premium",
     "disponible": true
   },
   {
     "codigo": "10034",
     "nombre": "Vacio",
-    "precioKg": 8.00,
-    "precioMedioKilo": 4.00,
+    "precioKg": 8,
+    "precioMedioKilo": 4,
     "categoria": "Premium",
     "disponible": true
   },
   {
     "codigo": "10035",
     "nombre": "Falda Gruesa",
-    "precioKg": 6.30,
+    "precioKg": 6.3,
     "precioMedioKilo": 3.15,
     "categoria": "Guisos",
     "disponible": true
@@ -282,7 +282,7 @@
   {
     "codigo": "10037",
     "nombre": "Rabo",
-    "precioKg": 6.90,
+    "precioKg": 6.9,
     "precioMedioKilo": 3.45,
     "categoria": "Guisos",
     "disponible": true
@@ -306,16 +306,16 @@
   {
     "codigo": "10040",
     "nombre": "Pajarilla",
-    "precioKg": 2.00,
-    "precioMedioKilo": 1.00,
+    "precioKg": 2,
+    "precioMedioKilo": 1,
     "categoria": "Especiales",
     "disponible": true
   },
   {
     "codigo": "10041",
     "nombre": "Corazón",
-    "precioKg": 3.00,
-    "precioMedioKilo": 1.50,
+    "precioKg": 3,
+    "precioMedioKilo": 1.5,
     "categoria": "Especiales",
     "disponible": true
   },
@@ -338,32 +338,32 @@
   {
     "codigo": "10044",
     "nombre": "Hueso rojo",
-    "precioKg": 2.00,
-    "precioMedioKilo": 1.00,
+    "precioKg": 2,
+    "precioMedioKilo": 1,
     "categoria": "Especiales",
     "disponible": true
   },
   {
     "codigo": "10045",
     "nombre": "Piltrafa",
-    "precioKg": 0.40,
-    "precioMedioKilo": 0.20,
+    "precioKg": 0.4,
+    "precioMedioKilo": 0.2,
     "categoria": "Especiales",
     "disponible": true
   },
   {
     "codigo": "10046",
     "nombre": "Ossobuco de res rebanado",
-    "precioKg": 7.00,
-    "precioMedioKilo": 3.50,
+    "precioKg": 7,
+    "precioMedioKilo": 3.5,
     "categoria": "Guisos",
     "disponible": true
   },
   {
     "codigo": "10047",
     "nombre": "Arañita",
-    "precioKg": 20.20,
-    "precioMedioKilo": 10.10,
+    "precioKg": 20.2,
+    "precioMedioKilo": 10.1,
     "categoria": "Premium",
     "disponible": true
   },
@@ -394,16 +394,16 @@
   {
     "codigo": "10051",
     "nombre": "Huevo",
-    "precioKg": 2.00,
-    "precioMedioKilo": 1.00,
+    "precioKg": 2,
+    "precioMedioKilo": 1,
     "categoria": "Especiales",
     "disponible": true
   },
   {
     "codigo": "10052",
     "nombre": "Tuétano /Canoa",
-    "precioKg": 5.00,
-    "precioMedioKilo": 2.50,
+    "precioKg": 5,
+    "precioMedioKilo": 2.5,
     "categoria": "Especiales",
     "disponible": true
   },
@@ -426,8 +426,8 @@
   {
     "codigo": "10055",
     "nombre": "Tomahawk",
-    "precioKg": 12.00,
-    "precioMedioKilo": 6.00,
+    "precioKg": 12,
+    "precioMedioKilo": 6,
     "categoria": "Premium",
     "disponible": true
   },
@@ -458,7 +458,7 @@
   {
     "codigo": "10059",
     "nombre": "Lomo redondo entero",
-    "precioKg": 7.50,
+    "precioKg": 7.5,
     "precioMedioKilo": 3.75,
     "categoria": "Plancha",
     "disponible": true
@@ -483,14 +483,14 @@
     "codigo": "10062",
     "nombre": "Pulpa negra entera",
     "precioKg": 8.59,
-    "precioMedioKilo": 4.30,
+    "precioMedioKilo": 4.3,
     "categoria": "Premium",
     "disponible": true
   },
   {
     "codigo": "10063",
     "nombre": "Costilla de res entera",
-    "precioKg": 5.50,
+    "precioKg": 5.5,
     "precioMedioKilo": 2.75,
     "categoria": "Parrilla",
     "disponible": true
@@ -506,7 +506,7 @@
   {
     "codigo": "10065",
     "nombre": "Carne de hamburguesa- 24 onzas",
-    "precioKg": 8.50,
+    "precioKg": 8.5,
     "precioMedioKilo": 4.25,
     "categoria": "Molida",
     "disponible": true
