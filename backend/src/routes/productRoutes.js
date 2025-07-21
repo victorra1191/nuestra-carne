@@ -113,7 +113,7 @@ router.get('/retail', async (req, res) => {
     const products = await readJSONFile(PRODUCTS_FILE);
     
     // Filtrar solo productos disponibles para venta minorista
-    const retailProducts = products.filter(p => p.precioLb > 0);
+    const retailProducts = products.filter(p => p.precioMedioKilo > 0);
     
     res.json({
       success: true,
