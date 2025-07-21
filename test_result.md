@@ -2,6 +2,91 @@
 
 ## Backend Tests
 
+frontend:
+  - task: "Landing Page Display and Navigation"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/LandingPage.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "COMPREHENSIVE UI TESTING COMPLETED: Successfully tested complete Nuestra Carne application. Landing page loads correctly with hero section, navigation works perfectly. 'HAZ TU PEDIDO YA!' button successfully navigates to order form at /haz-tu-pedido. All visual elements display properly including logo, delivery information, and call-to-action buttons."
+
+  - task: "Order Form - New Price Structure Implementation"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/OrderForm.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "CRITICAL PRICE STRUCTURE VERIFICATION PASSED: Successfully verified new price structure implementation. Found exactly 59 products with ½kg pricing format ($X.XX/½kg). All products use new codes (10001-10065) instead of old codes (20001-20065). Verified specific products: New York rebanado (Code: 10001) shows $4.63/½kg, Costillón entero shows $3.68/½kg (confirmed via multiple elements detection). Required disclaimer 'Todos los pedidos serán procesados y entregados en un lapso de 48 horas hábiles' is prominently displayed. Price synchronization working correctly throughout the application."
+
+  - task: "Product Categories and Accordion Functionality"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/OrderForm.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "PRODUCT CATEGORIES WORKING CORRECTLY: Premium, Parrilla, Guisos and other categories display properly. Desktop view shows categories in grid format, mobile view uses accordion functionality. Accordion buttons work correctly on mobile viewport (375x667). Category organization helps users navigate through 59+ available products efficiently."
+
+  - task: "Cart Functionality and Unit Management"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/OrderForm.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "CART FUNCTIONALITY FULLY OPERATIONAL: Successfully tested adding products to cart using 'AGREGAR AL PEDIDO' buttons. Cart displays at top on mobile and right side on desktop. Unit selector works correctly with 'medio kilo' and 'kilos' options. Price updates correctly when changing units. Quantity controls (+ and -) function properly. Cart calculations are accurate with new price structure. Subtotal, delivery fee logic ($3.50 under $50, free over $50), and total calculations working correctly."
+
+  - task: "Mobile Responsiveness"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/OrderForm.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "MOBILE RESPONSIVENESS EXCELLENT: Tested on mobile viewport (375x667). Cart displays at top on mobile as expected. Product categories work as accordion on mobile with proper expand/collapse functionality. All buttons and form elements are properly sized and accessible on mobile. Navigation and user experience optimized for mobile devices."
+
+  - task: "Order Flow and Customer Form"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/OrderForm.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "ORDER FLOW WORKING PERFECTLY: Successfully tested complete order flow from product selection to customer information. Step progression (1: Productos, 2: Datos, 3: Confirmar) works correctly. Customer information form accepts realistic data including name, phone, email, address, delivery date and time. Form validation and field requirements working properly. Continue button enables progression between steps when requirements are met."
+
+  - task: "Delivery Fee Logic and Promotions"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/OrderForm.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "DELIVERY AND PRICING LOGIC CORRECT: Delivery fee logic properly implemented - $3.50 for orders under $50, free delivery for orders $50 and above. Promotional code section available for discount application. Total calculations include subtotal, discounts, and delivery fees. All pricing displays correctly in both ½kg and kg formats as required."
+
 backend:
   - task: "Product API - Retail Prices"
     implemented: true
