@@ -306,7 +306,7 @@ const AdminProducts = ({ API_BASE }) => {
                 <th className="text-left py-3 px-4 font-semibold text-primary-900">Código</th>
                 <th className="text-left py-3 px-4 font-semibold text-primary-900">Producto</th>
                 <th className="text-left py-3 px-4 font-semibold text-primary-900">Categoría</th>
-                <th className="text-left py-3 px-4 font-semibold text-primary-900">Precio/Lb</th>
+                <th className="text-left py-3 px-4 font-semibold text-primary-900">Precio/½Kg</th>
                 <th className="text-left py-3 px-4 font-semibold text-primary-900">Precio/Kg</th>
                 <th className="text-left py-3 px-4 font-semibold text-primary-900">Estado</th>
                 <th className="text-left py-3 px-4 font-semibold text-primary-900">Acciones</th>
