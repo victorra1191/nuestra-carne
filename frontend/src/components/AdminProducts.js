@@ -40,6 +40,13 @@ const AdminProducts = ({ API_BASE }) => {
   useEffect(() => {
     fetchProducts();
     fetchStats();
+    
+    // Auto-refresh cada 30 segundos para mantener datos actualizados
+    const interval = setInterval(() => {
+      fetchStats(); // Solo stats, products se actualizan al hacer cambios
+    }, 30000);
+    
+    return () => clearInterval(interval);
   }, []);
 
   // Filtrar productos con debounce
