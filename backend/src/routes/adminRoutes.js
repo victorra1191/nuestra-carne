@@ -285,4 +285,54 @@ router.delete('/blog/articles/:id', authenticate, (req, res) => {
   }
 });
 
+/**
+ * GET /api/admin/orders
+ * Obtener todas las órdenes para el panel de administración
+ */
+router.get('/orders', authenticate, async (req, res) => {
+  try {
+    const { readJSONFile } = require('../utils/fileUtils');
+    const ordersFile = path.join(__dirname, '../data/orders.json');
+    
+    const orders = await readJSONFile(ordersFile);
+    
+    res.json({
+      success: true,
+      orders: orders || []
+    });
+
+  } catch (error) {
+    console.error('Error obteniendo órdenes:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Error interno del servidor'
+    });
+  }
+});
+
+/**
+ * GET /api/admin/wholesale
+ * Obtener solicitudes mayoristas
+ */
+router.get('/wholesale', authenticate, async (req, res) => {
+  try {
+    const { readJSONFile } = require('../utils/fileUtils');
+    const wholesaleFile = path.join(__dirname, '../data/wholesale-requests.json');
+    
+    const requests = await readJSONFile(wholesaleFile);
+    
+    res.json({
+      success: true,
+      requests: requests || []
+    });
+
+  } catch (error) {
+    console.error('Error obteniendo solicitudes mayoristas:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Error interno del servidor'
+    });
+  }
+});
+
 module.exports = router;
