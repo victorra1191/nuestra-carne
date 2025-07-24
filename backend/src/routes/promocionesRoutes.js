@@ -1,28 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const { v4: uuidv4 } = require('uuid');
-const fs = require('fs').promises;
+const { readJSONFile, writeJSONFile } = require('../utils/fileUtils');
 const path = require('path');
 
 // Archivo JSON para almacenar promociones
 const PROMOCIONES_FILE = path.join(__dirname, '../data/promociones.json');
-
-// Funciones helper
-const readJSONFile = async (filePath) => {
-  try {
-    const data = await fs.readFile(filePath, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    if (error.code === 'ENOENT') {
-      return [];
-    }
-    throw error;
-  }
-};
-
-const writeJSONFile = async (filePath, data) => {
-  await fs.writeFile(filePath, JSON.stringify(data, null, 2));
-};
 
 // Verificar token de admin (simple)
 const verificarAdmin = (req, res, next) => {
