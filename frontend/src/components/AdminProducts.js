@@ -214,11 +214,6 @@ const AdminProducts = ({ API_BASE }) => {
       setError('Error de conexión: ' + error.message);
     }
   };
-    } catch (error) {
-      console.error('Error toggling availability:', error);
-      setError('Error de conexión');
-    }
-  };
 
   const categories = ['Premium', 'Plancha', 'Parrilla', 'Guisos', 'Molida', 'Especiales'];
 
