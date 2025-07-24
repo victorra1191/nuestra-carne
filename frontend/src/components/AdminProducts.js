@@ -345,10 +345,33 @@ const AdminProducts = ({ API_BASE }) => {
                     </div>
                   </td>
                 </tr>
+              ) : error ? (
+                <tr>
+                  <td colSpan="7" className="text-center py-8">
+                    <div className="text-red-500 mb-4">
+                      <AlertCircle className="w-12 h-12 mx-auto mb-2" />
+                      <p className="font-medium">Error al cargar productos</p>
+                      <p className="text-sm text-gray-600 mt-1">{error}</p>
+                      <button 
+                        onClick={() => {
+                          setError('');
+                          fetchProducts();
+                        }}
+                        className="mt-3 px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 text-sm"
+                      >
+                        Reintentar
+                      </button>
+                    </div>
+                  </td>
+                </tr>
               ) : filteredProducts.length === 0 ? (
                 <tr>
                   <td colSpan="7" className="text-center py-8 text-primary-600">
-                    No se encontraron productos
+                    <Package className="w-12 h-12 mx-auto mb-2 text-primary-300" />
+                    <p className="font-medium">No se encontraron productos</p>
+                    <p className="text-sm text-gray-500 mt-1">
+                      {searchTerm || selectedCategory ? 'Intenta ajustar los filtros' : 'No hay productos disponibles'}
+                    </p>
                   </td>
                 </tr>
               ) : (
