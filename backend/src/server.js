@@ -14,6 +14,7 @@ const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const adminProductRoutes = require('./routes/adminProductRoutes');
 const promocionesRoutes = require('./routes/promocionesRoutes');
+const blogRoutes = require('./routes/blogRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 8001;
