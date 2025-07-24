@@ -185,6 +185,8 @@ const AdminProducts = ({ API_BASE }) => {
 
   const handleToggleAvailability = async (product) => {
     try {
+      console.log('🔄 [AdminProducts] Toggling availability for:', product.codigo, 'current:', product.disponible);
+      
       const response = await fetch(`${API_BASE}/admin/products/${product.codigo}/toggle`, {
         method: 'PUT',
         headers: {
@@ -192,12 +194,26 @@ const AdminProducts = ({ API_BASE }) => {
         }
       });
 
+      console.log('🔄 [AdminProducts] Toggle response status:', response.status);
+
       const data = await response.json();
+      console.log('🔄 [AdminProducts] Toggle response data:', data);
 
       if (data.success) {
+        console.log('✅ [AdminProducts] Product toggled successfully, refreshing...');
         // Refrescar todos los productos desde el servidor para mostrar datos actualizados
         await fetchProducts();
         await fetchStats(); // Actualizar estadísticas
+        console.log('✅ [AdminProducts] Toggle refresh completed');
+      } else {
+        console.error('❌ [AdminProducts] Toggle failed:', data);
+        setError('Error al cambiar disponibilidad: ' + (data.error || 'Error desconocido'));
+      }
+    } catch (error) {
+      console.error('❌ [AdminProducts] Toggle error:', error);
+      setError('Error de conexión: ' + error.message);
+    }
+  };
         setError('');
       } else {
         setError('Error al cambiar disponibilidad');
