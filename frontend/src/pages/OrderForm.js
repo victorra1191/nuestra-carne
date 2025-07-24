@@ -145,9 +145,9 @@ const OrderForm = () => {
     }
   }, [isAuthenticated, user]);
 
-  // Productos estáticos como fallback (actualizados con códigos 10001 y precios medio kilo)
+  // Productos estáticos como fallback (actualizados con últimos precios)
   const staticProductos = [
-    { codigo: '10001', nombre: 'New york rebanado', precioKg: 9.26, precioMedioKilo: 4.63, categoria: 'Premium' },
+    { codigo: '10001', nombre: 'New york rebanado', precioKg: 9.00, precioMedioKilo: 4.63, categoria: 'Premium' },
     { codigo: '10002', nombre: 'Filete Limpio /sin cordón', precioKg: 15.50, precioMedioKilo: 7.75, categoria: 'Premium' },
     { codigo: '10003', nombre: 'Lomo redondo porcionado', precioKg: 7.75, precioMedioKilo: 3.88, categoria: 'Plancha' },
     { codigo: '10004', nombre: 'Punta Palomilla entera (picanha)', precioKg: 10.55, precioMedioKilo: 5.28, categoria: 'Premium' },
