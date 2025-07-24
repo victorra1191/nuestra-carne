@@ -148,6 +148,9 @@ const AdminProducts = ({ API_BASE }) => {
 
   const handleSaveEdit = async () => {
     try {
+      console.log('🔄 [AdminProducts] Saving edit for product:', editingProduct.codigo);
+      console.log('🔄 [AdminProducts] Form data:', editForm);
+      
       const response = await fetch(`${API_BASE}/admin/products/${editingProduct.codigo}`, {
         method: 'PUT',
         headers: {
@@ -157,19 +160,26 @@ const AdminProducts = ({ API_BASE }) => {
         body: JSON.stringify(editForm)
       });
 
+      console.log('🔄 [AdminProducts] Response status:', response.status);
+
       const data = await response.json();
+      console.log('🔄 [AdminProducts] Response data:', data);
 
       if (data.success) {
+        console.log('✅ [AdminProducts] Product updated successfully, refreshing...');
         // Refrescar todos los productos desde el servidor para mostrar datos actualizados
         await fetchProducts();
+        await fetchStats(); // También refrescar estadísticas
         setEditingProduct(null);
         setError('');
+        console.log('✅ [AdminProducts] Refresh completed');
       } else {
-        setError('Error al actualizar producto');
+        console.error('❌ [AdminProducts] Update failed:', data);
+        setError('Error al actualizar producto: ' + (data.error || 'Error desconocido'));
       }
     } catch (error) {
-      console.error('Error updating product:', error);
-      setError('Error de conexión');
+      console.error('❌ [AdminProducts] Update error:', error);
+      setError('Error de conexión: ' + error.message);
     }
   };
 
