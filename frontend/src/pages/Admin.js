@@ -43,14 +43,24 @@ const Admin = () => {
   const [showMediaGallery, setShowMediaGallery] = useState(false);
   const [activeSection, setActiveSection] = useState('blog');
   
-  // URL del backend - Usar variable de entorno correctamente
+  // URL del backend - Determinar dinámicamente basado en el hostname
   const getApiBase = () => {
-    // Usar la variable de entorno si está disponible
+    // Si estamos en nuestracarnepa.com (producción), usar esa URL
+    if (typeof window !== 'undefined' && window.location.hostname === 'nuestracarnepa.com') {
+      return 'https://nuestracarnepa.com/api';
+    }
+    
+    // Si estamos en localhost, usar localhost
+    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+      return 'http://localhost:8001/api';
+    }
+    
+    // Para preview/desarrollo, usar la variable de entorno si existe
     if (process.env.REACT_APP_BACKEND_URL) {
       return `${process.env.REACT_APP_BACKEND_URL}/api`;
     }
     
-    // Fallback para desarrollo local
+    // Fallback
     return 'http://localhost:8001/api';
   };
   
