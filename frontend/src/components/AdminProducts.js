@@ -214,10 +214,6 @@ const AdminProducts = ({ API_BASE }) => {
       setError('Error de conexión: ' + error.message);
     }
   };
-        setError('');
-      } else {
-        setError('Error al cambiar disponibilidad');
-      }
     } catch (error) {
       console.error('Error toggling availability:', error);
       setError('Error de conexión');
