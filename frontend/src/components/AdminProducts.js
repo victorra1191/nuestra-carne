@@ -99,19 +99,29 @@ const AdminProducts = ({ API_BASE }) => {
 
   const fetchStats = async () => {
     try {
+      console.log('🔍 [AdminProducts] Fetching stats from:', `${API_BASE}/admin/stats`);
+      
       const response = await fetch(`${API_BASE}/admin/stats`, {
         headers: {
           'Authorization': `Basic ${btoa('admin:nuestra123')}`
         }
       });
 
-      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-      if (data.success) {
+      const data = await response.json();
+      console.log('🔍 [AdminProducts] Stats received:', data);
+
+      if (data.success && data.stats) {
         setStats(data.stats);
+        console.log('✅ [AdminProducts] Stats loaded successfully');
+      } else {
+        console.error('❌ [AdminProducts] Stats API error:', data);
       }
     } catch (error) {
-      console.error('Error fetching stats:', error);
+      console.error('❌ [AdminProducts] Stats fetch error:', error);
     }
   };
 
