@@ -47,20 +47,25 @@ const Admin = () => {
   const getApiBase = () => {
     // Si estamos en nuestracarnepa.com (producción), usar esa URL
     if (typeof window !== 'undefined' && window.location.hostname === 'nuestracarnepa.com') {
+      console.log('🌐 [Admin] Using production URL: https://nuestracarnepa.com/api');
       return 'https://nuestracarnepa.com/api';
     }
     
     // Si estamos en localhost, usar localhost
     if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+      console.log('🌐 [Admin] Using localhost URL: http://localhost:8001/api');
       return 'http://localhost:8001/api';
     }
     
     // Para preview/desarrollo, usar la variable de entorno si existe
     if (process.env.REACT_APP_BACKEND_URL) {
-      return `${process.env.REACT_APP_BACKEND_URL}/api`;
+      const url = `${process.env.REACT_APP_BACKEND_URL}/api`;
+      console.log('🌐 [Admin] Using env var URL:', url);
+      return url;
     }
     
     // Fallback
+    console.log('🌐 [Admin] Using fallback URL: http://localhost:8001/api');
     return 'http://localhost:8001/api';
   };
   
