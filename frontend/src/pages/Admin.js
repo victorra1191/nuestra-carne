@@ -43,30 +43,29 @@ const Admin = () => {
   const [showMediaGallery, setShowMediaGallery] = useState(false);
   const [activeSection, setActiveSection] = useState('blog');
   
-  // URL del backend - Determinar dinámicamente basado en el hostname
+  // URL del backend - HARDCODED para production fix
   const getApiBase = () => {
-    // Si estamos en nuestracarnepa.com (producción), usar esa URL
-    if (typeof window !== 'undefined' && window.location.hostname === 'nuestracarnepa.com') {
-      console.log('🌐 [Admin] Using production URL: https://nuestracarnepa.com/api');
-      return 'https://nuestracarnepa.com/api';
+    // FORZAR URL de producción - Fix crítico
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname;
+      console.log('🌐 [Admin] Hostname detected:', hostname);
+      
+      // Si NO es localhost, asumir que es producción
+      if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
+        console.log('🌐 [Admin] FORCING production URL: https://nuestracarnepa.com/api');
+        return 'https://nuestracarnepa.com/api';
+      }
+      
+      // Solo usar localhost si realmente estamos en localhost
+      if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        console.log('🌐 [Admin] Using localhost URL: http://localhost:8001/api');
+        return 'http://localhost:8001/api';
+      }
     }
     
-    // Si estamos en localhost, usar localhost
-    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-      console.log('🌐 [Admin] Using localhost URL: http://localhost:8001/api');
-      return 'http://localhost:8001/api';
-    }
-    
-    // Para preview/desarrollo, usar la variable de entorno si existe
-    if (process.env.REACT_APP_BACKEND_URL) {
-      const url = `${process.env.REACT_APP_BACKEND_URL}/api`;
-      console.log('🌐 [Admin] Using env var URL:', url);
-      return url;
-    }
-    
-    // Fallback
-    console.log('🌐 [Admin] Using fallback URL: http://localhost:8001/api');
-    return 'http://localhost:8001/api';
+    // Fallback a producción
+    console.log('🌐 [Admin] Fallback to production URL');
+    return 'https://nuestracarnepa.com/api';
   };
   
   const API_BASE = getApiBase();
