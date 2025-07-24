@@ -18,8 +18,7 @@ import {
   MapPin,
   Clock,
   Home,
-  Crown,
-  AlertCircle
+  Crown
 } from 'lucide-react';
 
 const OrderForm = () => {
