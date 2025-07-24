@@ -1,29 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const { v4: uuidv4 } = require('uuid');
-const fs = require('fs').promises;
+const { readJSONFile, writeJSONFile } = require('../utils/fileUtils');
 const path = require('path');
 
 // Rutas de archivos de datos
 const USERS_FILE = path.join(__dirname, '../data/users.json');
 const WHOLESALE_REQUESTS_FILE = path.join(__dirname, '../data/wholesale-requests.json');
-
-// Funciones helper para manejo de archivos
-const readJSONFile = async (filePath) => {
-  try {
-    const data = await fs.readFile(filePath, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
-    if (error.code === 'ENOENT') {
-      return [];
-    }
-    throw error;
-  }
-};
-
-const writeJSONFile = async (filePath, data) => {
-  await fs.writeFile(filePath, JSON.stringify(data, null, 2));
-};
 
 /**
  * POST /api/auth/register
