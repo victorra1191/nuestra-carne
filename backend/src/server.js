@@ -57,7 +57,7 @@ app.get('/api/health', (req, res) => {
     success: true, 
     message: 'Backend funcionando correctamente',
     timestamp: new Date().toISOString(),
-    routes: ['auth', 'admin', 'orders', 'products', 'media']
+    routes: ['auth', 'admin', 'orders', 'products', 'articles', 'media']
   });
 });
 
