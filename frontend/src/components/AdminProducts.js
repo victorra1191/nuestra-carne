@@ -63,22 +63,35 @@ const AdminProducts = ({ API_BASE }) => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
+      setError(''); // Clear previous errors
+      
+      console.log('🔍 [AdminProducts] Fetching from:', `${API_BASE}/admin/products/all`);
+      
       const response = await fetch(`${API_BASE}/admin/products/all`, {
         headers: {
           'Authorization': `Basic ${btoa('admin:nuestra123')}`
         }
       });
 
-      const data = await response.json();
+      console.log('🔍 [AdminProducts] Response status:', response.status);
 
-      if (data.success) {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('🔍 [AdminProducts] Data received:', data.success, data.products?.length);
+
+      if (data.success && data.products) {
         setProducts(data.products);
+        console.log('✅ [AdminProducts] Products loaded successfully');
       } else {
-        setError('Error al cargar productos');
+        console.error('❌ [AdminProducts] API returned error:', data);
+        setError('Error al cargar productos: ' + (data.error || 'Respuesta inválida'));
       }
     } catch (error) {
-      console.error('Error fetching products:', error);
-      setError('Error de conexión');
+      console.error('❌ [AdminProducts] Fetch error:', error);
+      setError(`Error de conexión: ${error.message}`);
     } finally {
       setLoading(false);
     }
