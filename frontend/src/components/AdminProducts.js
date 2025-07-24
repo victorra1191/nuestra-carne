@@ -42,22 +42,26 @@ const AdminProducts = ({ API_BASE }) => {
     fetchStats();
   }, []);
 
-  // Filtrar productos
+  // Filtrar productos con debounce
   useEffect(() => {
-    let filtered = products;
+    const timeoutId = setTimeout(() => {
+      let filtered = products;
 
-    if (searchTerm) {
-      filtered = filtered.filter(product =>
-        product.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        product.codigo.includes(searchTerm)
-      );
-    }
+      if (searchTerm) {
+        filtered = filtered.filter(product =>
+          product.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          product.codigo.includes(searchTerm)
+        );
+      }
 
-    if (selectedCategory) {
-      filtered = filtered.filter(product => product.categoria === selectedCategory);
-    }
+      if (selectedCategory) {
+        filtered = filtered.filter(product => product.categoria === selectedCategory);
+      }
 
-    setFilteredProducts(filtered);
+      setFilteredProducts(filtered);
+    }, 300); // 300ms debounce
+
+    return () => clearTimeout(timeoutId);
   }, [products, searchTerm, selectedCategory]);
 
   const fetchProducts = async () => {
