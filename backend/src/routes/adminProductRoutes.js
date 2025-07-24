@@ -36,6 +36,48 @@ const verifyAdmin = (req, res, next) => {
 };
 
 /**
+ * GET /api/admin/stats
+ * Obtener estadísticas del panel de administración
+ */
+router.get('/stats', verifyAdmin, async (req, res) => {
+  try {
+    // Leer productos
+    const products = await readJSONFile(PRODUCTS_FILE);
+    
+    // Calcular estadísticas
+    const productosActivos = products.filter(p => p.disponible && p.precioMedioKilo > 0).length;
+    const noDisponibles = products.filter(p => !p.disponible || p.precioMedioKilo === 0).length;
+    const totalProductos = products.length;
+    
+    // Estadísticas adicionales (placeholder por ahora)
+    const solicitudesMayoristas = 0; // Placeholder
+    const pedidosHoy = 0; // Placeholder  
+    const ventasHoy = 0; // Placeholder
+    
+    const stats = {
+      productosActivos,
+      noDisponibles,
+      totalProductos,
+      solicitudesMayoristas,
+      pedidosHoy,
+      ventasHoy
+    };
+    
+    res.json({
+      success: true,
+      stats
+    });
+
+  } catch (error) {
+    console.error('Error obteniendo estadísticas:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Error interno del servidor'
+    });
+  }
+});
+
+/**
  * GET /api/admin/products/all
  * Obtener todos los productos para gestión
  */
