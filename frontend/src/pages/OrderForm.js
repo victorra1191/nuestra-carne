@@ -78,7 +78,7 @@ const OrderForm = () => {
         
         // Usar precios mayoristas si: 1) usuario mayorista logueado, o 2) selecciona "empresa" en formulario
         const useWholesale = isWholesaleUser() || customerData.tipoCliente === 'empresa';
-        const endpoint = useWholesale ? '/api/products/wholesale' : '/api/products/retail';
+        const endpoint = useWholesale ? '/products/wholesale' : '/products/retail';
         const fullURL = `${API_BASE}${endpoint}`;
         
         console.log('🔍 [OrderForm] useWholesale:', useWholesale);
