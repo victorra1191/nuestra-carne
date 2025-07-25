@@ -44,7 +44,7 @@ const BlogList = () => {
       setLoading(true);
       setError(null); // Reset error state
       
-      const apiUrl = `${API_BASE}/admin/articles`;
+      const apiUrl = `${API_BASE}/articles`;
       console.log('🔍 [BlogList] Fetching articles from:', apiUrl);
       console.log('🔍 [BlogList] API_BASE:', API_BASE);
       console.log('🔍 [BlogList] window.location:', window.location);
