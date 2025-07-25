@@ -143,7 +143,7 @@ export const AuthProvider = ({ children }) => {
 
   const updateProfile = async (updates) => {
     try {
-      const response = await fetch(`${API_BASE}/api/auth/profile/${user.id}`, {
+      const response = await fetch(`${API_BASE}/auth/profile/${user.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
