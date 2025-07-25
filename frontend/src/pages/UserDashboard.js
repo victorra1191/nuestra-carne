@@ -56,7 +56,7 @@ const UserDashboard = () => {
         setLoadingOrders(true);
         setOrdersError(null);
         
-        const url = `${API_BASE}/api/orders/user/${user.id}?email=${user.email}`;
+        const url = `${API_BASE}/orders/user/${user.id}?email=${user.email}`;
         console.log('🌐 Fetching from URL:', url);
         
         const response = await fetch(url);
