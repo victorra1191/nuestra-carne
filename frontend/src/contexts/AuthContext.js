@@ -15,7 +15,27 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const API_BASE = process.env.REACT_APP_BACKEND_URL;
+  // URL del backend - Determinar dinámicamente
+  const getApiBase = () => {
+    // Si NO es localhost, asumir que es producción
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname;
+      
+      if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
+        return 'https://nuestracarnepa.com/api';
+      }
+      
+      // Solo usar localhost si realmente estamos en localhost
+      if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        return 'http://localhost:8001/api';
+      }
+    }
+    
+    // Fallback a producción
+    return 'https://nuestracarnepa.com/api';
+  };
+
+  const API_BASE = getApiBase();
 
   // Verificar token al cargar la app
   useEffect(() => {
