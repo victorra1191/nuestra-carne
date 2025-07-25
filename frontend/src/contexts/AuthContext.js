@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }) => {
           const parsedUser = JSON.parse(userData);
           
           // Verificar si el token sigue siendo válido
-          const response = await fetch(`${API_BASE}/api/auth/profile/${parsedUser.id}`);
+          const response = await fetch(`${API_BASE}/auth/profile/${parsedUser.id}`);
           const data = await response.json();
 
           if (data.success && data.user.estado === 'activo') {
