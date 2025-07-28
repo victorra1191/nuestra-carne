@@ -32,5 +32,34 @@
     "estado": "pendiente",
     "fechaCreacion": "2025-07-02T14:32:29.157Z",
     "usuarioId": null
+  },
+  {
+    "id": "668c5e0b-2300-4d89-9751-597982407af5",
+    "cliente": {
+      "tipoCliente": "individual",
+      "nombre": "Test Customer Order",
+      "telefono": "+507 6000-1111",
+      "email": "testcustomer@example.com",
+      "direccion": "Test Address, Panama City",
+      "fechaEntrega": "2025-02-21",
+      "horaEntrega": "14:00",
+      "notas": "Test order for debugging"
+    },
+    "productos": [
+      {
+        "codigo": "10028",
+        "nombre": "Trip tip (punta Rincón)",
+        "cantidad": 1,
+        "unidad": "kilos",
+        "subtotal": 9.6,
+        "precioKg": 9.6,
+        "precioMedioKilo": 4.8
+      }
+    ],
+    "total": 9.6,
+    "fecha": "2025-07-28T14:03:14.535Z",
+    "estado": "pendiente",
+    "fechaCreacion": "2025-07-28T14:03:14.535Z",
+    "usuarioId": null
   }
 ]
