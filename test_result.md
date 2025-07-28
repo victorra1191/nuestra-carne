@@ -276,11 +276,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Order API - Order Submission"
     - "Wholesale API - Request Management"
     - "Wholesale API - Approval System"
   stuck_tasks: 
-    - "Order API - Order Submission"
     - "Wholesale API - Request Management"
     - "Wholesale API - Approval System"
   test_all: false
