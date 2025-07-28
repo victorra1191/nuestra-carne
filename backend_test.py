@@ -554,13 +554,147 @@ class NuestraCarneTester:
             print(f"❌ Error reading orders file: {e}")
             return False
 
+    def test_admin_orders_stats(self):
+        """Test admin orders statistics endpoint"""
+        # Set up basic auth header
+        import base64
+        credentials = base64.b64encode(b'admin:nuestra123').decode('utf-8')
+        headers = {'Authorization': f'Basic {credentials}'}
+        
+        url = f"{self.base_url}/admin/orders/stats"
+        
+        self.tests_run += 1
+        print(f"\n🔍 Testing Admin Orders Statistics...")
+        
+        try:
+            response = requests.get(url, headers=headers)
+            success = response.status_code == 200
+            
+            if success:
+                self.tests_passed += 1
+                print(f"✅ Passed - Status: {response.status_code}")
+                
+                data = response.json()
+                if not data.get('success'):
+                    print("❌ Response indicates failure")
+                    return False, data
+                
+                stats = data.get('stats', {})
+                
+                # Verify required statistics fields
+                required_fields = [
+                    'totalOrders', 'completedOrders', 'activeOrders', 'todayOrders',
+                    'totalRevenue', 'topProducts', 'recentOrders', 'ordersByStatus', 'salesByPeriod'
+                ]
+                
+                for field in required_fields:
+                    if field not in stats:
+                        print(f"❌ Missing required field: {field}")
+                        return False, data
+                
+                print(f"📊 Statistics Summary:")
+                print(f"   Total Orders: {stats['totalOrders']}")
+                print(f"   Completed Orders: {stats['completedOrders']}")
+                print(f"   Active Orders: {stats['activeOrders']}")
+                print(f"   Today Orders: {stats['todayOrders']}")
+                print(f"   Total Revenue: ${stats['totalRevenue']:.2f}")
+                
+                # Verify topProducts structure
+                top_products = stats.get('topProducts', [])
+                print(f"   Top Products: {len(top_products)} items")
+                if top_products:
+                    for i, product in enumerate(top_products[:3]):
+                        print(f"     {i+1}. {product.get('nombre', 'N/A')} - Qty: {product.get('cantidad', 0)}, Revenue: ${product.get('ingresos', 0):.2f}")
+                
+                # Verify recentOrders structure
+                recent_orders = stats.get('recentOrders', [])
+                print(f"   Recent Orders: {len(recent_orders)} items")
+                if recent_orders:
+                    for order in recent_orders[:2]:
+                        print(f"     Order {order.get('id', 'N/A')[:8]}... - {order.get('cliente', 'N/A')} - ${order.get('total', 0):.2f}")
+                
+                # Verify ordersByStatus structure
+                orders_by_status = stats.get('ordersByStatus', {})
+                print(f"   Orders by Status:")
+                for status, count in orders_by_status.items():
+                    print(f"     {status}: {count}")
+                
+                # Verify salesByPeriod structure
+                sales_by_period = stats.get('salesByPeriod', {})
+                print(f"   Sales by Period:")
+                for period, amount in sales_by_period.items():
+                    print(f"     {period}: ${amount:.2f}")
+                
+                # Verify we have the expected 2 test orders
+                if stats['totalOrders'] >= 2:
+                    print("✅ Expected test orders found in statistics")
+                else:
+                    print(f"⚠️  Expected at least 2 orders, found {stats['totalOrders']}")
+                
+                return True, data
+                    
+            else:
+                print(f"❌ Failed - Expected 200, got {response.status_code}")
+                try:
+                    print(f"Response: {response.json()}")
+                except:
+                    print(f"Response: {response.text}")
+                return False, {}
+
+        except Exception as e:
+            print(f"❌ Failed - Error: {str(e)}")
+            return False, {}
+
+    def test_orders_all(self):
+        """Test get all orders endpoint"""
+        success, response = self.run_test(
+            "Get All Orders",
+            "GET",
+            "orders/all",
+            200
+        )
+        
+        if success:
+            orders = response.get('orders', [])
+            total = response.get('total', 0)
+            stats = response.get('stats', {})
+            
+            print(f"📋 Orders Summary:")
+            print(f"   Total Orders: {total}")
+            print(f"   Orders in response: {len(orders)}")
+            
+            if stats:
+                print(f"   Status breakdown:")
+                for status, count in stats.items():
+                    print(f"     {status}: {count}")
+            
+            # Verify structure of orders
+            if orders:
+                first_order = orders[0]
+                required_order_fields = ['id', 'cliente', 'productos', 'total', 'estado', 'fecha']
+                
+                for field in required_order_fields:
+                    if field not in first_order:
+                        print(f"❌ Missing required order field: {field}")
+                        return False, response
+                
+                print(f"   Sample order: {first_order['id'][:8]}... - {first_order['cliente']['nombre']} - ${first_order['total']}")
+                
+            # Verify we have the expected 2 test orders
+            if total >= 2:
+                print("✅ Expected test orders found")
+            else:
+                print(f"⚠️  Expected at least 2 orders, found {total}")
+        
+        return success, response
+
 def main():
     # Setup
     tester = NuestraCarneTester()
     
-    # Run tests
-    print("\n🔍 TESTING ORDER SUBMISSION ENDPOINT 🔍")
-    print("=======================================")
+    # Run tests for the new admin statistics endpoints
+    print("\n🔍 TESTING ADMIN STATISTICS ENDPOINTS 🔍")
+    print("=========================================")
     
     # 1. Health check first
     print("\n🔍 TESTING API HEALTH 🔍")
@@ -576,20 +710,20 @@ def main():
         print("❌ API Health Check Failed - Cannot proceed with testing")
         return 1
     
-    # 2. Test orders file persistence first
+    # 2. Test orders file persistence to verify data exists
     print("\n🔍 TESTING ORDERS FILE PERSISTENCE 🔍")
     print("====================================")
     file_success = tester.test_orders_file_persistence()
     
-    # 3. Test order submission with the specific test data
-    print("\n🔍 TESTING ORDER SUBMISSION ENDPOINT 🔍")
-    print("=======================================")
-    order_success = tester.test_order_submission()
+    # 3. Test the new admin statistics endpoint
+    print("\n🔍 TESTING ADMIN ORDERS STATISTICS ENDPOINT 🔍")
+    print("===============================================")
+    stats_success, stats_response = tester.test_admin_orders_stats()
     
-    # 4. Test orders file again after submission to verify persistence
-    print("\n🔍 VERIFYING ORDER PERSISTENCE AFTER SUBMISSION 🔍")
-    print("=================================================")
-    file_success_after = tester.test_orders_file_persistence()
+    # 4. Test the get all orders endpoint
+    print("\n🔍 TESTING GET ALL ORDERS ENDPOINT 🔍")
+    print("====================================")
+    all_orders_success, all_orders_response = tester.test_orders_all()
     
     # Print results
     print("\n📊 TEST RESULTS 📊")
@@ -600,22 +734,31 @@ def main():
     # Detailed results
     print("\n📋 DETAILED RESULTS:")
     print(f"   ✅ API Health Check: {'PASSED' if health_success else 'FAILED'}")
-    print(f"   ✅ Orders File Persistence (Before): {'PASSED' if file_success else 'FAILED'}")
-    print(f"   ✅ Order Submission: {'PASSED' if order_success else 'FAILED'}")
-    print(f"   ✅ Orders File Persistence (After): {'PASSED' if file_success_after else 'FAILED'}")
+    print(f"   ✅ Orders File Persistence: {'PASSED' if file_success else 'FAILED'}")
+    print(f"   ✅ Admin Orders Statistics: {'PASSED' if stats_success else 'FAILED'}")
+    print(f"   ✅ Get All Orders: {'PASSED' if all_orders_success else 'FAILED'}")
     
     # Critical issue detection
-    if not order_success:
+    if not stats_success:
         print("\n🚨 CRITICAL ISSUE DETECTED:")
-        print("   Order submission endpoint is not working properly")
-        print("   This prevents customers from placing orders")
+        print("   Admin orders statistics endpoint is not working properly")
+        print("   This prevents admin dashboard from displaying order statistics")
         
-    if file_success and not file_success_after:
-        print("\n🚨 CRITICAL PERSISTENCE ISSUE:")
-        print("   Orders file was accessible before but not after submission")
-        print("   This indicates a problem with order saving")
+    if not all_orders_success:
+        print("\n🚨 CRITICAL ISSUE DETECTED:")
+        print("   Get all orders endpoint is not working properly")
+        print("   This prevents admin from viewing all orders")
     
-    return 0 if (health_success and order_success) else 1
+    # Success criteria: both new endpoints must work
+    success_criteria = stats_success and all_orders_success
+    
+    if success_criteria:
+        print("\n🎉 SUCCESS: Both admin statistics endpoints are working correctly!")
+        print("   The admin dashboard can now display real order data instead of dummy data.")
+    else:
+        print("\n❌ FAILURE: One or more admin statistics endpoints are not working.")
+    
+    return 0 if success_criteria else 1
 
 if __name__ == "__main__":
     sys.exit(main())
