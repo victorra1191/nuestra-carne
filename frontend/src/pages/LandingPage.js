@@ -49,7 +49,24 @@ const LandingPage = () => {
   const navigate = useNavigate();
   
   // URL del backend desde variable de entorno
-  const API_BASE = process.env.REACT_APP_BACKEND_URL || 'https://nuestracarnepa.com/api';
+  // URL del backend - Determinar dinámicamente
+  const getApiBase = () => {
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname;
+      
+      if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
+        return 'https://nuestracarnepa.com/api';
+      }
+      
+      if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        return 'http://localhost:8001/api';
+      }
+    }
+    
+    return 'https://nuestracarnepa.com/api';
+  };
+
+  const API_BASE = getApiBase();
 
   // Datos de cortes panameños - SOLO 11 SELECCIONADOS PARA EL LANDING
   const cortes = [
