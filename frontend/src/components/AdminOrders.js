@@ -66,13 +66,18 @@ const AdminOrders = ({ API_BASE }) => {
 
   useEffect(() => {
     fetchOrders();
+    fetchDashboardStats();
   }, []);
 
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE}/orders/all`);
+      console.log('🔍 [AdminOrders] Fetching orders from:', `${API_URL}/orders/all`);
+      
+      const response = await fetch(`${API_URL}/orders/all`);
       const data = await response.json();
+      
+      console.log('🔍 [AdminOrders] Orders response:', data);
       
       if (data.success) {
         setOrders(data.orders || []);
@@ -80,10 +85,31 @@ const AdminOrders = ({ API_BASE }) => {
         throw new Error('Error al cargar pedidos');
       }
     } catch (error) {
-      console.error('Error fetching orders:', error);
+      console.error('❌ [AdminOrders] Error fetching orders:', error);
       setError('Error al cargar los pedidos');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchDashboardStats = async () => {
+    try {
+      console.log('🔍 [AdminOrders] Fetching dashboard stats from:', `${API_URL}/admin/orders/stats`);
+      
+      const response = await fetch(`${API_URL}/admin/orders/stats`, {
+        headers: {
+          'Authorization': `Basic ${btoa('admin:nuestra123')}`
+        }
+      });
+      const data = await response.json();
+      
+      console.log('🔍 [AdminOrders] Dashboard stats response:', data);
+      
+      if (data.success) {
+        setDashboardStats(data.stats || {});
+      }
+    } catch (error) {
+      console.error('❌ [AdminOrders] Error fetching dashboard stats:', error);
     }
   };
 
