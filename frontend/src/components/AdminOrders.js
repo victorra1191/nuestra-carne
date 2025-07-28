@@ -13,17 +13,56 @@ import {
   AlertCircle,
   TruckIcon,
   Edit3,
-  Eye
+  Eye,
+  BarChart3,
+  ShoppingBag,
+  TrendingUp
 } from 'lucide-react';
 
-const AdminOrders = () => {
+const AdminOrders = ({ API_BASE }) => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [showOrderDetail, setShowOrderDetail] = useState(false);
+  const [dashboardStats, setDashboardStats] = useState({
+    totalOrders: 0,
+    completedOrders: 0,
+    activeOrders: 0,
+    todayOrders: 0,
+    totalRevenue: 0,
+    topProducts: [],
+    recentOrders: []
+  });
   
-  const API_BASE = process.env.REACT_APP_BACKEND_URL;
+  // Función para obtener API base si no se pasa como prop
+  const getApiBase = () => {
+    if (API_BASE) return API_BASE;
+    
+    // FORZAR URL de producción - Fix crítico
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname;
+      console.log('🌐 [AdminOrders] Hostname detected:', hostname);
+      
+      // Si NO es localhost, asumir que es producción
+      if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
+        console.log('🌐 [AdminOrders] FORCING production URL: https://nuestracarnepa.com/api');
+        return 'https://nuestracarnepa.com/api';
+      }
+      
+      // Solo usar localhost si realmente estamos en localhost
+      if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        console.log('🌐 [AdminOrders] Using localhost URL: http://localhost:8001/api');
+        return 'http://localhost:8001/api';
+      }
+    }
+    
+    // Fallback a producción
+    console.log('🌐 [AdminOrders] Fallback to production URL');
+    return 'https://nuestracarnepa.com/api';
+  };
+
+  const API_URL = getApiBase();
 
   useEffect(() => {
     fetchOrders();
