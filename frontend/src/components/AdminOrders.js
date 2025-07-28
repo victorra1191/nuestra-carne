@@ -208,9 +208,60 @@ const AdminOrders = ({ API_BASE }) => {
 
   return (
     <div className="space-y-6">
+      {/* Dashboard de Estadísticas */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="bg-white rounded-lg shadow-sm p-6">
+          <div className="flex items-center">
+            <div className="p-2 bg-blue-100 rounded-lg">
+              <ShoppingBag className="w-6 h-6 text-blue-600" />
+            </div>
+            <div className="ml-4">
+              <p className="text-sm font-medium text-gray-600">Total Pedidos</p>
+              <p className="text-2xl font-bold text-gray-900">{dashboardStats.totalOrders || orders.length}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-sm p-6">
+          <div className="flex items-center">
+            <div className="p-2 bg-green-100 rounded-lg">
+              <CheckCircle className="w-6 h-6 text-green-600" />
+            </div>
+            <div className="ml-4">
+              <p className="text-sm font-medium text-gray-600">Completados</p>
+              <p className="text-2xl font-bold text-gray-900">{dashboardStats.completedOrders || orders.filter(o => o.estado === 'entregado').length}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-sm p-6">
+          <div className="flex items-center">
+            <div className="p-2 bg-yellow-100 rounded-lg">
+              <Clock className="w-6 h-6 text-yellow-600" />
+            </div>
+            <div className="ml-4">
+              <p className="text-sm font-medium text-gray-600">Activos</p>
+              <p className="text-2xl font-bold text-gray-900">{dashboardStats.activeOrders || orders.filter(o => ['pendiente', 'en_proceso', 'en_camino'].includes(o.estado)).length}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-sm p-6">
+          <div className="flex items-center">
+            <div className="p-2 bg-purple-100 rounded-lg">
+              <DollarSign className="w-6 h-6 text-purple-600" />
+            </div>
+            <div className="ml-4">
+              <p className="text-sm font-medium text-gray-600">Ingresos</p>
+              <p className="text-2xl font-bold text-gray-900">${(dashboardStats.totalRevenue || orders.reduce((sum, order) => sum + (order.total || 0), 0)).toFixed(2)}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold text-primary-900">Gestión de Pedidos</h2>
-        <button onClick={fetchOrders} className="btn-outline">
+        <button onClick={() => { fetchOrders(); fetchDashboardStats(); }} className="btn-outline">
           Actualizar
         </button>
       </div>
