@@ -179,7 +179,8 @@ const LandingPage = () => {
         setLoadingBlog(true);
         setBlogError(null);
         
-        const response = await fetch(`${API_BASE}/api/admin/articles`);
+        console.log('🔍 [LandingPage] Fetching blog articles from:', `${API_BASE}/articles`);
+        const response = await fetch(`${API_BASE}/articles`);
         const data = await response.json();
         
         if (data.success && data.articles) {
