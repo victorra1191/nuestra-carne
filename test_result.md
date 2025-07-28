@@ -300,8 +300,8 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Wholesale API - Request Management"
-    - "Wholesale API - Approval System"
+    - "Admin Statistics API - Orders Dashboard"
+    - "Orders API - Get All Orders"
   stuck_tasks: 
     - "Wholesale API - Request Management"
     - "Wholesale API - Approval System"
