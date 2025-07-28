@@ -115,7 +115,7 @@ const AdminOrders = ({ API_BASE }) => {
 
   const updateOrderStatus = async (orderId, newStatus, notas = '') => {
     try {
-      const response = await fetch(`${API_BASE}/orders/${orderId}/status`, {
+      const response = await fetch(`${API_URL}/orders/${orderId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -132,6 +132,9 @@ const AdminOrders = ({ API_BASE }) => {
             ? { ...order, estado: newStatus, fechaActualizacion: new Date().toISOString() }
             : order
         ));
+        
+        // Actualizar estadísticas
+        fetchDashboardStats();
         
         // Cerrar el modal si está abierto
         setShowOrderDetail(false);
