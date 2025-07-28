@@ -539,7 +539,17 @@ const OrderForm = () => {
       message += `• ${item.nombre} - ${item.cantidad} ${item.unidad} - $${item.subtotal.toFixed(2)}\n`;
     });
     
-    message += `\n💰 *TOTAL: $${orderData.total.toFixed(2)}*\n\n`;
+    message += `\n💰 *SUBTOTAL: $${(orderData.total - (orderData.total >= 50 ? 0 : 3.50)).toFixed(2)}*\n`;
+    
+    // Agregar costo de envío
+    const deliveryCost = orderData.total >= 50 ? 0 : 3.50;
+    if (deliveryCost > 0) {
+      message += `🚚 *Envío: $${deliveryCost.toFixed(2)}*\n`;
+    } else {
+      message += `🚚 *Envío: GRATIS* (pedido ≥ $50)\n`;
+    }
+    
+    message += `💰 *TOTAL FINAL: $${orderData.total.toFixed(2)}*\n\n`;
     
     if (orderData.cliente.notas) {
       message += `📝 *Notas:* ${orderData.cliente.notas}\n`;
