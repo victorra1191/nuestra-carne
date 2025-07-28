@@ -1313,6 +1313,24 @@ const OrderForm = () => {
                     Nuestro equipo te contactará para coordinar la entrega.
                   </p>
                 </div>
+                
+                {/* Disclaimer en página final */}
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mx-auto max-w-4xl mt-6">
+                  <div className="flex items-start gap-3">
+                    <div className="bg-yellow-500 rounded-full p-1 flex-shrink-0 mt-1">
+                      <AlertCircle size={16} className="text-white" />
+                    </div>
+                    <div className="text-left">
+                      <h3 className="text-yellow-800 font-semibold mb-2">Información Importante</h3>
+                      <ul className="text-yellow-700 text-sm space-y-1">
+                        <li>• Todos los pedidos serán procesados y entregados en un lapso de <strong>48 horas hábiles</strong></li>
+                        <li>• <strong>No se entregan los domingos</strong></li>
+                        <li>• Toda solicitud está sujeta a <strong>disponibilidad del producto</strong></li>
+                        <li>• Los precios pueden oscilar según el precio final del producto en un aproximado de <strong>medio kilo o kilo</strong></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
             </motion.div>
           )}
