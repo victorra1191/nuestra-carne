@@ -90,8 +90,8 @@ class SMTPEmailService {
    */
   async sendCompanyEmail(orderData) {
     const mailOptions = {
-      from: process.env.SMTP_EMAIL,
-      to: process.env.COMPANY_EMAIL,
+      from: process.env.FROM_EMAIL,
+      to: process.env.TO_EMAIL,
       subject: `🥩 Nuevo Pedido #${orderData.id} - ${orderData.cliente.nombre}`,
       html: this.generateCompanyEmailHTML(orderData)
     };
