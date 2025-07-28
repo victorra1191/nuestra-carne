@@ -222,11 +222,11 @@ backend:
 
   - task: "Order API - Order Submission"
     implemented: true
-    working: false
+    working: true
     file: "/app/backend/src/routes/orderRoutes.js"
-    stuck_count: 1
+    stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "testing"
@@ -234,6 +234,9 @@ backend:
       - working: false
         agent: "testing"
         comment: "Order submission failed with 500 internal server error. This is likely due to email service configuration issues."
+      - working: true
+        agent: "testing"
+        comment: "✅ ORDER SUBMISSION FIXED: Successfully tested POST /api/orders/submit endpoint. Fixed backend startup issue by removing duplicate productRoutes_backup.js file that was causing 'readJSONFile already declared' error. Order now properly saves to orders.json file with correct data structure. Email service (Ethereal SMTP) works correctly. Backend returns proper success response with orderId. Order persistence issue is RESOLVED. Test data: Trip tip order for $9.60 saved successfully with ID."
 
   - task: "Wholesale API - Request Management"
     implemented: true
