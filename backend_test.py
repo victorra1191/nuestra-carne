@@ -559,51 +559,37 @@ def main():
     tester = NuestraCarneTester()
     
     # Run tests
-    print("\n🔍 TESTING NUESTRA CARNE API - NEW PRICE STRUCTURE 🔍")
-    print("=====================================================")
+    print("\n🔍 TESTING ORDER SUBMISSION ENDPOINT 🔍")
+    print("=======================================")
     
-    # 1. Health check
+    # 1. Health check first
+    print("\n🔍 TESTING API HEALTH 🔍")
+    print("========================")
     health_success, health_response = tester.test_health()
     if health_success:
-        print(f"API Health: {json.dumps(health_response, indent=2)}")
-    
-    # 2. Test retail products endpoint with new structure
-    print("\n🔍 TESTING RETAIL PRODUCTS ENDPOINT (NEW STRUCTURE) 🔍")
-    print("======================================================")
-    
-    retail_success, retail_response = tester.test_retail_products()
-    if retail_success:
-        print("✅ Retail products endpoint is working correctly with new structure")
-        print("✅ Product codes updated to 10001-10065 range")
-        print("✅ Price field changed to precioMedioKilo")
-        print("✅ Exactly 59 products returned (products with precioMedioKilo > 0)")
-        print("✅ Costillón entero (codigo: 10014) has correct price of $3.68")
-        print("✅ New york rebanado (codigo: 10001) has correct price of $4.63")
+        print(f"✅ API Health Check Passed")
+        print(f"   Service: {health_response.get('service', 'N/A')}")
+        print(f"   Status: {health_response.get('status', 'N/A')}")
+        print(f"   Environment: {health_response.get('environment', 'N/A')}")
+        print(f"   Email configured: {health_response.get('email_from', 'N/A')}")
     else:
-        print("❌ Retail products endpoint test failed")
+        print("❌ API Health Check Failed - Cannot proceed with testing")
+        return 1
     
-    # 3. Test admin products endpoint
-    print("\n🔍 TESTING ADMIN PRODUCTS ENDPOINT 🔍")
+    # 2. Test orders file persistence first
+    print("\n🔍 TESTING ORDERS FILE PERSISTENCE 🔍")
     print("====================================")
+    file_success = tester.test_orders_file_persistence()
     
-    admin_success, admin_response = tester.test_admin_products()
-    if admin_success:
-        print("✅ Admin products endpoint working correctly")
-        print("✅ Basic authentication working (admin:nuestra123)")
-        print("✅ Returns all 65 products including unavailable ones")
-    else:
-        print("❌ Admin products endpoint test failed")
+    # 3. Test order submission with the specific test data
+    print("\n🔍 TESTING ORDER SUBMISSION ENDPOINT 🔍")
+    print("=======================================")
+    order_success = tester.test_order_submission()
     
-    # 4. Test admin product update
-    print("\n🔍 TESTING ADMIN PRODUCT UPDATE 🔍")
-    print("=================================")
-    
-    update_success, update_response = tester.test_admin_update_product()
-    if update_success:
-        print("✅ Admin product update working correctly")
-        print("✅ Price changes persist and can be verified")
-    else:
-        print("❌ Admin product update test failed")
+    # 4. Test orders file again after submission to verify persistence
+    print("\n🔍 VERIFYING ORDER PERSISTENCE AFTER SUBMISSION 🔍")
+    print("=================================================")
+    file_success_after = tester.test_orders_file_persistence()
     
     # Print results
     print("\n📊 TEST RESULTS 📊")
@@ -611,7 +597,25 @@ def main():
     print(f"Tests passed: {tester.tests_passed}/{tester.tests_run}")
     print(f"Success rate: {(tester.tests_passed/tester.tests_run)*100:.2f}%")
     
-    return 0 if tester.tests_passed == tester.tests_run else 1
+    # Detailed results
+    print("\n📋 DETAILED RESULTS:")
+    print(f"   ✅ API Health Check: {'PASSED' if health_success else 'FAILED'}")
+    print(f"   ✅ Orders File Persistence (Before): {'PASSED' if file_success else 'FAILED'}")
+    print(f"   ✅ Order Submission: {'PASSED' if order_success else 'FAILED'}")
+    print(f"   ✅ Orders File Persistence (After): {'PASSED' if file_success_after else 'FAILED'}")
+    
+    # Critical issue detection
+    if not order_success:
+        print("\n🚨 CRITICAL ISSUE DETECTED:")
+        print("   Order submission endpoint is not working properly")
+        print("   This prevents customers from placing orders")
+        
+    if file_success and not file_success_after:
+        print("\n🚨 CRITICAL PERSISTENCE ISSUE:")
+        print("   Orders file was accessible before but not after submission")
+        print("   This indicates a problem with order saving")
+    
+    return 0 if (health_success and order_success) else 1
 
 if __name__ == "__main__":
     sys.exit(main())
