@@ -308,9 +308,9 @@ test_plan:
   current_focus:
     - "Admin Statistics API - Orders Dashboard"
     - "Orders API - Get All Orders"
-  stuck_tasks: 
     - "Wholesale API - Request Management"
     - "Wholesale API - Approval System"
+  stuck_tasks: []
   test_all: false
   test_priority: "high_first"
 
