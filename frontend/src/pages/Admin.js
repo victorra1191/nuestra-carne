@@ -754,7 +754,7 @@ const Admin = () => {
 
         {/* Orders Section */}
         {activeSection === 'orders' && (
-          <AdminOrders />
+          <AdminOrders API_BASE={API_BASE} />
         )}
 
         {/* Promociones Section */}
