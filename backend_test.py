@@ -436,53 +436,123 @@ class NuestraCarneTester:
         )
 
     def test_order_submission(self):
-        """Test order submission (expected to fail on email)"""
+        """Test order submission with new product codes and structure"""
         test_order = {
             "cliente": {
                 "tipoCliente": "individual",
-                "nombre": "Test Customer",
-                "telefono": "+507 6000-0000",
-                "email": "test@example.com",
+                "nombre": "Test Customer Order",
+                "telefono": "+507 6000-1111",
+                "email": "testcustomer@example.com",
                 "direccion": "Test Address, Panama City",
-                "fechaEntrega": "2025-02-20",
+                "fechaEntrega": "2025-02-21",
                 "horaEntrega": "14:00",
-                "notas": "This is a test order"
+                "notas": "Test order for debugging"
             },
             "productos": [
                 {
-                    "codigo": "20047",
-                    "nombre": "Arañita",
-                    "cantidad": 2,
-                    "unidad": "libras",
-                    "subtotal": 18.32
-                },
-                {
-                    "codigo": "20002",
-                    "nombre": "Filete Limpio",
+                    "codigo": "10028",
+                    "nombre": "Trip tip (punta Rincón)",
                     "cantidad": 1,
-                    "unidad": "libras",
-                    "subtotal": 7.03
+                    "unidad": "kilos",
+                    "subtotal": 9.60,
+                    "precioKg": 9.60,
+                    "precioMedioKilo": 4.80
                 }
             ],
-            "total": 25.35
+            "total": 9.60
         }
         
-        # Note: We expect this to either succeed or fail with a 503 (email service error)
+        print(f"\n🔍 Testing Order Submission with data:")
+        print(f"   Cliente: {test_order['cliente']['nombre']}")
+        print(f"   Email: {test_order['cliente']['email']}")
+        print(f"   Productos: {len(test_order['productos'])} items")
+        print(f"   Total: ${test_order['total']}")
+        
+        # Test the order submission endpoint
         success, response = self.run_test(
-            "Submit Order",
+            "Submit Order (POST /api/orders/submit)",
             "POST",
-            "submit",
+            "orders/submit",
             200,
             data=test_order
         )
         
-        # If it failed with 503, that's expected (email service not configured)
-        if not success and response.get('error') == 'Error de servicio de email':
-            print("✅ Order submission failed as expected due to email service not being configured")
-            self.tests_passed += 1
+        if success:
+            print("✅ Order submission successful!")
+            print(f"   Order ID: {response.get('orderId', 'N/A')}")
+            print(f"   Emails sent: {response.get('emailsSent', False)}")
+            
+            # Verify the order was saved by checking if we can retrieve it
+            if 'orderId' in response:
+                order_id = response['orderId']
+                print(f"\n🔍 Verifying order {order_id} was saved...")
+                
+                # Try to get the specific order
+                get_success, get_response = self.run_test(
+                    f"Get Order {order_id}",
+                    "GET",
+                    f"orders/{order_id}",
+                    200
+                )
+                
+                if get_success and get_response.get('success'):
+                    saved_order = get_response.get('order', {})
+                    print("✅ Order successfully saved and retrieved!")
+                    print(f"   Saved cliente: {saved_order.get('cliente', {}).get('nombre', 'N/A')}")
+                    print(f"   Saved total: ${saved_order.get('total', 0)}")
+                    print(f"   Order status: {saved_order.get('estado', 'N/A')}")
+                    return True
+                else:
+                    print("❌ Order was submitted but could not be retrieved from storage")
+                    return False
+            
+            return True
+        else:
+            print("❌ Order submission failed")
+            if response:
+                print(f"   Error: {response.get('error', 'Unknown error')}")
+                print(f"   Message: {response.get('message', 'No message')}")
+            return False
+
+    def test_orders_file_persistence(self):
+        """Test that orders are being saved to orders.json file"""
+        import json
+        import os
+        
+        orders_file = '/app/backend/src/data/orders.json'
+        
+        print(f"\n🔍 Testing orders file persistence...")
+        print(f"   Orders file path: {orders_file}")
+        
+        # Check if orders file exists
+        if not os.path.exists(orders_file):
+            print("❌ Orders file does not exist")
+            return False
+        
+        try:
+            # Read the orders file
+            with open(orders_file, 'r') as f:
+                orders_data = json.load(f)
+            
+            print(f"✅ Orders file exists and is readable")
+            print(f"   Total orders in file: {len(orders_data)}")
+            
+            # Check if there are any orders
+            if len(orders_data) > 0:
+                latest_order = orders_data[-1]  # Get the most recent order
+                print(f"   Latest order ID: {latest_order.get('id', 'N/A')}")
+                print(f"   Latest order cliente: {latest_order.get('cliente', {}).get('nombre', 'N/A')}")
+                print(f"   Latest order total: ${latest_order.get('total', 0)}")
+                print(f"   Latest order date: {latest_order.get('fecha', 'N/A')}")
+            
             return True
             
-        return success
+        except json.JSONDecodeError as e:
+            print(f"❌ Orders file exists but contains invalid JSON: {e}")
+            return False
+        except Exception as e:
+            print(f"❌ Error reading orders file: {e}")
+            return False
 
 def main():
     # Setup
