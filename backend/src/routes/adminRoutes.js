@@ -286,6 +286,137 @@ router.delete('/blog/articles/:id', authenticate, (req, res) => {
 });
 
 /**
+ * GET /api/admin/orders/stats
+ * Obtener estadísticas de pedidos para el dashboard
+ */
+router.get('/orders/stats', authenticate, async (req, res) => {
+  try {
+    const { readJSONFile } = require('../utils/fileUtils');
+    const ordersFile = path.join(__dirname, '../data/orders.json');
+    
+    const orders = await readJSONFile(ordersFile) || [];
+    
+    // Calcular estadísticas
+    const today = new Date();
+    const todayStr = today.toISOString().split('T')[0];
+    
+    const stats = {
+      totalOrders: orders.length,
+      completedOrders: orders.filter(o => o.estado === 'entregado').length,
+      activeOrders: orders.filter(o => ['pendiente', 'en_proceso', 'en_camino'].includes(o.estado)).length,
+      todayOrders: orders.filter(o => {
+        const orderDate = new Date(o.fechaCreacion || o.fecha).toISOString().split('T')[0];
+        return orderDate === todayStr;
+      }).length,
+      totalRevenue: orders.reduce((sum, order) => sum + (order.total || 0), 0),
+      
+      // Top productos más vendidos
+      topProducts: getTopProducts(orders),
+      
+      // Pedidos recientes (últimos 5)
+      recentOrders: orders
+        .sort((a, b) => new Date(b.fechaCreacion || b.fecha) - new Date(a.fechaCreacion || a.fecha))
+        .slice(0, 5)
+        .map(order => ({
+          id: order.id,
+          cliente: order.cliente?.nombre,
+          total: order.total,
+          estado: order.estado,
+          fecha: order.fechaCreacion || order.fecha
+        })),
+      
+      // Estadísticas por estado
+      ordersByStatus: {
+        pendiente: orders.filter(o => o.estado === 'pendiente').length,
+        en_proceso: orders.filter(o => o.estado === 'en_proceso').length,
+        en_camino: orders.filter(o => o.estado === 'en_camino').length,
+        entregado: orders.filter(o => o.estado === 'entregado').length,
+        cancelado: orders.filter(o => o.estado === 'cancelado').length
+      },
+      
+      // Ventas por período
+      salesByPeriod: getSalesByPeriod(orders)
+    };
+    
+    res.json({
+      success: true,
+      stats: stats
+    });
+
+  } catch (error) {
+    console.error('Error obteniendo estadísticas de pedidos:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Error interno del servidor'
+    });
+  }
+});
+
+// Función helper para obtener productos más vendidos
+function getTopProducts(orders) {
+  const productCount = {};
+  
+  orders.forEach(order => {
+    if (order.productos && Array.isArray(order.productos)) {
+      order.productos.forEach(producto => {
+        const key = producto.codigo || producto.nombre;
+        if (!productCount[key]) {
+          productCount[key] = {
+            codigo: producto.codigo,
+            nombre: producto.nombre,
+            cantidad: 0,
+            ingresos: 0
+          };
+        }
+        productCount[key].cantidad += producto.cantidad || 1;
+        productCount[key].ingresos += producto.subtotal || 0;
+      });
+    }
+  });
+  
+  return Object.values(productCount)
+    .sort((a, b) => b.cantidad - a.cantidad)
+    .slice(0, 10);
+}
+
+// Función helper para obtener ventas por período
+function getSalesByPeriod(orders) {
+  const periods = {
+    today: 0,
+    thisWeek: 0,
+    thisMonth: 0,
+    lastMonth: 0
+  };
+  
+  const now = new Date();
+  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const weekStart = new Date(todayStart.getTime() - (7 * 24 * 60 * 60 * 1000));
+  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+  const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  const lastMonthEnd = new Date(now.getFullYear(), now.getMonth(), 0);
+  
+  orders.forEach(order => {
+    const orderDate = new Date(order.fechaCreacion || order.fecha);
+    const orderTotal = order.total || 0;
+    
+    if (orderDate >= todayStart) {
+      periods.today += orderTotal;
+    }
+    if (orderDate >= weekStart) {
+      periods.thisWeek += orderTotal;
+    }
+    if (orderDate >= monthStart) {
+      periods.thisMonth += orderTotal;
+    }
+    if (orderDate >= lastMonthStart && orderDate <= lastMonthEnd) {
+      periods.lastMonth += orderTotal;
+    }
+  });
+  
+  return periods;
+}
+
+/**
  * GET /api/admin/orders
  * Obtener todas las órdenes para el panel de administración
  */
