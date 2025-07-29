@@ -1628,6 +1628,9 @@ def main():
     if not send_weekly_success:
         critical_issues.append("Send weekly report functionality failed")
         
+    if not comprehensive_success:
+        critical_issues.append("Comprehensive weekly reports validation failed")
+        
     if not cron_success:
         critical_issues.append("Cron job configuration issues detected")
     
