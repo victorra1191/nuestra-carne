@@ -1362,8 +1362,8 @@ class NuestraCarneTester:
                     print("❌ Victor Rodriguez not found in WhatsApp message")
                     return False, data
                 
-                if '$72.70' not in whatsapp_message:
-                    print("❌ Expected total revenue $72.70 not found in WhatsApp message")
+                if '$47.35' not in whatsapp_message:
+                    print("❌ Expected current week revenue $47.35 not found in WhatsApp message")
                     return False, data
                 
                 print("✅ WhatsApp message includes expected products, customers, and metrics")
