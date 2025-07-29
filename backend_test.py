@@ -1588,7 +1588,12 @@ def main():
     print("==========================================")
     send_weekly_success, send_weekly_response = tester.test_send_weekly_report()
     
-    # 6. Test cron job verification
+    # 6. Test comprehensive validation across weeks
+    print("\n🔍 TESTING COMPREHENSIVE WEEKLY REPORTS VALIDATION 🔍")
+    print("====================================================")
+    comprehensive_success, comprehensive_response = tester.test_comprehensive_weekly_reports_validation()
+    
+    # 7. Test cron job verification
     print("\n🔍 TESTING CRON JOB VERIFICATION 🔍")
     print("==================================")
     cron_success = tester.test_cron_job_verification()
