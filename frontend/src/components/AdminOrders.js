@@ -318,6 +318,39 @@ const AdminOrders = ({ API_BASE }) => {
         </div>
       </div>
 
+      {/* Métricas de Productos Más Vendidos */}
+      <div className="bg-white rounded-lg shadow-sm p-6">
+        <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+          <TrendingUp className="w-5 h-5 mr-2" />
+          Cortes Más Pedidos
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {dashboardStats.topProducts && dashboardStats.topProducts.length > 0 ? (
+            dashboardStats.topProducts.slice(0, 6).map((producto, index) => (
+              <div key={index} className="bg-gray-50 p-4 rounded-lg border-l-4 border-primary-500">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="font-medium text-gray-900">{producto.nombre}</p>
+                    <p className="text-sm text-gray-600">Código: {producto.codigo}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-lg font-bold text-primary-600">{producto.cantidad}</p>
+                    <p className="text-xs text-gray-500">pedidos</p>
+                  </div>
+                </div>
+                <div className="mt-2 text-sm text-gray-600">
+                  <p>💰 Ingresos: ${producto.ingresos?.toFixed(2)}</p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="col-span-3 text-center text-gray-500 py-4">
+              No hay datos de productos aún
+            </div>
+          )}
+        </div>
+      </div>
+
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold text-primary-900">Gestión de Pedidos</h2>
         <button onClick={() => { fetchOrders(); fetchDashboardStats(); }} className="btn-outline">
