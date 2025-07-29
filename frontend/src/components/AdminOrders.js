@@ -35,6 +35,16 @@ const AdminOrders = ({ API_BASE }) => {
     recentOrders: []
   });
   
+  // Filtros
+  const [filters, setFilters] = useState({
+    dateFrom: '',
+    dateTo: '',
+    client: '',
+    status: 'all'
+  });
+  
+  const [expandedOrders, setExpandedOrders] = useState(new Set());
+  
   // Función para obtener API base si no se pasa como prop
   const getApiBase = () => {
     if (API_BASE) return API_BASE;
