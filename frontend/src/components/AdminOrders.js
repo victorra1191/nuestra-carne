@@ -609,19 +609,6 @@ const AdminOrders = ({ API_BASE }) => {
                     )}
                   </React.Fragment>
                 ))}
-                        value={order.estado}
-                        onChange={(e) => updateOrderStatus(order.id, e.target.value)}
-                        className="text-sm border border-gray-300 rounded px-2 py-1"
-                      >
-                        <option value="pendiente">Pendiente</option>
-                        <option value="en_proceso">En Proceso</option>
-                        <option value="en_camino">En Camino</option>
-                        <option value="entregado">Entregado</option>
-                        <option value="cancelado">Cancelado</option>
-                      </select>
-                    </td>
-                  </tr>
-                ))}
               </tbody>
             </table>
           </div>
