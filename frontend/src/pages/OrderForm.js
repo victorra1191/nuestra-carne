@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { trackOrderPlaced, trackAddToCart, trackPageView } from '../utils/analytics';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
