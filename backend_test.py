@@ -1390,7 +1390,112 @@ class NuestraCarneTester:
             print(f"❌ Failed - Error: {str(e)}")
             return False, {}
 
-    def test_cron_job_verification(self):
+    def test_comprehensive_weekly_reports_validation(self):
+        """Test comprehensive validation across different weeks to verify all 3 orders"""
+        # Set up basic auth header
+        import base64
+        credentials = base64.b64encode(b'admin:nuestra123').decode('utf-8')
+        headers = {'Authorization': f'Basic {credentials}'}
+        
+        self.tests_run += 1
+        print(f"\n🔍 Testing Comprehensive Weekly Reports Validation...")
+        
+        try:
+            # Test current week (should have 2 orders: $47.35)
+            current_url = f"{self.base_url}/reports/weekly"
+            current_response = requests.get(current_url, headers=headers)
+            
+            # Test July 2nd week (should have 1 order: $25.35)
+            july2_url = f"{self.base_url}/reports/weekly/2025-07-02"
+            july2_response = requests.get(july2_url, headers=headers)
+            
+            if current_response.status_code == 200 and july2_response.status_code == 200:
+                self.tests_passed += 1
+                print(f"✅ Both week reports generated successfully")
+                
+                current_data = current_response.json()
+                july2_data = july2_response.json()
+                
+                current_report = current_data.get('report', {})
+                july2_report = july2_data.get('report', {})
+                
+                current_summary = current_report.get('summary', {})
+                july2_summary = july2_report.get('summary', {})
+                
+                print(f"📊 Comprehensive Weekly Reports Analysis:")
+                print(f"   Current Week ({current_report.get('period', {}).get('description')}):")
+                print(f"     Orders: {current_summary.get('totalOrders')}")
+                print(f"     Revenue: ${current_summary.get('totalRevenue', 0):.2f}")
+                
+                print(f"   July 2nd Week ({july2_report.get('period', {}).get('description')}):")
+                print(f"     Orders: {july2_summary.get('totalOrders')}")
+                print(f"     Revenue: ${july2_summary.get('totalRevenue', 0):.2f}")
+                
+                # Verify total across both weeks equals expected $72.70
+                total_orders = current_summary.get('totalOrders', 0) + july2_summary.get('totalOrders', 0)
+                total_revenue = current_summary.get('totalRevenue', 0) + july2_summary.get('totalRevenue', 0)
+                
+                print(f"   COMBINED TOTALS:")
+                print(f"     Total Orders: {total_orders}")
+                print(f"     Total Revenue: ${total_revenue:.2f}")
+                
+                # Validate combined totals match expected values
+                if total_orders != 3:
+                    print(f"❌ Expected 3 total orders across weeks, got {total_orders}")
+                    return False, {}
+                else:
+                    print("✅ Correct total orders across all weeks: 3")
+                
+                if abs(total_revenue - 72.70) > 0.01:
+                    print(f"❌ Expected total revenue $72.70 across weeks, got ${total_revenue:.2f}")
+                    return False, {}
+                else:
+                    print("✅ Correct total revenue across all weeks: $72.70")
+                
+                # Verify all expected products are found across weeks
+                current_products = current_report.get('topProducts', [])
+                july2_products = july2_report.get('topProducts', [])
+                
+                all_products = []
+                for product in current_products + july2_products:
+                    all_products.append(product.get('nombre', ''))
+                
+                expected_products = ['Ribeye', 'Trip tip', 'Arañita', 'Filete Limpio']
+                for expected_product in expected_products:
+                    if not any(expected_product in found_name for found_name in all_products):
+                        print(f"❌ Expected product '{expected_product}' not found across weeks")
+                        return False, {}
+                
+                print("✅ All expected products found across different weeks")
+                
+                # Verify Victor Rodriguez appears in current week
+                current_customers = current_report.get('topCustomers', [])
+                victor_found = False
+                for customer in current_customers:
+                    if 'victor rodriguez' in customer.get('nombre', '').lower():
+                        victor_found = True
+                        if customer.get('totalGastado') != 37.75:
+                            print(f"❌ Victor Rodriguez has incorrect total: ${customer.get('totalGastado')} (expected $37.75)")
+                            return False, {}
+                        break
+                
+                if not victor_found:
+                    print("❌ Victor Rodriguez not found in current week customers")
+                    return False, {}
+                else:
+                    print("✅ Victor Rodriguez found in current week with correct total: $37.75")
+                
+                print("✅ Comprehensive weekly reports validation passed!")
+                print("   The system correctly separates orders by week and provides accurate reporting")
+                return True, {}
+                    
+            else:
+                print(f"❌ Failed - Current week: {current_response.status_code}, July 2nd week: {july2_response.status_code}")
+                return False, {}
+
+        except Exception as e:
+            print(f"❌ Failed - Error: {str(e)}")
+            return False, {}
         """Test cron job configuration verification"""
         print(f"\n🔍 Testing Cron Job Configuration...")
         
