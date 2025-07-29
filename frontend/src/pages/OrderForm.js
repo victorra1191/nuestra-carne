@@ -65,6 +65,11 @@ const OrderForm = () => {
   const DELIVERY_FEE_AMOUNT = 3.50;
   const DELIVERY_FREE_MINIMUM = 50.00;
 
+  // 📊 TRACKING: Página de pedidos visitada
+  useEffect(() => {
+    trackPageView('order_form', 'Formulario de Pedidos - Nuestra Carne');
+  }, []);
+
   // Cargar productos según el tipo de usuario (autenticado o seleccionado en formulario)
   useEffect(() => {
     const fetchProducts = async () => {
