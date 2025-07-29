@@ -1611,6 +1611,7 @@ def main():
     print(f"   ✅ Weekly Report (Specific Date): {'PASSED' if weekly_specific_success else 'FAILED'}")
     print(f"   ✅ Reports History: {'PASSED' if history_success else 'FAILED'}")
     print(f"   ✅ Send Weekly Report: {'PASSED' if send_weekly_success else 'FAILED'}")
+    print(f"   ✅ Comprehensive Validation: {'PASSED' if comprehensive_success else 'FAILED'}")
     print(f"   ✅ Cron Job Verification: {'PASSED' if cron_success else 'FAILED'}")
     
     # Critical issue detection
