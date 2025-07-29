@@ -5,6 +5,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#8B4513" />
         
+        <!-- Content Security Policy -->
+        <meta http-equiv="Content-Security-Policy" content="
+            default-src 'self' https://nuestracarnepa.com https://www.nuestracarnepa.com;
+            script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+            connect-src 'self' https://nuestracarnepa.com https://www.nuestracarnepa.com https://www.google-analytics.com https://analytics.google.com;
+            img-src 'self' data: https: http: blob:;
+            style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+            font-src 'self' https://fonts.gstatic.com;
+            object-src 'none';
+            base-uri 'self';
+            form-action 'self';
+        ">
+        
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-9CSGB3WL03"></script>
         <script>
