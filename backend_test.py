@@ -688,13 +688,345 @@ class NuestraCarneTester:
         
         return success, response
 
+    def test_admin_orders_stats_enhanced(self):
+        """Test admin orders statistics endpoint with enhanced validation for 3 orders"""
+        # Set up basic auth header
+        import base64
+        credentials = base64.b64encode(b'admin:nuestra123').decode('utf-8')
+        headers = {'Authorization': f'Basic {credentials}'}
+        
+        url = f"{self.base_url}/admin/orders/stats"
+        
+        self.tests_run += 1
+        print(f"\n🔍 Testing Enhanced Admin Orders Statistics...")
+        
+        try:
+            response = requests.get(url, headers=headers)
+            success = response.status_code == 200
+            
+            if success:
+                self.tests_passed += 1
+                print(f"✅ Passed - Status: {response.status_code}")
+                
+                data = response.json()
+                if not data.get('success'):
+                    print("❌ Response indicates failure")
+                    return False, data
+                
+                stats = data.get('stats', {})
+                
+                # Verify required statistics fields
+                required_fields = [
+                    'totalOrders', 'completedOrders', 'activeOrders', 'todayOrders',
+                    'totalRevenue', 'topProducts', 'recentOrders', 'ordersByStatus', 'salesByPeriod'
+                ]
+                
+                for field in required_fields:
+                    if field not in stats:
+                        print(f"❌ Missing required field: {field}")
+                        return False, data
+                
+                print(f"📊 Enhanced Statistics Summary:")
+                print(f"   Total Orders: {stats['totalOrders']}")
+                print(f"   Completed Orders: {stats['completedOrders']}")
+                print(f"   Active Orders: {stats['activeOrders']}")
+                print(f"   Today Orders: {stats['todayOrders']}")
+                print(f"   Total Revenue: ${stats['totalRevenue']:.2f}")
+                
+                # SPECIFIC VALIDATION FOR REVIEW REQUEST
+                # 1. Verify 3 orders total
+                if stats['totalOrders'] != 3:
+                    print(f"❌ Expected 3 total orders, got {stats['totalOrders']}")
+                    return False, data
+                else:
+                    print("✅ Correct total orders count: 3")
+                
+                # 2. Verify total revenue is $72.70 (25.35 + 9.60 + 37.75)
+                expected_revenue = 72.70
+                if abs(stats['totalRevenue'] - expected_revenue) > 0.01:
+                    print(f"❌ Expected total revenue ${expected_revenue}, got ${stats['totalRevenue']:.2f}")
+                    return False, data
+                else:
+                    print(f"✅ Correct total revenue: ${stats['totalRevenue']:.2f}")
+                
+                # 3. Verify active orders count (3: 2 pendiente + 1 en_proceso)
+                if stats['activeOrders'] != 3:
+                    print(f"❌ Expected 3 active orders, got {stats['activeOrders']}")
+                    return False, data
+                else:
+                    print("✅ Correct active orders count: 3")
+                
+                # 4. Verify topProducts includes expected products
+                top_products = stats.get('topProducts', [])
+                print(f"   Top Products: {len(top_products)} items")
+                
+                expected_products = ['Ribeye', 'Trip tip', 'Arañita', 'Filete Limpio']
+                found_products = [p.get('nombre', '') for p in top_products]
+                
+                for expected_product in expected_products:
+                    if not any(expected_product in found_name for found_name in found_products):
+                        print(f"❌ Expected product '{expected_product}' not found in top products")
+                        return False, data
+                
+                print("✅ All expected products found in top products")
+                
+                for i, product in enumerate(top_products[:4]):
+                    print(f"     {i+1}. {product.get('nombre', 'N/A')} - Qty: {product.get('cantidad', 0)}, Revenue: ${product.get('ingresos', 0):.2f}")
+                
+                # 5. Verify ordersByStatus includes en_proceso status
+                orders_by_status = stats.get('ordersByStatus', {})
+                print(f"   Orders by Status:")
+                for status, count in orders_by_status.items():
+                    print(f"     {status}: {count}")
+                
+                if orders_by_status.get('en_proceso', 0) != 1:
+                    print(f"❌ Expected 1 order with 'en_proceso' status, got {orders_by_status.get('en_proceso', 0)}")
+                    return False, data
+                else:
+                    print("✅ Correct 'en_proceso' status count: 1")
+                
+                if orders_by_status.get('pendiente', 0) != 2:
+                    print(f"❌ Expected 2 orders with 'pendiente' status, got {orders_by_status.get('pendiente', 0)}")
+                    return False, data
+                else:
+                    print("✅ Correct 'pendiente' status count: 2")
+                
+                # 6. Verify recentOrders structure and victor rodriguez order
+                recent_orders = stats.get('recentOrders', [])
+                print(f"   Recent Orders: {len(recent_orders)} items")
+                
+                victor_order_found = False
+                for order in recent_orders:
+                    print(f"     Order {order.get('id', 'N/A')[:8]}... - {order.get('cliente', 'N/A')} - ${order.get('total', 0):.2f}")
+                    if 'victor rodriguez' in order.get('cliente', '').lower():
+                        victor_order_found = True
+                        if order.get('total') != 37.75:
+                            print(f"❌ Victor Rodriguez order has incorrect total: ${order.get('total')} (expected $37.75)")
+                            return False, data
+                
+                if not victor_order_found:
+                    print("❌ Victor Rodriguez order not found in recent orders")
+                    return False, data
+                else:
+                    print("✅ Victor Rodriguez order found with correct total")
+                
+                # 7. Verify salesByPeriod structure
+                sales_by_period = stats.get('salesByPeriod', {})
+                print(f"   Sales by Period:")
+                for period, amount in sales_by_period.items():
+                    print(f"     {period}: ${amount:.2f}")
+                
+                print("✅ All enhanced validation checks passed!")
+                return True, data
+                    
+            else:
+                print(f"❌ Failed - Expected 200, got {response.status_code}")
+                try:
+                    print(f"Response: {response.json()}")
+                except:
+                    print(f"Response: {response.text}")
+                return False, {}
+
+        except Exception as e:
+            print(f"❌ Failed - Error: {str(e)}")
+            return False, {}
+
+    def test_orders_all_enhanced(self):
+        """Test get all orders endpoint with enhanced validation for 3 orders"""
+        success, response = self.run_test(
+            "Get All Orders (Enhanced)",
+            "GET",
+            "orders/all",
+            200
+        )
+        
+        if success:
+            orders = response.get('orders', [])
+            total = response.get('total', 0)
+            stats = response.get('stats', {})
+            
+            print(f"📋 Enhanced Orders Summary:")
+            print(f"   Total Orders: {total}")
+            print(f"   Orders in response: {len(orders)}")
+            
+            # SPECIFIC VALIDATION FOR REVIEW REQUEST
+            # 1. Verify 3 orders total
+            if total != 3:
+                print(f"❌ Expected 3 total orders, got {total}")
+                return False, response
+            else:
+                print("✅ Correct total orders count: 3")
+            
+            if len(orders) != 3:
+                print(f"❌ Expected 3 orders in response, got {len(orders)}")
+                return False, response
+            else:
+                print("✅ Correct orders count in response: 3")
+            
+            # 2. Verify victor rodriguez order exists and has proper usuarioId
+            victor_order_found = False
+            for order in orders:
+                if 'victor rodriguez' in order.get('cliente', {}).get('nombre', '').lower():
+                    victor_order_found = True
+                    print(f"✅ Victor Rodriguez order found:")
+                    print(f"     Order ID: {order.get('id', 'N/A')}")
+                    print(f"     Usuario ID: {order.get('usuarioId', 'N/A')}")
+                    print(f"     Total: ${order.get('total', 0)}")
+                    print(f"     Estado: {order.get('estado', 'N/A')}")
+                    
+                    # Verify usuarioId is present
+                    if not order.get('usuarioId'):
+                        print("❌ Victor Rodriguez order missing usuarioId")
+                        return False, response
+                    else:
+                        print(f"✅ Victor Rodriguez order has proper usuarioId: {order.get('usuarioId')}")
+                    
+                    # Verify total is correct
+                    if order.get('total') != 37.75:
+                        print(f"❌ Victor Rodriguez order has incorrect total: ${order.get('total')} (expected $37.75)")
+                        return False, response
+                    else:
+                        print("✅ Victor Rodriguez order has correct total: $37.75")
+                    
+                    # Verify products are complete
+                    productos = order.get('productos', [])
+                    if len(productos) != 2:
+                        print(f"❌ Victor Rodriguez order should have 2 products, got {len(productos)}")
+                        return False, response
+                    
+                    expected_products = ['Ribeye', 'Filete Limpio']
+                    found_products = [p.get('nombre', '') for p in productos]
+                    
+                    for expected_product in expected_products:
+                        if not any(expected_product in found_name for found_name in found_products):
+                            print(f"❌ Expected product '{expected_product}' not found in Victor's order")
+                            return False, response
+                    
+                    print("✅ Victor Rodriguez order has complete product details")
+                    break
+            
+            if not victor_order_found:
+                print("❌ Victor Rodriguez order not found")
+                return False, response
+            
+            # 3. Verify status breakdown
+            if stats:
+                print(f"   Status breakdown:")
+                for status, count in stats.items():
+                    print(f"     {status}: {count}")
+                
+                if stats.get('en_proceso', 0) != 1:
+                    print(f"❌ Expected 1 'en_proceso' order, got {stats.get('en_proceso', 0)}")
+                    return False, response
+                else:
+                    print("✅ Correct 'en_proceso' status count: 1")
+                
+                if stats.get('pendientes', 0) != 2:
+                    print(f"❌ Expected 2 'pendientes' orders, got {stats.get('pendientes', 0)}")
+                    return False, response
+                else:
+                    print("✅ Correct 'pendientes' status count: 2")
+            
+            # 4. Verify structure of orders
+            if orders:
+                first_order = orders[0]
+                required_order_fields = ['id', 'cliente', 'productos', 'total', 'estado', 'fecha']
+                
+                for field in required_order_fields:
+                    if field not in first_order:
+                        print(f"❌ Missing required order field: {field}")
+                        return False, response
+                
+                print(f"   Sample order: {first_order['id'][:8]}... - {first_order['cliente']['nombre']} - ${first_order['total']}")
+            
+            print("✅ All enhanced validation checks passed!")
+        
+        return success, response
+
+    def test_user_specific_orders(self):
+        """Test user-specific order retrieval for victor rodriguez"""
+        user_id = "e95820ef-429a-4419-a75b-d37043adc651"
+        
+        success, response = self.run_test(
+            f"Get User Orders for Victor Rodriguez",
+            "GET",
+            f"orders/user/{user_id}",
+            200
+        )
+        
+        if success:
+            orders = response.get('orders', [])
+            
+            print(f"👤 User-Specific Orders Summary:")
+            print(f"   User ID: {user_id}")
+            print(f"   Orders found: {len(orders)}")
+            
+            # SPECIFIC VALIDATION FOR REVIEW REQUEST
+            # 1. Should return 1 order for victor rodriguez
+            if len(orders) != 1:
+                print(f"❌ Expected 1 order for Victor Rodriguez, got {len(orders)}")
+                return False, response
+            else:
+                print("✅ Correct order count for Victor Rodriguez: 1")
+            
+            # 2. Verify the order details
+            order = orders[0]
+            
+            # Verify customer name
+            if 'victor rodriguez' not in order.get('cliente', {}).get('nombre', '').lower():
+                print(f"❌ Order customer name doesn't match: {order.get('cliente', {}).get('nombre', '')}")
+                return False, response
+            else:
+                print(f"✅ Correct customer name: {order.get('cliente', {}).get('nombre', '')}")
+            
+            # Verify products (should have Ribeye and Filete Limpio)
+            productos = order.get('productos', [])
+            if len(productos) != 2:
+                print(f"❌ Expected 2 products, got {len(productos)}")
+                return False, response
+            
+            expected_products = ['Ribeye', 'Filete Limpio']
+            found_products = [p.get('nombre', '') for p in productos]
+            
+            print(f"   Products in order:")
+            for i, product in enumerate(productos):
+                print(f"     {i+1}. {product.get('nombre', 'N/A')} - Qty: {product.get('cantidad', 0)} {product.get('unidad', '')} - ${product.get('subtotal', 0)}")
+            
+            for expected_product in expected_products:
+                if not any(expected_product in found_name for found_name in found_products):
+                    print(f"❌ Expected product '{expected_product}' not found")
+                    return False, response
+            
+            print("✅ All expected products found with complete details")
+            
+            # Verify total
+            if order.get('total') != 37.75:
+                print(f"❌ Expected total $37.75, got ${order.get('total')}")
+                return False, response
+            else:
+                print(f"✅ Correct total: ${order.get('total')}")
+            
+            # Verify usuarioId matches
+            if order.get('usuarioId') != user_id:
+                print(f"❌ Expected usuarioId {user_id}, got {order.get('usuarioId')}")
+                return False, response
+            else:
+                print(f"✅ Correct usuarioId: {order.get('usuarioId')}")
+            
+            print("✅ All user-specific validation checks passed!")
+        
+        return success, response
+
 def main():
     # Setup
     tester = NuestraCarneTester()
     
-    # Run tests for the new admin statistics endpoints
-    print("\n🔍 TESTING ADMIN STATISTICS ENDPOINTS 🔍")
-    print("=========================================")
+    # Run tests for the updated admin dashboard statistics API
+    print("\n🔍 TESTING UPDATED ADMIN DASHBOARD STATISTICS API 🔍")
+    print("====================================================")
+    print("Verifying new data structure and enhanced metrics with 3 orders")
+    print("Expected: Total orders: 3, Total revenue: $72.70, Active orders: 3")
+    print("Expected products: Ribeye, Trip tip, Arañita, Filete Limpio")
     
     # 1. Health check first
     print("\n🔍 TESTING API HEALTH 🔍")
@@ -710,20 +1042,20 @@ def main():
         print("❌ API Health Check Failed - Cannot proceed with testing")
         return 1
     
-    # 2. Test orders file persistence to verify data exists
-    print("\n🔍 TESTING ORDERS FILE PERSISTENCE 🔍")
-    print("====================================")
-    file_success = tester.test_orders_file_persistence()
+    # 2. Test GET /api/admin/orders/stats with enhanced validation
+    print("\n🔍 TESTING GET /api/admin/orders/stats (ENHANCED) 🔍")
+    print("===================================================")
+    stats_success, stats_response = tester.test_admin_orders_stats_enhanced()
     
-    # 3. Test the new admin statistics endpoint
-    print("\n🔍 TESTING ADMIN ORDERS STATISTICS ENDPOINT 🔍")
-    print("===============================================")
-    stats_success, stats_response = tester.test_admin_orders_stats()
+    # 3. Test GET /api/orders/all with enhanced validation
+    print("\n🔍 TESTING GET /api/orders/all (ENHANCED) 🔍")
+    print("===========================================")
+    all_orders_success, all_orders_response = tester.test_orders_all_enhanced()
     
-    # 4. Test the get all orders endpoint
-    print("\n🔍 TESTING GET ALL ORDERS ENDPOINT 🔍")
-    print("====================================")
-    all_orders_success, all_orders_response = tester.test_orders_all()
+    # 4. Test GET /api/orders/user/:userId for victor rodriguez
+    print("\n🔍 TESTING GET /api/orders/user/e95820ef-429a-4419-a75b-d37043adc651 🔍")
+    print("====================================================================")
+    user_orders_success, user_orders_response = tester.test_user_specific_orders()
     
     # Print results
     print("\n📊 TEST RESULTS 📊")
@@ -734,29 +1066,41 @@ def main():
     # Detailed results
     print("\n📋 DETAILED RESULTS:")
     print(f"   ✅ API Health Check: {'PASSED' if health_success else 'FAILED'}")
-    print(f"   ✅ Orders File Persistence: {'PASSED' if file_success else 'FAILED'}")
-    print(f"   ✅ Admin Orders Statistics: {'PASSED' if stats_success else 'FAILED'}")
-    print(f"   ✅ Get All Orders: {'PASSED' if all_orders_success else 'FAILED'}")
+    print(f"   ✅ Admin Orders Statistics (Enhanced): {'PASSED' if stats_success else 'FAILED'}")
+    print(f"   ✅ Get All Orders (Enhanced): {'PASSED' if all_orders_success else 'FAILED'}")
+    print(f"   ✅ User-Specific Orders (Victor Rodriguez): {'PASSED' if user_orders_success else 'FAILED'}")
     
     # Critical issue detection
     if not stats_success:
         print("\n🚨 CRITICAL ISSUE DETECTED:")
-        print("   Admin orders statistics endpoint is not working properly")
-        print("   This prevents admin dashboard from displaying order statistics")
+        print("   Admin orders statistics endpoint validation failed")
+        print("   The new data structure or enhanced metrics are not working correctly")
         
     if not all_orders_success:
         print("\n🚨 CRITICAL ISSUE DETECTED:")
-        print("   Get all orders endpoint is not working properly")
-        print("   This prevents admin from viewing all orders")
+        print("   Get all orders endpoint validation failed")
+        print("   The 3 orders including victor rodriguez order are not properly structured")
     
-    # Success criteria: both new endpoints must work
-    success_criteria = stats_success and all_orders_success
+    if not user_orders_success:
+        print("\n🚨 CRITICAL ISSUE DETECTED:")
+        print("   User-specific order retrieval failed")
+        print("   Victor Rodriguez order cannot be retrieved by user ID")
+    
+    # Success criteria: all three enhanced endpoints must work
+    success_criteria = stats_success and all_orders_success and user_orders_success
     
     if success_criteria:
-        print("\n🎉 SUCCESS: Both admin statistics endpoints are working correctly!")
-        print("   The admin dashboard can now display real order data instead of dummy data.")
+        print("\n🎉 SUCCESS: Updated admin dashboard statistics API is working correctly!")
+        print("   ✅ 3 orders total (including victor rodriguez order)")
+        print("   ✅ Total revenue: $72.70 (25.35 + 9.60 + 37.75)")
+        print("   ✅ Active orders: 3 (2 pendiente + 1 en_proceso)")
+        print("   ✅ Top products include Ribeye, Trip tip, Arañita, and Filete Limpio")
+        print("   ✅ Victor Rodriguez order has proper usuarioId and complete product details")
+        print("   ✅ User-specific order retrieval working for victor rodriguez")
+        print("\n   The enhanced dashboard data structure is working with real order and product information!")
     else:
-        print("\n❌ FAILURE: One or more admin statistics endpoints are not working.")
+        print("\n❌ FAILURE: One or more enhanced validation checks failed.")
+        print("   The updated admin dashboard statistics API needs attention.")
     
     return 0 if success_criteria else 1
 
