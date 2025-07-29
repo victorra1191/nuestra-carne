@@ -244,22 +244,30 @@ const OrderForm = () => {
     const existingItem = orderItems.find(item => item.codigo === producto.codigo);
     
     if (existingItem) {
+      const updatedItem = { 
+        ...existingItem, 
+        cantidad: existingItem.cantidad + 1,
+        subtotal: (existingItem.cantidad + 1) * (existingItem.unidad === 'kilos' ? existingItem.precioKg : existingItem.precioMedioKilo)
+      };
+      
       setOrderItems(orderItems.map(item =>
-        item.codigo === producto.codigo
-          ? { 
-              ...item, 
-              cantidad: item.cantidad + 1,
-              subtotal: (item.cantidad + 1) * (item.unidad === 'kilos' ? item.precioKg : item.precioMedioKilo)
-            }
-          : item
+        item.codigo === producto.codigo ? updatedItem : item
       ));
+      
+      // 📊 TRACKING: Producto agregado al carrito (cantidad aumentada)
+      trackAddToCart(updatedItem);
     } else {
-      setOrderItems([...orderItems, {
+      const newItem = {
         ...producto,
         cantidad: 1,
         unidad: 'kilos',
         subtotal: producto.precioKg
-      }]);
+      };
+      
+      setOrderItems([...orderItems, newItem]);
+      
+      // 📊 TRACKING: Nuevo producto agregado al carrito
+      trackAddToCart(newItem);
     }
   };
 
