@@ -285,6 +285,9 @@ backend:
       - working: true
         agent: "testing"
         comment: "✅ ADMIN STATISTICS ENDPOINT WORKING PERFECTLY: Successfully tested GET /api/admin/orders/stats endpoint with basic auth (admin:nuestra123). Returns comprehensive order statistics including: totalOrders: 2, completedOrders: 0, activeOrders: 2, totalRevenue: $34.95. Top products analysis shows Arañita (2 qty, $18.32), Trip tip (1 qty, $9.60), and Filete Limpio (1 qty, $7.03). Recent orders display correctly with proper customer names and totals. Orders by status breakdown shows 2 pending orders. Sales by period calculations working: today $9.60, thisMonth $34.95. All required fields present and calculations accurate. Dashboard can now display real order data instead of dummy data."
+      - working: true
+        agent: "testing"
+        comment: "✅ ENHANCED ADMIN STATISTICS VALIDATION PASSED: Successfully verified updated admin dashboard statistics API with new data structure and enhanced metrics. GET /api/admin/orders/stats now correctly returns: totalOrders: 3 (including victor rodriguez order), totalRevenue: $72.70 (25.35 + 9.60 + 37.75), activeOrders: 3 (2 pendiente + 1 en_proceso). Top products array includes all expected products: Ribeye (2 qty, $18.50), Trip tip (1 qty, $9.60), Arañita (1 qty, $25.35), and Filete Limpio (1 qty, $15.75). Orders by status correctly shows 1 'en_proceso' and 2 'pendiente' orders. Recent orders display includes victor rodriguez order with correct $37.75 total. All enhanced validation checks passed - the dashboard data structure is working with real order and product information instead of dummy data."
 
   - task: "Orders API - Get All Orders"
     implemented: true
