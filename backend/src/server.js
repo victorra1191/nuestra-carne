@@ -15,6 +15,7 @@ const productRoutes = require('./routes/productRoutes');
 const adminProductRoutes = require('./routes/adminProductRoutes');
 const promocionesRoutes = require('./routes/promocionesRoutes');
 const blogRoutes = require('./routes/blogRoutes');
+const reportsRoutes = require('./routes/reportsRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 8001;
