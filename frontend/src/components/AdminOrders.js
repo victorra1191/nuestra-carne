@@ -325,6 +325,76 @@ const AdminOrders = ({ API_BASE }) => {
         </button>
       </div>
 
+      {/* Filtros */}
+      <div className="bg-white rounded-lg shadow-sm p-6">
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Filtros</h3>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Fecha Desde
+            </label>
+            <input
+              type="date"
+              value={filters.dateFrom}
+              onChange={(e) => setFilters({...filters, dateFrom: e.target.value})}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Fecha Hasta
+            </label>
+            <input
+              type="date"
+              value={filters.dateTo}
+              onChange={(e) => setFilters({...filters, dateTo: e.target.value})}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Cliente
+            </label>
+            <input
+              type="text"
+              placeholder="Buscar por nombre..."
+              value={filters.client}
+              onChange={(e) => setFilters({...filters, client: e.target.value})}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+            />
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Estado
+            </label>
+            <select
+              value={filters.status}
+              onChange={(e) => setFilters({...filters, status: e.target.value})}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+            >
+              <option value="all">Todos</option>
+              <option value="pendiente">Pendiente</option>
+              <option value="en_proceso">En Proceso</option>
+              <option value="en_camino">En Camino</option>
+              <option value="entregado">Entregado</option>
+              <option value="cancelado">Cancelado</option>
+            </select>
+          </div>
+        </div>
+        
+        <div className="mt-4 flex gap-2">
+          <button onClick={clearFilters} className="btn-outline text-sm">
+            Limpiar Filtros
+          </button>
+          <span className="text-sm text-gray-600 self-center">
+            Mostrando {filteredOrders.length} de {orders.length} pedidos
+          </span>
+        </div>
+      </div>
+
       {orders.length === 0 ? (
         <div className="bg-white rounded-lg shadow-sm p-8 text-center">
           <Package className="text-gray-400 mx-auto mb-4" size={48} />
