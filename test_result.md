@@ -87,6 +87,18 @@ frontend:
         agent: "testing"
         comment: "DELIVERY AND PRICING LOGIC CORRECT: Delivery fee logic properly implemented - $3.50 for orders under $50, free delivery for orders $50 and above. Promotional code section available for discount application. Total calculations include subtotal, discounts, and delivery fees. All pricing displays correctly in both ½kg and kg formats as required."
 
+  - task: "Orders API - User-Specific Order Retrieval"
+    implemented: true
+    working: true
+    file: "/app/backend/src/routes/orderRoutes.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ USER-SPECIFIC ORDER RETRIEVAL WORKING PERFECTLY: Successfully tested GET /api/orders/user/e95820ef-429a-4419-a75b-d37043adc651 endpoint for victor rodriguez user. Returns exactly 1 order as expected with complete product details (Ribeye and Filete Limpio), correct total ($37.75), and proper usuarioId matching. Order contains all required fields and product information is complete with quantities, units, and subtotals. The endpoint correctly filters orders by user ID and maintains proper data structure for user-specific order history retrieval."
+
 backend:
   - task: "Product API - Retail Prices"
     implemented: true
