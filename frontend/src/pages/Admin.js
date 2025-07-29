@@ -776,6 +776,11 @@ const Admin = () => {
         {activeSection === 'promociones' && (
           <AdminPromociones />
         )}
+
+        {/* Reports Section */}
+        {activeSection === 'reports' && (
+          <AdminReports API_BASE={API_BASE} />
+        )}
       </div>
     </div>
   );
