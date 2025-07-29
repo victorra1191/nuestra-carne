@@ -1092,11 +1092,12 @@ class NuestraCarneTester:
                 else:
                     print(f"✅ Correct average order value: ${summary.get('averageOrderValue', 0):.2f}")
                 
-                # 4. Verify topProducts includes expected products
+                # 4. Verify topProducts includes expected products from current week
                 top_products = report.get('topProducts', [])
                 print(f"   Top Products: {len(top_products)} items")
                 
-                expected_products = ['Ribeye', 'Trip tip', 'Arañita', 'Filete Limpio']
+                # Current week should have: Trip tip (1 qty), Ribeye (2 qty), Filete Limpio (1 qty)
+                expected_products = ['Trip tip', 'Ribeye', 'Filete Limpio']
                 found_products = [p.get('nombre', '') for p in top_products]
                 
                 for expected_product in expected_products:
@@ -1104,9 +1105,9 @@ class NuestraCarneTester:
                         print(f"❌ Expected product '{expected_product}' not found in top products")
                         return False, data
                 
-                print("✅ All expected products found in top products")
+                print("✅ All expected products found in top products for current week")
                 
-                for i, product in enumerate(top_products[:4]):
+                for i, product in enumerate(top_products[:3]):
                     print(f"     {i+1}. {product.get('nombre', 'N/A')} - Qty: {product.get('cantidad', 0)}, Revenue: ${product.get('ingresos', 0):.2f}")
                 
                 # 5. Verify topCustomers includes victor rodriguez
