@@ -1641,7 +1641,7 @@ def main():
     
     # Success criteria: all weekly reports endpoints must work
     success_criteria = (weekly_current_success and weekly_specific_success and 
-                       history_success and send_weekly_success and cron_success)
+                       history_success and send_weekly_success and comprehensive_success and cron_success)
     
     if success_criteria:
         print("\n🎉 SUCCESS: Complete Weekly Reports system is working correctly!")
