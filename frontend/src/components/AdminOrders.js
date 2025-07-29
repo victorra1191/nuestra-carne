@@ -173,6 +173,8 @@ const AdminOrders = ({ API_BASE }) => {
   };
 
   const updateOrderStatus = async (orderId, newStatus, notas = '') => {
+    try {
+      const response = await fetch(`${API_URL}/orders/${orderId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
