@@ -158,6 +158,40 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../../frontend/build', 'index.html'));
 });
 
+// 🕒 CRONJOB: Reporte semanal automático
+// Ejecutar todos los viernes a las 23:59 (11:59 PM)
+cron.schedule('59 23 * * 5', async () => {
+  console.log('📊 [CRONJOB] Iniciando generación de reporte semanal automático...');
+  
+  try {
+    // Importar la función de generación de reportes
+    const { default: fetch } = await import('node-fetch');
+    
+    // Llamar al endpoint interno para generar y enviar el reporte
+    const response = await fetch('http://localhost:8001/api/reports/send-weekly', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Basic ' + Buffer.from('admin:nuestra123').toString('base64'),
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      console.log('✅ [CRONJOB] Reporte semanal enviado exitosamente:', result.reportId);
+    } else {
+      console.error('❌ [CRONJOB] Error enviando reporte semanal:', result.error);
+    }
+  } catch (error) {
+    console.error('❌ [CRONJOB] Error en cronjob de reporte semanal:', error);
+  }
+}, {
+  timezone: "America/Panama"
+});
+
+console.log('🕒 [CRONJOB] Reporte semanal programado para viernes 23:59 (zona horaria: America/Panama)');
+
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
   console.log(`🌐 URL: https://ncappweb-vt888.ondigitalocean.app`);
