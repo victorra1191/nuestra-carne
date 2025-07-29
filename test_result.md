@@ -324,8 +324,6 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Admin Statistics API - Orders Dashboard"
-    - "Orders API - Get All Orders"
     - "Wholesale API - Request Management"
     - "Wholesale API - Approval System"
   stuck_tasks: []
