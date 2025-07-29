@@ -58,7 +58,7 @@ app.get('/api/health', (req, res) => {
     success: true, 
     message: 'Backend funcionando correctamente',
     timestamp: new Date().toISOString(),
-    routes: ['auth', 'admin', 'orders', 'products', 'articles', 'media']
+    routes: ['auth', 'admin', 'orders', 'products', 'articles', 'media', 'reports']
   });
 });
 
@@ -68,6 +68,7 @@ app.use('/api/articles', blogRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/admin', adminProductRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/reports', reportsRoutes);
 app.use('/api', orderRoutes);
 app.use('/api/media', mediaRoutes);
 app.use('/api/products', productRoutes);
