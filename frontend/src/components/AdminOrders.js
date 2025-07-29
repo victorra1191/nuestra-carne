@@ -170,53 +170,6 @@ const AdminOrders = ({ API_BASE }) => {
       client: '',
       status: 'all'
     });
-  // Filtrar pedidos
-  const filteredOrders = orders.filter(order => {
-    // Filtro por fecha
-    if (filters.dateFrom) {
-      const orderDate = new Date(order.fechaCreacion || order.fecha);
-      const fromDate = new Date(filters.dateFrom);
-      if (orderDate < fromDate) return false;
-    }
-    
-    if (filters.dateTo) {
-      const orderDate = new Date(order.fechaCreacion || order.fecha);
-      const toDate = new Date(filters.dateTo);
-      toDate.setHours(23, 59, 59, 999); // Incluir todo el día
-      if (orderDate > toDate) return false;
-    }
-    
-    // Filtro por cliente
-    if (filters.client) {
-      const clientName = order.cliente?.nombre?.toLowerCase() || '';
-      if (!clientName.includes(filters.client.toLowerCase())) return false;
-    }
-    
-    // Filtro por estado
-    if (filters.status !== 'all') {
-      if (order.estado !== filters.status) return false;
-    }
-    
-    return true;
-  });
-
-  const toggleOrderExpansion = (orderId) => {
-    const newExpanded = new Set(expandedOrders);
-    if (newExpanded.has(orderId)) {
-      newExpanded.delete(orderId);
-    } else {
-      newExpanded.add(orderId);
-    }
-    setExpandedOrders(newExpanded);
-  };
-
-  const clearFilters = () => {
-    setFilters({
-      dateFrom: '',
-      dateTo: '',
-      client: '',
-      status: 'all'
-    });
   };
 
   const updateOrderStatus = async (orderId, newStatus, notas = '') => {
