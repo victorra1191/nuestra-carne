@@ -1496,6 +1496,8 @@ class NuestraCarneTester:
         except Exception as e:
             print(f"❌ Failed - Error: {str(e)}")
             return False, {}
+
+    def test_cron_job_verification(self):
         """Test cron job configuration verification"""
         print(f"\n🔍 Testing Cron Job Configuration...")
         
