@@ -5,6 +5,7 @@ import MediaUploader from '../components/MediaUploader';
 import AdminProducts from '../components/AdminProducts';
 import AdminWholesale from '../components/AdminWholesale';
 import AdminOrders from '../components/AdminOrders';
+import AdminReports from '../components/AdminReports';
 import AdminPromociones from './AdminPromociones';
 import { 
   Eye, 
