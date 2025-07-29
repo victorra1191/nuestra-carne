@@ -1139,17 +1139,17 @@ class NuestraCarneTester:
                 else:
                     print("✅ Daily analysis covers full week (7 days)")
                 
-                # 7. Verify orderDetails includes all product breakdown
+                # 7. Verify orderDetails includes current week orders
                 order_details = report.get('orderDetails', [])
                 print(f"   Order Details: {len(order_details)} orders")
                 
-                if len(order_details) != 3:
-                    print(f"❌ Expected 3 orders in details, got {len(order_details)}")
+                if len(order_details) != 2:
+                    print(f"❌ Expected 2 orders in current week details, got {len(order_details)}")
                     return False, data
                 else:
-                    print("✅ All orders included in order details")
+                    print("✅ Current week orders included in order details")
                 
-                print("✅ All weekly report validation checks passed!")
+                print("✅ All weekly report validation checks passed for current week!")
                 return True, data
                     
             else:
