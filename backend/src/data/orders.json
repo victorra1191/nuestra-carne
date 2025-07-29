@@ -1,30 +1,24 @@
 [
   {
-    "id": "0fd6e7cf-a142-4ba7-8491-fd4e6f792d7c",
+    "id": "6f792d7c-21ba-4b8c-a123-456789abc123",
     "cliente": {
       "tipoCliente": "individual",
       "nombre": "Test Customer",
       "telefono": "+507 6000-0000",
-      "email": "test@example.com",
+      "email": "test@customer.com",
       "direccion": "Test Address, Panama City",
-      "fechaEntrega": "2025-02-20",
-      "horaEntrega": "14:00",
-      "notas": "This is a test order"
+      "fechaEntrega": "2025-07-02",
+      "horaEntrega": "15:00"
     },
     "productos": [
       {
-        "codigo": "20047",
+        "codigo": "10029",
         "nombre": "Arañita",
-        "cantidad": 2,
-        "unidad": "libras",
-        "subtotal": 18.32
-      },
-      {
-        "codigo": "20002",
-        "nombre": "Filete Limpio",
         "cantidad": 1,
-        "unidad": "libras",
-        "subtotal": 7.03
+        "unidad": "kilos",
+        "subtotal": 25.35,
+        "precioKg": 25.35,
+        "precioMedioKilo": 12.68
       }
     ],
     "total": 25.35,
@@ -34,7 +28,7 @@
     "usuarioId": null
   },
   {
-    "id": "668c5e0b-2300-4d89-9751-597982407af5",
+    "id": "0fd6e7cf-a142-4ba8-9c4d-e1f2a3b4c5d6",
     "cliente": {
       "tipoCliente": "individual",
       "nombre": "Test Customer Order",
@@ -51,15 +45,53 @@
         "nombre": "Trip tip (punta Rincón)",
         "cantidad": 1,
         "unidad": "kilos",
-        "subtotal": 9.6,
-        "precioKg": 9.6,
-        "precioMedioKilo": 4.8
+        "subtotal": 9.60,
+        "precioKg": 9.60,
+        "precioMedioKilo": 4.80
       }
     ],
-    "total": 9.6,
+    "total": 9.60,
     "fecha": "2025-07-28T14:03:14.535Z",
     "estado": "pendiente",
     "fechaCreacion": "2025-07-28T14:03:14.535Z",
     "usuarioId": null
+  },
+  {
+    "id": "user-order-001-victor",
+    "cliente": {
+      "tipoCliente": "individual",
+      "nombre": "victor rodriguez",
+      "telefono": "65080983",
+      "email": "victor1191@gmail.com",
+      "direccion": "Vía Brasil, Ciudad de Panamá",
+      "fechaEntrega": "2025-07-30",
+      "horaEntrega": "16:00",
+      "notas": "Pedido de usuario registrado para pruebas"
+    },
+    "productos": [
+      {
+        "codigo": "10015",
+        "nombre": "Ribeye",
+        "cantidad": 2,
+        "unidad": "medios kilos",
+        "subtotal": 18.50,
+        "precioKg": 18.50,
+        "precioMedioKilo": 9.25
+      },
+      {
+        "codigo": "10032",
+        "nombre": "Filete Limpio",
+        "cantidad": 1,
+        "unidad": "kilos",
+        "subtotal": 15.75,
+        "precioKg": 15.75,
+        "precioMedioKilo": 7.88
+      }
+    ],
+    "total": 37.75,
+    "fecha": "2025-07-29T14:15:00.000Z",
+    "estado": "en_proceso",
+    "fechaCreacion": "2025-07-29T14:15:00.000Z",
+    "usuarioId": "e95820ef-429a-4419-a75b-d37043adc651"
   }
 ]
