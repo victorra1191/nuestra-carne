@@ -446,6 +446,12 @@ const OrderForm = () => {
       const result = await response.json();
 
       if (result.success) {
+        // 📊 TRACKING: Pedido completado exitosamente
+        trackOrderPlaced({
+          ...orderData,
+          id: result.orderId
+        });
+        
         // Éxito - mostrar confirmación
         alert(`¡Pedido #${result.orderId} enviado exitosamente!\n\n✅ Confirmación enviada a tu email\n📧 Notificación enviada a la empresa\n\nTe contactaremos pronto para coordinar la entrega.`);
         
