@@ -22,16 +22,27 @@ const AdminPromociones = () => {
   });
 
   const getApiBase = () => {
-    // Hardcode para producción (bypass env var issue)
-    if (typeof window !== 'undefined' && window.location.hostname === 'nuestracarnepa.com') {
-      return 'https://nuestracarnepa.com/api';
+    // FORZAR URL de producción - Fix crítico
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname;
+      console.log('🌐 [AdminPromociones] Hostname detected:', hostname);
+      
+      // Si NO es localhost, asumir que es producción
+      if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
+        console.log('🌐 [AdminPromociones] FORCING production URL: https://nuestracarnepa.com/api');
+        return 'https://nuestracarnepa.com/api';
+      }
+      
+      // Solo usar localhost si realmente estamos en localhost
+      if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        console.log('🌐 [AdminPromociones] Using localhost URL: http://localhost:8001/api');
+        return 'http://localhost:8001/api';
+      }
     }
     
-    // Para desarrollo local
-    if (process.env.REACT_APP_BACKEND_URL) {
-      return `${process.env.REACT_APP_BACKEND_URL}/api`;
-    }
-    return 'http://localhost:8001/api';
+    // Fallback a producción
+    console.log('🌐 [AdminPromociones] Fallback to production URL');
+    return 'https://nuestracarnepa.com/api';
   };
 
   const API_BASE = getApiBase();
