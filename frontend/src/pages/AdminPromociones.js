@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, Edit, Trash2, Calendar, Percent, DollarSign, Tag, Save, X } from 'lucide-react';
 
-const AdminPromociones = () => {
+const AdminPromociones = ({ API_BASE }) => {
   const [promociones, setPromociones] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
