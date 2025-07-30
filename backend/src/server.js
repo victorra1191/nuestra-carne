@@ -63,9 +63,15 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-// CORS
+// CORS - Permitir múltiples dominios para producción
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'https://ncappweb-vt888.ondigitalocean.app',
+  origin: [
+    'https://nuestracarnepa.com',
+    'https://www.nuestracarnepa.com', 
+    'https://ncappweb-vt888.ondigitalocean.app',
+    'http://localhost:3000',
+    'http://localhost:8001'
+  ],
   credentials: true
 }));
 
