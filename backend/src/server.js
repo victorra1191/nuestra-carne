@@ -34,7 +34,8 @@ app.use(helmet({
         "'unsafe-inline'", 
         "https://www.googletagmanager.com", 
         "https://www.google-analytics.com",
-        "https://ssl.google-analytics.com"
+        "https://ssl.google-analytics.com",
+        "https://us-assets.i.posthog.com"
       ],
       connectSrc: [
         "'self'", 
