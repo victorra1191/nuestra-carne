@@ -56,10 +56,9 @@ const AdminPromociones = ({ API_BASE }) => {
 
   const fetchPromociones = async () => {
     try {
-      const token = localStorage.getItem('adminToken');
       const response = await fetch(`${API_URL}/promociones/admin/all`, {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          'Authorization': `Bearer ${btoa('admin:nuestra123')}`,
           'Content-Type': 'application/json'
         }
       });
@@ -68,7 +67,7 @@ const AdminPromociones = ({ API_BASE }) => {
         const data = await response.json();
         setPromociones(data.promociones || []);
       } else {
-        console.error('Error al cargar promociones');
+        console.error('Error al cargar promociones - Status:', response.status);
       }
     } catch (error) {
       console.error('Error:', error);
