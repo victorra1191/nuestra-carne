@@ -24,8 +24,35 @@ const PORT = process.env.PORT || 8001;
 // Configurar trust proxy para DigitalOcean
 app.set('trust proxy', 1);
 
-// Middleware de seguridad
-app.use(helmet());
+// Middleware de seguridad con CSP personalizada
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'", "https://nuestracarnepa.com", "https://www.nuestracarnepa.com"],
+      scriptSrc: [
+        "'self'", 
+        "'unsafe-inline'", 
+        "https://www.googletagmanager.com", 
+        "https://www.google-analytics.com",
+        "https://ssl.google-analytics.com"
+      ],
+      connectSrc: [
+        "'self'", 
+        "https://nuestracarnepa.com", 
+        "https://www.nuestracarnepa.com",
+        "https://www.google-analytics.com",
+        "https://analytics.google.com",
+        "https://stats.g.doubleclick.net"
+      ],
+      imgSrc: ["'self'", "data:", "https:", "http:", "blob:"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      objectSrc: ["'none'"],
+      baseUri: ["'self'"],
+      formAction: ["'self'"]
+    }
+  }
+}));
 
 // Rate limiting con configuración para DigitalOcean
 const limiter = rateLimit({
