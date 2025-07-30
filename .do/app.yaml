@@ -51,6 +51,9 @@ services:
     source_dir: /frontend/build
     routes:
     - path: /
+    headers:
+    - key: Content-Security-Policy
+      value: "default-src 'self' https://nuestracarnepa.com https://www.nuestracarnepa.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com; connect-src 'self' https://nuestracarnepa.com https://www.nuestracarnepa.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net; img-src 'self' data: https: http: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; object-src 'none'; base-uri 'self'; form-action 'self'"
   envs:
   - key: REACT_APP_BACKEND_URL
     value: ${APP_URL}/api
