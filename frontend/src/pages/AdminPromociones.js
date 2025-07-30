@@ -21,7 +21,10 @@ const AdminPromociones = ({ API_BASE }) => {
     categorias: []
   });
 
+  // Función para obtener API base si no se pasa como prop
   const getApiBase = () => {
+    if (API_BASE) return API_BASE;
+    
     // FORZAR URL de producción - Fix crítico
     if (typeof window !== 'undefined') {
       const hostname = window.location.hostname;
@@ -45,7 +48,7 @@ const AdminPromociones = ({ API_BASE }) => {
     return 'https://nuestracarnepa.com/api';
   };
 
-  const API_BASE = getApiBase();
+  const API_URL = getApiBase();
 
   useEffect(() => {
     fetchPromociones();
