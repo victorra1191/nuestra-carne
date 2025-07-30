@@ -57,7 +57,7 @@ const AdminPromociones = ({ API_BASE }) => {
   const fetchPromociones = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch(`${API_BASE}/promociones/admin/all`, {
+      const response = await fetch(`${API_URL}/promociones/admin/all`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
