@@ -43,7 +43,9 @@ app.use(helmet({
         "https://www.nuestracarnepa.com",
         "https://www.google-analytics.com",
         "https://analytics.google.com",
-        "https://stats.g.doubleclick.net"
+        "https://stats.g.doubleclick.net",
+        "https://us-assets.i.posthog.com",
+        "https://app.posthog.com"
       ],
       imgSrc: ["'self'", "data:", "https:", "http:", "blob:"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
