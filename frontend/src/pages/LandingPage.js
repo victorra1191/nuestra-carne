@@ -101,28 +101,28 @@ const LandingPage = () => {
     {
       nombre: "Carne de hamburguesa- 24 onzas",
       descripcion: "Mezcla especial para hamburguesas gourmet",
-      precio: "$3.86/lb",
+      precio: "$4.25/½kg",
       cocina: ["Hamburguesas", "Parrilla", "Plancha"],
       imagen: "/images/productos/carne-hamburguesa.jpg"
     },
     {
       nombre: "Carne molida especial",
       descripcion: "Molida premium para múltiples preparaciones",
-      precio: "$3.62/lb",
+      precio: "$3.99/½kg",
       cocina: ["Albóndigas", "Tacos", "Rellenos"],
       imagen: "/images/productos/carne-molida.jpg"
     },
     {
       nombre: "Costillón entero",
       descripcion: "Ideal para parrilladas familiares",
-      precio: "$3.29/lb",
+      precio: "$3.63/½kg",
       cocina: ["Parrilla", "BBQ", "Asado lento"],
       imagen: "/images/productos/costilla-res.jpg"
     },
     {
       nombre: "Entraña",
       descripcion: "El rey de la parrilla, jugoso y sabroso",
-      precio: "$4.26/lb",
+      precio: "$4.70/½kg",
       cocina: ["Parrilla", "Plancha", "Marinado"],
       imagen: "/images/productos/entrana.jpg"
     },
