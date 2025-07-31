@@ -68,33 +68,33 @@ const LandingPage = () => {
 
   const API_BASE = getApiBase();
 
-  // Datos de cortes panameños - SOLO 11 SELECCIONADOS PARA EL LANDING
+  // Datos de cortes panameños - PRECIOS ACTUALIZADOS A MEDIO KILO
   const cortes = [
     {
       nombre: "Pulpa Negra",
       descripcion: "Corte premium para parrilla y plancha, muy jugoso",
-      precio: "$4.01/lb", 
+      precio: "$4.42/½kg", 
       cocina: ["Parrilla", "Plancha", "Bistec"],
       imagen: "/images/productos/pulpa-negra.jpg"
     },
     {
       nombre: "Bistec Picado",
       descripcion: "Ideal para plancha y frituras rápidas",
-      precio: "$3.18/lb",
+      precio: "$3.50/½kg",
       cocina: ["Plancha", "Frito", "Parrilla"],
       imagen: "/images/productos/bistec-picado.jpg"
     },
     {
       nombre: "Bofe",
       descripcion: "Corte especial tradicional, muy nutritivo",
-      precio: "$1.59/lb",
+      precio: "$1.75/½kg",
       cocina: ["Guisado", "Estofado", "Tradicional"],
       imagen: "/images/productos/bofe.jpg"
     },
     {
       nombre: "Carne de guisar",
       descripcion: "Perfecta para todos tus guisos favoritos",
-      precio: "$3.79/lb",
+      precio: "$4.18/½kg",
       cocina: ["Guisado", "Estofado", "Sancocho"],
       imagen: "/images/productos/carne-guisar.jpg"
     },
