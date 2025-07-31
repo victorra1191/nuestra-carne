@@ -129,21 +129,21 @@ const LandingPage = () => {
     {
       nombre: "Punta Palomilla entera (picanha)",
       descripcion: "Corte brasileño premium, muy jugoso",
-      precio: "$4.79/lb",
+      precio: "$5.28/½kg",
       cocina: ["Parrilla", "Asado", "Rodizio"],
       imagen: "/images/productos/picanha.jpg"
     },
     {
       nombre: "Rib- eye entero",
       descripcion: "Corte premium americano, máximo sabor",
-      precio: "$4.20/lb",
+      precio: "$4.63/½kg",
       cocina: ["Parrilla", "Plancha", "Horno"],
       imagen: "/images/productos/rib-eye.jpg"
     },
     {
       nombre: "Trip tip (punta Rincón)",
       descripcion: "Corte californiano, tierno y versátil",
-      precio: "$4.35/lb",
+      precio: "$4.80/½kg",
       cocina: ["Parrilla", "Plancha", "Asado"],
       imagen: "/images/productos/tip-trip.jpg"
     }
